@@ -1,4 +1,4 @@
-package com.lc.android
+package com.lc.android.presentation
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.lc.android.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestServerAuthCode(getString(R.string.server_client_id))
-                .requestEmail()
-                .build()
+            .requestServerAuthCode(getString(R.string.server_client_id))
+            .requestEmail()
+            .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
