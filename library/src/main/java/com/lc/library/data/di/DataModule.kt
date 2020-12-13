@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 private val dataModule = module {
 
-    single { DataSourceProvider() }
+    single { DataSourceProvider(get()) }
 
     single<LanguageCenterDataSource> { LanguageCenterDataSourceImpl(get()) }
 

@@ -61,7 +61,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(data)
 
                 val account = task.getResult(ApiException::class.java)
-                viewModel.signIn(account?.serverAuthCode)
+                viewModel.callSignIn(account?.serverAuthCode)
             } catch (e: ApiException) {
             }
         }
