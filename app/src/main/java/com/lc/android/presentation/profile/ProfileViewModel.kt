@@ -1,4 +1,4 @@
-package com.lc.android.presentation.main
+package com.lc.android.presentation.profile
 
 import com.lc.android.base.BaseViewModel
 import com.lc.library.data.repository.Resource
@@ -6,10 +6,10 @@ import com.lc.library.presentation.FetchUserInfoUseCase
 import com.lc.library.presentation.SignOutUseCase
 import kotlinx.coroutines.launch
 
-class MainViewModel(
+class ProfileViewModel(
     private val fetchUserInfoUseCase: FetchUserInfoUseCase,
     private val signOutUseCase: SignOutUseCase,
-) : BaseViewModel<MainViewState>(MainViewState()) {
+) : BaseViewModel<ProfileViewState>(ProfileViewState()) {
 
     fun callFetchUserInfo() {
         launch {
@@ -17,7 +17,12 @@ class MainViewModel(
 
             when (val resource = fetchUserInfoUseCase()) {
                 is Resource.Success -> {
-                    setState { copy(name = resource.data.userInfo?.name.orEmpty()) }
+                    setState {
+                        copy(
+                            name = resource.data.userInfo?.name.orEmpty(),
+                            picture = resource.data.userInfo?.picture,
+                        )
+                    }
                 }
                 is Resource.Error -> {
                     setError(resource.throwable)

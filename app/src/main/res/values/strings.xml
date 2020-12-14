@@ -6,4 +6,5 @@
     <string name="chat_group">Chat group</string>
     <string name="vocabulary">Vocabulary</string>
     <string name="profile">Profile</string>
+    <string name="sign_out">Sign out</string>
 </resources>

@@ -35,5 +35,8 @@
         tools:layout="@layout/fragment_profile"
         android:name="com.lc.android.presentation.profile.ProfileFragment"
         android:label="ProfileFragment" />
+    <action
+        android:id="@+id/action_global_authActivity"
+        app:destination="@id/authActivity" />
 
 </navigation>
