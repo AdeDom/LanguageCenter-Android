@@ -13,7 +13,7 @@ private val dataModule = module {
 
     single<LanguageCenterDataSource> { LanguageCenterDataSourceImpl(get()) }
 
-    single<LanguageCenterRepository> { LanguageCenterRepositoryImpl(get()) }
+    single<LanguageCenterRepository> { LanguageCenterRepositoryImpl(get(), get()) }
 
 }
 

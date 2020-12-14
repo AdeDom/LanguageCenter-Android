@@ -1,6 +1,7 @@
 package com.lc.android.presentation.main
 
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -35,6 +36,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         }
 
         viewModel.state.observe { state ->
+            animationLoading.isVisible = state.isLoading
             textView.text = state.name
         }
 

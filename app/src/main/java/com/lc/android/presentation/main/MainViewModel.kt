@@ -13,7 +13,7 @@ class MainViewModel(
 
     fun callFetchUserInfo() {
         launch {
-            setState { copy(loading = true) }
+            setState { copy(isLoading = true) }
 
             when (val resource = useCase()) {
                 is Resource.Success -> {
@@ -24,7 +24,7 @@ class MainViewModel(
                 }
             }
 
-            setState { copy(loading = false) }
+            setState { copy(isLoading = false) }
         }
     }
 

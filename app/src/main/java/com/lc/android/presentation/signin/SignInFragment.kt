@@ -2,6 +2,7 @@ package com.lc.android.presentation.signin
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -32,6 +33,11 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     }
 
     private fun observeViewModel() {
+        viewModel.state.observe { state->
+            animationLoading.isVisible = state.isLoading
+            signInButton.isClickable = state.isClickable
+        }
+
         viewModel.signInEvent.observe { response ->
             if (response.success) {
                 findNavController().navigate(R.id.action_global_splashScreenFragment)
