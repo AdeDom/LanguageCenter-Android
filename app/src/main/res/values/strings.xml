@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">LanguageCenter</string>
     <string name="server_client_id">888345009427-ihklblp8vucbrpp8mj1ob681pmgr940l.apps.googleusercontent.com</string>
+    <string name="community">Community</string>
+    <string name="chats">Chats</string>
+    <string name="chat_group">Chat group</string>
+    <string name="vocabulary">Vocabulary</string>
+    <string name="profile">Profile</string>
 </resources>

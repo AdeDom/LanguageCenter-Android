@@ -52,7 +52,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     private fun signOut() {
         mGoogleSignInClient.signOut().addOnCompleteListener(requireActivity()) {
             viewModel.signOut()
-            findNavController().navigate(R.id.action_mainFragment_to_authActivity)
+//            findNavController().navigate(R.id.action_mainFragment_to_authActivity)
             activity?.finishAffinity()
         }
     }

@@ -3,21 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/communityFragment">
 
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.lc.android.presentation.main.MainFragment"
-        android:label="MainFragment"
-        tools:layout="@layout/fragment_main">
-        <action
-            android:id="@+id/action_mainFragment_to_authActivity"
-            app:destination="@id/authActivity" />
-    </fragment>
     <activity
         android:id="@+id/authActivity"
         android:name="com.lc.android.presentation.AuthActivity"
         android:label="activity_auth"
         tools:layout="@layout/activity_auth" />
+    <fragment
+        android:id="@+id/communityFragment"
+        tools:layout="@layout/fragment_community"
+        android:name="com.lc.android.presentation.community.CommunityFragment"
+        android:label="CommunityFragment" />
+    <fragment
+        android:id="@+id/chatsFragment"
+        tools:layout="@layout/fragment_chats"
+        android:name="com.lc.android.presentation.chats.ChatsFragment"
+        android:label="ChatsFragment" />
+    <fragment
+        android:id="@+id/chatGroupFragment"
+        tools:layout="@layout/fragment_chat_group"
+        android:name="com.lc.android.presentation.chatgroup.ChatGroupFragment"
+        android:label="ChatGroupFragment" />
+    <fragment
+        android:id="@+id/vocabularyFragment"
+        tools:layout="@layout/fragment_vocabulary"
+        android:name="com.lc.android.presentation.vocapbulary.VocabularyFragment"
+        android:label="VocabularyFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        tools:layout="@layout/fragment_profile"
+        android:name="com.lc.android.presentation.profile.ProfileFragment"
+        android:label="ProfileFragment" />
 
 </navigation>
