@@ -11,4 +11,6 @@ interface LanguageCenterRepository {
 
     suspend fun callFetchUserInfo(): Resource<UserInfoResponse>
 
+    suspend fun signOut()
+
 }
