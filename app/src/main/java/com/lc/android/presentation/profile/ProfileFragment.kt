@@ -38,10 +38,14 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
-
-            tvName.text = state.name
-            ivPicture.load(state.picture)
         }
+
+        viewModel.getDbUserInfoLiveData.observe(viewLifecycleOwner, { userInfo ->
+            if (userInfo == null) return@observe
+
+            tvName.text = userInfo.name
+            ivPicture.load(userInfo.picture)
+        })
 
         viewModel.error.observeError()
     }
