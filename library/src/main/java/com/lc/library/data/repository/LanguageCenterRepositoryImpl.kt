@@ -49,7 +49,7 @@ class LanguageCenterRepositoryImpl(
 
         if (response is Resource.Success) saveUserInfoDb(response.data)
 
-        return safeApiCall { dataSource.callFetchUserInfo() }
+        return response
     }
 
     private suspend fun saveUserInfoDb(data: UserInfoResponse) {
@@ -68,6 +68,7 @@ class LanguageCenterRepositoryImpl(
                 aboutMe = userInfo?.aboutMe,
                 created = userInfo?.created,
                 updated = userInfo?.updated,
+                locales = userInfo?.locales ?: emptyList(),
             )
             dataSource.saveUserInfo(entity)
         }

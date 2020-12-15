@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.lc.library.data.db.dao.UserInfoDao
 import com.lc.library.data.db.entities.UserInfoEntity
 
-@Database(entities = [UserInfoEntity::class], version = 1)
+@Database(entities = [UserInfoEntity::class], version = 2)
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getUserInfoDao(): UserInfoDao

@@ -3,6 +3,7 @@ package com.lc.library.data.db.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.lc.server.models.model.UserInfoLocale
 
 @Entity(tableName = "user_info")
 data class UserInfoEntity(
@@ -19,4 +20,5 @@ data class UserInfoEntity(
     @ColumnInfo(name = "about_me") val aboutMe: String? = null,
     @ColumnInfo(name = "created") val created: String? = null,
     @ColumnInfo(name = "updated") val updated: String? = null,
+    @ColumnInfo(name = "locales") val locales: List<UserInfoLocale> = emptyList(),
 )
