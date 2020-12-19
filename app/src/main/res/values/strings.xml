@@ -9,4 +9,15 @@
     <string name="sign_out">Sign out</string>
     <string name="sign_in">Sign In</string>
     <string name="name">Name : %1$s</string>
+    <string name="email">Email : %1$s</string>
+    <string name="greeting">Greeting</string>
+    <string name="hello_english">Hello</string>
+    <string name="hello_thai">สวัสดี</string>
+    <string name="search">Search</string>
+    <string name="english">English</string>
+    <string name="vocabulary_english">Vocabulary english</string>
+    <string name="thai">Thai</string>
+    <string name="vocabulary_thai">คำศัพท์ภาษาไทย</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>

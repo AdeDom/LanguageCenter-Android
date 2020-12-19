@@ -44,6 +44,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             if (userInfo == null) return@observe
 
             tvName.text = getString(R.string.name, userInfo.name)
+            tvEmail.text = getString(R.string.email, userInfo.email)
             ivPicture.load(userInfo.picture)
         })
 
