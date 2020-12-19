@@ -8,7 +8,7 @@ import com.lc.android.R
 
 fun ImageView.load(
     url: String?,
-    @DrawableRes placeholder: Int = R.drawable.ic_image_profile
+    @DrawableRes placeholder: Int = R.drawable.ic_profile
 ) {
     Glide.with(this)
         .load(url)

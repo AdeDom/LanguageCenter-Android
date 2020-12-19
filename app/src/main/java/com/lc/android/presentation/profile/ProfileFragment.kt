@@ -43,7 +43,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         viewModel.getDbUserInfoLiveData.observe(viewLifecycleOwner, { userInfo ->
             if (userInfo == null) return@observe
 
-            tvName.text = userInfo.name
+            tvName.text = getString(R.string.name, userInfo.name)
             ivPicture.load(userInfo.picture)
         })
 

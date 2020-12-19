@@ -7,4 +7,6 @@
     <string name="vocabulary">Vocabulary</string>
     <string name="profile">Profile</string>
     <string name="sign_out">Sign out</string>
+    <string name="sign_in">Sign In</string>
+    <string name="name">Name : %1$s</string>
 </resources>
