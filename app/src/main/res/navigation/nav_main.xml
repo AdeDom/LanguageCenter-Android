@@ -12,31 +12,40 @@
         tools:layout="@layout/activity_auth" />
     <fragment
         android:id="@+id/communityFragment"
-        tools:layout="@layout/fragment_community"
         android:name="com.lc.android.presentation.community.CommunityFragment"
-        android:label="CommunityFragment" />
+        android:label="CommunityFragment"
+        tools:layout="@layout/fragment_community" />
     <fragment
         android:id="@+id/chatsFragment"
-        tools:layout="@layout/fragment_chats"
         android:name="com.lc.android.presentation.chats.ChatsFragment"
-        android:label="ChatsFragment" />
+        android:label="ChatsFragment"
+        tools:layout="@layout/fragment_chats" />
     <fragment
         android:id="@+id/chatGroupFragment"
-        tools:layout="@layout/fragment_chat_group"
         android:name="com.lc.android.presentation.chatgroup.ChatGroupFragment"
-        android:label="ChatGroupFragment" />
+        android:label="ChatGroupFragment"
+        tools:layout="@layout/fragment_chat_group" />
     <fragment
         android:id="@+id/vocabularyFragment"
-        tools:layout="@layout/fragment_vocabulary"
         android:name="com.lc.android.presentation.vocapbulary.VocabularyFragment"
-        android:label="VocabularyFragment" />
+        android:label="VocabularyFragment"
+        tools:layout="@layout/fragment_vocabulary" />
     <fragment
         android:id="@+id/profileFragment"
-        tools:layout="@layout/fragment_profile"
         android:name="com.lc.android.presentation.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileActivity"
+            app:destination="@id/editProfileActivity" />
+    </fragment>
     <action
         android:id="@+id/action_global_authActivity"
         app:destination="@id/authActivity" />
+    <activity
+        android:id="@+id/editProfileActivity"
+        android:name="com.lc.android.presentation.EditProfileActivity"
+        android:label="activity_edit_profile"
+        tools:layout="@layout/activity_edit_profile" />
 
 </navigation>

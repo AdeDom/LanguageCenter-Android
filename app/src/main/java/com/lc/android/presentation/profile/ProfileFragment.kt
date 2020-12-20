@@ -1,6 +1,7 @@
 package com.lc.android.presentation.profile
 
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -31,11 +32,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         viewEvent()
     }
 
-    private fun observeViewModel() {
-        viewModel.attachFirstTime.observe {
-            viewModel.callFetchUserInfo()
-        }
+    override fun onStart() {
+        super.onStart()
+        viewModel.callFetchUserInfo()
+    }
 
+    private fun observeViewModel() {
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
         }
@@ -43,9 +45,16 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         viewModel.getDbUserInfoLiveData.observe(viewLifecycleOwner, { userInfo ->
             if (userInfo == null) return@observe
 
-            tvName.text = getString(R.string.name, userInfo.name)
-            tvEmail.text = getString(R.string.email, userInfo.email)
-            ivPicture.load(userInfo.picture)
+            val (_, email, givenName, familyName, _, picture, gender, birthDate, _, aboutMe) = userInfo
+            if (givenName != null && familyName != null) {
+                val name = "$givenName $familyName"
+                tvName.text = getString(R.string.name, name)
+            }
+            email?.let { tvEmail.text = getString(R.string.email, email) }
+            gender?.let { tvGender.text = getString(R.string.gender, gender) }
+            birthDate?.let { tvBirthDate.text = getString(R.string.birth_date, birthDate) }
+            aboutMe?.let { tvAboutMe.text = getString(R.string.about_me, aboutMe) }
+            ivPicture.load(picture)
         })
 
         viewModel.error.observeError()
@@ -53,7 +62,25 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private fun viewEvent() {
         btSignOut.setOnClickListener {
-            signOut()
+            dialogSignOut()
+        }
+
+        ivEditProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_editProfileActivity)
+        }
+    }
+
+    private fun dialogSignOut() {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle(R.string.sign_out)
+            setMessage(R.string.dialog_sign_out_message)
+            setPositiveButton(android.R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+            setNegativeButton(android.R.string.ok) { _, _ ->
+                signOut()
+            }
+            show()
         }
     }
 

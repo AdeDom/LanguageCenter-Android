@@ -10,6 +10,9 @@
     <string name="sign_in">Sign In</string>
     <string name="name">Name : %1$s</string>
     <string name="email">Email : %1$s</string>
+    <string name="gender">Gender : %1$s</string>
+    <string name="birth_date">Birth date : %1$s</string>
+    <string name="about_me">About me : %1$s</string>
     <string name="greeting">Greeting</string>
     <string name="hello_english">Hello</string>
     <string name="hello_thai">สวัสดี</string>
@@ -23,4 +26,6 @@
     <string name="add_chat_group">Add chat group</string>
     <string name="message">Message</string>
     <string name="messages">Message...</string>
+    <string name="dialog_sign_out_message">Do you really want to sign out?</string>
+    <string name="given_name">Given name</string>
 </resources>
