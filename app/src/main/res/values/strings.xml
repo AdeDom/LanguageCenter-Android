@@ -8,11 +8,11 @@
     <string name="profile">Profile</string>
     <string name="sign_out">Sign out</string>
     <string name="sign_in">Sign In</string>
-    <string name="name">Name : %1$s</string>
-    <string name="email">Email : %1$s</string>
-    <string name="gender">Gender : %1$s</string>
-    <string name="birth_date">Birth date : %1$s</string>
-    <string name="about_me">About me : %1$s</string>
+    <string name="str_name">Name : %1$s</string>
+    <string name="str_email">Email : %1$s</string>
+    <string name="str_gender">Gender : %1$s</string>
+    <string name="str_birth_date">Birth date : %1$s</string>
+    <string name="str_about_me">About me : %1$s</string>
     <string name="greeting">Greeting</string>
     <string name="hello_english">Hello</string>
     <string name="hello_thai">สวัสดี</string>
@@ -31,4 +31,11 @@
     <string name="locale">Locale</string>
     <string name="locale_native">Locale native</string>
     <string name="locale_learning">Locale learning</string>
+    <string name="family_name">Family name</string>
+    <string name="email">Email</string>
+    <string name="about_me">About me</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="birth_date">Birth date</string>
 </resources>

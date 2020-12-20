@@ -63,12 +63,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             val (_, email, givenName, familyName, _, picture, gender, birthDate, _, aboutMe, _, _, localNatives, localLearnings) = userInfo
             if (givenName != null && familyName != null) {
                 val name = "$givenName $familyName"
-                tvName.text = getString(R.string.name, name)
+                tvName.text = getString(R.string.str_name, name)
             }
-            email?.let { tvEmail.text = getString(R.string.email, email) }
-            gender?.let { tvGender.text = getString(R.string.gender, gender) }
-            birthDate?.let { tvBirthDate.text = getString(R.string.birth_date, birthDate) }
-            aboutMe?.let { tvAboutMe.text = getString(R.string.about_me, aboutMe) }
+            email?.let { tvEmail.text = getString(R.string.str_email, email) }
+            gender?.let { tvGender.text = getString(R.string.str_gender, gender) }
+            birthDate?.let { tvBirthDate.text = getString(R.string.str_birth_date, birthDate) }
+            aboutMe?.let { tvAboutMe.text = getString(R.string.str_about_me, aboutMe) }
             ivPicture.load(picture)
 
             mLocalNativeAdapter.setList(localNatives)

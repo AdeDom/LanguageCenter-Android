@@ -44,7 +44,7 @@
         app:destination="@id/authActivity" />
     <activity
         android:id="@+id/editProfileActivity"
-        android:name="com.lc.android.presentation.EditProfileActivity"
+        android:name="com.lc.android.presentation.editprofile.EditProfileActivity"
         android:label="activity_edit_profile"
         tools:layout="@layout/activity_edit_profile" />
 

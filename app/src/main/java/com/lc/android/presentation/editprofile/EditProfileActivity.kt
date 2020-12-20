@@ -1,4 +1,4 @@
-package com.lc.android.presentation
+package com.lc.android.presentation.editprofile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
