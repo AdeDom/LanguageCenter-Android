@@ -20,4 +20,5 @@
     <string name="vocabulary_thai">คำศัพท์ภาษาไทย</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="add_chat_group">Add chat group</string>
 </resources>
