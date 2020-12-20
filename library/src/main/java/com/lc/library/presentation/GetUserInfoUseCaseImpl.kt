@@ -12,8 +12,8 @@ class GetUserInfoUseCaseImpl(
     private val repository: LanguageCenterRepository,
 ) : GetUserInfoUseCase {
 
-    override suspend fun callFetchUserInfo(): Resource<UserInfoResponse> {
-        return repository.callFetchUserInfo()
+    override suspend fun callFetchUserInfo(): Resource<UserInfoResponse>? {
+        return if (dataSource.getDbUserInfo() == null) repository.callFetchUserInfo() else null
     }
 
     override fun getDbUserInfoLiveData(): LiveData<UserInfoEntity> {

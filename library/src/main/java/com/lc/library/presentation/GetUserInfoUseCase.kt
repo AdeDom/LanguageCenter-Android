@@ -7,7 +7,7 @@ import com.lc.server.models.response.UserInfoResponse
 
 interface GetUserInfoUseCase {
 
-    suspend fun callFetchUserInfo(): Resource<UserInfoResponse>
+    suspend fun callFetchUserInfo(): Resource<UserInfoResponse>?
 
     fun getDbUserInfoLiveData(): LiveData<UserInfoEntity>
 

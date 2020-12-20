@@ -20,5 +20,6 @@ data class UserInfoEntity(
     @ColumnInfo(name = "about_me") val aboutMe: String? = null,
     @ColumnInfo(name = "created") val created: String? = null,
     @ColumnInfo(name = "updated") val updated: String? = null,
-    @ColumnInfo(name = "locales") val locales: List<UserInfoLocale> = emptyList(),
+    @ColumnInfo(name = "local_natives") val localNatives: List<UserInfoLocale> = emptyList(),
+    @ColumnInfo(name = "local_learnings") val localLearnings: List<UserInfoLocale> = emptyList(),
 )

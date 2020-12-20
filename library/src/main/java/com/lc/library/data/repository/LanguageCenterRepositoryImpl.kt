@@ -68,7 +68,8 @@ class LanguageCenterRepositoryImpl(
                 aboutMe = userInfo?.aboutMe,
                 created = userInfo?.created,
                 updated = userInfo?.updated,
-                locales = userInfo?.locales ?: emptyList(),
+                localNatives = userInfo?.localNatives ?: emptyList(),
+                localLearnings = userInfo?.localLearnings ?: emptyList(),
             )
             dataSource.saveUserInfo(entity)
         }

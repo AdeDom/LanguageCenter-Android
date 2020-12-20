@@ -32,12 +32,11 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         viewEvent()
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.callFetchUserInfo()
-    }
-
     private fun observeViewModel() {
+        viewModel.attachFirstTime.observe {
+            viewModel.callFetchUserInfo()
+        }
+
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
         }
