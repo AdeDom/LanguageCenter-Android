@@ -21,4 +21,6 @@
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="add_chat_group">Add chat group</string>
+    <string name="message">Message</string>
+    <string name="messages">Message...</string>
 </resources>
