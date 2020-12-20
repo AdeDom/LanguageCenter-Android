@@ -28,4 +28,7 @@
     <string name="messages">Message...</string>
     <string name="dialog_sign_out_message">Do you really want to sign out?</string>
     <string name="given_name">Given name</string>
+    <string name="locale">Locale</string>
+    <string name="locale_native">Locale native</string>
+    <string name="locale_learning">Locale learning</string>
 </resources>

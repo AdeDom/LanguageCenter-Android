@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -17,6 +18,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private val viewModel by viewModel<ProfileViewModel>()
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private val mLocalNativeAdapter by lazy { ProfileLocaleAdapter() }
+    private val mLocalLearningAdapter by lazy { ProfileLocaleAdapter() }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -28,8 +31,21 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
+        initialView()
         observeViewModel()
         viewEvent()
+    }
+
+    private fun initialView() {
+        recyclerViewLocalNatives.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = mLocalNativeAdapter
+        }
+
+        recyclerViewLocalLearnings.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = mLocalLearningAdapter
+        }
     }
 
     private fun observeViewModel() {
@@ -44,7 +60,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         viewModel.getDbUserInfoLiveData.observe(viewLifecycleOwner, { userInfo ->
             if (userInfo == null) return@observe
 
-            val (_, email, givenName, familyName, _, picture, gender, birthDate, _, aboutMe) = userInfo
+            val (_, email, givenName, familyName, _, picture, gender, birthDate, _, aboutMe, _, _, localNatives, localLearnings) = userInfo
             if (givenName != null && familyName != null) {
                 val name = "$givenName $familyName"
                 tvName.text = getString(R.string.name, name)
@@ -54,6 +70,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             birthDate?.let { tvBirthDate.text = getString(R.string.birth_date, birthDate) }
             aboutMe?.let { tvAboutMe.text = getString(R.string.about_me, aboutMe) }
             ivPicture.load(picture)
+
+            mLocalNativeAdapter.setList(localNatives)
+            mLocalLearningAdapter.setList(localLearnings)
         })
 
         viewModel.error.observeError()
