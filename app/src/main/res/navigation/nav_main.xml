@@ -29,7 +29,11 @@
         android:id="@+id/vocabularyFragment"
         android:name="com.lc.android.presentation.vocapbulary.VocabularyFragment"
         android:label="VocabularyFragment"
-        tools:layout="@layout/fragment_vocabulary" />
+        tools:layout="@layout/fragment_vocabulary" >
+        <action
+            android:id="@+id/action_vocabularyFragment_to_vocabularyActivity"
+            app:destination="@id/vocabularyActivity" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.lc.android.presentation.profile.ProfileFragment"
@@ -47,5 +51,10 @@
         android:name="com.lc.android.presentation.editprofile.EditProfileActivity"
         android:label="activity_edit_profile"
         tools:layout="@layout/activity_edit_profile" />
+    <activity
+        android:id="@+id/vocabularyActivity"
+        android:name="com.lc.android.presentation.VocabularyActivity"
+        android:label="activity_vocabulary"
+        tools:layout="@layout/activity_vocabulary" />
 
 </navigation>

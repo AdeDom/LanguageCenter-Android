@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_vocabulary"
+    app:startDestination="@id/vocabularyDetailFragment">
+
+    <fragment
+        android:id="@+id/vocabularyDetailFragment"
+        android:name="com.lc.android.presentation.vocabularydetail.VocabularyDetailFragment"
+        android:label="VocabularyDetailFragment"
+        tools:layout="@layout/fragment_vocabulary_detail" >
+        <action
+            android:id="@+id/action_vocabularyDetailFragment_to_addVocabularyFragment"
+            app:destination="@id/addVocabularyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addVocabularyFragment"
+        android:name="com.lc.android.presentation.addvocabulary.AddVocabularyFragment"
+        android:label="AddVocabularyFragment"
+        tools:layout="@layout/fragment_add_vocabulary" />
+</navigation>
