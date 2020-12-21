@@ -4,24 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_background_app">
+    android:background="@drawable/img_background_app"
+    tools:context=".presentation.userinfo.UserInfoActivity">
 
     <TextView
+        android:id="@+id/tvCommunity"
         style="@style/Text.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/profile"
+        android:text="@string/community"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/ivEditProfile"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_edit"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -43,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPicture"
-        tools:text="@string/str_name" />
+        tools:text="@string/name" />
 
     <TextView
         android:id="@+id/tvEmail"
@@ -54,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvName"
-        tools:text="@string/str_email" />
+        tools:text="@string/email" />
 
     <TextView
         android:id="@+id/tvGender"
@@ -65,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail"
-        tools:text="@string/str_gender" />
+        tools:text="@string/gender" />
 
     <TextView
         android:id="@+id/tvBirthDate"
@@ -76,7 +69,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGender"
-        tools:text="@string/str_birth_date" />
+        tools:text="@string/birth_date" />
 
     <TextView
         android:id="@+id/tvAboutMe"
@@ -87,7 +80,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBirthDate"
-        tools:text="@string/str_about_me" />
+        tools:text="@string/about_me" />
 
     <TextView
         android:id="@+id/tvLocaleNative"
@@ -138,30 +131,5 @@
         app:layout_constraintStart_toEndOf="@+id/recyclerViewLocalNatives"
         app:layout_constraintTop_toBottomOf="@+id/tvLocaleLearning"
         tools:listitem="@layout/item_user_info_locale" />
-
-    <Button
-        android:id="@+id/btSignOut"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:minWidth="0dp"
-        android:minHeight="0dp"
-        android:text="@string/sign_out"
-        android:textColor="@android:color/holo_red_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationLoading"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/language_loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

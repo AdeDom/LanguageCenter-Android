@@ -14,7 +14,11 @@
         android:id="@+id/communityFragment"
         android:name="com.lc.android.presentation.community.CommunityFragment"
         android:label="CommunityFragment"
-        tools:layout="@layout/fragment_community" />
+        tools:layout="@layout/fragment_community" >
+        <action
+            android:id="@+id/action_communityFragment_to_userInfoActivity"
+            app:destination="@id/userInfoActivity" />
+    </fragment>
     <fragment
         android:id="@+id/chatsFragment"
         android:name="com.lc.android.presentation.chats.ChatsFragment"
@@ -53,10 +57,10 @@
         <action
             android:id="@+id/action_profileFragment_to_editProfileActivity"
             app:destination="@id/editProfileActivity" />
+        <action
+            android:id="@+id/action_profileFragment_to_authActivity"
+            app:destination="@id/authActivity" />
     </fragment>
-    <action
-        android:id="@+id/action_global_authActivity"
-        app:destination="@id/authActivity" />
     <activity
         android:id="@+id/editProfileActivity"
         android:name="com.lc.android.presentation.editprofile.EditProfileActivity"
@@ -82,5 +86,10 @@
         android:name="com.lc.android.presentation.chat.ChatActivity"
         android:label="activity_chat"
         tools:layout="@layout/activity_chat" />
+    <activity
+        android:id="@+id/userInfoActivity"
+        android:name="com.lc.android.presentation.userinfo.UserInfoActivity"
+        android:label="activity_user_info"
+        tools:layout="@layout/activity_user_info" />
 
 </navigation>

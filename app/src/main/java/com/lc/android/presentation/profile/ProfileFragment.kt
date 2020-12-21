@@ -105,7 +105,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private fun signOut() {
         mGoogleSignInClient.signOut().addOnCompleteListener(requireActivity()) {
             viewModel.signOut()
-            findNavController().navigate(R.id.action_global_authActivity)
+            findNavController().navigate(R.id.action_profileFragment_to_authActivity)
             activity?.finishAffinity()
         }
     }
