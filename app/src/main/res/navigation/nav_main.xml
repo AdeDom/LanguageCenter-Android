@@ -19,7 +19,11 @@
         android:id="@+id/chatsFragment"
         android:name="com.lc.android.presentation.chats.ChatsFragment"
         android:label="ChatsFragment"
-        tools:layout="@layout/fragment_chats" />
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_chatsFragment_to_chatActivity"
+            app:destination="@id/chatActivity" />
+    </fragment>
     <fragment
         android:id="@+id/chatGroupFragment"
         android:name="com.lc.android.presentation.chatgroup.ChatGroupFragment"
@@ -73,5 +77,10 @@
         android:name="com.lc.android.presentation.addchatgroup.AddChatGroupActivity"
         android:label="activity_add_chat_group"
         tools:layout="@layout/activity_add_chat_group" />
+    <activity
+        android:id="@+id/chatActivity"
+        android:name="com.lc.android.presentation.chat.ChatActivity"
+        android:label="activity_chat"
+        tools:layout="@layout/activity_chat" />
 
 </navigation>
