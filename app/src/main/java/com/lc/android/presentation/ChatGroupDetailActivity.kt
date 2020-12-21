@@ -1,0 +1,12 @@
+package com.lc.android.presentation
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.lc.android.R
+
+class ChatGroupDetailActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_chat_group_detail)
+    }
+}
