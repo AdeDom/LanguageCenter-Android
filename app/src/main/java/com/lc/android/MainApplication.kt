@@ -6,10 +6,14 @@ import com.lc.android.presentation.di.getPresentationModule
 import com.lc.library.data.di.getDataAndroidModule
 import com.lc.library.domain.di.getDomainModule
 import com.lc.library.sharedpreference.di.getSharedPreferenceModule
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
