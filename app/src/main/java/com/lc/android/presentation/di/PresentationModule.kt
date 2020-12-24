@@ -1,5 +1,6 @@
 package com.lc.android.presentation.di
 
+import com.lc.android.presentation.guideline.birthdate.GuideBirthDateViewModel
 import com.lc.android.presentation.guideline.gender.GuideGenderViewModel
 import com.lc.android.presentation.profile.ProfileViewModel
 import com.lc.android.presentation.signin.SignInViewModel
@@ -17,6 +18,7 @@ private val presentationModule = module {
     viewModel { SignInViewModel(get()) }
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { GuideGenderViewModel() }
+    viewModel { GuideBirthDateViewModel() }
 
 }
 

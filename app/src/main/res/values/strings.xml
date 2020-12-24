@@ -12,6 +12,7 @@
     <string name="str_email">Email : %1$s</string>
     <string name="str_gender">Gender : %1$s</string>
     <string name="str_birth_date">Birth date : %1$s</string>
+    <string name="str_age">Age : %1$d</string>
     <string name="str_about_me">About me : %1$s</string>
     <string name="greeting">Greeting</string>
     <string name="hello_english">Hello</string>
@@ -42,4 +43,5 @@
     <string name="skip">Skip</string>
     <string name="learning_language">Learning language</string>
     <string name="native_language">Native language</string>
+    <string name="select_birth_date">Select birth date</string>
 </resources>
