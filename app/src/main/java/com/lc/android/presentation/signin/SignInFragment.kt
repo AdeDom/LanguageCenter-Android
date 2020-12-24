@@ -33,15 +33,14 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     }
 
     private fun observeViewModel() {
-        viewModel.state.observe { state->
+        viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
             signInButton.isClickable = state.isClickable
         }
 
         viewModel.signInEvent.observe { response ->
             if (response.success) {
-                findNavController().navigate(R.id.action_global_splashScreenFragment)
-                activity?.finishAffinity()
+                findNavController().navigate(R.id.action_signInFragment_to_guideNativeLanguageFragment)
             }
         }
 

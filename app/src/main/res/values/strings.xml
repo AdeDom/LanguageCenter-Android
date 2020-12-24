@@ -39,4 +39,7 @@
     <string name="female">Female</string>
     <string name="birth_date">Birth date</string>
     <string name="name">Name</string>
+    <string name="skip">Skip</string>
+    <string name="learning_language">Learning language</string>
+    <string name="native_language">Native language</string>
 </resources>
