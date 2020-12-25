@@ -36,35 +36,35 @@
         app:destination="@id/splashScreenFragment" />
     <fragment
         android:id="@+id/guideNativeLanguageFragment"
-        android:name="com.lc.android.presentation.guideline.nativelanguage.GuideNativeLanguageFragment"
+        android:name="com.lc.android.presentation.guide.nativelanguage.GuideNativeLanguageFragment"
         android:label="GuideNativeLanguageFragment"
-        tools:layout="@layout/fragment_guideline_native_language" >
+        tools:layout="@layout/fragment_guide_native_language" >
         <action
             android:id="@+id/action_guideNativeLanguageFragment_to_guideLearningLanguageFragment"
             app:destination="@id/guideLearningLanguageFragment" />
     </fragment>
     <fragment
         android:id="@+id/guideLearningLanguageFragment"
-        android:name="com.lc.android.presentation.guideline.learninglanguage.GuideLearningLanguageFragment"
+        android:name="com.lc.android.presentation.guide.learninglanguage.GuideLearningLanguageFragment"
         android:label="GuideLearningLanguageFragment"
-        tools:layout="@layout/fragment_guideline_learning_language" >
+        tools:layout="@layout/fragment_guide_learning_language" >
         <action
             android:id="@+id/action_guideLearningLanguageFragment_to_guideGenderFragment"
             app:destination="@id/guideGenderFragment" />
     </fragment>
     <fragment
         android:id="@+id/guideGenderFragment"
-        android:name="com.lc.android.presentation.guideline.gender.GuideGenderFragment"
+        android:name="com.lc.android.presentation.guide.gender.GuideGenderFragment"
         android:label="GuideGenderFragment"
-        tools:layout="@layout/fragment_guideline_gender" >
+        tools:layout="@layout/fragment_guide_gender" >
         <action
             android:id="@+id/action_guideGenderFragment_to_guideBirthDateFragment"
             app:destination="@id/guideBirthDateFragment" />
     </fragment>
     <fragment
         android:id="@+id/guideBirthDateFragment"
-        android:name="com.lc.android.presentation.guideline.birthdate.GuideBirthDateFragment"
+        android:name="com.lc.android.presentation.guide.birthdate.GuideBirthDateFragment"
         android:label="GuideBirthDateFragment"
-        tools:layout="@layout/fragment_guideline_birth_date" />
+        tools:layout="@layout/fragment_guide_birth_date" />
 
 </navigation>

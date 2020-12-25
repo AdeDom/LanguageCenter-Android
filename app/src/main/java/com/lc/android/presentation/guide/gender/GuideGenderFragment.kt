@@ -1,11 +1,11 @@
-package com.lc.android.presentation.guideline.gender
+package com.lc.android.presentation.guide.gender
 
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.util.clicks
-import kotlinx.android.synthetic.main.fragment_guideline_gender.*
+import kotlinx.android.synthetic.main.fragment_guide_gender.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.map
@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class GuideGenderFragment : BaseFragment(R.layout.fragment_guideline_gender) {
+class GuideGenderFragment : BaseFragment(R.layout.fragment_guide_gender) {
 
     private val viewModel by viewModel<GuideGenderViewModel>()
 

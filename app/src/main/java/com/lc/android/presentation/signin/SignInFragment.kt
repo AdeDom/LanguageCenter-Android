@@ -39,7 +39,9 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         }
 
         viewModel.signInEvent.observe { response ->
-            if (response.success) {
+            if (response.isUpdateProfile) {
+                findNavController().navigate(R.id.action_global_splashScreenFragment)
+            } else {
                 findNavController().navigate(R.id.action_signInFragment_to_guideNativeLanguageFragment)
             }
         }

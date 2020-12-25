@@ -1,4 +1,4 @@
-package com.lc.android.presentation.guideline.gender
+package com.lc.android.presentation.guide.gender
 
 sealed class GuideGenderEvent {
     object Male : GuideGenderEvent()

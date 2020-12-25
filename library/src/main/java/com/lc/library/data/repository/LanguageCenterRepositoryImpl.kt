@@ -32,7 +32,10 @@ class LanguageCenterRepositoryImpl(
     override suspend fun callSignIn(request: SignInRequest): Resource<SignInResponse> {
         val response = safeApiCall { dataSource.callSignIn(request) }
 
-        if (response is Resource.Success) saveTokenAuth(response.data)
+        if (response is Resource.Success) {
+            saveTokenAuth(response.data)
+            callFetchUserInfo()
+        }
 
         return response
     }

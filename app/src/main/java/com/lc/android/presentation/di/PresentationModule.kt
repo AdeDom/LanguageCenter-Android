@@ -1,7 +1,7 @@
 package com.lc.android.presentation.di
 
-import com.lc.android.presentation.guideline.birthdate.GuideBirthDateViewModel
-import com.lc.android.presentation.guideline.gender.GuideGenderViewModel
+import com.lc.android.presentation.guide.birthdate.GuideBirthDateViewModel
+import com.lc.android.presentation.guide.gender.GuideGenderViewModel
 import com.lc.android.presentation.profile.ProfileViewModel
 import com.lc.android.presentation.signin.SignInViewModel
 import com.lc.android.presentation.splashscreen.SplashScreenViewModel

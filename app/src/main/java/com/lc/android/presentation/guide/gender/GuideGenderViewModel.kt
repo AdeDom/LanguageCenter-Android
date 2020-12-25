@@ -1,4 +1,4 @@
-package com.lc.android.presentation.guideline.gender
+package com.lc.android.presentation.guide.gender
 
 import com.lc.android.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi

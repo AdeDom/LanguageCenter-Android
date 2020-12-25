@@ -1,4 +1,4 @@
-package com.lc.android.presentation.guideline.birthdate
+package com.lc.android.presentation.guide.birthdate
 
 import java.util.*
 

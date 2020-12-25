@@ -1,15 +1,15 @@
-package com.lc.android.presentation.guideline.birthdate
+package com.lc.android.presentation.guide.birthdate
 
 import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_guideline_birth_date.*
+import kotlinx.android.synthetic.main.fragment_guide_birth_date.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
-class GuideBirthDateFragment : BaseFragment(R.layout.fragment_guideline_birth_date) {
+class GuideBirthDateFragment : BaseFragment(R.layout.fragment_guide_birth_date) {
 
     private val viewModel by viewModel<GuideBirthDateViewModel>()
 
