@@ -24,6 +24,7 @@ class ProfileLocaleAdapter : RecyclerView.Adapter<ProfileLocaleAdapter.ProfileLo
         when (list[position].locale?.toLowerCase(Locale.getDefault())) {
             "th" -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_thailand)
             "en" -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_united_kingdom)
+            else -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_world)
         }
     }
 

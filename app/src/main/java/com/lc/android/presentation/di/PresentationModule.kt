@@ -2,6 +2,7 @@ package com.lc.android.presentation.di
 
 import com.lc.android.presentation.guide.birthdate.GuideBirthDateViewModel
 import com.lc.android.presentation.guide.gender.GuideGenderViewModel
+import com.lc.android.presentation.guide.nativelanguage.GuideNativeLanguageViewModel
 import com.lc.android.presentation.profile.ProfileViewModel
 import com.lc.android.presentation.signin.SignInViewModel
 import com.lc.android.presentation.splashscreen.SplashScreenViewModel
@@ -19,6 +20,7 @@ private val presentationModule = module {
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { GuideGenderViewModel() }
     viewModel { GuideBirthDateViewModel() }
+    viewModel { GuideNativeLanguageViewModel(get()) }
 
 }
 

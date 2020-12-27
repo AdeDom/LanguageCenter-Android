@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import com.lc.android.base.BaseViewModel
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.library.data.repository.Resource
-import com.lc.library.presentation.GetUserInfoUseCase
-import com.lc.library.presentation.SignOutUseCase
+import com.lc.library.presentation.usecase.GetUserInfoUseCase
+import com.lc.library.presentation.usecase.SignOutUseCase
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(

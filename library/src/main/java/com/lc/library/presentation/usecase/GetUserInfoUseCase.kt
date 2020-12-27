@@ -1,4 +1,4 @@
-package com.lc.library.presentation
+package com.lc.library.presentation.usecase
 
 import androidx.lifecycle.LiveData
 import com.lc.library.data.db.entities.UserInfoEntity

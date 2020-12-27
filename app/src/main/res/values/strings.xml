@@ -44,4 +44,6 @@
     <string name="learning_language">Learning language</string>
     <string name="native_language">Native language</string>
     <string name="select_birth_date">Select birth date</string>
+    <string name="next">Next</string>
+    <string name="level">Level</string>
 </resources>

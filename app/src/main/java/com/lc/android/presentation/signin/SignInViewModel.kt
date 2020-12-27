@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lc.android.base.BaseViewModel
 import com.lc.library.data.repository.Resource
-import com.lc.library.presentation.SignInUseCase
+import com.lc.library.presentation.usecase.SignInUseCase
 import com.lc.server.models.request.SignInRequest
 import com.lc.server.models.response.SignInResponse
 import kotlinx.coroutines.launch
