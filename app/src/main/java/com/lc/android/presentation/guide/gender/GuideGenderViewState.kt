@@ -1,5 +1,6 @@
 package com.lc.android.presentation.guide.gender
 
 data class GuideGenderViewState(
-    val gender: GuideGenderEvent? = null,
+    val genderEvent: GuideGenderEvent? = null,
+    val gender: String? = null,
 )

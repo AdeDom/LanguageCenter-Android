@@ -1,6 +1,7 @@
 package com.lc.android.presentation.guide.gender
 
 import com.lc.android.base.BaseViewModel
+import com.lc.server.util.LanguageCenterConstant
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -26,8 +27,22 @@ class GuideGenderViewModel : BaseViewModel<GuideGenderViewState>(GuideGenderView
         channel.asFlow()
             .onEach { event ->
                 when (event) {
-                    is GuideGenderEvent.Male -> setState { copy(gender = GuideGenderEvent.Male) }
-                    is GuideGenderEvent.Female -> setState { copy(gender = GuideGenderEvent.Female) }
+                    is GuideGenderEvent.Male -> {
+                        setState {
+                            copy(
+                                genderEvent = GuideGenderEvent.Male,
+                                gender = LanguageCenterConstant.GENDER_MALE,
+                            )
+                        }
+                    }
+                    is GuideGenderEvent.Female -> {
+                        setState {
+                            copy(
+                                genderEvent = GuideGenderEvent.Female,
+                                gender = LanguageCenterConstant.GENDER_FEMALE,
+                            )
+                        }
+                    }
                 }
             }
             .catch { setError(it) }

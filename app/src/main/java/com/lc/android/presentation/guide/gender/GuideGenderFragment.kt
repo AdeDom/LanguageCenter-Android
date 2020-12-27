@@ -6,7 +6,6 @@ import androidx.navigation.fragment.navArgs
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.util.clicks
-import com.lc.android.util.toast
 import kotlinx.android.synthetic.main.fragment_guide_gender.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -26,13 +25,11 @@ class GuideGenderFragment : BaseFragment(R.layout.fragment_guide_gender) {
 
         observeViewModel()
         viewEvent()
-
-        context.toast("${args.guideUpdateProfile}")
     }
 
     private fun observeViewModel() {
         viewModel.state.observe { state ->
-            when (state.gender) {
+            when (state.genderEvent) {
                 is GuideGenderEvent.Male -> ivGender.setImageResource(R.drawable.ic_male)
                 is GuideGenderEvent.Female -> ivGender.setImageResource(R.drawable.ic_female)
             }
@@ -45,8 +42,12 @@ class GuideGenderFragment : BaseFragment(R.layout.fragment_guide_gender) {
             rbFemale.clicks().map { GuideGenderEvent.Female },
         ).observe { viewModel.process(it) }
 
-        btSkip.setOnClickListener {
-            findNavController().navigate(R.id.action_guideGenderFragment_to_guideBirthDateFragment)
+        btNext.setOnClickListener {
+            val navDirections = GuideGenderFragmentDirections
+                .actionGuideGenderFragmentToGuideBirthDateFragment(
+                    args.guideUpdateProfile.copy(gender = viewModel.state.value?.gender)
+                )
+            findNavController().navigate(navDirections)
         }
     }
 
