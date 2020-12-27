@@ -21,7 +21,7 @@
         android:id="@+id/signInFragment"
         android:name="com.lc.android.presentation.signin.SignInFragment"
         android:label="SignInFragment"
-        tools:layout="@layout/fragment_sign_in" >
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_guideNativeLanguageFragment"
             app:destination="@id/guideNativeLanguageFragment" />
@@ -38,7 +38,7 @@
         android:id="@+id/guideNativeLanguageFragment"
         android:name="com.lc.android.presentation.guide.nativelanguage.GuideNativeLanguageFragment"
         android:label="GuideNativeLanguageFragment"
-        tools:layout="@layout/fragment_guide_native_language" >
+        tools:layout="@layout/fragment_guide_native_language">
         <action
             android:id="@+id/action_guideNativeLanguageFragment_to_guideLearningLanguageFragment"
             app:destination="@id/guideLearningLanguageFragment" />
@@ -47,16 +47,19 @@
         android:id="@+id/guideLearningLanguageFragment"
         android:name="com.lc.android.presentation.guide.learninglanguage.GuideLearningLanguageFragment"
         android:label="GuideLearningLanguageFragment"
-        tools:layout="@layout/fragment_guide_learning_language" >
+        tools:layout="@layout/fragment_guide_learning_language">
         <action
             android:id="@+id/action_guideLearningLanguageFragment_to_guideGenderFragment"
             app:destination="@id/guideGenderFragment" />
+        <argument
+            android:name="guideUpdateProfile"
+            app:argType="com.lc.android.presentation.guide.model.GuideUpdateProfileParcelable" />
     </fragment>
     <fragment
         android:id="@+id/guideGenderFragment"
         android:name="com.lc.android.presentation.guide.gender.GuideGenderFragment"
         android:label="GuideGenderFragment"
-        tools:layout="@layout/fragment_guide_gender" >
+        tools:layout="@layout/fragment_guide_gender">
         <action
             android:id="@+id/action_guideGenderFragment_to_guideBirthDateFragment"
             app:destination="@id/guideBirthDateFragment" />

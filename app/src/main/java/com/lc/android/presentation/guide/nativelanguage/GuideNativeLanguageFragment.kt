@@ -5,6 +5,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
+import com.lc.android.presentation.guide.model.GuideUpdateProfileParcelable
+import com.lc.android.presentation.guide.model.UserInfoLocaleParcelable
 import kotlinx.android.synthetic.main.fragment_guide_native_language.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,8 +43,23 @@ class GuideNativeLanguageFragment : BaseFragment(R.layout.fragment_guide_native_
     }
 
     private fun viewEvent() {
-        btSkip.setOnClickListener {
-            findNavController().navigate(R.id.action_guideNativeLanguageFragment_to_guideLearningLanguageFragment)
+        btNext.setOnClickListener {
+            val localNatives = mAdapter.list
+                .filter { it.isChecked }
+                .map {
+                    UserInfoLocaleParcelable(
+                        locale = it.locale,
+                        level = it.level,
+                    )
+                }
+            val guideUpdateProfileRequest = GuideUpdateProfileParcelable(
+                localNatives = localNatives
+            )
+            val navDirections = GuideNativeLanguageFragmentDirections
+                .actionGuideNativeLanguageFragmentToGuideLearningLanguageFragment(
+                    guideUpdateProfileRequest
+                )
+            findNavController().navigate(navDirections)
         }
     }
 

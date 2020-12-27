@@ -14,7 +14,7 @@ import java.util.*
 class GuideNativeLanguageAdapter :
     RecyclerView.Adapter<GuideNativeLanguageAdapter.GuideSettingLanguageViewHolder>() {
 
-    private val list by lazy { mutableListOf<UserInfoLocaleItem>() }
+    val list by lazy { mutableListOf<UserInfoLocaleItem>() }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -26,28 +26,29 @@ class GuideNativeLanguageAdapter :
     }
 
     override fun onBindViewHolder(holder: GuideSettingLanguageViewHolder, position: Int) {
-        var level = "${list[position].level}%"
+        val (locale, level, isChecked) = list[position]
 
-        holder.itemView.tvLocale.text = list[position].locale?.toUpperCase(Locale.getDefault())
-        holder.itemView.tvLevel.text = level
-        holder.itemView.checkBox.isChecked = list[position].isChecked
-        holder.itemView.seekBar.progress = list[position].level
-        holder.itemView.seekBar.isVisible = list[position].isChecked
-        when (list[position].locale?.toLowerCase(Locale.getDefault())) {
+        holder.itemView.tvLocale.text = locale?.toUpperCase(Locale.getDefault())
+        holder.itemView.tvLevel.text = "$level%"
+        holder.itemView.checkBox.isChecked = isChecked
+        holder.itemView.seekBar.progress = level
+        holder.itemView.seekBar.isVisible = isChecked
+        when (locale?.toLowerCase(Locale.getDefault())) {
             "th" -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_thailand)
             "en" -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_united_kingdom)
             else -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_world)
         }
 
         holder.itemView.checkBox.setOnCheckedChangeListener { _, b ->
+            list[holder.adapterPosition] = list[holder.adapterPosition].copy(isChecked = b)
             holder.itemView.seekBar.isVisible = b
         }
 
         holder.itemView.seekBar.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, b: Boolean) {
-                level = "$progress%"
-                holder.itemView.tvLevel.text = level
+                list[holder.adapterPosition] = list[holder.adapterPosition].copy(level = progress)
+                holder.itemView.tvLevel.text = "$progress%"
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
