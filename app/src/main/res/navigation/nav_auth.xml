@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_guideGenderFragment_to_guideBirthDateFragment"
             app:destination="@id/guideBirthDateFragment" />
+        <argument
+            android:name="guideUpdateProfile"
+            app:argType="com.lc.android.presentation.guide.model.GuideUpdateProfileParcelable" />
     </fragment>
     <fragment
         android:id="@+id/guideBirthDateFragment"

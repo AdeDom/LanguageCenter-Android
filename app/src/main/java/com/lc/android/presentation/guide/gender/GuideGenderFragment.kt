@@ -2,9 +2,11 @@ package com.lc.android.presentation.guide.gender
 
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.util.clicks
+import com.lc.android.util.toast
 import kotlinx.android.synthetic.main.fragment_guide_gender.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -16,6 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 @ExperimentalCoroutinesApi
 class GuideGenderFragment : BaseFragment(R.layout.fragment_guide_gender) {
 
+    private val args by navArgs<GuideGenderFragmentArgs>()
     private val viewModel by viewModel<GuideGenderViewModel>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -23,6 +26,8 @@ class GuideGenderFragment : BaseFragment(R.layout.fragment_guide_gender) {
 
         observeViewModel()
         viewEvent()
+
+        context.toast("${args.guideUpdateProfile}")
     }
 
     private fun observeViewModel() {
