@@ -1,12 +1,15 @@
 package com.lc.library.data.network.api
 
+import com.lc.server.models.request.GuideUpdateProfileRequest
 import com.lc.server.models.request.RefreshTokenRequest
 import com.lc.server.models.request.SignInRequest
+import com.lc.server.models.response.BaseResponse
 import com.lc.server.models.response.SignInResponse
 import com.lc.server.models.response.UserInfoResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 
 interface LanguageCenterApi {
 
@@ -18,5 +21,8 @@ interface LanguageCenterApi {
 
     @GET("api/account/user-info")
     suspend fun callFetchUserInfo(): UserInfoResponse
+
+    @PUT("api/account/guide-update-profile")
+    suspend fun callGuideUpdateProfile(@Body guideUpdateProfileRequest: GuideUpdateProfileRequest): BaseResponse
 
 }

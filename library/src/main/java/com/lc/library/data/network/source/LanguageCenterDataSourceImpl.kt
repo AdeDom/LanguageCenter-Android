@@ -3,7 +3,9 @@ package com.lc.library.data.network.source
 import androidx.lifecycle.LiveData
 import com.lc.library.data.db.AppDatabase
 import com.lc.library.data.db.entities.UserInfoEntity
+import com.lc.server.models.request.GuideUpdateProfileRequest
 import com.lc.server.models.request.SignInRequest
+import com.lc.server.models.response.BaseResponse
 import com.lc.server.models.response.SignInResponse
 import com.lc.server.models.response.UserInfoResponse
 
@@ -34,6 +36,10 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun callFetchUserInfo(): UserInfoResponse {
         return provider.getLanguageCenterDataSource().callFetchUserInfo()
+    }
+
+    override suspend fun callGuideUpdateProfile(guideUpdateProfileRequest: GuideUpdateProfileRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource().callGuideUpdateProfile(guideUpdateProfileRequest)
     }
 
 }
