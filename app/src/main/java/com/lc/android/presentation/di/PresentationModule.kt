@@ -20,7 +20,7 @@ private val presentationModule = module {
     viewModel { SignInViewModel(get()) }
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { GuideGenderViewModel(get()) }
-    viewModel { GuideBirthDateViewModel(get()) }
+    viewModel { GuideBirthDateViewModel(get(), get()) }
     viewModel { GuideNativeLanguageViewModel(get()) }
     viewModel { GuideLearningLanguageViewModel(get()) }
 

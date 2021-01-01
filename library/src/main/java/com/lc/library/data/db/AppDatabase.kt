@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.lc.library.data.db.dao.UserInfoDao
 import com.lc.library.data.db.entities.UserInfoEntity
 
-@Database(entities = [UserInfoEntity::class], version = 3)
+@Database(entities = [UserInfoEntity::class], version = 4)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

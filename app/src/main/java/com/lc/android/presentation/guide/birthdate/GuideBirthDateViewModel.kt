@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.lc.android.base.BaseViewModel
 import com.lc.android.presentation.guide.model.GuideUpdateProfileParcelable
 import com.lc.library.data.repository.Resource
+import com.lc.library.presentation.usecase.GetUserInfoUseCase
 import com.lc.library.presentation.usecase.GuideUpdateProfileUseCase
 import com.lc.server.models.model.UserInfoLocale
 import com.lc.server.models.request.GuideUpdateProfileRequest
@@ -14,6 +15,7 @@ import java.util.*
 import kotlin.math.floor
 
 class GuideBirthDateViewModel(
+    private val getUserInfoUseCase: GetUserInfoUseCase,
     private val useCase: GuideUpdateProfileUseCase,
 ) : BaseViewModel<GuideBirthDateViewState>(GuideBirthDateViewState()) {
 
@@ -71,6 +73,17 @@ class GuideBirthDateViewModel(
             }
 
             setState { copy(isLoading = false, isClickable = true) }
+        }
+    }
+
+    fun getDbUserInfo() {
+        launch {
+            getUserInfoUseCase.getDbUserInfo()?.birthDateLong?.let { birthDateLong ->
+                val calendar = Calendar.getInstance().apply {
+                    timeInMillis = birthDateLong
+                }
+                setStateBirthDate(calendar)
+            }
         }
     }
 

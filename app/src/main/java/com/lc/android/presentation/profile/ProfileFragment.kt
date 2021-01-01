@@ -60,14 +60,16 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         viewModel.getDbUserInfoLiveData.observe(viewLifecycleOwner, { userInfo ->
             if (userInfo == null) return@observe
 
-            val (_, email, givenName, familyName, _, picture, gender, birthDate, _, aboutMe, _, _, localNatives, localLearnings) = userInfo
+            val (_, email, givenName, familyName, _, picture, gender, birthDateString, _, _, aboutMe, _, _, localNatives, localLearnings) = userInfo
             if (givenName != null && familyName != null) {
                 val name = "$givenName $familyName"
                 tvName.text = getString(R.string.str_name, name)
             }
             email?.let { tvEmail.text = getString(R.string.str_email, email) }
             gender?.let { tvGender.text = getString(R.string.str_gender, gender) }
-            birthDate?.let { tvBirthDate.text = getString(R.string.str_birth_date, birthDate) }
+            birthDateString?.let {
+                tvBirthDate.text = getString(R.string.str_birth_date, birthDateString)
+            }
             aboutMe?.let { tvAboutMe.text = getString(R.string.str_about_me, aboutMe) }
             ivPicture.load(picture)
 

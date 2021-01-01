@@ -25,6 +25,10 @@ class GuideBirthDateFragment : BaseFragment(R.layout.fragment_guide_birth_date) 
     }
 
     private fun observeViewModel() {
+        viewModel.attachFirstTime.observe {
+            viewModel.getDbUserInfo()
+        }
+
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
 
