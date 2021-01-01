@@ -21,4 +21,8 @@ class GetUserInfoUseCaseImpl(
         return dataSource.getDbUserInfoLiveData()
     }
 
+    override suspend fun getDbUserInfo(): UserInfoEntity? {
+        return dataSource.getDbUserInfo()
+    }
+
 }

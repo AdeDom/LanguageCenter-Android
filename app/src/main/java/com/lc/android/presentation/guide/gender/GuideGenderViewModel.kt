@@ -1,6 +1,7 @@
 package com.lc.android.presentation.guide.gender
 
 import com.lc.android.base.BaseViewModel
+import com.lc.library.presentation.usecase.GetUserInfoUseCase
 import com.lc.server.util.LanguageCenterConstant
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -13,13 +14,39 @@ import kotlinx.coroutines.launch
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class GuideGenderViewModel : BaseViewModel<GuideGenderViewState>(GuideGenderViewState()) {
+class GuideGenderViewModel(
+    private val getUserInfoUseCase: GetUserInfoUseCase,
+) : BaseViewModel<GuideGenderViewState>(GuideGenderViewState()) {
 
     private val channel = ConflatedBroadcastChannel<GuideGenderEvent>()
 
     fun process(action: GuideGenderEvent) {
         launch {
             channel.send(action)
+        }
+    }
+
+    fun getDbUserInfo() {
+        launch {
+            val userInfo = getUserInfoUseCase.getDbUserInfo()
+            when (userInfo?.gender) {
+                LanguageCenterConstant.GENDER_MALE -> {
+                    setState {
+                        copy(
+                            genderEvent = GuideGenderEvent.Male,
+                            gender = LanguageCenterConstant.GENDER_MALE,
+                        )
+                    }
+                }
+                LanguageCenterConstant.GENDER_FEMALE -> {
+                    setState {
+                        copy(
+                            genderEvent = GuideGenderEvent.Female,
+                            gender = LanguageCenterConstant.GENDER_FEMALE,
+                        )
+                    }
+                }
+            }
         }
     }
 

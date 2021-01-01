@@ -28,12 +28,24 @@ class GuideGenderFragment : BaseFragment(R.layout.fragment_guide_gender) {
     }
 
     private fun observeViewModel() {
+        viewModel.attachFirstTime.observe {
+            viewModel.getDbUserInfo()
+        }
+
         viewModel.state.observe { state ->
             when (state.genderEvent) {
-                is GuideGenderEvent.Male -> ivGender.setImageResource(R.drawable.ic_male)
-                is GuideGenderEvent.Female -> ivGender.setImageResource(R.drawable.ic_female)
+                is GuideGenderEvent.Male -> {
+                    rbMale.isChecked = true
+                    ivGender.setImageResource(R.drawable.ic_male)
+                }
+                is GuideGenderEvent.Female -> {
+                    rbFemale.isChecked = true
+                    ivGender.setImageResource(R.drawable.ic_female)
+                }
             }
         }
+
+        viewModel.error.observeError()
     }
 
     private fun viewEvent() {

@@ -11,4 +11,6 @@ interface GetUserInfoUseCase {
 
     fun getDbUserInfoLiveData(): LiveData<UserInfoEntity>
 
+    suspend fun getDbUserInfo(): UserInfoEntity?
+
 }
