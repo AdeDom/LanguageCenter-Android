@@ -3,7 +3,6 @@ package com.lc.android.presentation.profile
 import androidx.lifecycle.LiveData
 import com.lc.android.base.BaseViewModel
 import com.lc.library.data.db.entities.UserInfoEntity
-import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.usecase.GetUserInfoUseCase
 import com.lc.library.presentation.usecase.SignOutUseCase
 import kotlinx.coroutines.launch
@@ -15,20 +14,6 @@ class ProfileViewModel(
 
     val getDbUserInfoLiveData: LiveData<UserInfoEntity>
         get() = getUserInfoUseCase.getDbUserInfoLiveData()
-
-    fun callFetchUserInfo() {
-        launch {
-            setState { copy(isLoading = true) }
-
-            when (val resource = getUserInfoUseCase.callFetchUserInfo()) {
-                is Resource.Error -> {
-                    setError(resource.throwable)
-                }
-            }
-
-            setState { copy(isLoading = false) }
-        }
-    }
 
     fun signOut() {
         launch {

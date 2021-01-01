@@ -1,6 +1,7 @@
 package com.lc.android.presentation.profile
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -49,10 +50,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     }
 
     private fun observeViewModel() {
-        viewModel.attachFirstTime.observe {
-            viewModel.callFetchUserInfo()
-        }
-
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
         }
@@ -61,6 +58,17 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             if (userInfo == null) return@observe
 
             val (_, email, givenName, familyName, _, picture, gender, birthDateString, _, _, aboutMe, _, _, localNatives, localLearnings) = userInfo
+
+            // set visibility widget
+            if (email.isNullOrBlank()) tvEmail.visibility = View.GONE
+            if (givenName.isNullOrBlank() && familyName.isNullOrBlank())
+                tvName.visibility = View.GONE
+            if (picture.isNullOrBlank()) ivPicture.visibility = View.GONE
+            if (gender.isNullOrBlank()) tvGender.visibility = View.GONE
+            if (birthDateString.isNullOrBlank()) tvBirthDate.visibility = View.GONE
+            if (aboutMe.isNullOrBlank()) tvAboutMe.visibility = View.GONE
+
+            // set value to widget
             if (givenName != null && familyName != null) {
                 val name = "$givenName $familyName"
                 tvName.text = getString(R.string.str_name, name)
