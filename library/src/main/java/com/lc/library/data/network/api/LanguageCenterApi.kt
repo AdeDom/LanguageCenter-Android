@@ -1,5 +1,6 @@
 package com.lc.library.data.network.api
 
+import com.lc.server.models.request.EditProfileRequest
 import com.lc.server.models.request.GuideUpdateProfileRequest
 import com.lc.server.models.request.RefreshTokenRequest
 import com.lc.server.models.request.SignInRequest
@@ -24,5 +25,8 @@ interface LanguageCenterApi {
 
     @PUT("api/account/guide-update-profile")
     suspend fun callGuideUpdateProfile(@Body guideUpdateProfileRequest: GuideUpdateProfileRequest): BaseResponse
+
+    @PUT("api/account/edit-profile")
+    suspend fun callEditProfile(@Body editProfileRequest: EditProfileRequest): BaseResponse
 
 }

@@ -2,9 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/img_background_app"
+    android:focusableInTouchMode="true"
     tools:context=".presentation.editprofile.EditProfileActivity">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -19,9 +21,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etGivenName"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/shape_edittext_background"
             android:hint="@string/given_name" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -38,29 +41,11 @@
         app:layout_constraintTop_toBottomOf="@+id/layoutGivenName">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etFamilyName"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/shape_edittext_background"
             android:hint="@string/family_name" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutFamilyName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/shape_edittext_background"
-            android:hint="@string/email" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,13 +58,15 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutEmail">
+        app:layout_constraintTop_toBottomOf="@+id/layoutFamilyName">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAboutMe"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/shape_edittext_background"
-            android:hint="@string/about_me" />
+            android:hint="@string/about_me"
+            android:imeOptions="actionDone" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

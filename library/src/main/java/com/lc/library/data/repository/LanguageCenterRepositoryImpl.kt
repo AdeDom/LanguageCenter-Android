@@ -4,6 +4,7 @@ import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.PreferenceAuth
+import com.lc.server.models.request.EditProfileRequest
 import com.lc.server.models.request.GuideUpdateProfileRequest
 import com.lc.server.models.request.SignInRequest
 import com.lc.server.models.response.BaseResponse
@@ -89,6 +90,14 @@ class LanguageCenterRepositoryImpl(
 
     override suspend fun callGuideUpdateProfile(guideUpdateProfileRequest: GuideUpdateProfileRequest): Resource<BaseResponse> {
         val response = safeApiCall { dataSource.callGuideUpdateProfile(guideUpdateProfileRequest) }
+
+        if (response is Resource.Success) callFetchUserInfo()
+
+        return response
+    }
+
+    override suspend fun callEditProfile(editProfileRequest: EditProfileRequest): Resource<BaseResponse> {
+        val response = safeApiCall { dataSource.callEditProfile(editProfileRequest) }
 
         if (response is Resource.Success) callFetchUserInfo()
 
