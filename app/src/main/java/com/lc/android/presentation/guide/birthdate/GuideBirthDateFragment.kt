@@ -36,9 +36,9 @@ class GuideBirthDateFragment : BaseFragment(R.layout.fragment_guide_birth_date) 
             btBirthDate.isClickable = state.isClickable
             btConfirm.isClickable = state.isClickable
 
-            tvBirthDate.text = state.birthDateString
+            tvBirthDate.text = getStringBirthDate(state.birthDateLong)
 
-            state.age?.let { tvAge.text = getString(R.string.str_age, it) }
+            tvAge.text = getString(R.string.str_age, viewModel.getAge(state.birthDateLong))
         }
 
         viewModel.error.observeError()
@@ -67,17 +67,33 @@ class GuideBirthDateFragment : BaseFragment(R.layout.fragment_guide_birth_date) 
     }
 
     private fun selectBirthDate() {
-        val calendar = viewModel.state.value?.birthDateCalendar ?: Calendar.getInstance()
+        val calendar = Calendar.getInstance().apply {
+            viewModel.state.value?.birthDateLong?.let { birthDateLong ->
+                timeInMillis = birthDateLong
+            }
+        }
         DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
                 calendar.set(year, month, dayOfMonth)
-                viewModel.setStateBirthDate(calendar)
+                viewModel.setStateBirthDate(calendar.timeInMillis)
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         ).show()
+    }
+
+    private fun getStringBirthDate(time: Long?): String {
+        val calendar = Calendar.getInstance().apply {
+            time?.let {
+                timeInMillis = time
+            }
+        }
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+        return "$dayOfMonth/${month.plus(1)}/$year"
     }
 
 }

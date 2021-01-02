@@ -11,8 +11,6 @@ import com.lc.server.models.model.UserInfoLocale
 import com.lc.server.models.request.GuideUpdateProfileRequest
 import com.lc.server.models.response.BaseResponse
 import kotlinx.coroutines.launch
-import java.util.*
-import kotlin.math.floor
 
 class GuideBirthDateViewModel(
     private val getUserInfoUseCase: GetUserInfoUseCase,
@@ -23,30 +21,18 @@ class GuideBirthDateViewModel(
     val guideUpdateProfileEvent: LiveData<BaseResponse>
         get() = _guideUpdateProfileEvent
 
-    fun setStateBirthDate(birthDate: Calendar) {
-        setState {
-            copy(
-                birthDateCalendar = birthDate,
-                birthDateString = getStringBirthDate(birthDate),
-                age = getAge(birthDate),
-            )
+    fun setStateBirthDate(birthDate: Long) {
+        setState { copy(birthDateLong = birthDate) }
+    }
+
+    fun getAge(time: Long?): Int? {
+        return time?.let { calendar ->
+            val now = System.currentTimeMillis()
+            val timeBetween: Long = now - calendar
+            val yearsBetween: Double = timeBetween / 3.15576e+10
+            val age = kotlin.math.floor(yearsBetween).toInt()
+            if (age < 0) null else age
         }
-    }
-
-    private fun getStringBirthDate(calendar: Calendar): String {
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
-        return "$dayOfMonth/${month.plus(1)}/$year"
-    }
-
-    private fun getAge(calendar: Calendar): Int? {
-        val now = System.currentTimeMillis()
-        val birthDate = calendar.timeInMillis
-        val timeBetween: Long = now - birthDate
-        val yearsBetween: Double = timeBetween / 3.15576e+10
-        val age = floor(yearsBetween).toInt()
-        return if (age < 0) null else age
     }
 
     fun callGuideUpdateProfile(guideUpdateProfile: GuideUpdateProfileParcelable) {
@@ -64,7 +50,7 @@ class GuideBirthDateViewModel(
                     localNatives = localNatives,
                     localLearnings = localLearnings,
                     gender = guideUpdateProfile.gender,
-                    birthDate = state.value?.birthDateCalendar?.timeInMillis,
+                    birthDate = state.value?.birthDateLong,
                 )
                 when (val resource = useCase(request)) {
                     is Resource.Success -> _guideUpdateProfileEvent.value = resource.data
@@ -79,10 +65,7 @@ class GuideBirthDateViewModel(
     fun getDbUserInfo() {
         launch {
             getUserInfoUseCase.getDbUserInfo()?.birthDateLong?.let { birthDateLong ->
-                val calendar = Calendar.getInstance().apply {
-                    timeInMillis = birthDateLong
-                }
-                setStateBirthDate(calendar)
+                setStateBirthDate(birthDateLong)
             }
         }
     }
