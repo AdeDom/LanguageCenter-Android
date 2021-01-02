@@ -21,6 +21,7 @@ class ProfileLocaleAdapter : RecyclerView.Adapter<ProfileLocaleAdapter.ProfileLo
 
     override fun onBindViewHolder(holder: ProfileLocaleViewHolder, position: Int) {
         holder.itemView.tvLocale.text = list[position].locale?.toUpperCase(Locale.getDefault())
+        holder.itemView.tvLevel.text = list[position].level.toString()
         when (list[position].locale?.toLowerCase(Locale.getDefault())) {
             "th" -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_thailand)
             "en" -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_united_kingdom)

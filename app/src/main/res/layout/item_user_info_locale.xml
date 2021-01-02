@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
@@ -12,6 +13,16 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_cardview_background">
 
+        <ImageView
+            android:id="@+id/ivLocale"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="4dp"
+            android:src="@drawable/ic_thailand"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tvLocale"
             style="@style/Text.Body"
@@ -19,19 +30,20 @@
             android:layout_height="wrap_content"
             android:text="@string/locale"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ivLocale"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvLevel"
+            app:layout_constraintStart_toEndOf="@+id/ivLocale"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ivLocale"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_thailand"
+        <TextView
+            android:id="@+id/tvLevel"
+            style="@style/Text.Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvLocale"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/tvLocale"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/level" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
