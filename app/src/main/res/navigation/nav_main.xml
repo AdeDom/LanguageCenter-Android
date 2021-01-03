@@ -14,7 +14,7 @@
         android:id="@+id/communityFragment"
         android:name="com.lc.android.presentation.community.CommunityFragment"
         android:label="CommunityFragment"
-        tools:layout="@layout/fragment_community" >
+        tools:layout="@layout/fragment_community">
         <action
             android:id="@+id/action_communityFragment_to_userInfoActivity"
             app:destination="@id/userInfoActivity" />
@@ -23,7 +23,7 @@
         android:id="@+id/chatsFragment"
         android:name="com.lc.android.presentation.chats.ChatsFragment"
         android:label="ChatsFragment"
-        tools:layout="@layout/fragment_chats" >
+        tools:layout="@layout/fragment_chats">
         <action
             android:id="@+id/action_chatsFragment_to_chatActivity"
             app:destination="@id/chatActivity" />
@@ -32,7 +32,7 @@
         android:id="@+id/chatGroupFragment"
         android:name="com.lc.android.presentation.chatgroup.ChatGroupFragment"
         android:label="ChatGroupFragment"
-        tools:layout="@layout/fragment_chat_group" >
+        tools:layout="@layout/fragment_chat_group">
         <action
             android:id="@+id/action_chatGroupFragment_to_chatGroupDetailActivity"
             app:destination="@id/chatGroupDetailActivity" />
@@ -44,7 +44,7 @@
         android:id="@+id/vocabularyFragment"
         android:name="com.lc.android.presentation.vocapbulary.VocabularyFragment"
         android:label="VocabularyFragment"
-        tools:layout="@layout/fragment_vocabulary" >
+        tools:layout="@layout/fragment_vocabulary">
         <action
             android:id="@+id/action_vocabularyFragment_to_vocabularyActivity"
             app:destination="@id/vocabularyActivity" />
@@ -60,10 +60,16 @@
         <action
             android:id="@+id/action_profileFragment_to_authActivity"
             app:destination="@id/authActivity" />
+        <action
+            android:id="@+id/action_profileFragment_to_editLocaleNativeActivity"
+            app:destination="@id/editLocaleNativeActivity" />
+        <action
+            android:id="@+id/action_profileFragment_to_editLocaleLearningActivity"
+            app:destination="@id/editLocaleLearningActivity" />
     </fragment>
     <activity
         android:id="@+id/editProfileActivity"
-        android:name="com.lc.android.presentation.editprofile.EditProfileActivity"
+        android:name="com.lc.android.presentation.edit.profile.EditProfileActivity"
         android:label="activity_edit_profile"
         tools:layout="@layout/activity_edit_profile" />
     <activity
@@ -91,5 +97,15 @@
         android:name="com.lc.android.presentation.userinfo.UserInfoActivity"
         android:label="activity_user_info"
         tools:layout="@layout/activity_user_info" />
+    <activity
+        android:id="@+id/editLocaleNativeActivity"
+        android:name="com.lc.android.presentation.edit.localenative.EditLocaleNativeActivity"
+        android:label="EditLocaleNativeActivity"
+        tools:layout="@layout/activity_edit_locale_native" />
+    <activity
+        android:id="@+id/editLocaleLearningActivity"
+        android:name="com.lc.android.presentation.edit.localelearning.EditLocaleLearningActivity"
+        android:label="EditLocaleLearningActivity"
+        tools:layout="@layout/activity_edit_locale_learning" />
 
 </navigation>

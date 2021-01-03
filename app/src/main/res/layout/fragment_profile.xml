@@ -96,9 +96,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/locale_native"
+        android:textColor="@android:color/holo_blue_dark"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewLocalNatives"
         app:layout_constraintStart_toStartOf="@+id/recyclerViewLocalNatives"
         app:layout_constraintTop_toBottomOf="@+id/tvAboutMe" />
+
+    <ImageButton
+        android:id="@+id/ibEditLocaleNative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_edit"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLocaleNative"
+        app:layout_constraintStart_toEndOf="@+id/tvLocaleNative"
+        app:layout_constraintTop_toTopOf="@+id/tvLocaleNative" />
 
     <TextView
         android:id="@+id/tvLocaleLearning"
@@ -107,9 +117,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/locale_learning"
+        android:textColor="@android:color/holo_blue_dark"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewLocalLearnings"
         app:layout_constraintStart_toStartOf="@+id/recyclerViewLocalLearnings"
         app:layout_constraintTop_toBottomOf="@+id/tvAboutMe" />
+
+    <ImageButton
+        android:id="@+id/ibEditLocaleLearning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_edit"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLocaleLearning"
+        app:layout_constraintStart_toEndOf="@+id/tvLocaleLearning"
+        app:layout_constraintTop_toTopOf="@+id/tvLocaleLearning" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLocalNatives"

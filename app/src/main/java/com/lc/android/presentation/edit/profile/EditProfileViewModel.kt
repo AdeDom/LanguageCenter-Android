@@ -1,4 +1,4 @@
-package com.lc.android.presentation.editprofile
+package com.lc.android.presentation.edit.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

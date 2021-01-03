@@ -96,6 +96,14 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         ivEditProfile.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_editProfileActivity)
         }
+
+        ibEditLocaleNative.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_editLocaleNativeActivity)
+        }
+
+        ibEditLocaleLearning.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_editLocaleLearningActivity)
+        }
     }
 
     private fun dialogSignOut() {

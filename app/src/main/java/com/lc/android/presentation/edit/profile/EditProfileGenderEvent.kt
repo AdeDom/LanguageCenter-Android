@@ -1,4 +1,4 @@
-package com.lc.android.presentation.editprofile
+package com.lc.android.presentation.edit.profile
 
 sealed class EditProfileGenderEvent {
     object Male : EditProfileGenderEvent()

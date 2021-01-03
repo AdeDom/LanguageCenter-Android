@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/img_background_app"
     android:focusableInTouchMode="true"
-    tools:context=".presentation.editprofile.EditProfileActivity">
+    tools:context=".presentation.edit.profile.EditProfileActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutGivenName"

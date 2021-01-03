@@ -1,6 +1,8 @@
 package com.lc.android.presentation.di
 
-import com.lc.android.presentation.editprofile.EditProfileViewModel
+import com.lc.android.presentation.edit.localelearning.EditLocaleLearningViewModel
+import com.lc.android.presentation.edit.localenative.EditLocaleNativeViewModel
+import com.lc.android.presentation.edit.profile.EditProfileViewModel
 import com.lc.android.presentation.guide.birthdate.GuideBirthDateViewModel
 import com.lc.android.presentation.guide.gender.GuideGenderViewModel
 import com.lc.android.presentation.guide.learninglanguage.GuideLearningLanguageViewModel
@@ -25,6 +27,8 @@ private val presentationModule = module {
     viewModel { GuideNativeLanguageViewModel(get()) }
     viewModel { GuideLearningLanguageViewModel(get()) }
     viewModel { EditProfileViewModel(get(), get()) }
+    viewModel { EditLocaleNativeViewModel(get()) }
+    viewModel { EditLocaleLearningViewModel(get()) }
 
 }
 
