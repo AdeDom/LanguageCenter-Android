@@ -46,4 +46,5 @@
     <string name="select_birth_date">Select birth date</string>
     <string name="next">Next</string>
     <string name="level">Level</string>
+    <string name="error_message_sign_in_network">Please check internet</string>
 </resources>

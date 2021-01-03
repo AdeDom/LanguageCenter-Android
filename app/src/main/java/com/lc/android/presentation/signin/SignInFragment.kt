@@ -10,6 +10,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
+import com.lc.android.util.snackbar
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -70,6 +71,9 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                 val account = task.getResult(ApiException::class.java)
                 viewModel.callSignIn(account?.serverAuthCode)
             } catch (e: ApiException) {
+                when (e.statusCode) {
+                    7 -> requireView().snackbar(getString(R.string.error_message_sign_in_network))
+                }
             }
         }
     }

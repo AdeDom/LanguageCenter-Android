@@ -23,12 +23,8 @@ class SignInViewModel(
 
             val request = SignInRequest(serverAuthCode)
             when (val response = useCase(request)) {
-                is Resource.Success -> {
-                    _signInEvent.value = response.data
-                }
-                is Resource.Error -> {
-                    setError(response.throwable)
-                }
+                is Resource.Success -> _signInEvent.value = response.data
+                is Resource.Error -> setError(response.throwable)
             }
 
             setState { copy(isLoading = false, isClickable = true) }

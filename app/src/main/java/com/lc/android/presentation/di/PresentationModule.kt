@@ -27,7 +27,7 @@ private val presentationModule = module {
     viewModel { GuideNativeLanguageViewModel(get()) }
     viewModel { GuideLearningLanguageViewModel(get()) }
     viewModel { EditProfileViewModel(get(), get()) }
-    viewModel { EditLocaleNativeViewModel(get()) }
+    viewModel { EditLocaleNativeViewModel(get(), get()) }
     viewModel { EditLocaleLearningViewModel(get()) }
 
 }
