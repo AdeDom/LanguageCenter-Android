@@ -1,9 +1,6 @@
 package com.lc.library.data.network.api
 
-import com.lc.server.models.request.EditProfileRequest
-import com.lc.server.models.request.GuideUpdateProfileRequest
-import com.lc.server.models.request.RefreshTokenRequest
-import com.lc.server.models.request.SignInRequest
+import com.lc.server.models.request.*
 import com.lc.server.models.response.BaseResponse
 import com.lc.server.models.response.SignInResponse
 import com.lc.server.models.response.UserInfoResponse
@@ -28,5 +25,8 @@ interface LanguageCenterApi {
 
     @PUT("api/account/edit-profile")
     suspend fun callEditProfile(@Body editProfileRequest: EditProfileRequest): BaseResponse
+
+    @PUT("api/account/edit-locale")
+    suspend fun callEditLocale(@Body editLocaleRequest: EditLocaleRequest): BaseResponse
 
 }

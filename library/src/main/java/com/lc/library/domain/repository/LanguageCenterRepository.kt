@@ -1,6 +1,7 @@
 package com.lc.library.domain.repository
 
 import com.lc.library.data.repository.Resource
+import com.lc.server.models.request.EditLocaleRequest
 import com.lc.server.models.request.EditProfileRequest
 import com.lc.server.models.request.GuideUpdateProfileRequest
 import com.lc.server.models.request.SignInRequest
@@ -19,5 +20,7 @@ interface LanguageCenterRepository {
     suspend fun callGuideUpdateProfile(guideUpdateProfileRequest: GuideUpdateProfileRequest): Resource<BaseResponse>
 
     suspend fun callEditProfile(editProfileRequest: EditProfileRequest): Resource<BaseResponse>
+
+    suspend fun callEditLocale(editLocaleRequest: EditLocaleRequest): Resource<BaseResponse>
 
 }

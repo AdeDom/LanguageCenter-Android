@@ -3,6 +3,7 @@ package com.lc.library.data.network.source
 import androidx.lifecycle.LiveData
 import com.lc.library.data.db.AppDatabase
 import com.lc.library.data.db.entities.UserInfoEntity
+import com.lc.server.models.request.EditLocaleRequest
 import com.lc.server.models.request.EditProfileRequest
 import com.lc.server.models.request.GuideUpdateProfileRequest
 import com.lc.server.models.request.SignInRequest
@@ -46,6 +47,10 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun callEditProfile(editProfileRequest: EditProfileRequest): BaseResponse {
         return provider.getLanguageCenterDataSource().callEditProfile(editProfileRequest)
+    }
+
+    override suspend fun callEditLocale(editLocaleRequest: EditLocaleRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource().callEditLocale(editLocaleRequest)
     }
 
 }
