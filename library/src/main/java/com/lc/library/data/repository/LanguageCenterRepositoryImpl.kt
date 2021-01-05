@@ -9,6 +9,7 @@ import com.lc.server.models.request.EditProfileRequest
 import com.lc.server.models.request.GuideUpdateProfileRequest
 import com.lc.server.models.request.SignInRequest
 import com.lc.server.models.response.BaseResponse
+import com.lc.server.models.response.FetchCommunityResponse
 import com.lc.server.models.response.SignInResponse
 import com.lc.server.models.response.UserInfoResponse
 import kotlinx.coroutines.Dispatchers
@@ -111,6 +112,10 @@ class LanguageCenterRepositoryImpl(
         if (response is Resource.Success) callFetchUserInfo()
 
         return response
+    }
+
+    override suspend fun callFetchCommunity(): Resource<FetchCommunityResponse> {
+        return safeApiCall { dataSource.callFetchCommunity() }
     }
 
 }

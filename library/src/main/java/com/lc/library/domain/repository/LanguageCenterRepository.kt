@@ -6,6 +6,7 @@ import com.lc.server.models.request.EditProfileRequest
 import com.lc.server.models.request.GuideUpdateProfileRequest
 import com.lc.server.models.request.SignInRequest
 import com.lc.server.models.response.BaseResponse
+import com.lc.server.models.response.FetchCommunityResponse
 import com.lc.server.models.response.SignInResponse
 import com.lc.server.models.response.UserInfoResponse
 
@@ -22,5 +23,7 @@ interface LanguageCenterRepository {
     suspend fun callEditProfile(editProfileRequest: EditProfileRequest): Resource<BaseResponse>
 
     suspend fun callEditLocale(editLocaleRequest: EditLocaleRequest): Resource<BaseResponse>
+
+    suspend fun callFetchCommunity(): Resource<FetchCommunityResponse>
 
 }

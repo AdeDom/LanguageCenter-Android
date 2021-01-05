@@ -2,6 +2,7 @@ package com.lc.library.data.network.api
 
 import com.lc.server.models.request.*
 import com.lc.server.models.response.BaseResponse
+import com.lc.server.models.response.FetchCommunityResponse
 import com.lc.server.models.response.SignInResponse
 import com.lc.server.models.response.UserInfoResponse
 import retrofit2.http.Body
@@ -28,5 +29,8 @@ interface LanguageCenterApi {
 
     @PUT("api/account/edit-locale")
     suspend fun callEditLocale(@Body editLocaleRequest: EditLocaleRequest): BaseResponse
+
+    @GET("api/community/fetch-community")
+    suspend fun callFetchCommunity(): FetchCommunityResponse
 
 }

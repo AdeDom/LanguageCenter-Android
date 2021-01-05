@@ -8,6 +8,7 @@ import com.lc.server.models.request.EditProfileRequest
 import com.lc.server.models.request.GuideUpdateProfileRequest
 import com.lc.server.models.request.SignInRequest
 import com.lc.server.models.response.BaseResponse
+import com.lc.server.models.response.FetchCommunityResponse
 import com.lc.server.models.response.SignInResponse
 import com.lc.server.models.response.UserInfoResponse
 
@@ -51,6 +52,10 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun callEditLocale(editLocaleRequest: EditLocaleRequest): BaseResponse {
         return provider.getLanguageCenterDataSource().callEditLocale(editLocaleRequest)
+    }
+
+    override suspend fun callFetchCommunity(): FetchCommunityResponse {
+        return provider.getLanguageCenterDataSource().callFetchCommunity()
     }
 
 }
