@@ -1,8 +1,8 @@
 package com.lc.android.presentation.community
 
-import com.lc.server.models.model.UserInfo
+import com.lc.server.models.model.Community
 
 data class CommunityViewState(
-    val userInfoList: List<UserInfo> = emptyList(),
+    val communities: List<Community> = emptyList(),
     val isLoading: Boolean = false,
 )

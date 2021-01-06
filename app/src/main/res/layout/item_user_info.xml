@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
@@ -19,16 +20,14 @@
             android:layout_height="100dp"
             android:layout_margin="8dp"
             android:src="@drawable/ic_profile"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/layoutContent"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center|start"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/ivPicture"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivPicture"
             app:layout_constraintTop_toTopOf="@+id/ivPicture">
@@ -54,6 +53,100 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="@string/str_email" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutNative"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/layoutContent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutContent">
+
+            <TextView
+                android:id="@+id/tvLocaleNative"
+                style="@style/Text.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_native" />
+
+            <ImageView
+                android:id="@+id/tvLocaleNativeTh"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_thailand"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/tvLocaleNativeEn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_united_kingdom"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutLearning"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/layoutNative"
+            app:layout_constraintTop_toBottomOf="@+id/layoutNative">
+
+            <TextView
+                android:id="@+id/tvLocaleLearning"
+                style="@style/Text.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_learning" />
+
+            <ImageView
+                android:id="@+id/tvLocaleLearningTh"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_thailand"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/tvLocaleLearningEn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_united_kingdom"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/ivPicture"
+            app:layout_constraintStart_toStartOf="@+id/ivPicture"
+            app:layout_constraintTop_toBottomOf="@+id/ivPicture">
+
+            <ImageView
+                android:id="@+id/ivGender"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_gender" />
+
+            <TextView
+                android:id="@+id/tvAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/shape_background_text_view"
+                tools:text="23" />
 
         </LinearLayout>
 

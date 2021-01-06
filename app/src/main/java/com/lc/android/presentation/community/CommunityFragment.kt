@@ -36,7 +36,7 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
 
-            mAdapter.setList(state.userInfoList)
+            mAdapter.setList(state.communities)
         }
 
         viewModel.error.observeError()
