@@ -1,14 +1,8 @@
 package com.lc.library.data.network.api
 
 import com.lc.server.models.request.*
-import com.lc.server.models.response.BaseResponse
-import com.lc.server.models.response.FetchCommunityResponse
-import com.lc.server.models.response.SignInResponse
-import com.lc.server.models.response.UserInfoResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import com.lc.server.models.response.*
+import retrofit2.http.*
 
 interface LanguageCenterApi {
 
@@ -36,8 +30,16 @@ interface LanguageCenterApi {
     @POST("api/community/add-algorithm")
     suspend fun callAddAlgorithm(@Body addAlgorithmRequest: AddAlgorithmRequest): BaseResponse
 
-    // TODO: 06/01/2564 rename route to chat group controller
-    @POST("api/chat/add-chat-group-new")
+    @POST("api/chat-group/add-chat-group-new")
     suspend fun callAddChatGroupNew(@Body addChatGroupNewRequest: AddChatGroupNewRequest): BaseResponse
+
+    @POST("api/chat-group/add-chat-group")
+    suspend fun callAddChatGroup(@Body addChatGroupRequest: AddChatGroupRequest): BaseResponse
+
+    @GET("api/chat-group/fetch-chat-group")
+    suspend fun callFetchChatGroup(): FetchChatGroupResponse
+
+    @GET("api/chat-group/fetch-chat-group-detail/{chatGroupId}")
+    suspend fun callFetchChatGroupDetail(@Path("chatGroupId") chatGroupId: Int?): FetchChatGroupDetailResponse
 
 }

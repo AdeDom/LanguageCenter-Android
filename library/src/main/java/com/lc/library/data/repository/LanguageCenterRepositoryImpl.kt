@@ -5,10 +5,7 @@ import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.PreferenceAuth
 import com.lc.server.models.request.*
-import com.lc.server.models.response.BaseResponse
-import com.lc.server.models.response.FetchCommunityResponse
-import com.lc.server.models.response.SignInResponse
-import com.lc.server.models.response.UserInfoResponse
+import com.lc.server.models.response.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -121,6 +118,18 @@ class LanguageCenterRepositoryImpl(
 
     override suspend fun callAddChatGroupNew(addChatGroupNewRequest: AddChatGroupNewRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callAddChatGroupNew(addChatGroupNewRequest) }
+    }
+
+    override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callAddChatGroup(addChatGroupRequest) }
+    }
+
+    override suspend fun callFetchChatGroup(): Resource<FetchChatGroupResponse> {
+        return safeApiCall { dataSource.callFetchChatGroup() }
+    }
+
+    override suspend fun callFetchChatGroupDetail(chatGroupId: Int?): Resource<FetchChatGroupDetailResponse> {
+        return safeApiCall { dataSource.callFetchChatGroupDetail(chatGroupId) }
     }
 
 }

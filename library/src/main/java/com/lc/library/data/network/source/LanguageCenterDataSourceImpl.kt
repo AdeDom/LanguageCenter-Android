@@ -4,10 +4,7 @@ import androidx.lifecycle.LiveData
 import com.lc.library.data.db.AppDatabase
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.server.models.request.*
-import com.lc.server.models.response.BaseResponse
-import com.lc.server.models.response.FetchCommunityResponse
-import com.lc.server.models.response.SignInResponse
-import com.lc.server.models.response.UserInfoResponse
+import com.lc.server.models.response.*
 
 class LanguageCenterDataSourceImpl(
     private val db: AppDatabase,
@@ -61,6 +58,18 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun callAddChatGroupNew(addChatGroupNewRequest: AddChatGroupNewRequest): BaseResponse {
         return provider.getLanguageCenterDataSource().callAddChatGroupNew(addChatGroupNewRequest)
+    }
+
+    override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource().callAddChatGroup(addChatGroupRequest)
+    }
+
+    override suspend fun callFetchChatGroup(): FetchChatGroupResponse {
+        return provider.getLanguageCenterDataSource().callFetchChatGroup()
+    }
+
+    override suspend fun callFetchChatGroupDetail(chatGroupId: Int?): FetchChatGroupDetailResponse {
+        return provider.getLanguageCenterDataSource().callFetchChatGroupDetail(chatGroupId)
     }
 
 }

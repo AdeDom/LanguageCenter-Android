@@ -14,6 +14,9 @@ private val domainModule = module {
     single<FetchCommunityUseCase> { FetchCommunityUseCaseImpl(get()) }
     single<AddAlgorithmUseCase> { AddAlgorithmUseCaseImpl(get()) }
     single<AddChatGroupNewUseCase> { AddChatGroupNewUseCaseImpl(get()) }
+    single<AddChatGroupUseCase> { AddChatGroupUseCaseImpl(get()) }
+    single<FetchChatGroup> { FetchChatGroupImpl(get()) }
+    single<FetchChatGroupDetail> { FetchChatGroupDetailImpl(get()) }
 
 }
 

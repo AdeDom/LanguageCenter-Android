@@ -3,10 +3,7 @@ package com.lc.library.data.network.source
 import androidx.lifecycle.LiveData
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.server.models.request.*
-import com.lc.server.models.response.BaseResponse
-import com.lc.server.models.response.FetchCommunityResponse
-import com.lc.server.models.response.SignInResponse
-import com.lc.server.models.response.UserInfoResponse
+import com.lc.server.models.response.*
 
 interface LanguageCenterDataSource {
 
@@ -33,5 +30,11 @@ interface LanguageCenterDataSource {
     suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): BaseResponse
 
     suspend fun callAddChatGroupNew(addChatGroupNewRequest: AddChatGroupNewRequest): BaseResponse
+
+    suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse
+
+    suspend fun callFetchChatGroup(): FetchChatGroupResponse
+
+    suspend fun callFetchChatGroupDetail(chatGroupId: Int?): FetchChatGroupDetailResponse
 
 }
