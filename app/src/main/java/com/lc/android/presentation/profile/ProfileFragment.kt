@@ -11,7 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.android.util.load
+import com.lc.android.util.loadCircle
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -79,7 +79,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
                 tvBirthDate.text = getString(R.string.str_birth_date, birthDateString)
             }
             aboutMe?.let { tvAboutMe.text = getString(R.string.str_about_me, aboutMe) }
-            ivPicture.load(picture)
+            ivPicture.loadCircle(picture)
 
             mLocalNativeAdapter.setList(localNatives)
             mLocalLearningAdapter.setList(localLearnings)

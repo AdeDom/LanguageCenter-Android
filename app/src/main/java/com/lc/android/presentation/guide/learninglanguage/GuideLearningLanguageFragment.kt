@@ -6,7 +6,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.android.presentation.guide.model.UserInfoLocaleParcelable
+import com.lc.android.presentation.model.UserInfoLocaleParcelable
 import kotlinx.android.synthetic.main.fragment_guide_learning_language.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

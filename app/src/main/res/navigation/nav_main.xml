@@ -96,7 +96,11 @@
         android:id="@+id/userInfoActivity"
         android:name="com.lc.android.presentation.userinfo.UserInfoActivity"
         android:label="activity_user_info"
-        tools:layout="@layout/activity_user_info" />
+        tools:layout="@layout/activity_user_info">
+        <argument
+            android:name="userInfoCommunity"
+            app:argType="com.lc.android.presentation.model.UserInfoCommunity" />
+    </activity>
     <activity
         android:id="@+id/editLocaleNativeActivity"
         android:name="com.lc.android.presentation.edit.localenative.EditLocaleNativeActivity"

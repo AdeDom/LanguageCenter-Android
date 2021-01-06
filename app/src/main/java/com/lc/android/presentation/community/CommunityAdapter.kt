@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lc.android.R
-import com.lc.android.util.load
+import com.lc.android.util.loadCircle
 import com.lc.server.models.model.Community
 import com.lc.server.util.LanguageCenterConstant
 import kotlinx.android.synthetic.main.item_user_info.view.*
@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.item_user_info.view.*
 class CommunityAdapter : RecyclerView.Adapter<CommunityAdapter.CommunityViewHolder>() {
 
     private val list by lazy { mutableListOf<Community>() }
+    private var listener: ((Community) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunityViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -52,11 +53,15 @@ class CommunityAdapter : RecyclerView.Adapter<CommunityAdapter.CommunityViewHold
         val name = "${item.givenName} ${item.familyName}"
         holder.itemView.tvName.text = name
         holder.itemView.tvEmail.text = item.email
-        holder.itemView.ivPicture.load(item.picture)
+        holder.itemView.ivPicture.loadCircle(item.picture)
         holder.itemView.tvAge.text = item.age.toString()
         when (item.gender) {
             LanguageCenterConstant.GENDER_MALE -> holder.itemView.ivGender.setImageResource(R.drawable.ic_male)
             LanguageCenterConstant.GENDER_FEMALE -> holder.itemView.ivGender.setImageResource(R.drawable.ic_female)
+        }
+
+        holder.itemView.setOnClickListener {
+            listener?.invoke(item)
         }
     }
 
@@ -66,6 +71,10 @@ class CommunityAdapter : RecyclerView.Adapter<CommunityAdapter.CommunityViewHold
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
+    }
+
+    fun setListener(listener: ((Community) -> Unit)?) {
+        this.listener = listener
     }
 
     class CommunityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

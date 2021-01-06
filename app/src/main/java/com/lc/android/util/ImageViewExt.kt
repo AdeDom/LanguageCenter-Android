@@ -6,7 +6,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.lc.android.R
 
-fun ImageView.load(
+fun ImageView.loadCircle(
     url: String?,
     @DrawableRes placeholder: Int = R.drawable.ic_profile
 ) {
@@ -14,5 +14,15 @@ fun ImageView.load(
         .load(url)
         .apply(RequestOptions.placeholderOf(placeholder))
         .circleCrop()
+        .into(this)
+}
+
+fun ImageView.load(
+    url: String?,
+    @DrawableRes placeholder: Int = R.drawable.ic_profile
+) {
+    Glide.with(this)
+        .load(url)
+        .apply(RequestOptions.placeholderOf(placeholder))
         .into(this)
 }

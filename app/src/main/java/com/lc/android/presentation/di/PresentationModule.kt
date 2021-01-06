@@ -11,6 +11,7 @@ import com.lc.android.presentation.guide.nativelanguage.GuideNativeLanguageViewM
 import com.lc.android.presentation.profile.ProfileViewModel
 import com.lc.android.presentation.signin.SignInViewModel
 import com.lc.android.presentation.splashscreen.SplashScreenViewModel
+import com.lc.android.presentation.userinfo.UserInfoViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -31,6 +32,7 @@ private val presentationModule = module {
     viewModel { EditLocaleNativeViewModel(get(), get()) }
     viewModel { EditLocaleLearningViewModel(get(), get()) }
     viewModel { CommunityViewModel(get()) }
+    viewModel { UserInfoViewModel(get(), get()) }
 
 }
 

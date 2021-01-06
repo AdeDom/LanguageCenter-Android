@@ -53,7 +53,7 @@
             app:destination="@id/guideGenderFragment" />
         <argument
             android:name="guideUpdateProfile"
-            app:argType="com.lc.android.presentation.guide.model.GuideUpdateProfileParcelable" />
+            app:argType="com.lc.android.presentation.model.GuideUpdateProfileParcelable" />
     </fragment>
     <fragment
         android:id="@+id/guideGenderFragment"
@@ -65,7 +65,7 @@
             app:destination="@id/guideBirthDateFragment" />
         <argument
             android:name="guideUpdateProfile"
-            app:argType="com.lc.android.presentation.guide.model.GuideUpdateProfileParcelable" />
+            app:argType="com.lc.android.presentation.model.GuideUpdateProfileParcelable" />
     </fragment>
     <fragment
         android:id="@+id/guideBirthDateFragment"
@@ -74,7 +74,7 @@
         tools:layout="@layout/fragment_guide_birth_date">
         <argument
             android:name="guideUpdateProfile"
-            app:argType="com.lc.android.presentation.guide.model.GuideUpdateProfileParcelable" />
+            app:argType="com.lc.android.presentation.model.GuideUpdateProfileParcelable" />
     </fragment>
 
 </navigation>

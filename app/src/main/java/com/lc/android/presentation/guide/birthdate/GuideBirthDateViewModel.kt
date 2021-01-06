@@ -3,7 +3,7 @@ package com.lc.android.presentation.guide.birthdate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lc.android.base.BaseViewModel
-import com.lc.android.presentation.guide.model.GuideUpdateProfileParcelable
+import com.lc.android.presentation.model.GuideUpdateProfileParcelable
 import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.usecase.GetUserInfoUseCase
 import com.lc.library.presentation.usecase.GuideUpdateProfileUseCase

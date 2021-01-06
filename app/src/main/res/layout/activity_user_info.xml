@@ -17,15 +17,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/ibAddFriend"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_add_friend"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivPicture" />
+
     <ImageView
         android:id="@+id/ivPicture"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/ic_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCommunity" />
 
     <TextView
         android:id="@+id/tvName"
@@ -36,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPicture"
-        tools:text="@string/name" />
+        tools:text="@string/str_name" />
 
     <TextView
         android:id="@+id/tvEmail"
@@ -47,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvName"
-        tools:text="@string/email" />
+        tools:text="@string/str_email" />
 
     <TextView
         android:id="@+id/tvGender"
@@ -58,10 +66,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail"
-        tools:text="@string/gender" />
+        tools:text="@string/str_gender" />
 
     <TextView
-        android:id="@+id/tvBirthDate"
+        android:id="@+id/tvAge"
         style="@style/Text.Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGender"
-        tools:text="@string/birth_date" />
+        tools:text="@string/str_age" />
 
     <TextView
         android:id="@+id/tvAboutMe"
@@ -79,8 +87,8 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBirthDate"
-        tools:text="@string/about_me" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAge"
+        tools:text="@string/str_about_me" />
 
     <TextView
         android:id="@+id/tvLocaleNative"
@@ -89,6 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/locale_native"
+        android:textColor="@android:color/holo_blue_dark"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewLocalNatives"
         app:layout_constraintStart_toStartOf="@+id/recyclerViewLocalNatives"
         app:layout_constraintTop_toBottomOf="@+id/tvAboutMe" />
@@ -100,6 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/locale_learning"
+        android:textColor="@android:color/holo_blue_dark"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewLocalLearnings"
         app:layout_constraintStart_toStartOf="@+id/recyclerViewLocalLearnings"
         app:layout_constraintTop_toBottomOf="@+id/tvAboutMe" />
@@ -111,7 +121,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/recyclerViewLocalLearnings"
         app:layout_constraintStart_toStartOf="parent"
@@ -125,11 +135,23 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/recyclerViewLocalNatives"
         app:layout_constraintTop_toBottomOf="@+id/tvLocaleLearning"
         tools:listitem="@layout/item_user_info_locale" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationLoading"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/language_loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

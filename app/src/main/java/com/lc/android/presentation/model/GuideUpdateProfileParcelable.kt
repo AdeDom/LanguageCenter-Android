@@ -1,4 +1,4 @@
-package com.lc.android.presentation.guide.model
+package com.lc.android.presentation.model
 
 import android.os.Parcel
 import android.os.Parcelable

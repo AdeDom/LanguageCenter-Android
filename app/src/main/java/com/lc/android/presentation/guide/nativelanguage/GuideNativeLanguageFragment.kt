@@ -5,8 +5,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.android.presentation.guide.model.GuideUpdateProfileParcelable
-import com.lc.android.presentation.guide.model.UserInfoLocaleParcelable
+import com.lc.android.presentation.model.UserInfoLocaleParcelable
+import com.lc.android.presentation.model.GuideUpdateProfileParcelable
 import kotlinx.android.synthetic.main.fragment_guide_native_language.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
