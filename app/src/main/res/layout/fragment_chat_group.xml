@@ -27,13 +27,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tvChatGroup"
         tools:listitem="@layout/item_chat_group" />
 
-    <ImageView
-        android:id="@+id/ivAddChatGroup"
+    <ImageButton
+        android:id="@+id/ibAddChatGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add_circle"
+        android:background="@drawable/ic_add_circle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

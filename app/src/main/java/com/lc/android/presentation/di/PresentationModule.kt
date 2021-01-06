@@ -1,5 +1,6 @@
 package com.lc.android.presentation.di
 
+import com.lc.android.presentation.addchatgroup.AddChatGroupViewModel
 import com.lc.android.presentation.chatgroup.ChatGroupViewModel
 import com.lc.android.presentation.community.CommunityViewModel
 import com.lc.android.presentation.edit.localelearning.EditLocaleLearningViewModel
@@ -35,6 +36,7 @@ private val presentationModule = module {
     viewModel { CommunityViewModel(get()) }
     viewModel { UserInfoViewModel(get(), get()) }
     viewModel { ChatGroupViewModel(get()) }
+    viewModel { AddChatGroupViewModel(get()) }
 
 }
 
