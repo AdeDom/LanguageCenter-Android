@@ -3,10 +3,7 @@ package com.lc.library.data.network.source
 import androidx.lifecycle.LiveData
 import com.lc.library.data.db.AppDatabase
 import com.lc.library.data.db.entities.UserInfoEntity
-import com.lc.server.models.request.EditLocaleRequest
-import com.lc.server.models.request.EditProfileRequest
-import com.lc.server.models.request.GuideUpdateProfileRequest
-import com.lc.server.models.request.SignInRequest
+import com.lc.server.models.request.*
 import com.lc.server.models.response.BaseResponse
 import com.lc.server.models.response.FetchCommunityResponse
 import com.lc.server.models.response.SignInResponse
@@ -56,6 +53,14 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun callFetchCommunity(): FetchCommunityResponse {
         return provider.getLanguageCenterDataSource().callFetchCommunity()
+    }
+
+    override suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource().callAddAlgorithm(addAlgorithmRequest)
+    }
+
+    override suspend fun callAddChatGroupNew(addChatGroupNewRequest: AddChatGroupNewRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource().callAddChatGroupNew(addChatGroupNewRequest)
     }
 
 }

@@ -4,10 +4,7 @@ import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.PreferenceAuth
-import com.lc.server.models.request.EditLocaleRequest
-import com.lc.server.models.request.EditProfileRequest
-import com.lc.server.models.request.GuideUpdateProfileRequest
-import com.lc.server.models.request.SignInRequest
+import com.lc.server.models.request.*
 import com.lc.server.models.response.BaseResponse
 import com.lc.server.models.response.FetchCommunityResponse
 import com.lc.server.models.response.SignInResponse
@@ -116,6 +113,14 @@ class LanguageCenterRepositoryImpl(
 
     override suspend fun callFetchCommunity(): Resource<FetchCommunityResponse> {
         return safeApiCall { dataSource.callFetchCommunity() }
+    }
+
+    override suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callAddAlgorithm(addAlgorithmRequest) }
+    }
+
+    override suspend fun callAddChatGroupNew(addChatGroupNewRequest: AddChatGroupNewRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callAddChatGroupNew(addChatGroupNewRequest) }
     }
 
 }

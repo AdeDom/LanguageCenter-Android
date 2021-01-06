@@ -1,10 +1,7 @@
 package com.lc.library.domain.repository
 
 import com.lc.library.data.repository.Resource
-import com.lc.server.models.request.EditLocaleRequest
-import com.lc.server.models.request.EditProfileRequest
-import com.lc.server.models.request.GuideUpdateProfileRequest
-import com.lc.server.models.request.SignInRequest
+import com.lc.server.models.request.*
 import com.lc.server.models.response.BaseResponse
 import com.lc.server.models.response.FetchCommunityResponse
 import com.lc.server.models.response.SignInResponse
@@ -25,5 +22,9 @@ interface LanguageCenterRepository {
     suspend fun callEditLocale(editLocaleRequest: EditLocaleRequest): Resource<BaseResponse>
 
     suspend fun callFetchCommunity(): Resource<FetchCommunityResponse>
+
+    suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): Resource<BaseResponse>
+
+    suspend fun callAddChatGroupNew(addChatGroupNewRequest: AddChatGroupNewRequest): Resource<BaseResponse>
 
 }

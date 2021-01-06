@@ -33,4 +33,11 @@ interface LanguageCenterApi {
     @GET("api/community/fetch-community")
     suspend fun callFetchCommunity(): FetchCommunityResponse
 
+    @POST("api/community/add-algorithm")
+    suspend fun callAddAlgorithm(@Body addAlgorithmRequest: AddAlgorithmRequest): BaseResponse
+
+    // TODO: 06/01/2564 rename route to chat group controller
+    @POST("api/chat/add-chat-group-new")
+    suspend fun callAddChatGroupNew(@Body addChatGroupNewRequest: AddChatGroupNewRequest): BaseResponse
+
 }

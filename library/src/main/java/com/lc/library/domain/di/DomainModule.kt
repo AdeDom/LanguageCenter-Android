@@ -12,6 +12,8 @@ private val domainModule = module {
     single<GuideUpdateProfileUseCase> { GuideUpdateProfileUseCaseImpl(get()) }
     single<EditUserInfoUseCase> { EditUserInfoUseCaseImpl(get()) }
     single<FetchCommunityUseCase> { FetchCommunityUseCaseImpl(get()) }
+    single<AddAlgorithmUseCase> { AddAlgorithmUseCaseImpl(get()) }
+    single<AddChatGroupNewUseCase> { AddChatGroupNewUseCaseImpl(get()) }
 
 }
 
