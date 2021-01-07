@@ -45,12 +45,8 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
         <action
-            android:id="@+id/action_chatGroupFragment_to_addChatGroupFragment"
-            app:destination="@id/addChatGroupFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_chatGroupFragment_to_addChatGroupDialog"
+            app:destination="@id/addChatGroupDialog" />
     </fragment>
     <fragment
         android:id="@+id/vocabularyFragment"
@@ -122,11 +118,6 @@
         android:name="com.lc.android.presentation.addchatgroupdetail.AddChatGroupDetailFragment"
         android:label="AddChatGroupDetailFragment"
         tools:layout="@layout/fragment_add_chat_group_detail" />
-    <fragment
-        android:id="@+id/addChatGroupFragment"
-        android:name="com.lc.android.presentation.addchatgroup.AddChatGroupFragment"
-        android:label="fragment_add_chat_group"
-        tools:layout="@layout/fragment_add_chat_group" />
     <activity
         android:id="@+id/chatActivity"
         android:name="com.lc.android.presentation.chat.ChatActivity"
@@ -151,5 +142,10 @@
         android:name="com.lc.android.presentation.edit.localelearning.EditLocaleLearningFragment"
         android:label="EditLocaleLearningFragment"
         tools:layout="@layout/fragment_edit_locale_learning" />
+    <dialog
+        android:id="@+id/addChatGroupDialog"
+        android:name="com.lc.android.presentation.chatgroup.AddChatGroupDialog"
+        android:label="AddChatGroupDialog"
+        tools:layout="@layout/dialog_add_chat_group" />
 
 </navigation>

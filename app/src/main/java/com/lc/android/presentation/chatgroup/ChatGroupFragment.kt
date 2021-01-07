@@ -2,11 +2,14 @@ package com.lc.android.presentation.chatgroup
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
+import com.lc.android.util.toast
 import kotlinx.android.synthetic.main.fragment_chat_group.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -15,12 +18,19 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
     private val viewModel by viewModel<ChatGroupViewModel>()
     private val mAdapter by lazy { ChatGroupAdapter() }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.callFetchChatGroup()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initialView()
         observeViewModel()
         viewEvent()
+        resultListener()
     }
 
     private fun initialView() {
@@ -30,18 +40,23 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        viewModel.callFetchChatGroup()
-    }
-
     private fun observeViewModel() {
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
 
+            ibAddChatGroup.isClickable = state.isClickable
+
             ivPlaceHolderDefault.isVisible = state.chatGroups.isNullOrEmpty()
             mAdapter.setList(state.chatGroups)
+        }
+
+        viewModel.addChatGroupEvent.observe { response ->
+            if (response.success) {
+                context.toast(response.message)
+                viewModel.callFetchChatGroup()
+            } else {
+                context.toast(response.message, Toast.LENGTH_LONG)
+            }
         }
 
         viewModel.error.observeError()
@@ -57,7 +72,14 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
         }
 
         ibAddChatGroup.setOnClickListener {
-            findNavController().navigate(R.id.action_chatGroupFragment_to_addChatGroupFragment)
+            findNavController().navigate(R.id.action_chatGroupFragment_to_addChatGroupDialog)
+        }
+    }
+
+    private fun resultListener() {
+        setFragmentResultListener(AddChatGroupDialog.ADD_CHAT_GROUP) { _, bundle ->
+            val groupName = bundle.getString(AddChatGroupDialog.GROUP_NAME)
+            viewModel.callAddChatGroup(groupName)
         }
     }
 

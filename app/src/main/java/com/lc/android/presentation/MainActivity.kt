@@ -23,7 +23,6 @@ class MainActivity : BaseActivity() {
                 R.id.profileFragment -> showBottomNav()
                 R.id.userInfoFragment -> hideBottomNav()
                 R.id.chatGroupDetailFragment -> hideBottomNav()
-                R.id.addChatGroupFragment -> hideBottomNav()
                 R.id.editProfileFragment -> hideBottomNav()
                 R.id.editLocaleNativeFragment -> hideBottomNav()
                 R.id.editLocaleLearningFragment -> hideBottomNav()
