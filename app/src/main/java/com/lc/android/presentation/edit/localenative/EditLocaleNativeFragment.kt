@@ -1,23 +1,24 @@
 package com.lc.android.presentation.edit.localenative
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
-import com.lc.android.base.BaseActivity
+import com.lc.android.base.BaseFragment
 import com.lc.android.util.toast
-import kotlinx.android.synthetic.main.activity_edit_locale_native.*
+import kotlinx.android.synthetic.main.fragment_edit_locale_native.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EditLocaleNativeActivity : BaseActivity() {
+class EditLocaleNativeFragment : BaseFragment(R.layout.fragment_edit_locale_native) {
 
     private val viewModel by viewModel<EditLocaleNativeViewModel>()
     private val mAdapter by lazy { EditLocaleNativeAdapter() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_locale_native)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initialView()
         observeViewModel()
@@ -46,10 +47,10 @@ class EditLocaleNativeActivity : BaseActivity() {
 
         viewModel.editLocaleNativeEvent.observe { response ->
             if (response.success) {
-                toast(response.message)
-                finish()
+                context.toast(response.message)
+                findNavController().popBackStack()
             } else {
-                toast(response.message, Toast.LENGTH_LONG)
+                context.toast(response.message, Toast.LENGTH_LONG)
             }
         }
 
@@ -63,7 +64,7 @@ class EditLocaleNativeActivity : BaseActivity() {
         }
 
         btCancel.setOnClickListener {
-            finish()
+            findNavController().popBackStack()
         }
     }
 

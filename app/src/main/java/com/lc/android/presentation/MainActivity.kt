@@ -22,6 +22,7 @@ class MainActivity : BaseActivity() {
                 R.id.profileFragment -> showBottomNav()
                 R.id.userInfoFragment -> hideBottomNav()
                 R.id.editProfileFragment -> hideBottomNav()
+                R.id.editLocaleNativeFragment -> hideBottomNav()
             }
         }
     }

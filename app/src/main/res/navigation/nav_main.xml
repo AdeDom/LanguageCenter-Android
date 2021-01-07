@@ -69,8 +69,12 @@
             android:id="@+id/action_profileFragment_to_authActivity"
             app:destination="@id/authActivity" />
         <action
-            android:id="@+id/action_profileFragment_to_editLocaleNativeActivity"
-            app:destination="@id/editLocaleNativeActivity" />
+            android:id="@+id/action_profileFragment_to_editLocaleNativeFragment"
+            app:destination="@id/editLocaleNativeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_profileFragment_to_editLocaleLearningActivity"
             app:destination="@id/editLocaleLearningActivity" />
@@ -109,11 +113,11 @@
             android:name="userInfoCommunity"
             app:argType="com.lc.android.presentation.model.UserInfoCommunity" />
     </fragment>
-    <activity
-        android:id="@+id/editLocaleNativeActivity"
-        android:name="com.lc.android.presentation.edit.localenative.EditLocaleNativeActivity"
-        android:label="EditLocaleNativeActivity"
-        tools:layout="@layout/activity_edit_locale_native" />
+    <fragment
+        android:id="@+id/editLocaleNativeFragment"
+        android:name="com.lc.android.presentation.edit.localenative.EditLocaleNativeFragment"
+        android:label="EditLocaleNativeFragment"
+        tools:layout="@layout/fragment_edit_locale_native" />
     <activity
         android:id="@+id/editLocaleLearningActivity"
         android:name="com.lc.android.presentation.edit.localelearning.EditLocaleLearningActivity"
