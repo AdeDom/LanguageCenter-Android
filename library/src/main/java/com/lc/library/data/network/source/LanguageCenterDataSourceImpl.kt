@@ -72,4 +72,12 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callFetchChatGroupDetail(chatGroupId)
     }
 
+    override suspend fun callRenameChatGroup(renameChatGroupRequest: RenameChatGroupRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource().callRenameChatGroup(renameChatGroupRequest)
+    }
+
+    override suspend fun callRemoveChatGroup(chatGroupId: Int?): BaseResponse {
+        return provider.getLanguageCenterDataSource().callRemoveChatGroup(chatGroupId)
+    }
+
 }

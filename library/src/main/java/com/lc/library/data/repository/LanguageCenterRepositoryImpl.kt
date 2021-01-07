@@ -132,4 +132,12 @@ class LanguageCenterRepositoryImpl(
         return safeApiCall { dataSource.callFetchChatGroupDetail(chatGroupId) }
     }
 
+    override suspend fun callRenameChatGroup(renameChatGroupRequest: RenameChatGroupRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callRenameChatGroup(renameChatGroupRequest) }
+    }
+
+    override suspend fun callRemoveChatGroup(chatGroupId: Int?): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callRemoveChatGroup(chatGroupId) }
+    }
+
 }

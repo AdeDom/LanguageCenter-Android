@@ -37,4 +37,8 @@ interface LanguageCenterDataSource {
 
     suspend fun callFetchChatGroupDetail(chatGroupId: Int?): FetchChatGroupDetailResponse
 
+    suspend fun callRenameChatGroup(renameChatGroupRequest: RenameChatGroupRequest): BaseResponse
+
+    suspend fun callRemoveChatGroup(chatGroupId: Int?): BaseResponse
+
 }

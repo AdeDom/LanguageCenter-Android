@@ -42,4 +42,10 @@ interface LanguageCenterApi {
     @GET("api/chat-group/fetch-chat-group-detail/{chatGroupId}")
     suspend fun callFetchChatGroupDetail(@Path("chatGroupId") chatGroupId: Int?): FetchChatGroupDetailResponse
 
+    @PUT("api/chat-group/rename-chat-group")
+    suspend fun callRenameChatGroup(@Body renameChatGroupRequest: RenameChatGroupRequest): BaseResponse
+
+    @DELETE("api/chat-group/remove-chat-group/{chatGroupId}")
+    suspend fun callRemoveChatGroup(@Path("chatGroupId") chatGroupId: Int?): BaseResponse
+
 }
