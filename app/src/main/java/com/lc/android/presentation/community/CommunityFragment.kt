@@ -17,6 +17,12 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
     private val viewModel by viewModel<CommunityViewModel>()
     private val mAdapter by lazy { CommunityAdapter() }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.callFetchCommunity()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -33,10 +39,6 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
     }
 
     private fun observeViewModel() {
-        viewModel.attachFirstTime.observe {
-            viewModel.callFetchCommunity()
-        }
-
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
 
@@ -71,7 +73,7 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
                 },
             )
             val navDirections = CommunityFragmentDirections
-                .actionCommunityFragmentToUserInfoActivity(userInfoCommunity)
+                .actionCommunityFragmentToUserInfoFragment(userInfoCommunity)
             findNavController().navigate(navDirections)
         }
     }

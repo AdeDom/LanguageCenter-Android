@@ -4,25 +4,24 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.navigation.navArgs
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
-import com.lc.android.base.BaseActivity
+import com.lc.android.base.BaseFragment
 import com.lc.android.util.load
 import com.lc.android.util.toast
-import kotlinx.android.synthetic.main.activity_user_info.*
+import kotlinx.android.synthetic.main.fragment_user_info.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UserInfoActivity : BaseActivity() {
+class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
 
     private val viewModel by viewModel<UserInfoViewModel>()
-    private val args by navArgs<UserInfoActivityArgs>()
+    private val args by navArgs<UserInfoFragmentArgs>()
     private val mLocalNativeAdapter by lazy { UserInfoLocaleAdapter() }
     private val mLocalLearningAdapter by lazy { UserInfoLocaleAdapter() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_info)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initialView()
         observeViewModel()
@@ -78,10 +77,10 @@ class UserInfoActivity : BaseActivity() {
 
         viewModel.addChatGroupNewEvent.observe { response ->
             if (response.success) {
-                toast(response.message)
+                context.toast(response.message)
                 ibAddFriend.visibility = View.GONE
             } else {
-                toast(response.message, Toast.LENGTH_LONG)
+                context.toast(response.message, Toast.LENGTH_LONG)
             }
         }
 
