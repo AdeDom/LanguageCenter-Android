@@ -2,6 +2,7 @@ package com.lc.android.presentation.chatgroup
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,9 +48,20 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
     }
 
     private fun viewEvent() {
+        mAdapter.setListener { chatGroupId ->
+            findNavController().navigate(
+                R.id.action_chatGroupFragment_to_chatGroupDetailActivity,
+                bundleOf(CHAT_GROUP_ID to chatGroupId)
+            )
+        }
+
         ibAddChatGroup.setOnClickListener {
             findNavController().navigate(R.id.action_chatGroupFragment_to_addChatGroupActivity)
         }
+    }
+
+    companion object {
+        const val CHAT_GROUP_ID = "chatGroupId"
     }
 
 }

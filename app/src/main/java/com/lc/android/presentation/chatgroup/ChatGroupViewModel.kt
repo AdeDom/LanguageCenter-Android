@@ -2,11 +2,11 @@ package com.lc.android.presentation.chatgroup
 
 import com.lc.android.base.BaseViewModel
 import com.lc.library.data.repository.Resource
-import com.lc.library.presentation.usecase.FetchChatGroup
+import com.lc.library.presentation.usecase.FetchChatGroupUseCase
 import kotlinx.coroutines.launch
 
 class ChatGroupViewModel(
-    private val useCase: FetchChatGroup,
+    private val useCase: FetchChatGroupUseCase,
 ) : BaseViewModel<ChatGroupViewState>(ChatGroupViewState()) {
 
     fun callFetchChatGroup() {
