@@ -12,6 +12,7 @@ class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHold
 
     private val list by lazy { mutableListOf<ChatGroup>() }
     private var listener: ((Int?) -> Unit)? = null
+    private var moreListener: ((ChatGroup?) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatGroupViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -25,6 +26,10 @@ class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHold
         holder.itemView.setOnClickListener {
             listener?.invoke(list[position].chatGroupId)
         }
+
+        holder.itemView.ibMore.setOnClickListener {
+            moreListener?.invoke(list[position])
+        }
     }
 
     override fun getItemCount(): Int = list.size
@@ -37,6 +42,10 @@ class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHold
 
     fun setListener(listener: ((Int?) -> Unit)?) {
         this.listener = listener
+    }
+
+    fun setMoreListener(moreListener: ((ChatGroup?) -> Unit)?) {
+        this.moreListener = moreListener
     }
 
     class ChatGroupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

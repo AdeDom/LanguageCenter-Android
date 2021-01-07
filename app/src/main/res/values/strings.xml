@@ -49,4 +49,10 @@
     <string name="error_message_sign_in_network">Please check internet</string>
     <string name="text_native">Native</string>
     <string name="text_learning">Learning</string>
+    <string name="rename">Rename</string>
+    <string name="more">More</string>
+    <string name="remove">Remove</string>
+    <string name="dialog_remove_chat_group_title">Remove chat group</string>
+    <string name="dialog_remove_chat_group_message">Do you really want to delete?</string>
+    <string name="rename_chat_group">Rename chat group</string>
 </resources>

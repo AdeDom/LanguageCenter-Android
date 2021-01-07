@@ -2,6 +2,7 @@ package com.lc.android.presentation.chatgroup
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
@@ -50,7 +51,7 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
             mAdapter.setList(state.chatGroups)
         }
 
-        viewModel.addChatGroupEvent.observe { response ->
+        viewModel.chatGroupEvent.observe { response ->
             if (response.success) {
                 requireView().snackbar(response.message, Snackbar.LENGTH_SHORT)
                 viewModel.callFetchChatGroup()
@@ -71,6 +72,11 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
             }
         }
 
+        mAdapter.setMoreListener { chatGroup ->
+            viewModel.setStateChatGroup(chatGroup)
+            findNavController().navigate(R.id.action_chatGroupFragment_to_moreChatGroupDialog)
+        }
+
         ibAddChatGroup.setOnClickListener {
             findNavController().navigate(R.id.action_chatGroupFragment_to_addChatGroupDialog)
         }
@@ -80,6 +86,40 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
         setFragmentResultListener(AddChatGroupDialog.ADD_CHAT_GROUP) { _, bundle ->
             val groupName = bundle.getString(AddChatGroupDialog.GROUP_NAME)
             viewModel.callAddChatGroup(groupName)
+        }
+
+        setFragmentResultListener(RenameChatGroupDialog.RENAME_CHAT_GROUP) { _, bundle ->
+            val groupName = bundle.getString(RenameChatGroupDialog.GROUP_NAME)
+            viewModel.callRenameChatGroup(groupName)
+        }
+
+        setFragmentResultListener(MoreChatGroupDialog.MORE_CHAT_GROUP) { _, bundle ->
+            when (bundle.getString(MoreChatGroupDialog.MORE_KEY, "")) {
+                MoreChatGroupDialog.RENAME -> dialogRenameChatGroup()
+                MoreChatGroupDialog.REMOVE -> dialogRemoveChatGroup()
+            }
+        }
+    }
+
+    private fun dialogRenameChatGroup() {
+        val groupName = viewModel.state.value?.chatGroup?.groupName
+        val navDirections = ChatGroupFragmentDirections
+            .actionChatGroupFragmentToRenameChatGroupDialog(groupName)
+        findNavController().navigate(navDirections)
+    }
+
+    private fun dialogRemoveChatGroup() {
+        AlertDialog.Builder(requireActivity()).apply {
+            setTitle(R.string.dialog_remove_chat_group_title)
+            setMessage(R.string.dialog_remove_chat_group_message)
+            setPositiveButton(android.R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+            setNegativeButton(android.R.string.ok) { dialog, _ ->
+                viewModel.callRemoveChatGroup()
+                dialog.dismiss()
+            }
+            show()
         }
     }
 

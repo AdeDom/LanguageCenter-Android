@@ -6,12 +6,12 @@
     android:focusableInTouchMode="true">
 
     <TextView
-        android:id="@+id/tvAddChatGroup"
+        android:id="@+id/tvRenameChatGroup"
         style="@style/Text.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/add_chat_group"
+        android:text="@string/rename_chat_group"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAddChatGroup">
+        app:layout_constraintTop_toBottomOf="@+id/tvRenameChatGroup">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etChatGroup"

@@ -4,6 +4,7 @@ import com.lc.server.models.model.ChatGroup
 
 data class ChatGroupViewState(
     val chatGroups: List<ChatGroup> = emptyList(),
+    val chatGroup: ChatGroup? = null,
     val isLoading: Boolean = false,
     val isClickable: Boolean = true,
 )
