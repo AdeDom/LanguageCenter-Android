@@ -94,7 +94,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         }
 
         ivEditProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_editProfileActivity)
+            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         }
 
         ibEditLocaleNative.setOnClickListener {

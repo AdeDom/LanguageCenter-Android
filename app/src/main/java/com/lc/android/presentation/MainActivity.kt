@@ -19,7 +19,9 @@ class MainActivity : BaseActivity() {
         fragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.communityFragment -> showBottomNav()
+                R.id.profileFragment -> showBottomNav()
                 R.id.userInfoFragment -> hideBottomNav()
+                R.id.editProfileFragment -> hideBottomNav()
             }
         }
     }

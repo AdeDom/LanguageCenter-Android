@@ -59,8 +59,12 @@
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment_to_editProfileActivity"
-            app:destination="@id/editProfileActivity" />
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_profileFragment_to_authActivity"
             app:destination="@id/authActivity" />
@@ -71,11 +75,11 @@
             android:id="@+id/action_profileFragment_to_editLocaleLearningActivity"
             app:destination="@id/editLocaleLearningActivity" />
     </fragment>
-    <activity
-        android:id="@+id/editProfileActivity"
-        android:name="com.lc.android.presentation.edit.profile.EditProfileActivity"
-        android:label="activity_edit_profile"
-        tools:layout="@layout/activity_edit_profile" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.lc.android.presentation.edit.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
     <activity
         android:id="@+id/vocabularyActivity"
         android:name="com.lc.android.presentation.VocabularyActivity"

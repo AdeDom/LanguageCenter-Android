@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.findNavController
 import com.lc.android.R
-import com.lc.android.base.BaseActivity
+import com.lc.android.base.BaseFragment
 import com.lc.android.util.clicks
 import com.lc.android.util.hideSoftKeyboard
 import com.lc.android.util.toast
-import kotlinx.android.synthetic.main.activity_edit_profile.*
+import kotlinx.android.synthetic.main.fragment_edit_profile.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.map
@@ -20,13 +21,12 @@ import java.util.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class EditProfileActivity : BaseActivity() {
+class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
 
     private val viewModel by viewModel<EditProfileViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_profile)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         observeViewModel()
         viewEvent()
@@ -56,7 +56,7 @@ class EditProfileActivity : BaseActivity() {
             ivBirthDate.isClickable = state.isClickable
         }
 
-        viewModel.getDbUserInfoLiveData.observe(this, { userInfo ->
+        viewModel.getDbUserInfoLiveData.observe(viewLifecycleOwner, { userInfo ->
             if (userInfo == null) return@observe
 
             val (_, _, givenName, familyName, _, _, _, _, _, _, aboutMe) = userInfo
@@ -67,10 +67,10 @@ class EditProfileActivity : BaseActivity() {
 
         viewModel.editProfileEvent.observe { response ->
             if (response.success) {
-                toast(response.message)
-                finish()
+                context.toast(response.message)
+                findNavController().popBackStack()
             } else {
-                toast(response.message, Toast.LENGTH_LONG)
+                context.toast(response.message, Toast.LENGTH_LONG)
             }
         }
 
@@ -104,11 +104,11 @@ class EditProfileActivity : BaseActivity() {
         }
 
         btCancel.setOnClickListener {
-            finish()
+            findNavController().popBackStack()
         }
 
         rootLayout.setOnClickListener {
-            hideSoftKeyboard()
+            activity?.hideSoftKeyboard()
         }
     }
 
@@ -119,7 +119,7 @@ class EditProfileActivity : BaseActivity() {
             }
         }
         DatePickerDialog(
-            this,
+            requireActivity(),
             { _, year, month, dayOfMonth ->
                 calendar.set(year, month, dayOfMonth)
                 viewModel.setStateBirthDate(calendar.timeInMillis)
