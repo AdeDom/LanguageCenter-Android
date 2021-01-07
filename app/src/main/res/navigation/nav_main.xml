@@ -76,8 +76,12 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
         <action
-            android:id="@+id/action_profileFragment_to_editLocaleLearningActivity"
-            app:destination="@id/editLocaleLearningActivity" />
+            android:id="@+id/action_profileFragment_to_editLocaleLearningFragment"
+            app:destination="@id/editLocaleLearningFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -118,10 +122,10 @@
         android:name="com.lc.android.presentation.edit.localenative.EditLocaleNativeFragment"
         android:label="EditLocaleNativeFragment"
         tools:layout="@layout/fragment_edit_locale_native" />
-    <activity
-        android:id="@+id/editLocaleLearningActivity"
-        android:name="com.lc.android.presentation.edit.localelearning.EditLocaleLearningActivity"
-        android:label="EditLocaleLearningActivity"
-        tools:layout="@layout/activity_edit_locale_learning" />
+    <fragment
+        android:id="@+id/editLocaleLearningFragment"
+        android:name="com.lc.android.presentation.edit.localelearning.EditLocaleLearningFragment"
+        android:label="EditLocaleLearningFragment"
+        tools:layout="@layout/fragment_edit_locale_learning" />
 
 </navigation>

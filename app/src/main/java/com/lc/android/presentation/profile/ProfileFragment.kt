@@ -102,7 +102,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         }
 
         ibEditLocaleLearning.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_editLocaleLearningActivity)
+            findNavController().navigate(R.id.action_profileFragment_to_editLocaleLearningFragment)
         }
     }
 
