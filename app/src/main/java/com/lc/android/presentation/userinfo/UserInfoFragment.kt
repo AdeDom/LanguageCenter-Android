@@ -2,14 +2,14 @@ package com.lc.android.presentation.userinfo
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.util.load
-import com.lc.android.util.toast
+import com.lc.android.util.snackbar
 import kotlinx.android.synthetic.main.fragment_user_info.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -77,10 +77,10 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
 
         viewModel.addChatGroupNewEvent.observe { response ->
             if (response.success) {
-                context.toast(response.message)
+                requireView().snackbar(response.message, Snackbar.LENGTH_SHORT)
                 ibAddFriend.visibility = View.GONE
             } else {
-                context.toast(response.message, Toast.LENGTH_LONG)
+                requireView().snackbar(response.message)
             }
         }
 

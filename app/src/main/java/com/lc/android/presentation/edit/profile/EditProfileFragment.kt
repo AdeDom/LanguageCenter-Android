@@ -2,15 +2,15 @@ package com.lc.android.presentation.edit.profile
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.util.clicks
 import com.lc.android.util.hideSoftKeyboard
-import com.lc.android.util.toast
+import com.lc.android.util.snackbar
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -67,10 +67,10 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
 
         viewModel.editProfileEvent.observe { response ->
             if (response.success) {
-                context.toast(response.message)
+                requireView().snackbar(response.message, Snackbar.LENGTH_SHORT)
                 findNavController().popBackStack()
             } else {
-                context.toast(response.message, Toast.LENGTH_LONG)
+                requireView().snackbar(response.message)
             }
         }
 

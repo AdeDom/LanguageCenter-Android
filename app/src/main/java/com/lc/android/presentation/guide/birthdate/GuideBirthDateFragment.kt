@@ -5,9 +5,10 @@ import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.android.util.toast
+import com.lc.android.util.snackbar
 import kotlinx.android.synthetic.main.fragment_guide_birth_date.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -44,10 +45,12 @@ class GuideBirthDateFragment : BaseFragment(R.layout.fragment_guide_birth_date) 
         viewModel.error.observeError()
 
         viewModel.guideUpdateProfileEvent.observe { response ->
-            context.toast(response.message)
             if (response.success) {
+                requireView().snackbar(response.message, Snackbar.LENGTH_SHORT)
                 findNavController().navigate(R.id.action_global_splashScreenFragment)
                 activity?.finishAffinity()
+            } else {
+                requireView().snackbar(response.message)
             }
         }
     }

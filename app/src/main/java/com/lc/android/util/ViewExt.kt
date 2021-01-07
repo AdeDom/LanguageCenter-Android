@@ -8,8 +8,8 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
-fun View.snackbar(message: String?) =
-    Snackbar.make(this, message.toString(), Snackbar.LENGTH_INDEFINITE).apply {
+fun View.snackbar(message: String?, duration: Int = Snackbar.LENGTH_INDEFINITE) =
+    Snackbar.make(this, message.toString(), duration).apply {
         setAction(android.R.string.ok) {
         }
     }.show()

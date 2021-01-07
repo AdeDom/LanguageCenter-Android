@@ -1,13 +1,13 @@
 package com.lc.android.presentation.edit.localelearning
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.android.util.toast
+import com.lc.android.util.snackbar
 import kotlinx.android.synthetic.main.fragment_edit_locale_learning.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -46,10 +46,10 @@ class EditLocaleLearningFragment : BaseFragment(R.layout.fragment_edit_locale_le
 
         viewModel.editLocaleLearningEvent.observe { response ->
             if (response.success) {
-                context.toast(response.message)
+                requireView().snackbar(response.message, Snackbar.LENGTH_SHORT)
                 findNavController().popBackStack()
             } else {
-                context.toast(response.message, Toast.LENGTH_LONG)
+                requireView().snackbar(response.message)
             }
         }
 

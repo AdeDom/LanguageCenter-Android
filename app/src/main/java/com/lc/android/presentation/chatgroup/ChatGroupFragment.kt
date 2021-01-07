@@ -2,14 +2,14 @@ package com.lc.android.presentation.chatgroup
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.android.util.toast
+import com.lc.android.util.snackbar
 import kotlinx.android.synthetic.main.fragment_chat_group.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -52,10 +52,10 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
 
         viewModel.addChatGroupEvent.observe { response ->
             if (response.success) {
-                context.toast(response.message)
+                requireView().snackbar(response.message, Snackbar.LENGTH_SHORT)
                 viewModel.callFetchChatGroup()
             } else {
-                context.toast(response.message, Toast.LENGTH_LONG)
+                requireView().snackbar(response.message)
             }
         }
 
