@@ -56,7 +56,7 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
         }
 
         ibAddChatGroup.setOnClickListener {
-            findNavController().navigate(R.id.action_chatGroupFragment_to_addChatGroupActivity)
+            findNavController().navigate(R.id.action_chatGroupFragment_to_addChatGroupFragment)
         }
     }
 

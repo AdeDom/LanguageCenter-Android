@@ -41,8 +41,12 @@
             android:id="@+id/action_chatGroupFragment_to_chatGroupDetailActivity"
             app:destination="@id/chatGroupDetailActivity" />
         <action
-            android:id="@+id/action_chatGroupFragment_to_addChatGroupActivity"
-            app:destination="@id/addChatGroupActivity" />
+            android:id="@+id/action_chatGroupFragment_to_addChatGroupFragment"
+            app:destination="@id/addChatGroupFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/vocabularyFragment"
@@ -98,11 +102,11 @@
         android:name="com.lc.android.presentation.ChatGroupDetailActivity"
         android:label="activity_chat_group_detail"
         tools:layout="@layout/activity_chat_group_detail" />
-    <activity
-        android:id="@+id/addChatGroupActivity"
-        android:name="com.lc.android.presentation.addchatgroup.AddChatGroupActivity"
-        android:label="activity_add_chat_group"
-        tools:layout="@layout/activity_add_chat_group" />
+    <fragment
+        android:id="@+id/addChatGroupFragment"
+        android:name="com.lc.android.presentation.addchatgroup.AddChatGroupFragment"
+        android:label="fragment_add_chat_group"
+        tools:layout="@layout/fragment_add_chat_group" />
     <activity
         android:id="@+id/chatActivity"
         android:name="com.lc.android.presentation.chat.ChatActivity"

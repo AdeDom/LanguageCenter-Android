@@ -19,8 +19,10 @@ class MainActivity : BaseActivity() {
         fragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.communityFragment -> showBottomNav()
+                R.id.chatGroupFragment -> showBottomNav()
                 R.id.profileFragment -> showBottomNav()
                 R.id.userInfoFragment -> hideBottomNav()
+                R.id.addChatGroupFragment -> hideBottomNav()
                 R.id.editProfileFragment -> hideBottomNav()
                 R.id.editLocaleNativeFragment -> hideBottomNav()
                 R.id.editLocaleLearningFragment -> hideBottomNav()

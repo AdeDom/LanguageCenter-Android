@@ -5,19 +5,20 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.findNavController
 import com.lc.android.R
-import com.lc.android.base.BaseActivity
+import com.lc.android.base.BaseFragment
+import com.lc.android.util.hideSoftKeyboard
 import com.lc.android.util.toast
-import kotlinx.android.synthetic.main.activity_add_chat_group.*
+import kotlinx.android.synthetic.main.fragment_add_chat_group.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AddChatGroupActivity : BaseActivity() {
+class AddChatGroupFragment : BaseFragment(R.layout.fragment_add_chat_group) {
 
     private val viewModel by viewModel<AddChatGroupViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_chat_group)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         observeViewModel()
         setState()
@@ -34,10 +35,11 @@ class AddChatGroupActivity : BaseActivity() {
 
         viewModel.addChatGroupEvent.observe { response ->
             if (response.success) {
-                toast(response.message)
-                finish()
+                context.toast(response.message)
+                activity?.hideSoftKeyboard()
+                findNavController().popBackStack()
             } else {
-                toast(response.message, Toast.LENGTH_LONG)
+                context.toast(response.message, Toast.LENGTH_LONG)
             }
         }
 
@@ -59,7 +61,7 @@ class AddChatGroupActivity : BaseActivity() {
         }
 
         btCancel.setOnClickListener {
-            finish()
+            findNavController().popBackStack()
         }
     }
 
