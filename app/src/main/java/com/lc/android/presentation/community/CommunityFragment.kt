@@ -42,6 +42,7 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
 
+            ivPlaceHolderDefault.isVisible = state.communities.isNullOrEmpty()
             mAdapter.setList(state.communities)
         }
 

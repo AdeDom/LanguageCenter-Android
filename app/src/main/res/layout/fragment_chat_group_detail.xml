@@ -45,6 +45,16 @@
         tools:listitem="@layout/item_user_info" />
 
     <ImageView
+        android:id="@+id/ivPlaceHolderDefault"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/ic_placeholder_default"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recyclerView" />
+
+    <ImageView
         android:id="@+id/ivAddChatGroupDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

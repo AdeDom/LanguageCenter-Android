@@ -40,6 +40,7 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
 
+            ivPlaceHolderDefault.isVisible = state.chatGroups.isNullOrEmpty()
             mAdapter.setList(state.chatGroups)
         }
 
