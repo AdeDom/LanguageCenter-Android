@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LanguageCenter">
         <activity android:name=".presentation.chat.ChatActivity" />
-        <activity android:name=".presentation.ChatGroupDetailActivity" />
         <activity android:name=".presentation.VocabularyActivity" />
         <activity android:name=".presentation.AuthActivity">
             <intent-filter>

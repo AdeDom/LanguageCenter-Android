@@ -2,16 +2,17 @@ package com.lc.android.presentation.chatgroupdetail
 
 import android.os.Bundle
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.android.presentation.ChatGroupDetailActivity
 import kotlinx.android.synthetic.main.fragment_chat_group_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail) {
 
     private val viewModel by viewModel<ChatGroupDetailViewModel>()
+    private val args by navArgs<ChatGroupDetailFragmentArgs>()
     private val mAdapter by lazy { ChatGroupDetailAdapter() }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -30,8 +31,7 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
 
     private fun observeViewModel() {
         viewModel.attachFirstTime.observe {
-            val chatGroupId = arguments?.getInt(ChatGroupDetailActivity.CHAT_GROUP_ID, 0)
-            viewModel.callFetchChatGroupDetail(chatGroupId)
+            viewModel.callFetchChatGroupDetail(args.chatGroupId)
         }
 
         viewModel.state.observe { state ->
