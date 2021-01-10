@@ -1,20 +1,24 @@
 package com.lc.android.presentation.chatgroup
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.lc.android.R
 import kotlinx.android.synthetic.main.dialog_more_chat_group.*
 
-class MoreChatGroupDialog : DialogFragment(R.layout.dialog_more_chat_group) {
+class MoreChatGroupDialog : BottomSheetDialogFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setStyle(STYLE_NO_TITLE, android.R.style.Theme_Material_Light_Dialog_MinWidth)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.dialog_more_chat_group, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -14,6 +14,15 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_cardview_background">
 
+        <TextView
+            android:id="@+id/tvAlgorithm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="A"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/ivPicture"
             android:layout_width="100dp"
@@ -23,38 +32,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/layoutContent"
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/Text.Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/str_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivPicture"
-            app:layout_constraintTop_toTopOf="@+id/ivPicture">
+            app:layout_constraintTop_toTopOf="@+id/ivPicture" />
 
-            <TextView
-                android:id="@+id/tvName"
-                style="@style/Text.Body"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="8dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="@string/str_name" />
-
-            <TextView
-                android:id="@+id/tvEmail"
-                style="@style/Text.Body"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="8dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="@string/str_email" />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvEmail"
+            style="@style/Text.Body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/str_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPicture"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
         <LinearLayout
             android:id="@+id/layoutNative"
@@ -63,8 +67,8 @@
             android:layout_marginStart="16dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/layoutContent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutContent">
+            app:layout_constraintStart_toStartOf="@+id/tvEmail"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmail">
 
             <TextView
                 android:id="@+id/tvLocaleNative"
@@ -125,30 +129,28 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/ivGender"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_gender"
+            app:layout_constraintEnd_toStartOf="@+id/tvAge"
+            app:layout_constraintStart_toStartOf="@+id/ivPicture"
+            app:layout_constraintTop_toBottomOf="@+id/ivPicture" />
+
+        <TextView
+            android:id="@+id/tvAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_background_text_view"
             app:layout_constraintEnd_toEndOf="@+id/ivPicture"
-            app:layout_constraintStart_toStartOf="@+id/ivPicture"
-            app:layout_constraintTop_toBottomOf="@+id/ivPicture">
-
-            <ImageView
-                android:id="@+id/ivGender"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_gender" />
-
-            <TextView
-                android:id="@+id/tvAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/shape_background_text_view"
-                tools:text="23" />
-
-        </LinearLayout>
+            app:layout_constraintStart_toEndOf="@+id/ivGender"
+            app:layout_constraintTop_toBottomOf="@+id/ivPicture"
+            tools:text="23" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

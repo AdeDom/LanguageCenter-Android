@@ -50,6 +50,7 @@ class CommunityAdapter : RecyclerView.Adapter<CommunityAdapter.CommunityViewHold
             holder.itemView.tvLocaleLearningEn.visibility = View.VISIBLE
         }
 
+        holder.itemView.tvAlgorithm.text = item.algorithm
         val name = "${item.givenName} ${item.familyName}"
         holder.itemView.tvName.text = name
         holder.itemView.tvEmail.text = item.email
