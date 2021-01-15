@@ -11,7 +11,7 @@ import com.lc.library.data.db.dao.UserInfoDao
 import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.library.data.db.entities.UserInfoEntity
 
-@Database(entities = [UserInfoEntity::class, AddChatGroupDetailEntity::class], version = 7)
+@Database(entities = [UserInfoEntity::class, AddChatGroupDetailEntity::class], version = 8)
 @TypeConverters(UserInfoLocaleConverters::class)
 abstract class AppDatabase : RoomDatabase() {
 

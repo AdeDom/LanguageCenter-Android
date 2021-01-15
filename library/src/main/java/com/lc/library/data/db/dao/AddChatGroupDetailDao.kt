@@ -13,6 +13,9 @@ interface AddChatGroupDetailDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveAddChatGroupDetail(addChatGroupDetailEntity: AddChatGroupDetailEntity)
 
+    @Query("SELECT user_id FROM add_chat_group_detail ORDER BY created DESC LIMIT 1")
+    suspend fun getDbFetchLastUserId(): String?
+
     @Query(
         "SELECT * FROM add_chat_group_detail WHERE email LIKE '%' || :search || '%' " +
                 " OR given_name LIKE '%' || :search || '%' " +

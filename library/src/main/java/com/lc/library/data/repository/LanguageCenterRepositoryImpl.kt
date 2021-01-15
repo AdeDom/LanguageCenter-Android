@@ -83,6 +83,7 @@ class LanguageCenterRepositoryImpl(
         pref.accessToken = ""
         pref.refreshToken = ""
         dataSource.deleteUserInfo()
+        dataSource.deleteAddChatGroupDetail()
     }
 
     override suspend fun callGuideUpdateProfile(guideUpdateProfileRequest: GuideUpdateProfileRequest): Resource<BaseResponse> {
@@ -142,12 +143,11 @@ class LanguageCenterRepositoryImpl(
     }
 
     override suspend fun callFetchAddChatGroupDetail(): Resource<FetchAddChatGroupDetailResponse> {
-        val resource = safeApiCall { dataSource.callFetchAddChatGroupDetail() }
+        val fetchLastUserId = dataSource.getDbFetchLastUserId()
+        val resource = safeApiCall { dataSource.callFetchAddChatGroupDetail(fetchLastUserId) }
 
         if (resource is Resource.Success) {
             val addChatGroupDetailList = resource.data.addChatGroupDetailList
-
-            dataSource.deleteAddChatGroupDetail()
 
             addChatGroupDetailList.forEach {
                 val entity = AddChatGroupDetailEntity(
@@ -162,6 +162,7 @@ class LanguageCenterRepositoryImpl(
                     birthDateString = it.birthDateString,
                     birthDateLong = it.birthDateLong,
                     aboutMe = it.aboutMe,
+                    created = it.created,
                     localNatives = it.localNatives,
                     localLearnings = it.localLearnings,
                 )

@@ -19,6 +19,7 @@ data class AddChatGroupDetailEntity(
     @ColumnInfo(name = "birth_date_string") val birthDateString: String? = null,
     @ColumnInfo(name = "birth_date_long") val birthDateLong: Long? = null,
     @ColumnInfo(name = "about_me") val aboutMe: String? = null,
+    @ColumnInfo(name = "created") val created: Long? = null,
     @ColumnInfo(name = "local_natives") val localNatives: List<UserInfoLocale> = emptyList(),
     @ColumnInfo(name = "local_learnings") val localLearnings: List<UserInfoLocale> = emptyList(),
 )

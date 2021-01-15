@@ -32,6 +32,10 @@ class LanguageCenterDataSourceImpl(
         return db.getAddChatGroupDetailDao().saveAddChatGroupDetail(addChatGroupDetailEntity)
     }
 
+    override suspend fun getDbFetchLastUserId(): String? {
+        return db.getAddChatGroupDetailDao().getDbFetchLastUserId()
+    }
+
     override suspend fun getDbAddChatGroupDetail(search: String?): List<AddChatGroupDetailEntity>? {
         return db.getAddChatGroupDetailDao().getDbAddChatGroupDetail(search)
     }
@@ -97,8 +101,8 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callRemoveChatGroup(chatGroupId)
     }
 
-    override suspend fun callFetchAddChatGroupDetail(): FetchAddChatGroupDetailResponse {
-        return provider.getLanguageCenterDataSource().callFetchAddChatGroupDetail()
+    override suspend fun callFetchAddChatGroupDetail(userId: String?): FetchAddChatGroupDetailResponse {
+        return provider.getLanguageCenterDataSource().callFetchAddChatGroupDetail(userId)
     }
 
     override suspend fun callAddChatGroupDetail(addChatGroupDetailRequest: AddChatGroupDetailRequest): BaseResponse {
