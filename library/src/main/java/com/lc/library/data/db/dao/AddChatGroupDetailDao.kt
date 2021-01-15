@@ -27,7 +27,10 @@ interface AddChatGroupDetailDao {
     @Query("SELECT * FROM add_chat_group_detail")
     fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>>
 
+    @Query("DELETE FROM add_chat_group_detail WHERE user_id = :userId")
+    suspend fun deleteAddChatGroupDetail(userId: String?)
+
     @Query("DELETE FROM add_chat_group_detail")
-    suspend fun deleteAddChatGroupDetail()
+    suspend fun deleteAllAddChatGroupDetail()
 
 }

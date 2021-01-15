@@ -24,7 +24,9 @@ interface LanguageCenterDataSource {
 
     fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>>
 
-    suspend fun deleteAddChatGroupDetail()
+    suspend fun deleteAddChatGroupDetail(userId: String?)
+
+    suspend fun deleteAllAddChatGroupDetail()
 
     suspend fun callSignIn(request: SignInRequest): SignInResponse
 

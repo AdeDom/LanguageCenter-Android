@@ -123,7 +123,11 @@
         android:id="@+id/addChatGroupDetailFragment"
         android:name="com.lc.android.presentation.addchatgroupdetail.AddChatGroupDetailFragment"
         android:label="AddChatGroupDetailFragment"
-        tools:layout="@layout/fragment_add_chat_group_detail" />
+        tools:layout="@layout/fragment_add_chat_group_detail">
+        <argument
+            android:name="chatGroupId"
+            app:argType="integer" />
+    </fragment>
     <activity
         android:id="@+id/chatActivity"
         android:name="com.lc.android.presentation.chat.ChatActivity"

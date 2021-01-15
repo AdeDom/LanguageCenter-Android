@@ -2,8 +2,10 @@ package com.lc.android.presentation.addchatgroupdetail
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
@@ -13,6 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group_detail) {
 
     private val viewModel by viewModel<AddChatGroupDetailViewModel>()
+    private val args by navArgs<AddChatGroupDetailFragmentArgs>()
     private val mAdapter by lazy { AddChatGroupDetailAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,6 +40,12 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
 
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
+
+            if (state.isClickable) {
+                mAdapter.setListener { dialogAddFriend(args.chatGroupId, it.userId) }
+            } else {
+                mAdapter.setListener { }
+            }
         }
 
         viewModel.getDbAddChatGroupDetail.observe(viewLifecycleOwner, { list ->
@@ -53,6 +62,21 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
         etSearch.addTextChangedListener {
             viewModel.setStateSearch(it.toString())
             viewModel.getDbAddChatGroupDetail()
+        }
+    }
+
+    private fun dialogAddFriend(chatGroupId: Int, userId: String) {
+        AlertDialog.Builder(requireActivity()).apply {
+            setTitle(R.string.dialog_add_chat_group_detail_title)
+            setMessage(R.string.dialog_add_chat_group_detail_message)
+            setPositiveButton(android.R.string.ok) { dialog, _ ->
+                viewModel.callAddChatGroupDetail(chatGroupId, userId)
+                dialog.dismiss()
+            }
+            setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+            show()
         }
     }
 

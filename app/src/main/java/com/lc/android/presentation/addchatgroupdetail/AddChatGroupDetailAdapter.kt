@@ -14,6 +14,7 @@ class AddChatGroupDetailAdapter :
     RecyclerView.Adapter<AddChatGroupDetailAdapter.AddChatGroupDetailViewHolder>() {
 
     private val list by lazy { mutableListOf<AddChatGroupDetailEntity>() }
+    private var listener: ((AddChatGroupDetailEntity) -> Unit)? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -62,6 +63,10 @@ class AddChatGroupDetailAdapter :
             LanguageCenterConstant.GENDER_MALE -> holder.itemView.ivGender.setImageResource(R.drawable.ic_male)
             LanguageCenterConstant.GENDER_FEMALE -> holder.itemView.ivGender.setImageResource(R.drawable.ic_female)
         }
+
+        holder.itemView.setOnClickListener {
+            listener?.invoke(item)
+        }
     }
 
     override fun getItemCount(): Int = list.size
@@ -70,6 +75,10 @@ class AddChatGroupDetailAdapter :
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
+    }
+
+    fun setListener(listener: (AddChatGroupDetailEntity) -> Unit) {
+        this.listener = listener
     }
 
     class AddChatGroupDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

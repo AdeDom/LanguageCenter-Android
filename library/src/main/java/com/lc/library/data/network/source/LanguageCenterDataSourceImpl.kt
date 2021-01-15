@@ -44,8 +44,12 @@ class LanguageCenterDataSourceImpl(
         return db.getAddChatGroupDetailDao().getDbAddChatGroupDetailLiveData()
     }
 
-    override suspend fun deleteAddChatGroupDetail() {
-        return db.getAddChatGroupDetailDao().deleteAddChatGroupDetail()
+    override suspend fun deleteAddChatGroupDetail(userId: String?) {
+        return db.getAddChatGroupDetailDao().deleteAddChatGroupDetail(userId)
+    }
+
+    override suspend fun deleteAllAddChatGroupDetail() {
+        return db.getAddChatGroupDetailDao().deleteAllAddChatGroupDetail()
     }
 
     override suspend fun callSignIn(request: SignInRequest): SignInResponse {

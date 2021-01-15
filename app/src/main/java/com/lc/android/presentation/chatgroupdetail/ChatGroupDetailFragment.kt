@@ -48,7 +48,9 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
 
     private fun viewEvent() {
         ivAddChatGroupDetail.setOnClickListener {
-            findNavController().navigate(R.id.action_chatGroupDetailFragment_to_addChatGroupDetailFragment)
+            val navDirections = ChatGroupDetailFragmentDirections
+                .actionChatGroupDetailFragmentToAddChatGroupDetailFragment(args.chatGroupId)
+            findNavController().navigate(navDirections)
         }
     }
 
