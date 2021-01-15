@@ -13,8 +13,13 @@ interface AddChatGroupDetailDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveAddChatGroupDetail(addChatGroupDetailEntity: AddChatGroupDetailEntity)
 
-    @Query("SELECT * FROM add_chat_group_detail")
-    suspend fun getDbAddChatGroupDetail(): List<AddChatGroupDetailEntity>?
+    @Query(
+        "SELECT * FROM add_chat_group_detail WHERE email LIKE '%' || :search || '%' " +
+                " OR given_name LIKE '%' || :search || '%' " +
+                " OR family_name LIKE '%' || :search || '%' " +
+                " OR about_me LIKE '%' || :search || '%'"
+    )
+    suspend fun getDbAddChatGroupDetail(search: String?): List<AddChatGroupDetailEntity>?
 
     @Query("SELECT * FROM add_chat_group_detail")
     fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>>

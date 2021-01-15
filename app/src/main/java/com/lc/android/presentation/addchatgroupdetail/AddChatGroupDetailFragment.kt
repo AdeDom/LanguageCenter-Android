@@ -3,6 +3,7 @@ package com.lc.android.presentation.addchatgroupdetail
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
@@ -19,6 +20,7 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
 
         initialView()
         observeViewModel()
+        viewEvent()
     }
 
     private fun initialView() {
@@ -37,7 +39,7 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
             animationLoading.isVisible = state.isLoading
         }
 
-        viewModel.getDbAddChatGroupDetailLiveData.observe(viewLifecycleOwner, { list ->
+        viewModel.getDbAddChatGroupDetail.observe(viewLifecycleOwner, { list ->
             if (list.isNullOrEmpty()) return@observe
 
             ivPlaceHolderDefault.visibility = View.GONE
@@ -45,6 +47,13 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
         })
 
         viewModel.error.observeError()
+    }
+
+    private fun viewEvent() {
+        etSearch.addTextChangedListener {
+            viewModel.setStateSearch(it.toString())
+            viewModel.getDbAddChatGroupDetail()
+        }
     }
 
 }

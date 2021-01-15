@@ -1,6 +1,5 @@
 package com.lc.library.domain.usecase
 
-import androidx.lifecycle.LiveData
 import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.data.repository.Resource
@@ -17,8 +16,8 @@ class GetAddChatGroupDetailUseCaseImpl(
         return repository.callFetchAddChatGroupDetail()
     }
 
-    override fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>> {
-        return dataSource.getDbAddChatGroupDetailLiveData()
+    override suspend fun getDbAddChatGroupDetail(search: String?): List<AddChatGroupDetailEntity>? {
+        return dataSource.getDbAddChatGroupDetail(search)
     }
 
 }

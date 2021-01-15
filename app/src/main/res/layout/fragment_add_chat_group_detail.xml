@@ -37,20 +37,28 @@
                 android:layout_marginBottom="16dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <EditText
-                    android:id="@+id/etSearch"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/shape_edittext_background"
-                    android:drawableStart="@drawable/ic_search"
-                    android:drawablePadding="8dp"
-                    android:hint="@string/search"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvChatGroup" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvChatGroup">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/shape_edittext_background"
+                        android:drawableStart="@drawable/ic_search"
+                        android:drawablePadding="8dp"
+                        android:hint="@string/search"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
