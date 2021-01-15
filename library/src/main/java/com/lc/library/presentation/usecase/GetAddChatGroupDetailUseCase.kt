@@ -9,6 +9,6 @@ interface GetAddChatGroupDetailUseCase {
 
     suspend fun callFetchAddChatGroupDetail(): Resource<FetchAddChatGroupDetailResponse>
 
-    fun getDbAddChatGroupDetailLiveData(): LiveData<AddChatGroupDetailEntity>
+    fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>>
 
 }

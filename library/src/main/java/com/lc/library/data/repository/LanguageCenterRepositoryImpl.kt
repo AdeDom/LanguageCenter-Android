@@ -146,9 +146,27 @@ class LanguageCenterRepositoryImpl(
 
         if (resource is Resource.Success) {
             val addChatGroupDetailList = resource.data.addChatGroupDetailList
-            val entity = AddChatGroupDetailEntity(addChatGroupDetailList = addChatGroupDetailList)
+
             dataSource.deleteAddChatGroupDetail()
-            dataSource.saveAddChatGroupDetail(entity)
+
+            addChatGroupDetailList.forEach {
+                val entity = AddChatGroupDetailEntity(
+                    userId = it.userId.orEmpty(),
+                    email = it.email,
+                    givenName = it.givenName,
+                    familyName = it.familyName,
+                    name = it.name,
+                    picture = it.picture,
+                    gender = it.gender,
+                    age = it.age,
+                    birthDateString = it.birthDateString,
+                    birthDateLong = it.birthDateLong,
+                    aboutMe = it.aboutMe,
+                    localNatives = it.localNatives,
+                    localLearnings = it.localLearnings,
+                )
+                dataSource.saveAddChatGroupDetail(entity)
+            }
         }
 
         return resource

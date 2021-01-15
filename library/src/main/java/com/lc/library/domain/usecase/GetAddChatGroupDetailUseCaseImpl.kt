@@ -17,7 +17,7 @@ class GetAddChatGroupDetailUseCaseImpl(
         return repository.callFetchAddChatGroupDetail()
     }
 
-    override fun getDbAddChatGroupDetailLiveData(): LiveData<AddChatGroupDetailEntity> {
+    override fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>> {
         return dataSource.getDbAddChatGroupDetailLiveData()
     }
 

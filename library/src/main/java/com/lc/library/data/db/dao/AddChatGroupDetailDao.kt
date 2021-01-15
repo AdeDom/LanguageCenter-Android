@@ -14,10 +14,10 @@ interface AddChatGroupDetailDao {
     suspend fun saveAddChatGroupDetail(addChatGroupDetailEntity: AddChatGroupDetailEntity)
 
     @Query("SELECT * FROM add_chat_group_detail")
-    suspend fun getDbAddChatGroupDetail(): AddChatGroupDetailEntity?
+    suspend fun getDbAddChatGroupDetail(): List<AddChatGroupDetailEntity>?
 
     @Query("SELECT * FROM add_chat_group_detail")
-    fun getDbAddChatGroupDetailLiveData(): LiveData<AddChatGroupDetailEntity>
+    fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>>
 
     @Query("DELETE FROM add_chat_group_detail")
     suspend fun deleteAddChatGroupDetail()

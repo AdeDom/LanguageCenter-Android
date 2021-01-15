@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lc.android.R
 import com.lc.android.util.loadCircle
-import com.lc.server.models.model.AddChatGroupDetail
+import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.server.util.LanguageCenterConstant
 import kotlinx.android.synthetic.main.item_user_info.view.*
 
 class AddChatGroupDetailAdapter :
     RecyclerView.Adapter<AddChatGroupDetailAdapter.AddChatGroupDetailViewHolder>() {
 
-    private val list by lazy { mutableListOf<AddChatGroupDetail>() }
+    private val list by lazy { mutableListOf<AddChatGroupDetailEntity>() }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -66,7 +66,7 @@ class AddChatGroupDetailAdapter :
 
     override fun getItemCount(): Int = list.size
 
-    fun setList(list: List<AddChatGroupDetail>) {
+    fun setList(list: List<AddChatGroupDetailEntity>) {
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()

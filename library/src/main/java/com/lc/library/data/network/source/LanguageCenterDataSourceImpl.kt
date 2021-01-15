@@ -32,11 +32,11 @@ class LanguageCenterDataSourceImpl(
         return db.getAddChatGroupDetailDao().saveAddChatGroupDetail(addChatGroupDetailEntity)
     }
 
-    override suspend fun getDbAddChatGroupDetail(): AddChatGroupDetailEntity? {
+    override suspend fun getDbAddChatGroupDetail(): List<AddChatGroupDetailEntity>? {
         return db.getAddChatGroupDetailDao().getDbAddChatGroupDetail()
     }
 
-    override fun getDbAddChatGroupDetailLiveData(): LiveData<AddChatGroupDetailEntity> {
+    override fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>> {
         return db.getAddChatGroupDetailDao().getDbAddChatGroupDetailLiveData()
     }
 

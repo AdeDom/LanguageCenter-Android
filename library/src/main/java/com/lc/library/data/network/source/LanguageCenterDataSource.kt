@@ -18,9 +18,9 @@ interface LanguageCenterDataSource {
 
     suspend fun saveAddChatGroupDetail(addChatGroupDetailEntity: AddChatGroupDetailEntity)
 
-    suspend fun getDbAddChatGroupDetail(): AddChatGroupDetailEntity?
+    suspend fun getDbAddChatGroupDetail(): List<AddChatGroupDetailEntity>?
 
-    fun getDbAddChatGroupDetailLiveData(): LiveData<AddChatGroupDetailEntity>
+    fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>>
 
     suspend fun deleteAddChatGroupDetail()
 

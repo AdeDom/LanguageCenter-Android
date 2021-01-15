@@ -11,7 +11,7 @@ class AddChatGroupDetailViewModel(
     private val getAddChatGroupDetailUseCase: GetAddChatGroupDetailUseCase,
 ) : BaseViewModel<AddChatGroupDetailViewState>(AddChatGroupDetailViewState()) {
 
-    val getDbAddChatGroupDetailLiveData: LiveData<AddChatGroupDetailEntity>
+    val getDbAddChatGroupDetailLiveData: LiveData<List<AddChatGroupDetailEntity>>
         get() = getAddChatGroupDetailUseCase.getDbAddChatGroupDetailLiveData()
 
     fun callFetchAddChatGroupDetail() {
