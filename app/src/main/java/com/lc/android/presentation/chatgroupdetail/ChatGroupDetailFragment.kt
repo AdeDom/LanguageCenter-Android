@@ -2,6 +2,7 @@ package com.lc.android.presentation.chatgroupdetail
 
 import android.os.Bundle
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
@@ -20,6 +21,7 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
 
         initialView()
         observeViewModel()
+        viewEvent()
     }
 
     private fun initialView() {
@@ -42,6 +44,12 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
         }
 
         viewModel.error.observeError()
+    }
+
+    private fun viewEvent() {
+        ivAddChatGroupDetail.setOnClickListener {
+            findNavController().navigate(R.id.action_chatGroupDetailFragment_to_addChatGroupDetailFragment)
+        }
     }
 
 }
