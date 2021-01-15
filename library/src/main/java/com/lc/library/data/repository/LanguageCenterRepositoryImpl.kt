@@ -1,5 +1,6 @@
 package com.lc.library.data.repository
 
+import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
@@ -141,7 +142,16 @@ class LanguageCenterRepositoryImpl(
     }
 
     override suspend fun callFetchAddChatGroupDetail(): Resource<FetchAddChatGroupDetailResponse> {
-        return safeApiCall { dataSource.callFetchAddChatGroupDetail() }
+        val resource = safeApiCall { dataSource.callFetchAddChatGroupDetail() }
+
+        if (resource is Resource.Success) {
+            val addChatGroupDetailList = resource.data.addChatGroupDetailList
+            val entity = AddChatGroupDetailEntity(addChatGroupDetailList = addChatGroupDetailList)
+            dataSource.deleteAddChatGroupDetail()
+            dataSource.saveAddChatGroupDetail(entity)
+        }
+
+        return resource
     }
 
     override suspend fun callAddChatGroupDetail(addChatGroupDetailRequest: AddChatGroupDetailRequest): Resource<BaseResponse> {

@@ -35,10 +35,14 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
 
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
-            ivPlaceHolderDefault.isVisible = state.addChatGroupDetailList.isNullOrEmpty()
-
-            mAdapter.setList(state.addChatGroupDetailList)
         }
+
+        viewModel.getDbAddChatGroupDetailLiveData.observe(viewLifecycleOwner, { entity ->
+            if (entity == null) return@observe
+
+            ivPlaceHolderDefault.visibility = View.GONE
+            mAdapter.setList(entity.addChatGroupDetailList)
+        })
 
         viewModel.error.observeError()
     }

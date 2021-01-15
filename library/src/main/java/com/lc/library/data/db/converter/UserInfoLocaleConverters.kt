@@ -1,10 +1,10 @@
-package com.lc.library.data.db
+package com.lc.library.data.db.converter
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.lc.server.models.model.UserInfoLocale
 
-class Converters {
+class UserInfoLocaleConverters {
 
     @TypeConverter
     fun listToJson(value: List<UserInfoLocale>): String {

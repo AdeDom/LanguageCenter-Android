@@ -2,6 +2,7 @@ package com.lc.library.data.network.source
 
 import androidx.lifecycle.LiveData
 import com.lc.library.data.db.AppDatabase
+import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
@@ -25,6 +26,22 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun deleteUserInfo() {
         return db.getUserInfoDao().deleteUserInfo()
+    }
+
+    override suspend fun saveAddChatGroupDetail(addChatGroupDetailEntity: AddChatGroupDetailEntity) {
+        return db.getAddChatGroupDetailDao().saveAddChatGroupDetail(addChatGroupDetailEntity)
+    }
+
+    override suspend fun getDbAddChatGroupDetail(): AddChatGroupDetailEntity? {
+        return db.getAddChatGroupDetailDao().getDbAddChatGroupDetail()
+    }
+
+    override fun getDbAddChatGroupDetailLiveData(): LiveData<AddChatGroupDetailEntity> {
+        return db.getAddChatGroupDetailDao().getDbAddChatGroupDetailLiveData()
+    }
+
+    override suspend fun deleteAddChatGroupDetail() {
+        return db.getAddChatGroupDetailDao().deleteAddChatGroupDetail()
     }
 
     override suspend fun callSignIn(request: SignInRequest): SignInResponse {

@@ -1,6 +1,7 @@
 package com.lc.library.data.network.source
 
 import androidx.lifecycle.LiveData
+import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
@@ -14,6 +15,14 @@ interface LanguageCenterDataSource {
     fun getDbUserInfoLiveData(): LiveData<UserInfoEntity>
 
     suspend fun deleteUserInfo()
+
+    suspend fun saveAddChatGroupDetail(addChatGroupDetailEntity: AddChatGroupDetailEntity)
+
+    suspend fun getDbAddChatGroupDetail(): AddChatGroupDetailEntity?
+
+    fun getDbAddChatGroupDetailLiveData(): LiveData<AddChatGroupDetailEntity>
+
+    suspend fun deleteAddChatGroupDetail()
 
     suspend fun callSignIn(request: SignInRequest): SignInResponse
 
