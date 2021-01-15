@@ -34,4 +34,8 @@ interface LanguageCenterRepository {
 
     suspend fun callRemoveChatGroup(chatGroupId: Int?): Resource<BaseResponse>
 
+    suspend fun callFetchAddChatGroupDetail(): Resource<FetchAddChatGroupDetailResponse>
+
+    suspend fun callAddChatGroupDetail(addChatGroupDetailRequest: AddChatGroupDetailRequest): Resource<BaseResponse>
+
 }

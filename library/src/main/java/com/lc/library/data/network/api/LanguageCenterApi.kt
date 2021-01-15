@@ -48,4 +48,10 @@ interface LanguageCenterApi {
     @DELETE("api/chat-group/remove-chat-group/{chatGroupId}")
     suspend fun callRemoveChatGroup(@Path("chatGroupId") chatGroupId: Int?): BaseResponse
 
+    @GET("api/chat-group/fetch-add-chat-group-detail")
+    suspend fun callFetchAddChatGroupDetail(): FetchAddChatGroupDetailResponse
+
+    @POST("api/chat-group/add-chat-group-detail")
+    suspend fun callAddChatGroupDetail(@Body addChatGroupDetailRequest: AddChatGroupDetailRequest): BaseResponse
+
 }

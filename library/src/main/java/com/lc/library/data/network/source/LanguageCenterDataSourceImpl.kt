@@ -80,4 +80,13 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callRemoveChatGroup(chatGroupId)
     }
 
+    override suspend fun callFetchAddChatGroupDetail(): FetchAddChatGroupDetailResponse {
+        return provider.getLanguageCenterDataSource().callFetchAddChatGroupDetail()
+    }
+
+    override suspend fun callAddChatGroupDetail(addChatGroupDetailRequest: AddChatGroupDetailRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource()
+            .callAddChatGroupDetail(addChatGroupDetailRequest)
+    }
+
 }
