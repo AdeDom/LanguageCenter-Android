@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
+import com.lc.android.presentation.model.ChatGroup
 import com.lc.android.util.snackbar
 import kotlinx.android.synthetic.main.fragment_chat_group.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -64,10 +65,19 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
     }
 
     private fun viewEvent() {
-        mAdapter.setListener { chatGroupId ->
+        mAdapter.setListener { chatGroupId, chatGroups ->
             chatGroupId?.let {
                 val navDirections = ChatGroupFragmentDirections
-                    .actionChatGroupFragmentToChatGroupDetailFragment(chatGroupId)
+                    .actionChatGroupFragmentToChatGroupDetailFragment(
+                        chatGroupId = chatGroupId,
+                        chatGroups = chatGroups.map {
+                            ChatGroup(
+                                chatGroupId = it.chatGroupId,
+                                groupName = it.groupName,
+                                userId = it.userId,
+                            )
+                        }.toTypedArray(),
+                    )
                 findNavController().navigate(navDirections)
             }
         }

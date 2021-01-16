@@ -1,4 +1,4 @@
-package com.lc.android.presentation.chatgroup
+package com.lc.android.presentation.chatgroupdetail
 
 import android.os.Bundle
 import android.view.View
@@ -7,9 +7,9 @@ import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.lc.android.R
 import com.lc.android.base.BaseBottomSheetDialog
-import kotlinx.android.synthetic.main.dialog_more_chat_group.*
+import kotlinx.android.synthetic.main.dialog_more_chat_group_detail.*
 
-class MoreChatGroupDialog : BaseBottomSheetDialog(R.layout.dialog_more_chat_group) {
+class MoreChatGroupDetailDialog : BaseBottomSheetDialog(R.layout.dialog_more_chat_group_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -18,8 +18,8 @@ class MoreChatGroupDialog : BaseBottomSheetDialog(R.layout.dialog_more_chat_grou
     }
 
     private fun viewEvent() {
-        tvRename.setOnClickListener {
-            onSelectItem(RENAME)
+        tvChangeChatGroup.setOnClickListener {
+            onSelectItem(CHANGE_CHAT_GROUP)
         }
 
         tvRemove.setOnClickListener {
@@ -30,15 +30,15 @@ class MoreChatGroupDialog : BaseBottomSheetDialog(R.layout.dialog_more_chat_grou
     private fun onSelectItem(value: String) {
         findNavController().popBackStack()
         setFragmentResult(
-            MORE_CHAT_GROUP,
+            MORE_CHAT_GROUP_DETAIL,
             bundleOf(MORE_KEY to value)
         )
     }
 
     companion object {
-        const val MORE_CHAT_GROUP = "MoreChatGroup"
+        const val MORE_CHAT_GROUP_DETAIL = "MoreChatGroupDetail"
         const val MORE_KEY = "moreKey"
-        const val RENAME = "rename"
+        const val CHANGE_CHAT_GROUP = "change_chat_group_detail"
         const val REMOVE = "remove"
     }
 

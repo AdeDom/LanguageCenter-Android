@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_chat_group.view.*
 class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHolder>() {
 
     private val list by lazy { mutableListOf<ChatGroup>() }
-    private var listener: ((Int?) -> Unit)? = null
+    private var listener: ((Int?, MutableList<ChatGroup>) -> Unit)? = null
     private var moreListener: ((ChatGroup?) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatGroupViewHolder {
@@ -24,7 +24,7 @@ class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHold
         holder.itemView.tvChatGroupName.text = list[position].groupName
 
         holder.itemView.setOnClickListener {
-            listener?.invoke(list[position].chatGroupId)
+            listener?.invoke(list[position].chatGroupId, list)
         }
 
         holder.itemView.ibMore.setOnClickListener {
@@ -40,7 +40,7 @@ class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHold
         notifyDataSetChanged()
     }
 
-    fun setListener(listener: ((Int?) -> Unit)?) {
+    fun setListener(listener: ((Int?, MutableList<ChatGroup>) -> Unit)?) {
         this.listener = listener
     }
 

@@ -8,16 +8,17 @@ import com.lc.android.R
 import com.lc.android.util.loadCircle
 import com.lc.server.models.model.ChatGroupDetail
 import com.lc.server.util.LanguageCenterConstant
-import kotlinx.android.synthetic.main.item_user_info.view.*
+import kotlinx.android.synthetic.main.item_chat_group_detail.view.*
 
 class ChatGroupDetailAdapter :
     RecyclerView.Adapter<ChatGroupDetailAdapter.ChatGroupDetailViewHolder>() {
 
     private val list by lazy { mutableListOf<ChatGroupDetail>() }
+    private var moreListener: ((ChatGroupDetail?) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatGroupDetailViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_user_info, parent, false)
+            .inflate(R.layout.item_chat_group_detail, parent, false)
         return ChatGroupDetailViewHolder(view)
     }
 
@@ -59,6 +60,10 @@ class ChatGroupDetailAdapter :
             LanguageCenterConstant.GENDER_MALE -> holder.itemView.ivGender.setImageResource(R.drawable.ic_male)
             LanguageCenterConstant.GENDER_FEMALE -> holder.itemView.ivGender.setImageResource(R.drawable.ic_female)
         }
+
+        holder.itemView.ibMore.setOnClickListener {
+            moreListener?.invoke(list[position])
+        }
     }
 
     override fun getItemCount(): Int = list.size
@@ -67,6 +72,10 @@ class ChatGroupDetailAdapter :
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
+    }
+
+    fun setMoreListener(moreListener: ((ChatGroupDetail?) -> Unit)?) {
+        this.moreListener = moreListener
     }
 
     class ChatGroupDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

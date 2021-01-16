@@ -57,4 +57,7 @@
     <string name="rename_chat_group">Rename chat group</string>
     <string name="dialog_add_chat_group_detail_title">Add chat group detail</string>
     <string name="dialog_add_chat_group_detail_message">Do you really want to add chat group detail?</string>
+    <string name="change_chat_group">Change chat group</string>
+    <string name="dialog_remove_chat_group_detail_title">Remove chat group detail</string>
+    <string name="dialog_remove_chat_group_detail_message">Do you really want to delete?</string>
 </resources>

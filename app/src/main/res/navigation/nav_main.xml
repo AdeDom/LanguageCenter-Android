@@ -118,6 +118,15 @@
         <argument
             android:name="chatGroupId"
             app:argType="integer" />
+        <argument
+            android:name="chatGroups"
+            app:argType="com.lc.android.presentation.model.ChatGroup[]" />
+        <action
+            android:id="@+id/action_chatGroupDetailFragment_to_changeChatGroupDialog"
+            app:destination="@id/changeChatGroupDialog" />
+        <action
+            android:id="@+id/action_chatGroupDetailFragment_to_moreChatGroupDetailDialog"
+            app:destination="@id/moreChatGroupDetailDialog" />
     </fragment>
     <fragment
         android:id="@+id/addChatGroupDetailFragment"
@@ -172,5 +181,19 @@
             app:argType="string"
             app:nullable="true" />
     </dialog>
+    <dialog
+        android:id="@+id/changeChatGroupDialog"
+        android:name="com.lc.android.presentation.chatgroupdetail.ChangeChatGroupDialog"
+        android:label="ChangeChatGroupDialog"
+        tools:layout="@layout/dialog_change_chat_group">
+        <argument
+            android:name="otherChatGroups"
+            app:argType="com.lc.android.presentation.model.ChatGroup[]" />
+    </dialog>
+    <dialog
+        android:id="@+id/moreChatGroupDetailDialog"
+        android:name="com.lc.android.presentation.chatgroupdetail.MoreChatGroupDetailDialog"
+        android:label="MoreChatGroupDetailDialog"
+        tools:layout="@layout/dialog_more_chat_group_detail" />
 
 </navigation>
