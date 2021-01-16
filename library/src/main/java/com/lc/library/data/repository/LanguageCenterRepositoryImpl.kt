@@ -5,6 +5,7 @@ import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.PreferenceAuth
+import com.lc.server.models.model.AddChatGroupDetail
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
 import kotlinx.coroutines.Dispatchers
@@ -143,11 +144,19 @@ class LanguageCenterRepositoryImpl(
     }
 
     override suspend fun callFetchAddChatGroupDetail(): Resource<FetchAddChatGroupDetailResponse> {
-        val fetchLastUserId = dataSource.getDbFetchLastUserId()
-        val resource = safeApiCall { dataSource.callFetchAddChatGroupDetail(fetchLastUserId) }
+        val resource = safeApiCall { dataSource.callFetchAddChatGroupDetail() }
 
         if (resource is Resource.Success) {
-            val addChatGroupDetailList = resource.data.addChatGroupDetailList
+            var addChatGroupDetailList = resource.data.addChatGroupDetailList
+
+            // filter
+            val otherFriendUserId = dataSource.getDbAddChatGroupDetailList()?.map { it.userId }
+            val list = mutableListOf<AddChatGroupDetail>()
+            otherFriendUserId?.forEach { userId ->
+                val element = addChatGroupDetailList.find { it.userId == userId }
+                if (element != null) list.add(element)
+            }
+            addChatGroupDetailList = addChatGroupDetailList - list
 
             addChatGroupDetailList.forEach {
                 val entity = AddChatGroupDetailEntity(

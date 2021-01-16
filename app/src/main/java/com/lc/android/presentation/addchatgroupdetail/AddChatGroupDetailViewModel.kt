@@ -24,7 +24,7 @@ class AddChatGroupDetailViewModel(
             setState { copy(isLoading = true, isClickable = false) }
 
             when (val resource = getAddChatGroupDetailUseCase.callFetchAddChatGroupDetail()) {
-                is Resource.Success -> getDbAddChatGroupDetail()
+                is Resource.Success -> getDbAddChatGroupDetailBySearch()
                 is Resource.Error -> setError(resource.throwable)
             }
 
@@ -36,10 +36,10 @@ class AddChatGroupDetailViewModel(
         setState { copy(search = search) }
     }
 
-    fun getDbAddChatGroupDetail() {
+    fun getDbAddChatGroupDetailBySearch() {
         launch {
             _getDbAddChatGroupDetail.value = getAddChatGroupDetailUseCase
-                .getDbAddChatGroupDetail(state.value?.search)
+                .getDbAddChatGroupDetailBySearch(state.value?.search)
         }
     }
 
@@ -52,7 +52,7 @@ class AddChatGroupDetailViewModel(
                 userId = userId,
             )
             when (val resource = addChatGroupDetailUseCase(request)) {
-                is Resource.Success -> getDbAddChatGroupDetail()
+                is Resource.Success -> getDbAddChatGroupDetailBySearch()
                 is Resource.Error -> setError(resource.throwable)
             }
 

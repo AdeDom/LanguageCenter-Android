@@ -61,7 +61,7 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
     private fun viewEvent() {
         etSearch.addTextChangedListener {
             viewModel.setStateSearch(it.toString())
-            viewModel.getDbAddChatGroupDetail()
+            viewModel.getDbAddChatGroupDetailBySearch()
         }
     }
 

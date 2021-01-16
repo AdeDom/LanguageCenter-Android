@@ -22,7 +22,10 @@ interface AddChatGroupDetailDao {
                 " OR family_name LIKE '%' || :search || '%' " +
                 " OR about_me LIKE '%' || :search || '%'"
     )
-    suspend fun getDbAddChatGroupDetail(search: String?): List<AddChatGroupDetailEntity>?
+    suspend fun getDbAddChatGroupDetailBySearch(search: String?): List<AddChatGroupDetailEntity>?
+
+    @Query("SELECT * FROM add_chat_group_detail")
+    suspend fun getDbAddChatGroupDetailList(): List<AddChatGroupDetailEntity>?
 
     @Query("SELECT * FROM add_chat_group_detail")
     fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>>

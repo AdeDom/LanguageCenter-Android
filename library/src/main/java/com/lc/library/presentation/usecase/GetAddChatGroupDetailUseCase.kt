@@ -8,6 +8,6 @@ interface GetAddChatGroupDetailUseCase {
 
     suspend fun callFetchAddChatGroupDetail(): Resource<FetchAddChatGroupDetailResponse>
 
-    suspend fun getDbAddChatGroupDetail(search: String?): List<AddChatGroupDetailEntity>?
+    suspend fun getDbAddChatGroupDetailBySearch(search: String?): List<AddChatGroupDetailEntity>?
 
 }

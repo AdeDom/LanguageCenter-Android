@@ -20,7 +20,9 @@ interface LanguageCenterDataSource {
 
     suspend fun getDbFetchLastUserId(): String?
 
-    suspend fun getDbAddChatGroupDetail(search: String?): List<AddChatGroupDetailEntity>?
+    suspend fun getDbAddChatGroupDetailBySearch(search: String?): List<AddChatGroupDetailEntity>?
+
+    suspend fun getDbAddChatGroupDetailList(): List<AddChatGroupDetailEntity>?
 
     fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>>
 
@@ -54,7 +56,7 @@ interface LanguageCenterDataSource {
 
     suspend fun callRemoveChatGroup(chatGroupId: Int?): BaseResponse
 
-    suspend fun callFetchAddChatGroupDetail(userId: String?): FetchAddChatGroupDetailResponse
+    suspend fun callFetchAddChatGroupDetail(): FetchAddChatGroupDetailResponse
 
     suspend fun callAddChatGroupDetail(addChatGroupDetailRequest: AddChatGroupDetailRequest): BaseResponse
 

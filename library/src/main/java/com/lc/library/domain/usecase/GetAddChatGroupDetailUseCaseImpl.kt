@@ -16,8 +16,8 @@ class GetAddChatGroupDetailUseCaseImpl(
         return repository.callFetchAddChatGroupDetail()
     }
 
-    override suspend fun getDbAddChatGroupDetail(search: String?): List<AddChatGroupDetailEntity>? {
-        return dataSource.getDbAddChatGroupDetail(search)
+    override suspend fun getDbAddChatGroupDetailBySearch(search: String?): List<AddChatGroupDetailEntity>? {
+        return dataSource.getDbAddChatGroupDetailBySearch(search)
     }
 
 }
