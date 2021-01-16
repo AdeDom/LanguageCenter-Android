@@ -114,4 +114,13 @@ class LanguageCenterDataSourceImpl(
             .callAddChatGroupDetail(addChatGroupDetailRequest)
     }
 
+    override suspend fun callChangeChatGroup(changeChatGroupRequest: ChangeChatGroupRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource().callChangeChatGroup(changeChatGroupRequest)
+    }
+
+    override suspend fun callRemoveChatGroupDetail(removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource()
+            .callRemoveChatGroupDetail(removeChatGroupDetailRequest)
+    }
+
 }

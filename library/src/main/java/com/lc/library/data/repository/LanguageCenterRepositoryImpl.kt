@@ -185,4 +185,12 @@ class LanguageCenterRepositoryImpl(
         return resource
     }
 
+    override suspend fun callChangeChatGroup(changeChatGroupRequest: ChangeChatGroupRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callChangeChatGroup(changeChatGroupRequest) }
+    }
+
+    override suspend fun callRemoveChatGroupDetail(removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callRemoveChatGroupDetail(removeChatGroupDetailRequest) }
+    }
+
 }

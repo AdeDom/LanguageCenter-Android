@@ -54,4 +54,10 @@ interface LanguageCenterApi {
     @POST("api/chat-group/add-chat-group-detail")
     suspend fun callAddChatGroupDetail(@Body addChatGroupDetailRequest: AddChatGroupDetailRequest): BaseResponse
 
+    @PUT("api/chat-group/change-chat-group")
+    suspend fun callChangeChatGroup(@Body changeChatGroupRequest: ChangeChatGroupRequest): BaseResponse
+
+    @DELETE("api/chat-group/remove-chat-group-detail")
+    suspend fun callRemoveChatGroupDetail(@Body removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): BaseResponse
+
 }
