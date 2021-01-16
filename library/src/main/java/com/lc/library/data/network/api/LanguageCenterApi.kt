@@ -57,7 +57,7 @@ interface LanguageCenterApi {
     @PUT("api/chat-group/change-chat-group")
     suspend fun callChangeChatGroup(@Body changeChatGroupRequest: ChangeChatGroupRequest): BaseResponse
 
-    @DELETE("api/chat-group/remove-chat-group-detail")
+    @HTTP(method = "DELETE", path = "api/chat-group/remove-chat-group-detail", hasBody = true)
     suspend fun callRemoveChatGroupDetail(@Body removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): BaseResponse
 
 }

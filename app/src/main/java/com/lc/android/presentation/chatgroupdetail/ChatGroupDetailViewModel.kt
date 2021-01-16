@@ -5,12 +5,18 @@ import androidx.lifecycle.MutableLiveData
 import com.lc.android.base.BaseViewModel
 import com.lc.android.presentation.model.ChatGroup
 import com.lc.library.data.repository.Resource
+import com.lc.library.presentation.usecase.ChangeChatGroupUseCase
 import com.lc.library.presentation.usecase.FetchChatGroupDetailUseCase
+import com.lc.library.presentation.usecase.RemoveChatGroupDetailUseCase
+import com.lc.server.models.request.ChangeChatGroupRequest
+import com.lc.server.models.request.RemoveChatGroupDetailRequest
 import com.lc.server.models.response.BaseResponse
 import kotlinx.coroutines.launch
 
 class ChatGroupDetailViewModel(
-    private val useCase: FetchChatGroupDetailUseCase,
+    private val fetchChatGroupDetailUseCase: FetchChatGroupDetailUseCase,
+    private val changeChatGroupUseCase: ChangeChatGroupUseCase,
+    private val removeChatGroupDetailUseCase: RemoveChatGroupDetailUseCase,
 ) : BaseViewModel<ChatGroupDetailViewState>(ChatGroupDetailViewState()) {
 
     private val _chatGroupDetailEvent = MutableLiveData<BaseResponse>()
@@ -21,7 +27,7 @@ class ChatGroupDetailViewModel(
         launch {
             setState { copy(isLoading = true, isClickable = false) }
 
-            when (val resource = useCase(state.value?.chatGroupId)) {
+            when (val resource = fetchChatGroupDetailUseCase(state.value?.chatGroupId)) {
                 is Resource.Success -> setState { copy(chatGroupDetails = resource.data.chatGroupDetails) }
                 is Resource.Error -> setError(resource.throwable)
             }
@@ -47,10 +53,15 @@ class ChatGroupDetailViewModel(
         launch {
             setState { copy(isLoading = true, isClickable = false) }
 
-            val message =
-                "${state.value?.chatGroupId}      ${state.value?.friendUserId}" +
-                        "\n$changeChatGroupId"
-            _chatGroupDetailEvent.value = BaseResponse(message = message)
+            val request = ChangeChatGroupRequest(
+                chatGroupId = state.value?.chatGroupId,
+                friendUserId = state.value?.friendUserId,
+                changeChatGroupId = changeChatGroupId,
+            )
+            when (val resource = changeChatGroupUseCase(request)) {
+                is Resource.Success -> _chatGroupDetailEvent.value = resource.data
+                is Resource.Error -> setError(resource.throwable)
+            }
 
             setState { copy(isLoading = false, isClickable = true) }
         }
@@ -60,9 +71,14 @@ class ChatGroupDetailViewModel(
         launch {
             setState { copy(isLoading = true, isClickable = false) }
 
-            val message =
-                "chatGroupId : ${state.value?.chatGroupId}\nfriendUserId : ${state.value?.friendUserId}"
-            _chatGroupDetailEvent.value = BaseResponse(message = message)
+            val request = RemoveChatGroupDetailRequest(
+                chatGroupId = state.value?.chatGroupId,
+                friendUserId = state.value?.friendUserId,
+            )
+            when (val resource = removeChatGroupDetailUseCase(request)) {
+                is Resource.Success -> _chatGroupDetailEvent.value = resource.data
+                is Resource.Error -> setError(resource.throwable)
+            }
 
             setState { copy(isLoading = false, isClickable = true) }
         }
