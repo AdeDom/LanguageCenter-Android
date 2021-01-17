@@ -13,17 +13,16 @@ private val domainModule = module {
     single<EditUserInfoUseCase> { EditUserInfoUseCaseImpl(get()) }
     single<FetchCommunityUseCase> { FetchCommunityUseCaseImpl(get()) }
     single<AddAlgorithmUseCase> { AddAlgorithmUseCaseImpl(get()) }
-    single<AddChatGroupNewUseCase> { AddChatGroupNewUseCaseImpl(get()) }
     single<AddChatGroupUseCase> { AddChatGroupUseCaseImpl(get()) }
     single<FetchChatGroupUseCase> { FetchChatGroupUseCaseImpl(get()) }
     single<FetchChatGroupDetailUseCase> { FetchChatGroupDetailUseCaseImpl(get()) }
     single<RemoveChatGroupUseCase> { RemoveChatGroupUseCaseImpl(get()) }
     single<RenameChatGroupUseCase> { RenameChatGroupUseCaseImpl(get()) }
     single<GetAddChatGroupDetailUseCase> { GetAddChatGroupDetailUseCaseImpl(get(), get()) }
-    single<AddChatGroupDetailUseCase> { AddChatGroupDetailUseCaseImpl(get()) }
     single<ChangeChatGroupUseCase> { ChangeChatGroupUseCaseImpl(get()) }
     single<RemoveChatGroupDetailUseCase> { RemoveChatGroupDetailUseCaseImpl(get()) }
     single<FetchFriendInfoUseCase> { FetchFriendInfoUseCaseImpl(get(), get()) }
+    single<AddChatGroupFriendUseCase> { AddChatGroupFriendUseCaseImpl(get()) }
 
 }
 

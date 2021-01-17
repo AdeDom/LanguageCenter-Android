@@ -7,17 +7,16 @@ import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.library.data.db.entities.FriendInfoEntity
 import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.usecase.AddAlgorithmUseCase
-import com.lc.library.presentation.usecase.AddChatGroupNewUseCase
+import com.lc.library.presentation.usecase.AddChatGroupFriendUseCase
 import com.lc.library.presentation.usecase.FetchFriendInfoUseCase
 import com.lc.server.models.model.UserInfoLocale
 import com.lc.server.models.request.AddAlgorithmRequest
-import com.lc.server.models.request.AddChatGroupNewRequest
 import com.lc.server.models.response.BaseResponse
 import kotlinx.coroutines.launch
 
 class UserInfoViewModel(
     private val addAlgorithmUseCase: AddAlgorithmUseCase,
-    private val addChatGroupNewUseCase: AddChatGroupNewUseCase,
+    private val addChatGroupFriendUseCase: AddChatGroupFriendUseCase,
     private val fetchFriendInfoUseCase: FetchFriendInfoUseCase,
 ) : BaseViewModel<UserInfoViewState>(UserInfoViewState()) {
 
@@ -41,11 +40,10 @@ class UserInfoViewModel(
         }
     }
 
-    fun callAddChatGroupNew(userId: String?, friendInfo: UserInfoParcelable) {
+    fun callAddChatGroupNew(chatGroupId: Int?, friendInfo: UserInfoParcelable) {
         launch {
             setState { copy(isLoading = true, isClickable = false) }
 
-            val request = AddChatGroupNewRequest(userId)
             val entity = FriendInfoEntity(
                 userId = friendInfo.userId.orEmpty(),
                 email = friendInfo.email,
@@ -65,7 +63,9 @@ class UserInfoViewModel(
                     UserInfoLocale(locale = it.locale, level = it.level)
                 } ?: emptyList(),
             )
-            when (val resource = addChatGroupNewUseCase(request, entity)) {
+
+            val resource = addChatGroupFriendUseCase(chatGroupId, friendInfo.userId, entity)
+            when (resource) {
                 is Resource.Success -> _addChatGroupNewEvent.value = resource.data
                 is Resource.Error -> setError(resource.throwable)
             }

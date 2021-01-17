@@ -9,10 +9,13 @@
     <TextView
         android:id="@+id/tvChatGroup"
         style="@style/Text.Title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/chat_group"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/add_chat_group_detail"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

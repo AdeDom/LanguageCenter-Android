@@ -82,7 +82,7 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
                 email = community.email,
                 givenName = community.givenName,
                 familyName = community.familyName,
-                name = "${community.givenName} ${community.familyName}",
+                name = community.name,
                 picture = community.picture,
                 gender = community.gender,
                 age = community.age,
@@ -91,20 +91,14 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
                 aboutMe = community.aboutMe,
                 algorithm = community.algorithm,
                 localNatives = community.localNatives.map {
-                    UserInfoLocaleParcelable(
-                        locale = it.locale,
-                        level = it.level,
-                    )
+                    UserInfoLocaleParcelable(locale = it.locale, level = it.level)
                 },
                 localLearnings = community.localLearnings.map {
-                    UserInfoLocaleParcelable(
-                        locale = it.locale,
-                        level = it.level,
-                    )
+                    UserInfoLocaleParcelable(locale = it.locale, level = it.level)
                 },
             )
             val navDirections = CommunityFragmentDirections
-                .actionCommunityFragmentToUserInfoFragment(userInfoCommunity)
+                .actionCommunityFragmentToUserInfoFragment(null, userInfoCommunity)
             findNavController().navigate(navDirections)
         }
     }

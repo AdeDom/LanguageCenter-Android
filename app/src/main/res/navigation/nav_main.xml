@@ -139,6 +139,9 @@
         <argument
             android:name="chatGroupId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_addChatGroupDetailFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
     </fragment>
     <activity
         android:id="@+id/chatActivity"
@@ -150,6 +153,10 @@
         android:name="com.lc.android.presentation.userinfo.UserInfoFragment"
         android:label="fragment_user_info"
         tools:layout="@layout/fragment_user_info">
+        <argument
+            android:name="chatGroupId"
+            app:argType="string"
+            app:nullable="true" />
         <argument
             android:name="userInfo"
             app:argType="com.lc.android.presentation.model.UserInfoParcelable" />

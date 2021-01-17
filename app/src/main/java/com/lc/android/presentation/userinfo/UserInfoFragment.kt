@@ -98,7 +98,7 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
 
     private fun viewEvent() {
         ibAddFriend.setOnClickListener {
-            viewModel.callAddChatGroupNew(args.userInfo.userId, args.userInfo)
+            viewModel.callAddChatGroupNew(args.chatGroupId?.toInt(), args.userInfo)
         }
     }
 

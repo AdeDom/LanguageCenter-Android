@@ -94,7 +94,10 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
                 },
             )
             val navDirections = ChatGroupDetailFragmentDirections
-                .actionChatGroupDetailFragmentToUserInfoFragment(userInfo)
+                .actionChatGroupDetailFragmentToUserInfoFragment(
+                    args.chatGroupId.toString(),
+                    userInfo,
+                )
             findNavController().navigate(navDirections)
         }
 

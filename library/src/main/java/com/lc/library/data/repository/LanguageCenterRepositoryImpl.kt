@@ -164,21 +164,6 @@ class LanguageCenterRepositoryImpl(
         return safeApiCall { dataSource.callAddAlgorithm(addAlgorithmRequest) }
     }
 
-    override suspend fun callAddChatGroupNew(
-        addChatGroupNewRequest: AddChatGroupNewRequest,
-        friendInfoEntity: FriendInfoEntity,
-    ): Resource<BaseResponse> {
-        val resource = safeApiCall { dataSource.callAddChatGroupNew(addChatGroupNewRequest) }
-
-        if (resource is Resource.Success) {
-            if (resource.data.success) {
-                dataSource.saveFriendInfo(friendInfoEntity)
-            }
-        }
-
-        return resource
-    }
-
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callAddChatGroup(addChatGroupRequest) }
     }
@@ -238,44 +223,39 @@ class LanguageCenterRepositoryImpl(
         return resource
     }
 
-    override suspend fun callAddChatGroupDetail(
-        addChatGroupDetailRequest: AddChatGroupDetailRequest,
-        addChatGroupDetailEntity: AddChatGroupDetailEntity,
-    ): Resource<BaseResponse> {
-        val resource = safeApiCall { dataSource.callAddChatGroupDetail(addChatGroupDetailRequest) }
-
-        if (resource is Resource.Success) {
-            if (resource.data.success) {
-                val entity = FriendInfoEntity(
-                    userId = addChatGroupDetailEntity.userId,
-                    email = addChatGroupDetailEntity.email,
-                    givenName = addChatGroupDetailEntity.givenName,
-                    familyName = addChatGroupDetailEntity.familyName,
-                    name = addChatGroupDetailEntity.name,
-                    picture = addChatGroupDetailEntity.picture,
-                    gender = addChatGroupDetailEntity.gender,
-                    age = addChatGroupDetailEntity.age,
-                    birthDateString = addChatGroupDetailEntity.birthDateString,
-                    birthDateLong = addChatGroupDetailEntity.birthDateLong,
-                    aboutMe = addChatGroupDetailEntity.aboutMe,
-                    localNatives = addChatGroupDetailEntity.localNatives,
-                    localLearnings = addChatGroupDetailEntity.localLearnings,
-                )
-                dataSource.saveFriendInfo(entity)
-
-                dataSource.deleteAddChatGroupDetail(addChatGroupDetailRequest.userId)
-            }
-        }
-
-        return resource
-    }
-
     override suspend fun callChangeChatGroup(changeChatGroupRequest: ChangeChatGroupRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callChangeChatGroup(changeChatGroupRequest) }
     }
 
     override suspend fun callRemoveChatGroupDetail(removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callRemoveChatGroupDetail(removeChatGroupDetailRequest) }
+    }
+
+    override suspend fun callAddChatGroupFriend(
+        chatGroupId: Int?,
+        friendId: String?,
+        friendInfoEntity: FriendInfoEntity
+    ): Resource<BaseResponse> {
+        val callApiResponse = if (chatGroupId == null) {
+            val request = AddChatGroupNewRequest(friendId)
+            safeApiCall { dataSource.callAddChatGroupNew(request) }
+        } else {
+            val request = AddChatGroupDetailRequest(
+                chatGroupId = chatGroupId,
+                userId = friendId,
+            )
+            safeApiCall { dataSource.callAddChatGroupDetail(request) }
+        }
+
+        if (callApiResponse is Resource.Success) {
+            if (callApiResponse.data.success) {
+                dataSource.saveFriendInfo(friendInfoEntity)
+
+                dataSource.deleteAddChatGroupDetail(friendId)
+            }
+        }
+
+        return callApiResponse
     }
 
 }
