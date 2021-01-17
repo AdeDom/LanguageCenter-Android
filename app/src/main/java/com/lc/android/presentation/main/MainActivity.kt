@@ -47,7 +47,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.attachFirstTime.observe { state ->
+        viewModel.attachFirstTime.observe {
             viewModel.callFetchFriendInfo()
         }
     }

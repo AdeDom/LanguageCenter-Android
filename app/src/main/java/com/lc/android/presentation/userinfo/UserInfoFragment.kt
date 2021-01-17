@@ -39,9 +39,9 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
             adapter = mLocalLearningAdapter
         }
 
-        val (_, email, name, picture, gender, age, aboutMe, _, localNatives, localLearnings) = args.userInfo
+        val (_, email, givenName, familyName, _, picture, gender, age, _, _, aboutMe, _, localNatives, localLearnings) = args.userInfo
         if (email.isNullOrBlank()) tvEmail.visibility = View.GONE
-        if (name.isNullOrBlank()) tvName.visibility = View.GONE
+        if (givenName.isNullOrBlank() && familyName.isNullOrBlank()) tvName.visibility = View.GONE
         if (gender.isNullOrBlank()) tvGender.visibility = View.GONE
         if (age == null) tvAge.visibility = View.GONE
         if (aboutMe.isNullOrBlank()) tvAboutMe.visibility = View.GONE
@@ -55,6 +55,7 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
             recyclerViewLocalLearnings.visibility = View.GONE
         }
 
+        val name = "$givenName $familyName"
         tvName.text = getString(R.string.str_name, name)
         tvEmail.text = getString(R.string.str_email, email)
         tvGender.text = getString(R.string.str_gender, gender)
@@ -80,18 +81,24 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
         viewModel.addChatGroupNewEvent.observe { response ->
             if (response.success) {
                 requireView().snackbar(response.message, Snackbar.LENGTH_SHORT)
-                ibAddFriend.visibility = View.GONE
             } else {
                 requireView().snackbar(response.message)
             }
         }
+
+        viewModel.getDbFriendInfoLiveData.observe(viewLifecycleOwner, { entity ->
+            if (entity == null) return@observe
+
+            val friendInfo = entity.find { it.userId == args.userInfo.userId }
+            if (friendInfo != null) ibAddFriend.visibility = View.GONE
+        })
 
         viewModel.error.observeError()
     }
 
     private fun viewEvent() {
         ibAddFriend.setOnClickListener {
-            viewModel.callAddChatGroupNew(args.userInfo.userId)
+            viewModel.callAddChatGroupNew(args.userInfo.userId, args.userInfo)
         }
     }
 

@@ -12,8 +12,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.presentation.model.ChatGroup
-import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.android.presentation.model.UserInfoLocaleParcelable
+import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.android.util.snackbar
 import kotlinx.android.synthetic.main.fragment_chat_group_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -77,10 +77,14 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
             val userInfo = UserInfoParcelable(
                 userId = chatGroupDetail.userId,
                 email = chatGroupDetail.email,
+                givenName = chatGroupDetail.givenName,
+                familyName = chatGroupDetail.familyName,
                 name = chatGroupDetail.name,
                 picture = chatGroupDetail.picture,
                 gender = chatGroupDetail.gender,
                 age = chatGroupDetail.age,
+                birthDateString = chatGroupDetail.birthDateString,
+                birthDateLong = chatGroupDetail.birthDateLong,
                 aboutMe = chatGroupDetail.aboutMe,
                 localNatives = chatGroupDetail.localNatives.map {
                     UserInfoLocaleParcelable(locale = it.locale, level = it.level)

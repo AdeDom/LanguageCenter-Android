@@ -36,7 +36,7 @@ private val presentationModule = module {
     viewModel { EditLocaleNativeViewModel(get(), get()) }
     viewModel { EditLocaleLearningViewModel(get(), get()) }
     viewModel { CommunityViewModel(get()) }
-    viewModel { UserInfoViewModel(get(), get()) }
+    viewModel { UserInfoViewModel(get(), get(), get()) }
     viewModel { ChatGroupViewModel(get(), get(), get(), get()) }
     viewModel { ChatGroupDetailViewModel(get(), get(), get()) }
     viewModel { AddChatGroupDetailViewModel(get(), get()) }

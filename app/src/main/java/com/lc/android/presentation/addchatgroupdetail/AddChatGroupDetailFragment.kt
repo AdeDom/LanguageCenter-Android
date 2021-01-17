@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
+import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import kotlinx.android.synthetic.main.fragment_add_chat_group_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -42,7 +43,7 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
             animationLoading.isVisible = state.isLoading
 
             if (state.isClickable) {
-                mAdapter.setListener { dialogAddFriend(args.chatGroupId, it.userId) }
+                mAdapter.setListener { dialogAddFriend(args.chatGroupId, it.userId, it) }
             } else {
                 mAdapter.setListener { }
             }
@@ -65,12 +66,16 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
         }
     }
 
-    private fun dialogAddFriend(chatGroupId: Int, userId: String) {
+    private fun dialogAddFriend(
+        chatGroupId: Int,
+        userId: String,
+        addChatGroupDetailEntity: AddChatGroupDetailEntity,
+    ) {
         AlertDialog.Builder(requireActivity()).apply {
             setTitle(R.string.dialog_add_chat_group_detail_title)
             setMessage(R.string.dialog_add_chat_group_detail_message)
             setPositiveButton(android.R.string.ok) { dialog, _ ->
-                viewModel.callAddChatGroupDetail(chatGroupId, userId)
+                viewModel.callAddChatGroupDetail(chatGroupId, userId, addChatGroupDetailEntity)
                 dialog.dismiss()
             }
             setNegativeButton(android.R.string.cancel) { dialog, _ ->

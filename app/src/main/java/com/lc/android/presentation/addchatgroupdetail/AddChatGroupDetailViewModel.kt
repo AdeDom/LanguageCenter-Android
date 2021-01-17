@@ -43,7 +43,11 @@ class AddChatGroupDetailViewModel(
         }
     }
 
-    fun callAddChatGroupDetail(chatGroupId: Int, userId: String) {
+    fun callAddChatGroupDetail(
+        chatGroupId: Int,
+        userId: String,
+        addChatGroupDetailEntity: AddChatGroupDetailEntity,
+    ) {
         launch {
             setState { copy(isLoading = true, isClickable = false) }
 
@@ -51,7 +55,7 @@ class AddChatGroupDetailViewModel(
                 chatGroupId = chatGroupId,
                 userId = userId,
             )
-            when (val resource = addChatGroupDetailUseCase(request)) {
+            when (val resource = addChatGroupDetailUseCase(request, addChatGroupDetailEntity)) {
                 is Resource.Success -> getDbAddChatGroupDetailBySearch()
                 is Resource.Error -> setError(resource.throwable)
             }

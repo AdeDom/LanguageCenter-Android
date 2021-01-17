@@ -6,10 +6,14 @@ import android.os.Parcelable
 data class UserInfoParcelable(
     val userId: String? = null,
     val email: String? = null,
+    val givenName: String? = null,
+    val familyName: String? = null,
     val name: String? = null,
     val picture: String? = null,
     val gender: String? = null,
     val age: Int? = null,
+    val birthDateString: String? = null,
+    val birthDateLong: Long? = null,
     val aboutMe: String? = null,
     val algorithm: String? = null,
     val localNatives: List<UserInfoLocaleParcelable>? = emptyList(),
@@ -21,7 +25,11 @@ data class UserInfoParcelable(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
         parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readValue(Long::class.java.classLoader) as? Long,
         parcel.readString(),
         parcel.readString(),
         parcel.createTypedArrayList(UserInfoLocaleParcelable),
@@ -31,10 +39,14 @@ data class UserInfoParcelable(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(userId)
         parcel.writeString(email)
+        parcel.writeString(givenName)
+        parcel.writeString(familyName)
         parcel.writeString(name)
         parcel.writeString(picture)
         parcel.writeString(gender)
         parcel.writeValue(age)
+        parcel.writeString(birthDateString)
+        parcel.writeValue(birthDateLong)
         parcel.writeString(aboutMe)
         parcel.writeString(algorithm)
         parcel.writeTypedList(localNatives)

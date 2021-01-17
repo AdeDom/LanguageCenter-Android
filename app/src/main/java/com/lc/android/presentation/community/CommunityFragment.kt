@@ -8,8 +8,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.android.presentation.model.UserInfoLocaleParcelable
+import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.android.util.snackbar
 import kotlinx.android.synthetic.main.fragment_community.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -80,10 +80,14 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
             val userInfoCommunity = UserInfoParcelable(
                 userId = community.userId,
                 email = community.email,
+                givenName = community.givenName,
+                familyName = community.familyName,
                 name = "${community.givenName} ${community.familyName}",
                 picture = community.picture,
                 gender = community.gender,
                 age = community.age,
+                birthDateString = community.birthDateString,
+                birthDateLong = community.birthDateLong,
                 aboutMe = community.aboutMe,
                 algorithm = community.algorithm,
                 localNatives = community.localNatives.map {

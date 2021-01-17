@@ -10,7 +10,7 @@ class MainViewModel(
 
     fun callFetchFriendInfo() {
         launch {
-            useCase()
+            useCase.callFetchFriendInfo()
         }
     }
 

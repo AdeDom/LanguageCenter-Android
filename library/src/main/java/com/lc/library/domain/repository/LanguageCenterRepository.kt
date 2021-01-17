@@ -1,5 +1,7 @@
 package com.lc.library.domain.repository
 
+import com.lc.library.data.db.entities.AddChatGroupDetailEntity
+import com.lc.library.data.db.entities.FriendInfoEntity
 import com.lc.library.data.repository.Resource
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
@@ -24,7 +26,10 @@ interface LanguageCenterRepository {
 
     suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): Resource<BaseResponse>
 
-    suspend fun callAddChatGroupNew(addChatGroupNewRequest: AddChatGroupNewRequest): Resource<BaseResponse>
+    suspend fun callAddChatGroupNew(
+        addChatGroupNewRequest: AddChatGroupNewRequest,
+        friendInfoEntity: FriendInfoEntity,
+    ): Resource<BaseResponse>
 
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse>
 
@@ -38,7 +43,10 @@ interface LanguageCenterRepository {
 
     suspend fun callFetchAddChatGroupDetail(): Resource<FetchAddChatGroupDetailResponse>
 
-    suspend fun callAddChatGroupDetail(addChatGroupDetailRequest: AddChatGroupDetailRequest): Resource<BaseResponse>
+    suspend fun callAddChatGroupDetail(
+        addChatGroupDetailRequest: AddChatGroupDetailRequest,
+        addChatGroupDetailEntity: AddChatGroupDetailEntity,
+    ): Resource<BaseResponse>
 
     suspend fun callChangeChatGroup(changeChatGroupRequest: ChangeChatGroupRequest): Resource<BaseResponse>
 
