@@ -29,8 +29,8 @@
         android:label="ChatsFragment"
         tools:layout="@layout/fragment_chats">
         <action
-            android:id="@+id/action_chatsFragment_to_chatActivity"
-            app:destination="@id/chatActivity" />
+            android:id="@+id/action_chatsFragment_to_talkFragment"
+            app:destination="@id/talkFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatGroupFragment"
@@ -143,11 +143,6 @@
             android:id="@+id/action_addChatGroupDetailFragment_to_userInfoFragment"
             app:destination="@id/userInfoFragment" />
     </fragment>
-    <activity
-        android:id="@+id/chatActivity"
-        android:name="com.lc.android.presentation.chat.ChatActivity"
-        android:label="activity_chat"
-        tools:layout="@layout/activity_chat" />
     <fragment
         android:id="@+id/userInfoFragment"
         android:name="com.lc.android.presentation.userinfo.UserInfoFragment"
@@ -160,6 +155,9 @@
         <argument
             android:name="userInfo"
             app:argType="com.lc.android.presentation.model.UserInfoParcelable" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_talkFragment"
+            app:destination="@id/talkFragment" />
     </fragment>
     <fragment
         android:id="@+id/editLocaleNativeFragment"
@@ -205,5 +203,10 @@
         android:name="com.lc.android.presentation.chatgroupdetail.MoreChatGroupDetailDialog"
         android:label="MoreChatGroupDetailDialog"
         tools:layout="@layout/dialog_more_chat_group_detail" />
+    <fragment
+        android:id="@+id/talkFragment"
+        android:name="com.lc.android.presentation.talk.TalkFragment"
+        android:label="TalkFragment"
+        tools:layout="@layout/fragment_talk" />
 
 </navigation>

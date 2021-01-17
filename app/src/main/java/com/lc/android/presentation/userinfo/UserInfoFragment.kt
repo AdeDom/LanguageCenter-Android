@@ -3,6 +3,7 @@ package com.lc.android.presentation.userinfo
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -90,7 +91,7 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
             if (entity == null) return@observe
 
             val friendInfo = entity.find { it.userId == args.userInfo.userId }
-            if (friendInfo != null) ibAddFriend.visibility = View.GONE
+            if (friendInfo != null) ibAddFriend.visibility = View.INVISIBLE
         })
 
         viewModel.error.observeError()
@@ -99,6 +100,10 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
     private fun viewEvent() {
         ibAddFriend.setOnClickListener {
             viewModel.callAddChatGroupNew(args.chatGroupId?.toInt(), args.userInfo)
+        }
+
+        ibTalk.setOnClickListener {
+            findNavController().navigate(R.id.action_userInfoFragment_to_talkFragment)
         }
     }
 

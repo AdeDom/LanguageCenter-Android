@@ -15,6 +15,7 @@ import com.lc.android.presentation.main.MainViewModel
 import com.lc.android.presentation.profile.ProfileViewModel
 import com.lc.android.presentation.signin.SignInViewModel
 import com.lc.android.presentation.splashscreen.SplashScreenViewModel
+import com.lc.android.presentation.talk.TalkViewModel
 import com.lc.android.presentation.userinfo.UserInfoViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -41,6 +42,7 @@ private val presentationModule = module {
     viewModel { ChatGroupDetailViewModel(get(), get(), get()) }
     viewModel { AddChatGroupDetailViewModel(get()) }
     viewModel { MainViewModel(get(), get()) }
+    viewModel { TalkViewModel() }
 
 }
 

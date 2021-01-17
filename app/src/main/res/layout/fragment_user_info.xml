@@ -26,6 +26,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ivPicture" />
 
+    <ImageButton
+        android:id="@+id/ibTalk"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/ic_talk"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ibAddFriend"/>
+
     <ImageView
         android:id="@+id/ivPicture"
         android:layout_width="150dp"
