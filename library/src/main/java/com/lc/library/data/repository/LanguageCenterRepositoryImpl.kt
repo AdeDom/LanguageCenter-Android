@@ -1,12 +1,13 @@
 package com.lc.library.data.repository
 
-import android.util.Log
 import com.lc.library.data.db.entities.AddChatGroupDetailEntity
+import com.lc.library.data.db.entities.FriendInfoEntity
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.PreferenceAuth
 import com.lc.server.models.model.AddChatGroupDetail
+import com.lc.server.models.model.Community
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
 import kotlinx.coroutines.Dispatchers
@@ -85,6 +86,7 @@ class LanguageCenterRepositoryImpl(
         pref.accessToken = ""
         pref.refreshToken = ""
         dataSource.deleteUserInfo()
+        dataSource.deleteFriendInfo()
         dataSource.deleteAllAddChatGroupDetail()
     }
 
@@ -117,7 +119,37 @@ class LanguageCenterRepositoryImpl(
 
         if (resource is Resource.Success) {
             if (resource.data.success) {
-                Log.d("callFetchFriendInfo", "callFetchFriendInfo: ${resource.data.friendInfoList}")
+                val friendUserIdList = dataSource.getDbFriendInfoList()?.map { it.userId }
+
+                var friendInfoList = resource.data.friendInfoList
+
+                // filter
+                val list = mutableListOf<Community>()
+                friendUserIdList?.forEach { friendUserId ->
+                    friendInfoList.filter { it.userId == friendUserId }
+                        .onEach { list.add(it) }
+                }
+                friendInfoList = friendInfoList - list
+
+                // save room database
+                friendInfoList.forEach { friendInfo ->
+                    val entity = FriendInfoEntity(
+                        userId = friendInfo.userId.orEmpty(),
+                        email = friendInfo.email,
+                        givenName = friendInfo.givenName,
+                        familyName = friendInfo.familyName,
+                        name = friendInfo.name,
+                        picture = friendInfo.picture,
+                        gender = friendInfo.gender,
+                        age = friendInfo.age,
+                        birthDateString = friendInfo.birthDateString,
+                        birthDateLong = friendInfo.birthDateLong,
+                        aboutMe = friendInfo.aboutMe,
+                        localNatives = friendInfo.localNatives,
+                        localLearnings = friendInfo.localLearnings,
+                    )
+                    dataSource.saveFriendInfo(entity)
+                }
             }
         }
 

@@ -3,6 +3,7 @@ package com.lc.library.data.network.source
 import androidx.lifecycle.LiveData
 import com.lc.library.data.db.AppDatabase
 import com.lc.library.data.db.entities.AddChatGroupDetailEntity
+import com.lc.library.data.db.entities.FriendInfoEntity
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
@@ -26,6 +27,22 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun deleteUserInfo() {
         return db.getUserInfoDao().deleteUserInfo()
+    }
+
+    override suspend fun saveFriendInfo(friendInfoEntity: FriendInfoEntity) {
+        return db.getFriendInfoDao().saveFriendInfo(friendInfoEntity)
+    }
+
+    override suspend fun getDbFriendInfoList(): List<FriendInfoEntity>? {
+        return db.getFriendInfoDao().getDbFriendInfoList()
+    }
+
+    override fun getDbFriendInfoLiveData(): LiveData<List<FriendInfoEntity>> {
+        return db.getFriendInfoDao().getDbFriendInfoLiveData()
+    }
+
+    override suspend fun deleteFriendInfo() {
+        return db.getFriendInfoDao().deleteFriendInfo()
     }
 
     override suspend fun saveAddChatGroupDetail(addChatGroupDetailEntity: AddChatGroupDetailEntity) {
