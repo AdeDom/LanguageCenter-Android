@@ -40,6 +40,8 @@ interface LanguageCenterDataSource {
 
     suspend fun callEditLocale(editLocaleRequest: EditLocaleRequest): BaseResponse
 
+    suspend fun callFetchFriendInfo(): FetchFriendInfoResponse
+
     suspend fun callFetchCommunity(): FetchCommunityResponse
 
     suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): BaseResponse

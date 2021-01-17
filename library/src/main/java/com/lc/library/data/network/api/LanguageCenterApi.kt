@@ -24,6 +24,9 @@ interface LanguageCenterApi {
     @PUT("api/account/edit-locale")
     suspend fun callEditLocale(@Body editLocaleRequest: EditLocaleRequest): BaseResponse
 
+    @GET("api/account/fetch-friend-info")
+    suspend fun callFetchFriendInfo(): FetchFriendInfoResponse
+
     @GET("api/community/fetch-community")
     suspend fun callFetchCommunity(): FetchCommunityResponse
 

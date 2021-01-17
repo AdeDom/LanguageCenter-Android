@@ -11,6 +11,7 @@ import com.lc.android.presentation.guide.birthdate.GuideBirthDateViewModel
 import com.lc.android.presentation.guide.gender.GuideGenderViewModel
 import com.lc.android.presentation.guide.learninglanguage.GuideLearningLanguageViewModel
 import com.lc.android.presentation.guide.nativelanguage.GuideNativeLanguageViewModel
+import com.lc.android.presentation.main.MainViewModel
 import com.lc.android.presentation.profile.ProfileViewModel
 import com.lc.android.presentation.signin.SignInViewModel
 import com.lc.android.presentation.splashscreen.SplashScreenViewModel
@@ -39,6 +40,7 @@ private val presentationModule = module {
     viewModel { ChatGroupViewModel(get(), get(), get(), get()) }
     viewModel { ChatGroupDetailViewModel(get(), get(), get()) }
     viewModel { AddChatGroupDetailViewModel(get(), get()) }
+    viewModel { MainViewModel(get()) }
 
 }
 

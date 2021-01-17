@@ -28,7 +28,7 @@
     </fragment>
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.lc.android.presentation.MainActivity"
+        android:name="com.lc.android.presentation.main.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
     <action

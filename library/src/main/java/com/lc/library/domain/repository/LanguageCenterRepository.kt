@@ -18,6 +18,8 @@ interface LanguageCenterRepository {
 
     suspend fun callEditLocale(editLocaleRequest: EditLocaleRequest): Resource<BaseResponse>
 
+    suspend fun callFetchFriendInfo(): Resource<FetchFriendInfoResponse>
+
     suspend fun callFetchCommunity(): Resource<FetchCommunityResponse>
 
     suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): Resource<BaseResponse>

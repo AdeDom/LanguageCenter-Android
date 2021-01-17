@@ -1,5 +1,6 @@
 package com.lc.library.data.repository
 
+import android.util.Log
 import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.library.data.network.source.LanguageCenterDataSource
@@ -109,6 +110,18 @@ class LanguageCenterRepositoryImpl(
         if (response is Resource.Success) callFetchUserInfo()
 
         return response
+    }
+
+    override suspend fun callFetchFriendInfo(): Resource<FetchFriendInfoResponse> {
+        val resource = safeApiCall { dataSource.callFetchFriendInfo() }
+
+        if (resource is Resource.Success) {
+            if (resource.data.success) {
+                Log.d("callFetchFriendInfo", "callFetchFriendInfo: ${resource.data.friendInfoList}")
+            }
+        }
+
+        return resource
     }
 
     override suspend fun callFetchCommunity(): Resource<FetchCommunityResponse> {

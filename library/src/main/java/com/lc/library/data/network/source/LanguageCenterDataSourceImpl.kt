@@ -77,6 +77,10 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callEditLocale(editLocaleRequest)
     }
 
+    override suspend fun callFetchFriendInfo(): FetchFriendInfoResponse {
+        return provider.getLanguageCenterDataSource().callFetchFriendInfo()
+    }
+
     override suspend fun callFetchCommunity(): FetchCommunityResponse {
         return provider.getLanguageCenterDataSource().callFetchCommunity()
     }
