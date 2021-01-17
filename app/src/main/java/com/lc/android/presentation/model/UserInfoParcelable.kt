@@ -3,7 +3,7 @@ package com.lc.android.presentation.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class UserInfoCommunity(
+data class UserInfoParcelable(
     val userId: String? = null,
     val email: String? = null,
     val name: String? = null,
@@ -45,12 +45,12 @@ data class UserInfoCommunity(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<UserInfoCommunity> {
-        override fun createFromParcel(parcel: Parcel): UserInfoCommunity {
-            return UserInfoCommunity(parcel)
+    companion object CREATOR : Parcelable.Creator<UserInfoParcelable> {
+        override fun createFromParcel(parcel: Parcel): UserInfoParcelable {
+            return UserInfoParcelable(parcel)
         }
 
-        override fun newArray(size: Int): Array<UserInfoCommunity?> {
+        override fun newArray(size: Int): Array<UserInfoParcelable?> {
             return arrayOfNulls(size)
         }
     }

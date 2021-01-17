@@ -127,6 +127,9 @@
         <action
             android:id="@+id/action_chatGroupDetailFragment_to_moreChatGroupDetailDialog"
             app:destination="@id/moreChatGroupDetailDialog" />
+        <action
+            android:id="@+id/action_chatGroupDetailFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/addChatGroupDetailFragment"
@@ -148,8 +151,8 @@
         android:label="fragment_user_info"
         tools:layout="@layout/fragment_user_info">
         <argument
-            android:name="userInfoCommunity"
-            app:argType="com.lc.android.presentation.model.UserInfoCommunity" />
+            android:name="userInfo"
+            app:argType="com.lc.android.presentation.model.UserInfoParcelable" />
     </fragment>
     <fragment
         android:id="@+id/editLocaleNativeFragment"

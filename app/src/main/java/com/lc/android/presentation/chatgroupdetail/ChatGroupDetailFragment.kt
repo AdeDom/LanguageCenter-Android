@@ -12,6 +12,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.presentation.model.ChatGroup
+import com.lc.android.presentation.model.UserInfoParcelable
+import com.lc.android.presentation.model.UserInfoLocaleParcelable
 import com.lc.android.util.snackbar
 import kotlinx.android.synthetic.main.fragment_chat_group_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -71,8 +73,29 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
             findNavController().navigate(navDirections)
         }
 
+        mAdapter.setListener { chatGroupDetail ->
+            val userInfo = UserInfoParcelable(
+                userId = chatGroupDetail.userId,
+                email = chatGroupDetail.email,
+                name = chatGroupDetail.name,
+                picture = chatGroupDetail.picture,
+                gender = chatGroupDetail.gender,
+                age = chatGroupDetail.age,
+                aboutMe = chatGroupDetail.aboutMe,
+                localNatives = chatGroupDetail.localNatives.map {
+                    UserInfoLocaleParcelable(locale = it.locale, level = it.level)
+                },
+                localLearnings = chatGroupDetail.localLearnings.map {
+                    UserInfoLocaleParcelable(locale = it.locale, level = it.level)
+                },
+            )
+            val navDirections = ChatGroupDetailFragmentDirections
+                .actionChatGroupDetailFragmentToUserInfoFragment(userInfo)
+            findNavController().navigate(navDirections)
+        }
+
         mAdapter.setMoreListener {
-            viewModel.setStateFriendUserId(it?.userId)
+            viewModel.setStateFriendUserId(it.userId)
             findNavController().navigate(R.id.action_chatGroupDetailFragment_to_moreChatGroupDetailDialog)
         }
     }

@@ -39,7 +39,7 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
             adapter = mLocalLearningAdapter
         }
 
-        val (_, email, name, picture, gender, age, aboutMe, _, localNatives, localLearnings) = args.userInfoCommunity
+        val (_, email, name, picture, gender, age, aboutMe, _, localNatives, localLearnings) = args.userInfo
         if (email.isNullOrBlank()) tvEmail.visibility = View.GONE
         if (name.isNullOrBlank()) tvName.visibility = View.GONE
         if (gender.isNullOrBlank()) tvGender.visibility = View.GONE
@@ -67,7 +67,9 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
 
     private fun observeViewModel() {
         viewModel.attachFirstTime.observe {
-            viewModel.callAddAlgorithm(args.userInfoCommunity.algorithm)
+            if (args.userInfo.algorithm != null) {
+                viewModel.callAddAlgorithm(args.userInfo.algorithm)
+            }
         }
 
         viewModel.state.observe { state ->
@@ -89,7 +91,7 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
 
     private fun viewEvent() {
         ibAddFriend.setOnClickListener {
-            viewModel.callAddChatGroupNew(args.userInfoCommunity.userId)
+            viewModel.callAddChatGroupNew(args.userInfo.userId)
         }
     }
 

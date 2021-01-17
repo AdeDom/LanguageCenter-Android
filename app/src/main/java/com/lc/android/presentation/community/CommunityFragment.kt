@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.android.presentation.model.UserInfoCommunity
+import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.android.presentation.model.UserInfoLocaleParcelable
 import com.lc.android.util.snackbar
 import kotlinx.android.synthetic.main.fragment_community.*
@@ -77,7 +77,7 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
 
     private fun viewEvent() {
         mAdapter.setListener { community ->
-            val userInfoCommunity = UserInfoCommunity(
+            val userInfoCommunity = UserInfoParcelable(
                 userId = community.userId,
                 email = community.email,
                 name = "${community.givenName} ${community.familyName}",

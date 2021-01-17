@@ -14,7 +14,8 @@ class ChatGroupDetailAdapter :
     RecyclerView.Adapter<ChatGroupDetailAdapter.ChatGroupDetailViewHolder>() {
 
     private val list by lazy { mutableListOf<ChatGroupDetail>() }
-    private var moreListener: ((ChatGroupDetail?) -> Unit)? = null
+    private var listener: ((ChatGroupDetail) -> Unit)? = null
+    private var moreListener: ((ChatGroupDetail) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatGroupDetailViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -61,8 +62,12 @@ class ChatGroupDetailAdapter :
             LanguageCenterConstant.GENDER_FEMALE -> holder.itemView.ivGender.setImageResource(R.drawable.ic_female)
         }
 
+        holder.itemView.setOnClickListener {
+            listener?.invoke(item)
+        }
+
         holder.itemView.ibMore.setOnClickListener {
-            moreListener?.invoke(list[position])
+            moreListener?.invoke(item)
         }
     }
 
@@ -74,7 +79,11 @@ class ChatGroupDetailAdapter :
         notifyDataSetChanged()
     }
 
-    fun setMoreListener(moreListener: ((ChatGroupDetail?) -> Unit)?) {
+    fun setListener(listener: ((ChatGroupDetail) -> Unit)?) {
+        this.listener = listener
+    }
+
+    fun setMoreListener(moreListener: ((ChatGroupDetail) -> Unit)?) {
         this.moreListener = moreListener
     }
 
