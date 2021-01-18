@@ -2,6 +2,7 @@ package com.lc.library.data.repository
 
 import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.library.data.db.entities.FriendInfoEntity
+import com.lc.library.data.db.entities.TalkEntity
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
@@ -89,6 +90,7 @@ class LanguageCenterRepositoryImpl(
         dataSource.deleteUserInfo()
         dataSource.deleteFriendInfo()
         dataSource.deleteAllAddChatGroupDetail()
+        dataSource.deleteTalk()
     }
 
     override suspend fun callGuideUpdateProfile(guideUpdateProfileRequest: GuideUpdateProfileRequest): Resource<BaseResponse> {
@@ -166,10 +168,23 @@ class LanguageCenterRepositoryImpl(
     }
 
     override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<BaseResponse> {
-        val request = sendMessageRequest.copy(
-            talkId = UUID.randomUUID().toString().replace("-", "")
+        val talkId = UUID.randomUUID().toString().replace("-", "")
+        val entity = TalkEntity(
+            talkId = talkId,
+            toUserId = sendMessageRequest.toUserId.orEmpty(),
+            messages = sendMessageRequest.messages.orEmpty(),
         )
+        dataSource.saveTalk(entity)
+
+        val request = sendMessageRequest.copy(talkId = talkId)
         val resource = safeApiCall { dataSource.callSendMessage(request) }
+
+        if (resource is Resource.Success) {
+            if (resource.data.success) {
+                dataSource.updateIsSendMessage(talkId)
+            }
+        }
+
         return resource
     }
 

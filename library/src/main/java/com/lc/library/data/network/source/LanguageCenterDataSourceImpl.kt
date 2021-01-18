@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.lc.library.data.db.AppDatabase
 import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.library.data.db.entities.FriendInfoEntity
+import com.lc.library.data.db.entities.TalkEntity
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
@@ -71,6 +72,18 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun deleteAllAddChatGroupDetail() {
         return db.getAddChatGroupDetailDao().deleteAllAddChatGroupDetail()
+    }
+
+    override suspend fun saveTalk(talkEntity: TalkEntity) {
+        return db.getTalkDao().saveTalk(talkEntity)
+    }
+
+    override suspend fun updateIsSendMessage(talkId: String) {
+        return db.getTalkDao().updateIsSendMessage(talkId)
+    }
+
+    override suspend fun deleteTalk() {
+        return db.getTalkDao().deleteTalk()
     }
 
     override suspend fun callSignIn(request: SignInRequest): SignInResponse {
