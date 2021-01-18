@@ -13,6 +13,7 @@ import com.lc.server.models.response.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import java.util.*
 
 class LanguageCenterRepositoryImpl(
     private val dataSource: LanguageCenterDataSource,
@@ -162,6 +163,14 @@ class LanguageCenterRepositoryImpl(
 
     override suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callAddAlgorithm(addAlgorithmRequest) }
+    }
+
+    override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<BaseResponse> {
+        val request = sendMessageRequest.copy(
+            talkId = UUID.randomUUID().toString().replace("-", "")
+        )
+        val resource = safeApiCall { dataSource.callSendMessage(request) }
+        return resource
     }
 
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse> {

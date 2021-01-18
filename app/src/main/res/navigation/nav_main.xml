@@ -30,7 +30,11 @@
         tools:layout="@layout/fragment_chats">
         <action
             android:id="@+id/action_chatsFragment_to_talkFragment"
-            app:destination="@id/talkFragment" />
+            app:destination="@id/talkFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/chatGroupFragment"
@@ -129,7 +133,11 @@
             app:destination="@id/moreChatGroupDetailDialog" />
         <action
             android:id="@+id/action_chatGroupDetailFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment" />
+            app:destination="@id/userInfoFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/addChatGroupDetailFragment"
@@ -141,7 +149,11 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_addChatGroupDetailFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment" />
+            app:destination="@id/userInfoFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
@@ -157,7 +169,13 @@
             app:argType="com.lc.android.presentation.model.UserInfoParcelable" />
         <action
             android:id="@+id/action_userInfoFragment_to_talkFragment"
-            app:destination="@id/talkFragment" />
+            app:destination="@id/talkFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/userInfoFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/editLocaleNativeFragment"
@@ -207,6 +225,10 @@
         android:id="@+id/talkFragment"
         android:name="com.lc.android.presentation.talk.TalkFragment"
         android:label="TalkFragment"
-        tools:layout="@layout/fragment_talk" />
+        tools:layout="@layout/fragment_talk">
+        <argument
+            android:name="userInfo"
+            app:argType="com.lc.android.presentation.model.UserInfoParcelable" />
+    </fragment>
 
 </navigation>

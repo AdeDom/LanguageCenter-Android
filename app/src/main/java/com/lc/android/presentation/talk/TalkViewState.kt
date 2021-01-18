@@ -1,6 +1,8 @@
 package com.lc.android.presentation.talk
 
 data class TalkViewState(
-    val message: String = "",
+    val toUserId: String? = "",
+    val messages: String = "",
+    val isSendMessage: Boolean = false,
     val isLoading: Boolean = false,
 )

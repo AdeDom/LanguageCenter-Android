@@ -55,6 +55,8 @@ interface LanguageCenterDataSource {
 
     suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): BaseResponse
 
+    suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): BaseResponse
+
     suspend fun callAddChatGroupNew(addChatGroupNewRequest: AddChatGroupNewRequest): BaseResponse
 
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse

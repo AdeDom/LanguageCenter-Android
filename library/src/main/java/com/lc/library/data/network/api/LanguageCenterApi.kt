@@ -1,6 +1,7 @@
 package com.lc.library.data.network.api
 
 import com.lc.server.models.request.*
+import com.lc.server.models.request.SendMessageRequest
 import com.lc.server.models.response.*
 import retrofit2.http.*
 
@@ -32,6 +33,9 @@ interface LanguageCenterApi {
 
     @POST("api/community/add-algorithm")
     suspend fun callAddAlgorithm(@Body addAlgorithmRequest: AddAlgorithmRequest): BaseResponse
+
+    @POST("api/chats/send-message")
+    suspend fun callSendMessage(@Body sendMessageRequest: SendMessageRequest): BaseResponse
 
     @POST("api/chat-group/add-chat-group-new")
     suspend fun callAddChatGroupNew(@Body addChatGroupNewRequest: AddChatGroupNewRequest): BaseResponse

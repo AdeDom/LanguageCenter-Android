@@ -103,7 +103,9 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
         }
 
         ibTalk.setOnClickListener {
-            findNavController().navigate(R.id.action_userInfoFragment_to_talkFragment)
+            val navDirections = UserInfoFragmentDirections
+                .actionUserInfoFragmentToTalkFragment(args.userInfo)
+            findNavController().navigate(navDirections)
         }
     }
 

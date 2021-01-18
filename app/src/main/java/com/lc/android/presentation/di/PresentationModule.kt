@@ -42,7 +42,7 @@ private val presentationModule = module {
     viewModel { ChatGroupDetailViewModel(get(), get(), get()) }
     viewModel { AddChatGroupDetailViewModel(get()) }
     viewModel { MainViewModel(get(), get()) }
-    viewModel { TalkViewModel() }
+    viewModel { TalkViewModel(get()) }
 
 }
 

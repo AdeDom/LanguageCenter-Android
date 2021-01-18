@@ -25,6 +25,8 @@ interface LanguageCenterRepository {
 
     suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): Resource<BaseResponse>
 
+    suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<BaseResponse>
+
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse>
 
     suspend fun callFetchChatGroup(): Resource<FetchChatGroupResponse>

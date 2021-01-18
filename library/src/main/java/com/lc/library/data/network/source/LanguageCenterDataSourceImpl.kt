@@ -106,6 +106,10 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callAddAlgorithm(addAlgorithmRequest)
     }
 
+    override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource().callSendMessage(sendMessageRequest)
+    }
+
     override suspend fun callAddChatGroupNew(addChatGroupNewRequest: AddChatGroupNewRequest): BaseResponse {
         return provider.getLanguageCenterDataSource().callAddChatGroupNew(addChatGroupNewRequest)
     }

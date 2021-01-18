@@ -4,35 +4,41 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.navArgs
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.util.hideSoftKeyboard
-import com.lc.android.util.snackbar
+import com.lc.android.util.loadCircle
 import kotlinx.android.synthetic.main.fragment_talk.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TalkFragment : BaseFragment(R.layout.fragment_talk) {
 
     private val viewModel by viewModel<TalkViewModel>()
+    private val args by navArgs<TalkFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initialView()
         observeViewModel()
         viewEvent()
     }
 
+    private fun initialView() {
+        val name = "${args.userInfo.givenName} ${args.userInfo.familyName}"
+        tvName.text = name
+        ivPicture.loadCircle(args.userInfo.picture)
+    }
+
     private fun observeViewModel() {
-        viewModel.state.observe { state ->
-            animationLoading.isVisible = state.isLoading
+        viewModel.attachFirstTime.observe {
+            viewModel.setStateToUserId(args.userInfo.userId)
         }
 
-        viewModel.sendMessageEvent.observe { response ->
-            if (response.success) {
-                requireView().snackbar(response.message)
-            } else {
-                requireView().snackbar(response.message)
-            }
+        viewModel.state.observe { state ->
+            animationLoading.isVisible = state.isLoading
+            ibSendMessage.isClickable = state.isSendMessage
         }
 
         viewModel.clearTextEvent.observe {
@@ -43,7 +49,7 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
     }
 
     private fun viewEvent() {
-        etMessage.addTextChangedListener { viewModel.setStateMessage(it.toString()) }
+        etMessage.addTextChangedListener { viewModel.setStateMessages(it.toString()) }
 
         ibSendMessage.setOnClickListener { viewModel.callSendMessage() }
 
