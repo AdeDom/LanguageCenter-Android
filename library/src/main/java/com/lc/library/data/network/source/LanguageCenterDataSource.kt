@@ -64,8 +64,6 @@ interface LanguageCenterDataSource {
 
     suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): BaseResponse
 
-    suspend fun callAddChatGroupNew(addChatGroupNewRequest: AddChatGroupNewRequest): BaseResponse
-
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse
 
     suspend fun callFetchChatGroup(): FetchChatGroupResponse
@@ -78,10 +76,10 @@ interface LanguageCenterDataSource {
 
     suspend fun callFetchAddChatGroupDetail(): FetchAddChatGroupDetailResponse
 
-    suspend fun callAddChatGroupDetail(addChatGroupDetailRequest: AddChatGroupDetailRequest): BaseResponse
-
     suspend fun callChangeChatGroup(changeChatGroupRequest: ChangeChatGroupRequest): BaseResponse
 
     suspend fun callRemoveChatGroupDetail(removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): BaseResponse
+
+    suspend fun callAddChatGroupFriend(addChatGroupFriendRequest: AddChatGroupFriendRequest): BaseResponse
 
 }

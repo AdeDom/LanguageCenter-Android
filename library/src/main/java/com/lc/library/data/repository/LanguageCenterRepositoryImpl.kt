@@ -243,30 +243,20 @@ class LanguageCenterRepositoryImpl(
     }
 
     override suspend fun callAddChatGroupFriend(
-        chatGroupId: Int?,
-        friendId: String?,
-        friendInfoEntity: FriendInfoEntity
+        addChatGroupFriendRequest: AddChatGroupFriendRequest,
+        friendInfoEntity: FriendInfoEntity,
     ): Resource<BaseResponse> {
-        val callApiResponse = if (chatGroupId == null) {
-            val request = AddChatGroupNewRequest(friendId)
-            safeApiCall { dataSource.callAddChatGroupNew(request) }
-        } else {
-            val request = AddChatGroupDetailRequest(
-                chatGroupId = chatGroupId,
-                userId = friendId,
-            )
-            safeApiCall { dataSource.callAddChatGroupDetail(request) }
-        }
+        val resource = safeApiCall { dataSource.callAddChatGroupFriend(addChatGroupFriendRequest) }
 
-        if (callApiResponse is Resource.Success) {
-            if (callApiResponse.data.success) {
+        if (resource is Resource.Success) {
+            if (resource.data.success) {
                 dataSource.saveFriendInfo(friendInfoEntity)
 
-                dataSource.deleteAddChatGroupDetail(friendId)
+                dataSource.deleteAddChatGroupDetail(addChatGroupFriendRequest.friendUserId)
             }
         }
 
-        return callApiResponse
+        return resource
     }
 
 }

@@ -11,6 +11,7 @@ import com.lc.library.presentation.usecase.AddChatGroupFriendUseCase
 import com.lc.library.presentation.usecase.FetchFriendInfoUseCase
 import com.lc.server.models.model.UserInfoLocale
 import com.lc.server.models.request.AddAlgorithmRequest
+import com.lc.server.models.request.AddChatGroupFriendRequest
 import com.lc.server.models.response.BaseResponse
 import kotlinx.coroutines.launch
 
@@ -64,8 +65,11 @@ class UserInfoViewModel(
                 } ?: emptyList(),
             )
 
-            val resource = addChatGroupFriendUseCase(chatGroupId, friendInfo.userId, entity)
-            when (resource) {
+            val request = AddChatGroupFriendRequest(
+                chatGroupId = chatGroupId,
+                friendUserId = friendInfo.userId,
+            )
+            when (val resource = addChatGroupFriendUseCase(request, entity)) {
                 is Resource.Success -> _addChatGroupNewEvent.value = resource.data
                 is Resource.Error -> setError(resource.throwable)
             }

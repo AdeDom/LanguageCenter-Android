@@ -123,10 +123,6 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callSendMessage(sendMessageRequest)
     }
 
-    override suspend fun callAddChatGroupNew(addChatGroupNewRequest: AddChatGroupNewRequest): BaseResponse {
-        return provider.getLanguageCenterDataSource().callAddChatGroupNew(addChatGroupNewRequest)
-    }
-
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse {
         return provider.getLanguageCenterDataSource().callAddChatGroup(addChatGroupRequest)
     }
@@ -151,11 +147,6 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callFetchAddChatGroupDetail()
     }
 
-    override suspend fun callAddChatGroupDetail(addChatGroupDetailRequest: AddChatGroupDetailRequest): BaseResponse {
-        return provider.getLanguageCenterDataSource()
-            .callAddChatGroupDetail(addChatGroupDetailRequest)
-    }
-
     override suspend fun callChangeChatGroup(changeChatGroupRequest: ChangeChatGroupRequest): BaseResponse {
         return provider.getLanguageCenterDataSource().callChangeChatGroup(changeChatGroupRequest)
     }
@@ -163,6 +154,11 @@ class LanguageCenterDataSourceImpl(
     override suspend fun callRemoveChatGroupDetail(removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): BaseResponse {
         return provider.getLanguageCenterDataSource()
             .callRemoveChatGroupDetail(removeChatGroupDetailRequest)
+    }
+
+    override suspend fun callAddChatGroupFriend(addChatGroupFriendRequest: AddChatGroupFriendRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource()
+            .callAddChatGroupFriend(addChatGroupFriendRequest)
     }
 
 }

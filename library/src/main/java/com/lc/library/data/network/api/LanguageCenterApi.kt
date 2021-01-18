@@ -1,7 +1,6 @@
 package com.lc.library.data.network.api
 
 import com.lc.server.models.request.*
-import com.lc.server.models.request.SendMessageRequest
 import com.lc.server.models.response.*
 import retrofit2.http.*
 
@@ -37,9 +36,6 @@ interface LanguageCenterApi {
     @POST("api/chats/send-message")
     suspend fun callSendMessage(@Body sendMessageRequest: SendMessageRequest): BaseResponse
 
-    @POST("api/chat-group/add-chat-group-new")
-    suspend fun callAddChatGroupNew(@Body addChatGroupNewRequest: AddChatGroupNewRequest): BaseResponse
-
     @POST("api/chat-group/add-chat-group")
     suspend fun callAddChatGroup(@Body addChatGroupRequest: AddChatGroupRequest): BaseResponse
 
@@ -58,13 +54,13 @@ interface LanguageCenterApi {
     @GET("api/chat-group/fetch-add-chat-group-detail")
     suspend fun callFetchAddChatGroupDetail(): FetchAddChatGroupDetailResponse
 
-    @POST("api/chat-group/add-chat-group-detail")
-    suspend fun callAddChatGroupDetail(@Body addChatGroupDetailRequest: AddChatGroupDetailRequest): BaseResponse
-
     @PUT("api/chat-group/change-chat-group")
     suspend fun callChangeChatGroup(@Body changeChatGroupRequest: ChangeChatGroupRequest): BaseResponse
 
     @HTTP(method = "DELETE", path = "api/chat-group/remove-chat-group-detail", hasBody = true)
     suspend fun callRemoveChatGroupDetail(@Body removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): BaseResponse
+
+    @POST("/api/chat-group/add-chat-group-friend")
+    suspend fun callAddChatGroupFriend(@Body addChatGroupFriendRequest: AddChatGroupFriendRequest): BaseResponse
 
 }

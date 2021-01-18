@@ -40,8 +40,7 @@ interface LanguageCenterRepository {
     suspend fun callRemoveChatGroupDetail(removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): Resource<BaseResponse>
 
     suspend fun callAddChatGroupFriend(
-        chatGroupId: Int?,
-        friendId: String?,
+        addChatGroupFriendRequest: AddChatGroupFriendRequest,
         friendInfoEntity: FriendInfoEntity,
     ): Resource<BaseResponse>
 
