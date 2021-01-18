@@ -20,7 +20,6 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         initialView()
-        observeViewModel()
     }
 
     private fun initialView() {
@@ -66,12 +65,6 @@ class MainActivity : BaseActivity() {
 
     private fun hideBottomNav() {
         bottomNavigationView.visibility = View.GONE
-    }
-
-    private fun observeViewModel() {
-        viewModel.attachFirstTime.observe {
-            viewModel.callFetchFriendInfo()
-        }
     }
 
 }

@@ -8,7 +8,6 @@ import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.PreferenceAuth
 import com.lc.server.models.model.AddChatGroupDetail
-import com.lc.server.models.model.Community
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +39,7 @@ class LanguageCenterRepositoryImpl(
         if (response is Resource.Success) {
             saveTokenAuth(response.data)
             callFetchUserInfo()
+            callFetchFriendInfo()
         }
 
         return response
@@ -52,36 +52,35 @@ class LanguageCenterRepositoryImpl(
         }
     }
 
-    override suspend fun callFetchUserInfo(): Resource<UserInfoResponse> {
+    private suspend fun callFetchUserInfo(): Resource<UserInfoResponse> {
         val response = safeApiCall { dataSource.callFetchUserInfo() }
 
-        if (response is Resource.Success) saveUserInfoDb(response.data)
+        if (response is Resource.Success) {
+            val data = response.data
+            if (data.success) {
+                val userInfo = data.userInfo
+                val entity = UserInfoEntity(
+                    userId = userInfo?.userId.orEmpty(),
+                    email = userInfo?.email,
+                    givenName = userInfo?.givenName,
+                    familyName = userInfo?.familyName,
+                    name = userInfo?.name,
+                    picture = userInfo?.picture,
+                    gender = userInfo?.gender,
+                    birthDateString = userInfo?.birthDateString,
+                    birthDateLong = userInfo?.birthDateLong,
+                    verifiedEmail = userInfo?.verifiedEmail ?: false,
+                    aboutMe = userInfo?.aboutMe,
+                    created = userInfo?.created,
+                    updated = userInfo?.updated,
+                    localNatives = userInfo?.localNatives ?: emptyList(),
+                    localLearnings = userInfo?.localLearnings ?: emptyList(),
+                )
+                dataSource.saveUserInfo(entity)
+            }
+        }
 
         return response
-    }
-
-    private suspend fun saveUserInfoDb(data: UserInfoResponse) {
-        if (data.success) {
-            val userInfo = data.userInfo
-            val entity = UserInfoEntity(
-                userId = userInfo?.userId.orEmpty(),
-                email = userInfo?.email,
-                givenName = userInfo?.givenName,
-                familyName = userInfo?.familyName,
-                name = userInfo?.name,
-                picture = userInfo?.picture,
-                gender = userInfo?.gender,
-                birthDateString = userInfo?.birthDateString,
-                birthDateLong = userInfo?.birthDateLong,
-                verifiedEmail = userInfo?.verifiedEmail ?: false,
-                aboutMe = userInfo?.aboutMe,
-                created = userInfo?.created,
-                updated = userInfo?.updated,
-                localNatives = userInfo?.localNatives ?: emptyList(),
-                localLearnings = userInfo?.localLearnings ?: emptyList(),
-            )
-            dataSource.saveUserInfo(entity)
-        }
     }
 
     override suspend fun signOut() {
@@ -117,24 +116,12 @@ class LanguageCenterRepositoryImpl(
         return response
     }
 
-    override suspend fun callFetchFriendInfo(): Resource<FetchFriendInfoResponse> {
+    private suspend fun callFetchFriendInfo(): Resource<FetchFriendInfoResponse> {
         val resource = safeApiCall { dataSource.callFetchFriendInfo() }
 
         if (resource is Resource.Success) {
             if (resource.data.success) {
-                val friendUserIdList = dataSource.getDbFriendInfoList()?.map { it.userId }
-
-                var friendInfoList = resource.data.friendInfoList
-
-                // filter
-                val list = mutableListOf<Community>()
-                friendUserIdList?.forEach { friendUserId ->
-                    friendInfoList.filter { it.userId == friendUserId }
-                        .onEach { list.add(it) }
-                }
-                friendInfoList = friendInfoList - list
-
-                // save room database
+                val friendInfoList = resource.data.friendInfoList
                 friendInfoList.forEach { friendInfo ->
                     val entity = FriendInfoEntity(
                         userId = friendInfo.userId.orEmpty(),

@@ -9,8 +9,6 @@ interface LanguageCenterRepository {
 
     suspend fun callSignIn(request: SignInRequest): Resource<SignInResponse>
 
-    suspend fun callFetchUserInfo(): Resource<UserInfoResponse>
-
     suspend fun signOut()
 
     suspend fun callGuideUpdateProfile(guideUpdateProfileRequest: GuideUpdateProfileRequest): Resource<BaseResponse>
@@ -18,8 +16,6 @@ interface LanguageCenterRepository {
     suspend fun callEditProfile(editProfileRequest: EditProfileRequest): Resource<BaseResponse>
 
     suspend fun callEditLocale(editLocaleRequest: EditLocaleRequest): Resource<BaseResponse>
-
-    suspend fun callFetchFriendInfo(): Resource<FetchFriendInfoResponse>
 
     suspend fun callFetchCommunity(): Resource<FetchCommunityResponse>
 

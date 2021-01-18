@@ -95,7 +95,11 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
             if (entity == null) return@observe
 
             val friendInfo = entity.find { it.userId == args.userInfo.userId }
-            if (friendInfo == null) ibAddFriend.visibility = View.VISIBLE
+            if (friendInfo == null) {
+                ibAddFriend.visibility = View.VISIBLE
+            } else {
+                ibAddFriend.visibility = View.INVISIBLE
+            }
         })
 
         viewModel.error.observeError()
