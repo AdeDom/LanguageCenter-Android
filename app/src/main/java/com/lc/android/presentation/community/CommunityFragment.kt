@@ -98,7 +98,7 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
                 },
             )
             val navDirections = CommunityFragmentDirections
-                .actionCommunityFragmentToUserInfoFragment(null, userInfoCommunity)
+                .actionCommunityFragmentToUserInfoFragment(null, false, userInfoCommunity)
             findNavController().navigate(navDirections)
         }
     }

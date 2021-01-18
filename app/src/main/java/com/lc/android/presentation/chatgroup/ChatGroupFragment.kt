@@ -46,7 +46,7 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
 
-            ibAddChatGroup.isClickable = state.isClickable
+            fab.isClickable = state.isClickable
 
             ivPlaceHolderDefault.isVisible = state.chatGroups.isNullOrEmpty()
             mAdapter.setList(state.chatGroups)
@@ -87,7 +87,7 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
             findNavController().navigate(R.id.action_chatGroupFragment_to_moreChatGroupDialog)
         }
 
-        ibAddChatGroup.setOnClickListener {
+        fab.setOnClickListener {
             findNavController().navigate(R.id.action_chatGroupFragment_to_addChatGroupDialog)
         }
     }

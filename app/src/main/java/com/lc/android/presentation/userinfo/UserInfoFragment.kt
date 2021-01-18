@@ -30,6 +30,10 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
     }
 
     private fun initialView() {
+        if (!args.navFromTalk) {
+            ibTalk.visibility = View.VISIBLE
+        }
+
         recyclerViewLocalNatives.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = mLocalNativeAdapter
@@ -91,7 +95,7 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
             if (entity == null) return@observe
 
             val friendInfo = entity.find { it.userId == args.userInfo.userId }
-            if (friendInfo != null) ibAddFriend.visibility = View.INVISIBLE
+            if (friendInfo == null) ibAddFriend.visibility = View.VISIBLE
         })
 
         viewModel.error.observeError()

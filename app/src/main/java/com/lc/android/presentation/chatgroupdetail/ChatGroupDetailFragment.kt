@@ -48,7 +48,7 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
 
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
-            ivAddChatGroupDetail.isClickable = state.isClickable
+            fab.isClickable = state.isClickable
 
             ivPlaceHolderDefault.isVisible = state.chatGroupDetails.isNullOrEmpty()
             mAdapter.setList(state.chatGroupDetails)
@@ -67,7 +67,7 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
     }
 
     private fun viewEvent() {
-        ivAddChatGroupDetail.setOnClickListener {
+        fab.setOnClickListener {
             val navDirections = ChatGroupDetailFragmentDirections
                 .actionChatGroupDetailFragmentToAddChatGroupDetailFragment(args.chatGroupId)
             findNavController().navigate(navDirections)
@@ -96,6 +96,7 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
             val navDirections = ChatGroupDetailFragmentDirections
                 .actionChatGroupDetailFragmentToUserInfoFragment(
                     args.chatGroupId.toString(),
+                    false,
                     userInfo,
                 )
             findNavController().navigate(navDirections)

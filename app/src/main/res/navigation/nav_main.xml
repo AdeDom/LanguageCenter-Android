@@ -165,6 +165,9 @@
             app:argType="string"
             app:nullable="true" />
         <argument
+            android:name="navFromTalk"
+            app:argType="boolean" />
+        <argument
             android:name="userInfo"
             app:argType="com.lc.android.presentation.model.UserInfoParcelable" />
         <action
@@ -229,6 +232,13 @@
         <argument
             android:name="userInfo"
             app:argType="com.lc.android.presentation.model.UserInfoParcelable" />
+        <action
+            android:id="@+id/action_talkFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
 
 </navigation>

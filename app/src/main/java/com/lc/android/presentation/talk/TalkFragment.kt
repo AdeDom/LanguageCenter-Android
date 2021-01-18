@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
@@ -54,6 +55,15 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         ibSendMessage.setOnClickListener { viewModel.callSendMessage() }
 
         requireView().setOnClickListener { activity?.hideSoftKeyboard() }
+
+        ivPicture.setOnClickListener { navToUserInfo() }
+        tvName.setOnClickListener { navToUserInfo() }
+    }
+
+    private fun navToUserInfo() {
+        val navDirections = TalkFragmentDirections
+            .actionTalkFragmentToUserInfoFragment(null, true, args.userInfo)
+        findNavController().navigate(navDirections)
     }
 
 }

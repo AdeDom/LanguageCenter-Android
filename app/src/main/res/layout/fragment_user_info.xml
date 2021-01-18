@@ -23,6 +23,7 @@
         android:layout_height="32dp"
         android:layout_margin="8dp"
         android:src="@drawable/ic_add_friend"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ivPicture" />
 
@@ -32,8 +33,9 @@
         android:layout_height="32dp"
         android:layout_margin="8dp"
         android:background="@drawable/ic_talk"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ibAddFriend"/>
+        app:layout_constraintTop_toBottomOf="@+id/ibAddFriend" />
 
     <ImageView
         android:id="@+id/ivPicture"
