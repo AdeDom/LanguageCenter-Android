@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.util.hideSoftKeyboard
@@ -17,6 +18,7 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
 
     private val viewModel by viewModel<TalkViewModel>()
     private val args by navArgs<TalkFragmentArgs>()
+    private val mAdapter by lazy { TalkAdapter(args.userInfo.userId) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,13 +32,16 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         val name = "${args.userInfo.givenName} ${args.userInfo.familyName}"
         tvName.text = name
         ivPicture.loadCircle(args.userInfo.picture)
+
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(context).apply {
+                stackFromEnd = true
+            }
+            adapter = mAdapter
+        }
     }
 
     private fun observeViewModel() {
-        viewModel.attachFirstTime.observe {
-            viewModel.setStateToUserId(args.userInfo.userId)
-        }
-
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
             ibSendMessage.isClickable = state.isSendMessage
@@ -46,13 +51,21 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
             etMessage.text?.clear()
         }
 
+        viewModel.getDbTalkByOtherUserIdLiveData(args.userInfo.userId)
+            .observe(viewLifecycleOwner, { talkEntity ->
+                if (talkEntity == null) return@observe
+
+                mAdapter.submitList(talkEntity)
+                recyclerView.smoothScrollToPosition(talkEntity.size)
+            })
+
         viewModel.error.observeError()
     }
 
     private fun viewEvent() {
         etMessage.addTextChangedListener { viewModel.setStateMessages(it.toString()) }
 
-        ibSendMessage.setOnClickListener { viewModel.callSendMessage() }
+        ibSendMessage.setOnClickListener { viewModel.callSendMessage(args.userInfo.userId) }
 
         requireView().setOnClickListener { activity?.hideSoftKeyboard() }
 

@@ -43,7 +43,7 @@ interface LanguageCenterDataSource {
 
     suspend fun saveTalk(talkEntity: TalkEntity)
 
-    suspend fun updateIsSendMessage(talkId: String)
+    fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>>
 
     suspend fun deleteTalk()
 

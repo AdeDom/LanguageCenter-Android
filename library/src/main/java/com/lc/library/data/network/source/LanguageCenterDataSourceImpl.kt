@@ -81,8 +81,8 @@ class LanguageCenterDataSourceImpl(
         return db.getTalkDao().saveTalk(talkEntity)
     }
 
-    override suspend fun updateIsSendMessage(talkId: String) {
-        return db.getTalkDao().updateIsSendMessage(talkId)
+    override fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>> {
+        return db.getTalkDao().getDbTalkByOtherUserIdLiveData(otherUserId)
     }
 
     override suspend fun deleteTalk() {

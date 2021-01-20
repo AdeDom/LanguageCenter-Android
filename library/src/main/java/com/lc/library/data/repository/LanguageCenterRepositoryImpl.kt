@@ -14,6 +14,7 @@ import com.lc.server.models.response.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import java.text.SimpleDateFormat
 import java.util.*
 
 class LanguageCenterRepositoryImpl(
@@ -268,11 +269,16 @@ class LanguageCenterRepositoryImpl(
 
     override suspend fun incomingSendMessageSocket() {
         dataSource.incomingSendMessageSocket {
+            val dateSdf = SimpleDateFormat("E, MMM d", Locale.getDefault())
+            val timeSdf = SimpleDateFormat("HH:mm", Locale.getDefault())
+
             val entity = TalkEntity(
                 talkId = it.talkId,
                 fromUserId = it.fromUserId,
                 toUserId = it.toUserId,
                 messages = it.messages,
+                dateString = dateSdf.format(it.dateTimeLong),
+                timeString = timeSdf.format(it.dateTimeLong),
                 dateTimeLong = it.dateTimeLong,
                 isSendMessage = true,
             )
