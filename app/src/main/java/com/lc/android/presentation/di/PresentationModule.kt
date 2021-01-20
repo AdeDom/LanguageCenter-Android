@@ -17,12 +17,14 @@ import com.lc.android.presentation.signin.SignInViewModel
 import com.lc.android.presentation.splashscreen.SplashScreenViewModel
 import com.lc.android.presentation.talk.TalkViewModel
 import com.lc.android.presentation.userinfo.UserInfoViewModel
+import io.ktor.util.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 @FlowPreview
+@KtorExperimentalAPI
 @ExperimentalCoroutinesApi
 private val presentationModule = module {
 
@@ -41,11 +43,12 @@ private val presentationModule = module {
     viewModel { ChatGroupViewModel(get(), get(), get(), get()) }
     viewModel { ChatGroupDetailViewModel(get(), get(), get()) }
     viewModel { AddChatGroupDetailViewModel(get()) }
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(), get()) }
     viewModel { TalkViewModel(get()) }
 
 }
 
 @FlowPreview
+@KtorExperimentalAPI
 @ExperimentalCoroutinesApi
 val getPresentationModule = presentationModule

@@ -3,8 +3,10 @@ package com.lc.library.data.network.source
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.lc.library.BuildConfig
 import com.lc.library.data.network.api.LanguageCenterApi
+import com.lc.library.data.network.ws.LanguageCenterWs
 import com.lc.library.sharedpreference.pref.PreferenceAuth
 import com.lc.server.models.request.RefreshTokenRequest
+import io.ktor.util.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -16,7 +18,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import java.util.concurrent.TimeUnit
 
-class DataSourceProvider(private val pref: PreferenceAuth) {
+@KtorExperimentalAPI
+class DataSourceProvider(
+    private val pref: PreferenceAuth,
+    private val webSocket: LanguageCenterWs,
+) {
 
     fun getDataSource(): LanguageCenterApi {
         val okHttpClient = OkHttpClient.Builder().apply {
@@ -76,6 +82,8 @@ class DataSourceProvider(private val pref: PreferenceAuth) {
 
         return retrofit.create()
     }
+
+    fun getWebSocketDataSource() = webSocket
 
     private fun callRefreshToken() {
         try {

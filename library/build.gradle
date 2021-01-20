@@ -83,7 +83,6 @@ dependencies {
     implementation "org.koin:koin-androidx-fragment:$koin_version"
 
     // ktor client
-    def ktor_version = "1.4.1"
     implementation "io.ktor:ktor-client-okhttp:$ktor_version"
     implementation "io.ktor:ktor-client-logging-jvm:$ktor_version"
 

@@ -34,7 +34,7 @@ interface LanguageCenterApi {
     suspend fun callAddAlgorithm(@Body addAlgorithmRequest: AddAlgorithmRequest): BaseResponse
 
     @POST("api/chats/send-message")
-    suspend fun callSendMessage(@Body sendMessageRequest: SendMessageRequest): BaseResponse
+    suspend fun callSendMessage(@Body sendMessageRequest: SendMessageRequest): SendMessageResponse
 
     @POST("api/chat-group/add-chat-group")
     suspend fun callAddChatGroup(@Body addChatGroupRequest: AddChatGroupRequest): BaseResponse

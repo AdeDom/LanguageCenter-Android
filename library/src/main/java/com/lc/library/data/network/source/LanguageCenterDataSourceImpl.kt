@@ -6,9 +6,12 @@ import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.library.data.db.entities.FriendInfoEntity
 import com.lc.library.data.db.entities.TalkEntity
 import com.lc.library.data.db.entities.UserInfoEntity
+import com.lc.server.models.model.TalkSendMessageWebSocket
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
+import io.ktor.util.*
 
+@KtorExperimentalAPI
 class LanguageCenterDataSourceImpl(
     private val db: AppDatabase,
     private val provider: DataSourceProvider,
@@ -119,7 +122,7 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callAddAlgorithm(addAlgorithmRequest)
     }
 
-    override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): BaseResponse {
+    override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): SendMessageResponse {
         return provider.getLanguageCenterDataSource().callSendMessage(sendMessageRequest)
     }
 
@@ -159,6 +162,14 @@ class LanguageCenterDataSourceImpl(
     override suspend fun callAddChatGroupFriend(addChatGroupFriendRequest: AddChatGroupFriendRequest): BaseResponse {
         return provider.getLanguageCenterDataSource()
             .callAddChatGroupFriend(addChatGroupFriendRequest)
+    }
+
+    override suspend fun incomingSendMessageSocket(listener: suspend (TalkSendMessageWebSocket) -> Unit) {
+        return provider.getWebSocketDataSource().incomingSendMessageSocket(listener)
+    }
+
+    override suspend fun outgoingSendMessageSocket(talkSendMessageWebSocket: TalkSendMessageWebSocket) {
+        return provider.getWebSocketDataSource().outgoingSendMessageSocket(talkSendMessageWebSocket)
     }
 
 }

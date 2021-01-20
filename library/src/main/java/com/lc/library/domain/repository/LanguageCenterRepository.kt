@@ -21,7 +21,7 @@ interface LanguageCenterRepository {
 
     suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): Resource<BaseResponse>
 
-    suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<BaseResponse>
+    suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse>
 
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse>
 
@@ -43,5 +43,7 @@ interface LanguageCenterRepository {
         addChatGroupFriendRequest: AddChatGroupFriendRequest,
         friendInfoEntity: FriendInfoEntity,
     ): Resource<BaseResponse>
+
+    suspend fun incomingSendMessageSocket()
 
 }

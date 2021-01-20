@@ -5,6 +5,7 @@ import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.library.data.db.entities.FriendInfoEntity
 import com.lc.library.data.db.entities.TalkEntity
 import com.lc.library.data.db.entities.UserInfoEntity
+import com.lc.server.models.model.TalkSendMessageWebSocket
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
 
@@ -62,7 +63,7 @@ interface LanguageCenterDataSource {
 
     suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): BaseResponse
 
-    suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): BaseResponse
+    suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): SendMessageResponse
 
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse
 
@@ -81,5 +82,9 @@ interface LanguageCenterDataSource {
     suspend fun callRemoveChatGroupDetail(removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): BaseResponse
 
     suspend fun callAddChatGroupFriend(addChatGroupFriendRequest: AddChatGroupFriendRequest): BaseResponse
+
+    suspend fun incomingSendMessageSocket(listener: suspend (TalkSendMessageWebSocket) -> Unit)
+
+    suspend fun outgoingSendMessageSocket(talkSendMessageWebSocket: TalkSendMessageWebSocket)
 
 }

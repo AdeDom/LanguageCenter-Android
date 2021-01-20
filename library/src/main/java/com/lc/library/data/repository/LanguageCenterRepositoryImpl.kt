@@ -8,6 +8,7 @@ import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.PreferenceAuth
 import com.lc.server.models.model.AddChatGroupDetail
+import com.lc.server.models.model.TalkSendMessageWebSocket
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
 import kotlinx.coroutines.Dispatchers
@@ -154,7 +155,7 @@ class LanguageCenterRepositoryImpl(
         return safeApiCall { dataSource.callAddAlgorithm(addAlgorithmRequest) }
     }
 
-    override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<BaseResponse> {
+    override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse> {
         val talkId = UUID.randomUUID().toString().replace("-", "")
         val entity = TalkEntity(
             talkId = talkId,
@@ -168,7 +169,13 @@ class LanguageCenterRepositoryImpl(
 
         if (resource is Resource.Success) {
             if (resource.data.success) {
-                dataSource.updateIsSendMessage(talkId)
+                val talk = TalkSendMessageWebSocket(
+                    talkId = talkId,
+                    toUserId = sendMessageRequest.toUserId.orEmpty(),
+                    messages = sendMessageRequest.messages.orEmpty(),
+                    dateTimeLong = resource.data.dateTimeLong,
+                )
+                dataSource.outgoingSendMessageSocket(talk)
             }
         }
 
@@ -257,6 +264,20 @@ class LanguageCenterRepositoryImpl(
         }
 
         return resource
+    }
+
+    override suspend fun incomingSendMessageSocket() {
+        dataSource.incomingSendMessageSocket {
+            val entity = TalkEntity(
+                talkId = it.talkId,
+                fromUserId = it.fromUserId,
+                toUserId = it.toUserId,
+                messages = it.messages,
+                dateTimeLong = it.dateTimeLong,
+                isSendMessage = true,
+            )
+            dataSource.saveTalk(entity)
+        }
     }
 
 }
