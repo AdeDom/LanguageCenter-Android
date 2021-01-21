@@ -13,8 +13,20 @@ interface TalkDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveTalk(talkEntity: TalkEntity)
 
-    @Query("SELECT * FROM talk WHERE from_user_id = :otherUserId OR to_user_id = :otherUserId")
+    @Query("SELECT * FROM talk WHERE from_user_id = :otherUserId OR to_user_id = :otherUserId ORDER BY date_time_long ASC")
     fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>>
+
+    @Query("SELECT COUNT(*) FROM talk WHERE talk_id = :talkId")
+    suspend fun getDbCountTalkByTalkId(talkId: String): Int
+
+    @Query("UPDATE talk SET date_string = :dateString, time_string = :timeString, date_time_long = :dateTimeLong, is_send_message = :isSendMessage WHERE talk_id = :talkId")
+    suspend fun updateTalkSendMessage(
+        talkId: String,
+        dateString: String,
+        timeString: String,
+        dateTimeLong: Long,
+        isSendMessage: Boolean
+    )
 
     @Query("DELETE FROM talk")
     suspend fun deleteTalk()

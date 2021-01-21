@@ -85,6 +85,21 @@ class LanguageCenterDataSourceImpl(
         return db.getTalkDao().getDbTalkByOtherUserIdLiveData(otherUserId)
     }
 
+    override suspend fun getDbCountTalkByTalkId(talkId: String): Int {
+        return db.getTalkDao().getDbCountTalkByTalkId(talkId)
+    }
+
+    override suspend fun updateTalkSendMessage(
+        talkId: String,
+        dateString: String,
+        timeString: String,
+        dateTimeLong: Long,
+        isSendMessage: Boolean
+    ) {
+        return db.getTalkDao()
+            .updateTalkSendMessage(talkId, dateString, timeString, dateTimeLong, isSendMessage)
+    }
+
     override suspend fun deleteTalk() {
         return db.getTalkDao().deleteTalk()
     }

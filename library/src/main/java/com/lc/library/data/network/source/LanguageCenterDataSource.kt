@@ -45,6 +45,16 @@ interface LanguageCenterDataSource {
 
     fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>>
 
+    suspend fun getDbCountTalkByTalkId(talkId: String): Int
+
+    suspend fun updateTalkSendMessage(
+        talkId: String,
+        dateString: String,
+        timeString: String,
+        dateTimeLong: Long,
+        isSendMessage: Boolean
+    )
+
     suspend fun deleteTalk()
 
     suspend fun callSignIn(request: SignInRequest): SignInResponse

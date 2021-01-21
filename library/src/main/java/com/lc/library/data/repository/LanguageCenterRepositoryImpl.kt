@@ -7,6 +7,7 @@ import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.PreferenceAuth
+import com.lc.library.util.LanguageCenterUtils
 import com.lc.server.models.model.AddChatGroupDetail
 import com.lc.server.models.model.TalkSendMessageWebSocket
 import com.lc.server.models.request.*
@@ -14,8 +15,6 @@ import com.lc.server.models.response.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import java.text.SimpleDateFormat
-import java.util.*
 
 class LanguageCenterRepositoryImpl(
     private val dataSource: LanguageCenterDataSource,
@@ -157,11 +156,19 @@ class LanguageCenterRepositoryImpl(
     }
 
     override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse> {
-        val talkId = UUID.randomUUID().toString().replace("-", "")
+        val talkId = LanguageCenterUtils.getRandomUUID()
+        val fromUserId = dataSource.getDbUserInfo()?.userId
         val entity = TalkEntity(
             talkId = talkId,
+            fromUserId = fromUserId.orEmpty(),
             toUserId = sendMessageRequest.toUserId.orEmpty(),
             messages = sendMessageRequest.messages.orEmpty(),
+            dateString = "",
+            timeString = "",
+            dateTimeLong = LanguageCenterUtils.getCurrentTimeMillis(),
+            isRead = false,
+            isSendMessage = false,
+            isSendType = true,
         )
         dataSource.saveTalk(entity)
 
@@ -172,6 +179,7 @@ class LanguageCenterRepositoryImpl(
             if (resource.data.success) {
                 val talk = TalkSendMessageWebSocket(
                     talkId = talkId,
+                    fromUserId = fromUserId.orEmpty(),
                     toUserId = sendMessageRequest.toUserId.orEmpty(),
                     messages = sendMessageRequest.messages.orEmpty(),
                     dateTimeLong = resource.data.dateTimeLong,
@@ -269,20 +277,30 @@ class LanguageCenterRepositoryImpl(
 
     override suspend fun incomingSendMessageSocket() {
         dataSource.incomingSendMessageSocket {
-            val dateSdf = SimpleDateFormat("E, MMM d", Locale.getDefault())
-            val timeSdf = SimpleDateFormat("HH:mm", Locale.getDefault())
-
-            val entity = TalkEntity(
-                talkId = it.talkId,
-                fromUserId = it.fromUserId,
-                toUserId = it.toUserId,
-                messages = it.messages,
-                dateString = dateSdf.format(it.dateTimeLong),
-                timeString = timeSdf.format(it.dateTimeLong),
-                dateTimeLong = it.dateTimeLong,
-                isSendMessage = true,
-            )
-            dataSource.saveTalk(entity)
+            val count = dataSource.getDbCountTalkByTalkId(it.talkId)
+            if (count == 0) {
+                val entity = TalkEntity(
+                    talkId = it.talkId,
+                    fromUserId = it.fromUserId,
+                    toUserId = it.toUserId,
+                    messages = it.messages,
+                    dateString = LanguageCenterUtils.getDateFormat(it.dateTimeLong),
+                    timeString = LanguageCenterUtils.getTimeFormat(it.dateTimeLong),
+                    dateTimeLong = it.dateTimeLong,
+                    isRead = false,
+                    isSendMessage = true,
+                    isSendType = false,
+                )
+                dataSource.saveTalk(entity)
+            } else {
+                dataSource.updateTalkSendMessage(
+                    talkId = it.talkId,
+                    dateString = LanguageCenterUtils.getDateFormat(it.dateTimeLong),
+                    timeString = LanguageCenterUtils.getTimeFormat(it.dateTimeLong),
+                    dateTimeLong = it.dateTimeLong,
+                    isSendMessage = true,
+                )
+            }
         }
     }
 

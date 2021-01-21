@@ -18,7 +18,7 @@ import com.lc.library.data.db.entities.UserInfoEntity
 @Database(
     entities = [UserInfoEntity::class, FriendInfoEntity::class, AddChatGroupDetailEntity::class,
         TalkEntity::class],
-    version = 10
+    version = 11
 )
 @TypeConverters(UserInfoLocaleConverters::class)
 abstract class AppDatabase : RoomDatabase() {
