@@ -1,9 +1,6 @@
 package com.lc.library.data.repository
 
-import com.lc.library.data.db.entities.AddChatGroupDetailEntity
-import com.lc.library.data.db.entities.FriendInfoEntity
-import com.lc.library.data.db.entities.TalkEntity
-import com.lc.library.data.db.entities.UserInfoEntity
+import com.lc.library.data.db.entities.*
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.PreferenceAuth
@@ -278,29 +275,64 @@ class LanguageCenterRepositoryImpl(
 
     override suspend fun incomingSendMessageSocket() {
         dataSource.incomingSendMessageSocket {
-            val count = dataSource.getDbCountTalkByTalkId(it.talkId)
-            if (count == 0) {
-                val entity = TalkEntity(
-                    talkId = it.talkId,
-                    fromUserId = it.fromUserId,
-                    toUserId = it.toUserId,
-                    messages = it.messages,
-                    dateString = LanguageCenterUtils.getDateFormat(it.dateTimeLong),
-                    timeString = LanguageCenterUtils.getTimeFormat(it.dateTimeLong),
-                    dateTimeLong = it.dateTimeLong,
-                    isRead = false,
-                    isSendMessage = true,
-                    isSendType = false,
+            sendMessageCompleted(it)
+            saveChatListDatabase(it)
+        }
+    }
+
+    private suspend fun sendMessageCompleted(socket: TalkSendMessageWebSocket) {
+        val count = dataSource.getDbCountTalkByTalkId(socket.talkId)
+        if (count == 0) {
+            val entity = TalkEntity(
+                talkId = socket.talkId,
+                fromUserId = socket.fromUserId,
+                toUserId = socket.toUserId,
+                messages = socket.messages,
+                dateString = LanguageCenterUtils.getDateFormat(socket.dateTimeLong),
+                timeString = LanguageCenterUtils.getTimeFormat(socket.dateTimeLong),
+                dateTimeLong = socket.dateTimeLong,
+                isRead = false,
+                isSendMessage = true,
+                isSendType = false,
+            )
+            dataSource.saveTalk(entity)
+        } else {
+            dataSource.updateTalkSendMessage(
+                talkId = socket.talkId,
+                dateString = LanguageCenterUtils.getDateFormat(socket.dateTimeLong),
+                timeString = LanguageCenterUtils.getTimeFormat(socket.dateTimeLong),
+                dateTimeLong = socket.dateTimeLong,
+                isSendMessage = true,
+            )
+        }
+    }
+
+    private suspend fun saveChatListDatabase(socket: TalkSendMessageWebSocket) {
+        val resource = safeApiCall { dataSource.callChatListUserInfo(socket.toUserId) }
+
+        if (resource is Resource.Success) {
+            if (resource.data.success) {
+                val userInfo = resource.data.chatListUserInfo
+
+                val entity = ChatListEntity(
+                    userId = socket.toUserId,
+                    email = userInfo?.email,
+                    givenName = userInfo?.givenName,
+                    familyName = userInfo?.familyName,
+                    name = userInfo?.name,
+                    picture = userInfo?.picture,
+                    gender = userInfo?.gender,
+                    age = userInfo?.age,
+                    birthDateString = userInfo?.birthDateString,
+                    birthDateLong = userInfo?.birthDateLong,
+                    aboutMe = userInfo?.aboutMe,
+                    localNatives = userInfo?.localNatives ?: emptyList(),
+                    localLearnings = userInfo?.localLearnings ?: emptyList(),
+                    messages = socket.messages,
+                    dateTimeString = LanguageCenterUtils.getDateTimeFormat(socket.dateTimeLong),
+                    dateTimeLong = socket.dateTimeLong,
                 )
-                dataSource.saveTalk(entity)
-            } else {
-                dataSource.updateTalkSendMessage(
-                    talkId = it.talkId,
-                    dateString = LanguageCenterUtils.getDateFormat(it.dateTimeLong),
-                    timeString = LanguageCenterUtils.getTimeFormat(it.dateTimeLong),
-                    dateTimeLong = it.dateTimeLong,
-                    isSendMessage = true,
-                )
+                dataSource.saveChatListEntity(entity)
             }
         }
     }

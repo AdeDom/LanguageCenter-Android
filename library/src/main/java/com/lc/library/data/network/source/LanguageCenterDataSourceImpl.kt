@@ -154,6 +154,10 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callSendMessage(sendMessageRequest)
     }
 
+    override suspend fun callChatListUserInfo(otherUserId: String): ChatListUserInfoResponse {
+        return provider.getLanguageCenterDataSource().callChatListUserInfo(otherUserId)
+    }
+
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse {
         return provider.getLanguageCenterDataSource().callAddChatGroup(addChatGroupRequest)
     }

@@ -3,6 +3,7 @@ package com.lc.library.data.db.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.lc.server.models.model.UserInfoLocale
 
 @Entity(tableName = "chat_list")
 data class ChatListEntity(
@@ -14,7 +15,12 @@ data class ChatListEntity(
     @ColumnInfo(name = "name") val name: String? = null,
     @ColumnInfo(name = "picture") val picture: String? = null,
     @ColumnInfo(name = "gender") val gender: String? = null,
+    @ColumnInfo(name = "age") val age: Int? = null,
+    @ColumnInfo(name = "birth_date_string") val birthDateString: String? = null,
+    @ColumnInfo(name = "birth_date_long") val birthDateLong: Long? = null,
     @ColumnInfo(name = "about_me") val aboutMe: String? = null,
+    @ColumnInfo(name = "local_natives") val localNatives: List<UserInfoLocale> = emptyList(),
+    @ColumnInfo(name = "local_learnings") val localLearnings: List<UserInfoLocale> = emptyList(),
     @ColumnInfo(name = "messages") val messages: String,
     @ColumnInfo(name = "date_time_string") val dateTimeString: String,
     @ColumnInfo(name = "date_time_long") val dateTimeLong: Long,

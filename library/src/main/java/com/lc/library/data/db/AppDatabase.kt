@@ -12,7 +12,7 @@ import com.lc.library.data.db.entities.*
 @Database(
     entities = [UserInfoEntity::class, FriendInfoEntity::class, AddChatGroupDetailEntity::class,
         TalkEntity::class, ChatListEntity::class],
-    version = 12
+    version = 14
 )
 @TypeConverters(UserInfoLocaleConverters::class)
 abstract class AppDatabase : RoomDatabase() {

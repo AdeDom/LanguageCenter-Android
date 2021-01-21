@@ -23,4 +23,9 @@ object LanguageCenterUtils {
         return timeSdf.format(dateTime)
     }
 
+    fun getDateTimeFormat(dateTime: Long): String {
+        val dateTimeSdf = SimpleDateFormat("E, d MMM yyyy HH:mm", Locale.getDefault())
+        return dateTimeSdf.format(dateTime)
+    }
+
 }

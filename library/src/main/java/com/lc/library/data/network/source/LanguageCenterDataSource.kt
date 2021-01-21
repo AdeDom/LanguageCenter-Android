@@ -80,6 +80,8 @@ interface LanguageCenterDataSource {
 
     suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): SendMessageResponse
 
+    suspend fun callChatListUserInfo(otherUserId: String): ChatListUserInfoResponse
+
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse
 
     suspend fun callFetchChatGroup(): FetchChatGroupResponse
