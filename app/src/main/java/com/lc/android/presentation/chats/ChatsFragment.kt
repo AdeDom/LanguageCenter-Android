@@ -2,12 +2,15 @@ package com.lc.android.presentation.chats
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.presentation.model.UserInfoLocaleParcelable
 import com.lc.android.presentation.model.UserInfoParcelable
+import com.lc.android.util.hideSoftKeyboard
 import kotlinx.android.synthetic.main.fragment_chats.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,10 +41,28 @@ class ChatsFragment : BaseFragment(R.layout.fragment_chats) {
             mAdapter.submitList(chatListEntity)
         })
 
+        viewModel.getDbChatListBySearch.observe { chatListEntity ->
+            mAdapter.submitList(chatListEntity)
+        }
+
         viewModel.error.observeError()
     }
 
     private fun viewEvent() {
+        etSearch.addTextChangedListener {
+            viewModel.setStateSearch(it.toString())
+            viewModel.getDbChatListBySearch()
+        }
+
+        etSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) viewModel.getDbChatListBySearch()
+            false
+        }
+
+        requireView().setOnClickListener {
+            activity?.hideSoftKeyboard()
+        }
+
         mAdapter.setListener { chatListEntity ->
             val userInfo = UserInfoParcelable(
                 userId = chatListEntity.userId,

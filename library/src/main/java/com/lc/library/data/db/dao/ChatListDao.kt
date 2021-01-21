@@ -19,6 +19,9 @@ interface ChatListDao {
     @Query("SELECT * FROM chat_list ORDER BY date_time_long DESC")
     fun getDbChatListLiveData(): LiveData<List<ChatListEntity>>
 
+    @Query("SELECT * FROM chat_list WHERE given_name LIKE '%' || :search || '%'  OR family_name LIKE '%' || :search || '%' ")
+    suspend fun getDbChatListBySearch(search: String?): List<ChatListEntity>?
+
     @Query("SELECT COUNT(*) FROM chat_list WHERE user_id = :userId")
     suspend fun getDbChatListCountByUserId(userId: String?): Int
 

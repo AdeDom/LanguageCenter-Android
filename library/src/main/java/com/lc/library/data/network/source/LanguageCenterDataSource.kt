@@ -60,6 +60,8 @@ interface LanguageCenterDataSource {
 
     fun getDbChatListLiveData(): LiveData<List<ChatListEntity>>
 
+    suspend fun getDbChatListBySearch(search: String?): List<ChatListEntity>?
+
     suspend fun getDbChatListCountByUserId(userId: String?): Int
 
     suspend fun updateChatListNewMessage(

@@ -1,3 +1,5 @@
 package com.lc.android.presentation.chats
 
-object ChatsViewState
+data class ChatsViewState(
+    val search: String = "",
+)

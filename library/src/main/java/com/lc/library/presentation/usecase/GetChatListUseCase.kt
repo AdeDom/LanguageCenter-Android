@@ -4,5 +4,9 @@ import androidx.lifecycle.LiveData
 import com.lc.library.data.db.entities.ChatListEntity
 
 interface GetChatListUseCase {
-    operator fun invoke(): LiveData<List<ChatListEntity>>
+
+    fun getDbChatListLiveData(): LiveData<List<ChatListEntity>>
+
+    suspend fun getDbChatListBySearch(search: String?): List<ChatListEntity>?
+
 }

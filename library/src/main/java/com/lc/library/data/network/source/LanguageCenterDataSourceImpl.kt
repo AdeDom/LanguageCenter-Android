@@ -113,6 +113,10 @@ class LanguageCenterDataSourceImpl(
         return db.getChatListDao().getDbChatListLiveData()
     }
 
+    override suspend fun getDbChatListBySearch(search: String?): List<ChatListEntity>? {
+        return db.getChatListDao().getDbChatListBySearch(search)
+    }
+
     override suspend fun getDbChatListCountByUserId(userId: String?): Int {
         return db.getChatListDao().getDbChatListCountByUserId(userId)
     }
