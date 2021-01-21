@@ -25,6 +25,7 @@ private val domainModule = module {
     single<AddChatGroupFriendUseCase> { AddChatGroupFriendUseCaseImpl(get()) }
     single<SendMessageUseCase> { SendMessageUseCaseImpl(get()) }
     single<GetTalkUseCase> { GetTalkUseCaseImpl(get()) }
+    single<GetChatListUseCase> { GetChatListUseCaseImpl(get()) }
 
 }
 
