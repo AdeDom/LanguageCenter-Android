@@ -6,19 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.lc.library.data.db.converter.UserInfoLocaleConverters
-import com.lc.library.data.db.dao.AddChatGroupDetailDao
-import com.lc.library.data.db.dao.FriendInfoDao
-import com.lc.library.data.db.dao.TalkDao
-import com.lc.library.data.db.dao.UserInfoDao
-import com.lc.library.data.db.entities.AddChatGroupDetailEntity
-import com.lc.library.data.db.entities.FriendInfoEntity
-import com.lc.library.data.db.entities.TalkEntity
-import com.lc.library.data.db.entities.UserInfoEntity
+import com.lc.library.data.db.dao.*
+import com.lc.library.data.db.entities.*
 
 @Database(
     entities = [UserInfoEntity::class, FriendInfoEntity::class, AddChatGroupDetailEntity::class,
-        TalkEntity::class],
-    version = 11
+        TalkEntity::class, ChatListEntity::class],
+    version = 12
 )
 @TypeConverters(UserInfoLocaleConverters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -30,6 +24,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getAddChatGroupDetailDao(): AddChatGroupDetailDao
 
     abstract fun getTalkDao(): TalkDao
+
+    abstract fun getChatListDao(): ChatListDao
 
     companion object {
         @Volatile
