@@ -16,8 +16,19 @@ interface ChatListDao {
     @Query("SELECT * FROM chat_list")
     suspend fun getDbChatListAll(): List<ChatListEntity>
 
-    @Query("SELECT * FROM chat_list")
+    @Query("SELECT * FROM chat_list ORDER BY date_time_long DESC")
     fun getDbChatListLiveData(): LiveData<List<ChatListEntity>>
+
+    @Query("SELECT COUNT(*) FROM chat_list WHERE user_id = :userId")
+    suspend fun getDbChatListCountByUserId(userId: String?): Int
+
+    @Query("UPDATE chat_list SET messages = :messages, date_time_string = :dateTimeString, date_time_long = :dateTimeLong WHERE user_id = :userId")
+    suspend fun updateChatListNewMessage(
+        userId: String,
+        messages: String,
+        dateTimeString: String,
+        dateTimeLong: Long
+    )
 
     @Query("DELETE FROM chat_list")
     suspend fun deleteChatList()

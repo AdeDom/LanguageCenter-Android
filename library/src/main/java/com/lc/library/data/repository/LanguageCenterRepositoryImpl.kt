@@ -88,6 +88,7 @@ class LanguageCenterRepositoryImpl(
         dataSource.deleteFriendInfo()
         dataSource.deleteAllAddChatGroupDetail()
         dataSource.deleteTalk()
+        dataSource.deleteChatList()
     }
 
     override suspend fun callGuideUpdateProfile(guideUpdateProfileRequest: GuideUpdateProfileRequest): Resource<BaseResponse> {
@@ -308,32 +309,49 @@ class LanguageCenterRepositoryImpl(
     }
 
     private suspend fun saveChatListDatabase(socket: TalkSendMessageWebSocket) {
-        val resource = safeApiCall { dataSource.callChatListUserInfo(socket.toUserId) }
+        val getDbUserInfoUserId = dataSource.getDbUserInfo()?.userId
 
-        if (resource is Resource.Success) {
-            if (resource.data.success) {
-                val userInfo = resource.data.chatListUserInfo
+        val listUserId = mutableListOf<String>()
+        listUserId.add(socket.fromUserId)
+        listUserId.add(socket.toUserId)
+        val userId = listUserId.singleOrNull { it != getDbUserInfoUserId }
 
-                val entity = ChatListEntity(
-                    userId = socket.toUserId,
-                    email = userInfo?.email,
-                    givenName = userInfo?.givenName,
-                    familyName = userInfo?.familyName,
-                    name = userInfo?.name,
-                    picture = userInfo?.picture,
-                    gender = userInfo?.gender,
-                    age = userInfo?.age,
-                    birthDateString = userInfo?.birthDateString,
-                    birthDateLong = userInfo?.birthDateLong,
-                    aboutMe = userInfo?.aboutMe,
-                    localNatives = userInfo?.localNatives ?: emptyList(),
-                    localLearnings = userInfo?.localLearnings ?: emptyList(),
-                    messages = socket.messages,
-                    dateTimeString = LanguageCenterUtils.getDateTimeFormat(socket.dateTimeLong),
-                    dateTimeLong = socket.dateTimeLong,
-                )
-                dataSource.saveChatListEntity(entity)
+        val count = dataSource.getDbChatListCountByUserId(userId)
+        if (count == 0) {
+            val resource = safeApiCall { dataSource.callChatListUserInfo(userId) }
+
+            if (resource is Resource.Success) {
+                if (resource.data.success) {
+                    val userInfo = resource.data.chatListUserInfo
+
+                    val entity = ChatListEntity(
+                        userId = userInfo?.userId.orEmpty(),
+                        email = userInfo?.email,
+                        givenName = userInfo?.givenName,
+                        familyName = userInfo?.familyName,
+                        name = userInfo?.name,
+                        picture = userInfo?.picture,
+                        gender = userInfo?.gender,
+                        age = userInfo?.age,
+                        birthDateString = userInfo?.birthDateString,
+                        birthDateLong = userInfo?.birthDateLong,
+                        aboutMe = userInfo?.aboutMe,
+                        localNatives = userInfo?.localNatives ?: emptyList(),
+                        localLearnings = userInfo?.localLearnings ?: emptyList(),
+                        messages = socket.messages,
+                        dateTimeString = LanguageCenterUtils.getDateTimeFormat(socket.dateTimeLong),
+                        dateTimeLong = socket.dateTimeLong,
+                    )
+                    dataSource.saveChatListEntity(entity)
+                }
             }
+        } else {
+            dataSource.updateChatListNewMessage(
+                userId = userId.orEmpty(),
+                messages = socket.messages,
+                dateTimeString = LanguageCenterUtils.getDateTimeFormat(socket.dateTimeLong),
+                dateTimeLong = socket.dateTimeLong,
+            )
         }
     }
 

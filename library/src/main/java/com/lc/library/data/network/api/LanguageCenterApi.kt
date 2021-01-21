@@ -37,7 +37,7 @@ interface LanguageCenterApi {
     suspend fun callSendMessage(@Body sendMessageRequest: SendMessageRequest): SendMessageResponse
 
     @GET("api/chats/chat-list-user-info")
-    suspend fun callChatListUserInfo(@Query("otherUserId") otherUserId: String): ChatListUserInfoResponse
+    suspend fun callChatListUserInfo(@Query("otherUserId") otherUserId: String?): ChatListUserInfoResponse
 
     @POST("api/chat-group/add-chat-group")
     suspend fun callAddChatGroup(@Body addChatGroupRequest: AddChatGroupRequest): BaseResponse

@@ -60,6 +60,15 @@ interface LanguageCenterDataSource {
 
     fun getDbChatListLiveData(): LiveData<List<ChatListEntity>>
 
+    suspend fun getDbChatListCountByUserId(userId: String?): Int
+
+    suspend fun updateChatListNewMessage(
+        userId: String,
+        messages: String,
+        dateTimeString: String,
+        dateTimeLong: Long
+    )
+
     suspend fun deleteChatList()
 
     suspend fun callSignIn(request: SignInRequest): SignInResponse
@@ -80,7 +89,7 @@ interface LanguageCenterDataSource {
 
     suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): SendMessageResponse
 
-    suspend fun callChatListUserInfo(otherUserId: String): ChatListUserInfoResponse
+    suspend fun callChatListUserInfo(otherUserId: String?): ChatListUserInfoResponse
 
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse
 

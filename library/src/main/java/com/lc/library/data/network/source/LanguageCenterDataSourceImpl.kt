@@ -113,6 +113,20 @@ class LanguageCenterDataSourceImpl(
         return db.getChatListDao().getDbChatListLiveData()
     }
 
+    override suspend fun getDbChatListCountByUserId(userId: String?): Int {
+        return db.getChatListDao().getDbChatListCountByUserId(userId)
+    }
+
+    override suspend fun updateChatListNewMessage(
+        userId: String,
+        messages: String,
+        dateTimeString: String,
+        dateTimeLong: Long
+    ) {
+        return db.getChatListDao()
+            .updateChatListNewMessage(userId, messages, dateTimeString, dateTimeLong)
+    }
+
     override suspend fun deleteChatList() {
         return db.getChatListDao().deleteChatList()
     }
@@ -154,7 +168,7 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callSendMessage(sendMessageRequest)
     }
 
-    override suspend fun callChatListUserInfo(otherUserId: String): ChatListUserInfoResponse {
+    override suspend fun callChatListUserInfo(otherUserId: String?): ChatListUserInfoResponse {
         return provider.getLanguageCenterDataSource().callChatListUserInfo(otherUserId)
     }
 
