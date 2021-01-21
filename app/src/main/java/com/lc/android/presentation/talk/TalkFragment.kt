@@ -18,7 +18,7 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
 
     private val viewModel by viewModel<TalkViewModel>()
     private val args by navArgs<TalkFragmentArgs>()
-    private val mAdapter by lazy { TalkAdapter(args.userInfo.userId) }
+    private val mAdapter by lazy { TalkAdapter(args.userInfo.picture) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,8 +55,10 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
             .observe(viewLifecycleOwner, { talkEntity ->
                 if (talkEntity == null) return@observe
 
-                mAdapter.submitList(talkEntity)
-                recyclerView.smoothScrollToPosition(talkEntity.size)
+                if (talkEntity.isNotEmpty()) {
+                    mAdapter.submitList(talkEntity)
+                    recyclerView.smoothScrollToPosition(talkEntity.lastIndex)
+                }
             })
 
         viewModel.error.observeError()

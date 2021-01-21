@@ -158,14 +158,15 @@ class LanguageCenterRepositoryImpl(
     override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse> {
         val talkId = LanguageCenterUtils.getRandomUUID()
         val fromUserId = dataSource.getDbUserInfo()?.userId
+        val dateTimeLong = LanguageCenterUtils.getCurrentTimeMillis()
         val entity = TalkEntity(
             talkId = talkId,
             fromUserId = fromUserId.orEmpty(),
             toUserId = sendMessageRequest.toUserId.orEmpty(),
             messages = sendMessageRequest.messages.orEmpty(),
-            dateString = "",
-            timeString = "",
-            dateTimeLong = LanguageCenterUtils.getCurrentTimeMillis(),
+            dateString = LanguageCenterUtils.getDateFormat(dateTimeLong),
+            timeString = LanguageCenterUtils.getTimeFormat(dateTimeLong),
+            dateTimeLong = dateTimeLong,
             isRead = false,
             isSendMessage = false,
             isSendType = true,
