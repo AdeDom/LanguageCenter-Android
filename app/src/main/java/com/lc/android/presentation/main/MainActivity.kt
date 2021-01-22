@@ -21,8 +21,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.incomingSendMessageSocket()
-
         initialView()
     }
 
@@ -70,6 +68,12 @@ class MainActivity : BaseActivity() {
 
     private fun hideBottomNav() {
         bottomNavigationView.visibility = View.GONE
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.incomingSendMessageSocket()
     }
 
 }

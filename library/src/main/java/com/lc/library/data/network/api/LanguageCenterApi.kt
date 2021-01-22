@@ -36,7 +36,7 @@ interface LanguageCenterApi {
     @POST("api/chats/send-message")
     suspend fun callSendMessage(@Body sendMessageRequest: SendMessageRequest): SendMessageResponse
 
-    @GET("api/chats/chat-list-user-info")
+    @GET("api/chats/chatListUserInfo")
     suspend fun callChatListUserInfo(@Query("otherUserId") otherUserId: String?): ChatListUserInfoResponse
 
     @POST("api/chat-group/add-chat-group")
@@ -45,8 +45,8 @@ interface LanguageCenterApi {
     @GET("api/chat-group/fetch-chat-group")
     suspend fun callFetchChatGroup(): FetchChatGroupResponse
 
-    @GET("api/chat-group/fetch-chat-group-detail/{chatGroupId}")
-    suspend fun callFetchChatGroupDetail(@Path("chatGroupId") chatGroupId: Int?): FetchChatGroupDetailResponse
+    @GET("api/chat-group/fetchChatGroupDetail")
+    suspend fun callFetchChatGroupDetail(@Query("chatGroupId") chatGroupId: Int?): FetchChatGroupDetailResponse
 
     @PUT("api/chat-group/rename-chat-group")
     suspend fun callRenameChatGroup(@Body renameChatGroupRequest: RenameChatGroupRequest): BaseResponse
