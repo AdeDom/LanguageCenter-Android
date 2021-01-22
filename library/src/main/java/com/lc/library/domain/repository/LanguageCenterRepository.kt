@@ -1,5 +1,6 @@
 package com.lc.library.domain.repository
 
+import com.lc.library.data.db.entities.ChatListEntity
 import com.lc.library.data.db.entities.FriendInfoEntity
 import com.lc.library.data.repository.Resource
 import com.lc.server.models.request.*
@@ -10,6 +11,8 @@ interface LanguageCenterRepository {
     suspend fun callSignIn(request: SignInRequest): Resource<SignInResponse>
 
     suspend fun signOut()
+
+    suspend fun saveChatListEntity(chatListEntity: ChatListEntity)
 
     suspend fun callGuideUpdateProfile(guideUpdateProfileRequest: GuideUpdateProfileRequest): Resource<BaseResponse>
 

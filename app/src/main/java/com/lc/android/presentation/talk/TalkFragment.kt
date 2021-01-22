@@ -48,6 +48,10 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
     }
 
     private fun observeViewModel() {
+        viewModel.attachFirstTime.observe {
+            viewModel.saveChatList(args.userInfo)
+        }
+
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
             ibSendMessage.isClickable = state.isSendMessage

@@ -27,6 +27,7 @@ private val domainModule = module {
     single<GetTalkUseCase> { GetTalkUseCaseImpl(get()) }
     single<GetChatListUseCase> { GetChatListUseCaseImpl(get()) }
     single<ReadMessagesUseCase> { ReadMessagesUseCaseImpl(get()) }
+    single<SaveChatListUseCase> { SaveChatListUseCaseImpl(get()) }
 
 }
 

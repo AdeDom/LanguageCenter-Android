@@ -91,6 +91,11 @@ class LanguageCenterRepositoryImpl(
         dataSource.deleteChatList()
     }
 
+    override suspend fun saveChatListEntity(chatListEntity: ChatListEntity) {
+        val count = dataSource.getDbChatListCountByUserId(chatListEntity.userId)
+        if (count == 0) dataSource.saveChatListEntity(chatListEntity)
+    }
+
     override suspend fun callGuideUpdateProfile(guideUpdateProfileRequest: GuideUpdateProfileRequest): Resource<BaseResponse> {
         val response = safeApiCall { dataSource.callGuideUpdateProfile(guideUpdateProfileRequest) }
 
@@ -196,8 +201,13 @@ class LanguageCenterRepositoryImpl(
                     )
                     dataSource.outgoingSendMessageSocket(talkSendMessageWebSocket)
 
-                    // save chat list
-                    saveChatListDatabase(talkSendMessageWebSocket)
+                    // update chat list
+                    dataSource.updateChatListNewMessage(
+                        userId = sendMessageRequest.toUserId.orEmpty(),
+                        messages = sendMessageRequest.messages.orEmpty(),
+                        dateTimeString = LanguageCenterUtils.getDateTimeFormat(it.dateTimeLong),
+                        dateTimeLong = it.dateTimeLong,
+                    )
                 }
             }
         }
