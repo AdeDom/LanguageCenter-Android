@@ -175,15 +175,30 @@ class LanguageCenterRepositoryImpl(
         val resource = safeApiCall { dataSource.callSendMessage(request) }
 
         if (resource is Resource.Success) {
-            if (resource.data.success) {
-                val talk = TalkSendMessageWebSocket(
-                    talkId = talkId,
-                    fromUserId = fromUserId.orEmpty(),
-                    toUserId = sendMessageRequest.toUserId.orEmpty(),
-                    messages = sendMessageRequest.messages.orEmpty(),
-                    dateTimeLong = resource.data.dateTimeLong,
-                )
-                dataSource.outgoingSendMessageSocket(talk)
+            resource.data.also {
+                if (it.success) {
+                    // update send message
+                    dataSource.updateTalkSendMessage(
+                        talkId = talkId,
+                        dateString = LanguageCenterUtils.getDateFormat(it.dateTimeLong),
+                        timeString = LanguageCenterUtils.getTimeFormat(it.dateTimeLong),
+                        dateTimeLong = it.dateTimeLong,
+                        isSendMessage = true,
+                    )
+
+                    // call web socket
+                    val talkSendMessageWebSocket = TalkSendMessageWebSocket(
+                        talkId = talkId,
+                        fromUserId = fromUserId.orEmpty(),
+                        toUserId = sendMessageRequest.toUserId.orEmpty(),
+                        messages = sendMessageRequest.messages.orEmpty(),
+                        dateTimeLong = it.dateTimeLong,
+                    )
+                    dataSource.outgoingSendMessageSocket(talkSendMessageWebSocket)
+
+                    // save chat list
+                    saveChatListDatabase(talkSendMessageWebSocket)
+                }
             }
         }
 
@@ -281,35 +296,29 @@ class LanguageCenterRepositoryImpl(
     override suspend fun incomingSendMessageSocket() {
         dataSource.incomingSendMessageSocket {
             sendMessageCompleted(it)
+            updateSendMessage(it)
             saveChatListDatabase(it)
         }
     }
 
     private suspend fun sendMessageCompleted(socket: TalkSendMessageWebSocket) {
-        val count = dataSource.getDbCountTalkByTalkId(socket.talkId)
-        if (count == 0) {
-            val entity = TalkEntity(
-                talkId = socket.talkId,
-                fromUserId = socket.fromUserId,
-                toUserId = socket.toUserId,
-                messages = socket.messages,
-                dateString = LanguageCenterUtils.getDateFormat(socket.dateTimeLong),
-                timeString = LanguageCenterUtils.getTimeFormat(socket.dateTimeLong),
-                dateTimeLong = socket.dateTimeLong,
-                isRead = false,
-                isSendMessage = true,
-                isSendType = false,
-            )
-            dataSource.saveTalk(entity)
-        } else {
-            dataSource.updateTalkSendMessage(
-                talkId = socket.talkId,
-                dateString = LanguageCenterUtils.getDateFormat(socket.dateTimeLong),
-                timeString = LanguageCenterUtils.getTimeFormat(socket.dateTimeLong),
-                dateTimeLong = socket.dateTimeLong,
-                isSendMessage = true,
-            )
-        }
+        val entity = TalkEntity(
+            talkId = socket.talkId,
+            fromUserId = socket.fromUserId,
+            toUserId = socket.toUserId,
+            messages = socket.messages,
+            dateString = LanguageCenterUtils.getDateFormat(socket.dateTimeLong),
+            timeString = LanguageCenterUtils.getTimeFormat(socket.dateTimeLong),
+            dateTimeLong = socket.dateTimeLong,
+            isRead = false,
+            isSendMessage = true,
+            isSendType = false,
+        )
+        dataSource.saveTalk(entity)
+    }
+
+    private suspend fun updateSendMessage(socket: TalkSendMessageWebSocket) {
+        dataSource.callUpdateSendMessage(socket.talkId)
     }
 
     private suspend fun saveChatListDatabase(socket: TalkSendMessageWebSocket) {

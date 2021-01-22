@@ -180,6 +180,10 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callReadMessages(readUserId)
     }
 
+    override suspend fun callUpdateSendMessage(talkId: String?): BaseResponse {
+        return provider.getLanguageCenterDataSource().callUpdateSendMessage(talkId)
+    }
+
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse {
         return provider.getLanguageCenterDataSource().callAddChatGroup(addChatGroupRequest)
     }
