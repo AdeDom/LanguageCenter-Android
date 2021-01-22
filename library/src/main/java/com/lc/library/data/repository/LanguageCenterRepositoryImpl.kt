@@ -10,6 +10,7 @@ import com.lc.server.models.model.TalkSendMessageWebSocket
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
@@ -191,6 +192,14 @@ class LanguageCenterRepositoryImpl(
                         isSendMessage = true,
                     )
 
+                    // update chat list
+                    dataSource.updateChatListNewMessage(
+                        userId = sendMessageRequest.toUserId.orEmpty(),
+                        messages = sendMessageRequest.messages.orEmpty(),
+                        dateTimeString = LanguageCenterUtils.getDateTimeFormat(it.dateTimeLong),
+                        dateTimeLong = it.dateTimeLong,
+                    )
+
                     // call web socket
                     val talkSendMessageWebSocket = TalkSendMessageWebSocket(
                         talkId = talkId,
@@ -199,15 +208,10 @@ class LanguageCenterRepositoryImpl(
                         messages = sendMessageRequest.messages.orEmpty(),
                         dateTimeLong = it.dateTimeLong,
                     )
-                    dataSource.outgoingSendMessageSocket(talkSendMessageWebSocket)
-
-                    // update chat list
-                    dataSource.updateChatListNewMessage(
-                        userId = sendMessageRequest.toUserId.orEmpty(),
-                        messages = sendMessageRequest.messages.orEmpty(),
-                        dateTimeString = LanguageCenterUtils.getDateTimeFormat(it.dateTimeLong),
-                        dateTimeLong = it.dateTimeLong,
-                    )
+                    repeat(3) {
+                        dataSource.outgoingSendMessageSocket(talkSendMessageWebSocket)
+                        delay(500)
+                    }
                 }
             }
         }
@@ -305,9 +309,12 @@ class LanguageCenterRepositoryImpl(
 
     override suspend fun incomingSendMessageSocket() {
         dataSource.incomingSendMessageSocket {
-            sendMessageCompleted(it)
-            updateSendMessage(it)
-            saveChatListDatabase(it)
+            val count = dataSource.getDbCountTalkByTalkId(it.talkId)
+            if (count == 0) {
+                sendMessageCompleted(it)
+                callReceiveMessage(it)
+                saveChatListDatabase(it)
+            }
         }
     }
 
@@ -327,8 +334,8 @@ class LanguageCenterRepositoryImpl(
         dataSource.saveTalk(entity)
     }
 
-    private suspend fun updateSendMessage(socket: TalkSendMessageWebSocket) {
-        dataSource.callUpdateSendMessage(socket.talkId)
+    private suspend fun callReceiveMessage(socket: TalkSendMessageWebSocket) {
+        dataSource.callReceiveMessage(socket.talkId)
     }
 
     private suspend fun saveChatListDatabase(socket: TalkSendMessageWebSocket) {

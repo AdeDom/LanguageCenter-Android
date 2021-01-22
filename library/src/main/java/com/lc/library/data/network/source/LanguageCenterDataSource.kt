@@ -95,7 +95,7 @@ interface LanguageCenterDataSource {
 
     suspend fun callReadMessages(readUserId: String?): BaseResponse
 
-    suspend fun callUpdateSendMessage(talkId: String?): BaseResponse
+    suspend fun callReceiveMessage(talkId: String?): BaseResponse
 
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse
 
