@@ -18,8 +18,6 @@ class TalkAdapter(
     private val picture: String?
 ) : RecyclerView.Adapter<TalkAdapter.TalkViewHolder>() {
 
-    private lateinit var messagesType: MessagesType
-
     private val asyncListDiffer =
         AsyncListDiffer(this, object : DiffUtil.ItemCallback<TalkEntity>() {
             override fun areItemsTheSame(oldItem: TalkEntity, newItem: TalkEntity): Boolean {
@@ -35,13 +33,12 @@ class TalkAdapter(
         get() = asyncListDiffer.currentList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TalkViewHolder {
-        val layout = when (messagesType) {
-            is MessagesType.ChatLeft -> R.layout.item_chat_left
-            is MessagesType.ChatRight -> R.layout.item_chat_right
+        val layout = when (viewType) {
+            CHAT_LEFT -> R.layout.item_chat_left
+            else -> R.layout.item_chat_right
         }
 
-        val view = LayoutInflater.from(parent.context)
-            .inflate(layout, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
         return TalkViewHolder(view)
     }
 
@@ -77,11 +74,8 @@ class TalkAdapter(
     override fun getItemCount(): Int = list.size
 
     override fun getItemViewType(position: Int): Int {
-        messagesType = when (list[position].isSendType) {
-            true -> MessagesType.ChatRight
-            false -> MessagesType.ChatLeft
-        }
-        return super.getItemViewType(position)
+        super.getItemViewType(position)
+        return if (list[position].isSendType) CHAT_RIGHT else CHAT_LEFT
     }
 
     fun submitList(list: List<TalkEntity>) = asyncListDiffer.submitList(list)
@@ -95,6 +89,11 @@ class TalkAdapter(
         val ivSendMessageCompleted: ImageView = itemView.findViewById(R.id.ivSendMessageCompleted)
         val animationSendMessage: LottieAnimationView =
             itemView.findViewById(R.id.animationSendMessage)
+    }
+
+    companion object {
+        const val CHAT_LEFT = 0
+        const val CHAT_RIGHT = 1
     }
 
 }
