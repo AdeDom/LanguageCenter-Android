@@ -6,6 +6,7 @@ import com.lc.android.base.BaseViewModel
 import com.lc.library.data.db.entities.TalkEntity
 import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.usecase.GetTalkUseCase
+import com.lc.library.presentation.usecase.ReadMessagesUseCase
 import com.lc.library.presentation.usecase.SendMessageUseCase
 import com.lc.server.models.request.SendMessageRequest
 import kotlinx.coroutines.launch
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 class TalkViewModel(
     private val sendMessageUseCase: SendMessageUseCase,
     private val getTalkUseCase: GetTalkUseCase,
+    private val readMessagesUseCase: ReadMessagesUseCase,
 ) : BaseViewModel<TalkViewState>(TalkViewState()) {
 
     private val _clearTextEvent = MutableLiveData<Unit>()
@@ -42,6 +44,14 @@ class TalkViewModel(
                 toUserId = toUserId,
             )
             when (val resource = sendMessageUseCase(request)) {
+                is Resource.Error -> setError(resource.throwable)
+            }
+        }
+    }
+
+    fun callReadMessages(readUserId: String?) {
+        launch {
+            when (val resource = readMessagesUseCase(readUserId)) {
                 is Resource.Error -> setError(resource.throwable)
             }
         }

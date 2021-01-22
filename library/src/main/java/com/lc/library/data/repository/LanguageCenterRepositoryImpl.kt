@@ -190,6 +190,10 @@ class LanguageCenterRepositoryImpl(
         return resource
     }
 
+    override suspend fun callReadMessages(readUserId: String?): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callReadMessages(readUserId) }
+    }
+
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callAddChatGroup(addChatGroupRequest) }
     }

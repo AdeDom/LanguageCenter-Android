@@ -39,6 +39,9 @@ interface LanguageCenterApi {
     @GET("api/chats/chatListUserInfo")
     suspend fun callChatListUserInfo(@Query("otherUserId") otherUserId: String?): ChatListUserInfoResponse
 
+    @PATCH("api/chats/read-messages/{readUserId}")
+    suspend fun callReadMessages(@Path("readUserId") readUserId: String?): BaseResponse
+
     @POST("api/chat-group/add-chat-group")
     suspend fun callAddChatGroup(@Body addChatGroupRequest: AddChatGroupRequest): BaseResponse
 

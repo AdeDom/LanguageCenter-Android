@@ -23,6 +23,8 @@ interface LanguageCenterRepository {
 
     suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse>
 
+    suspend fun callReadMessages(readUserId: String?): Resource<BaseResponse>
+
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse>
 
     suspend fun callFetchChatGroup(): Resource<FetchChatGroupResponse>

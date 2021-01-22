@@ -93,6 +93,8 @@ interface LanguageCenterDataSource {
 
     suspend fun callChatListUserInfo(otherUserId: String?): ChatListUserInfoResponse
 
+    suspend fun callReadMessages(readUserId: String?): BaseResponse
+
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse
 
     suspend fun callFetchChatGroup(): FetchChatGroupResponse

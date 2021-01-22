@@ -28,6 +28,12 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         viewEvent()
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.callReadMessages(args.userInfo.userId)
+    }
+
     private fun initialView() {
         val name = "${args.userInfo.givenName} ${args.userInfo.familyName}"
         tvName.text = name
