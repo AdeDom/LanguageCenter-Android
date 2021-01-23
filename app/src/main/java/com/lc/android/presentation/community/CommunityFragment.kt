@@ -53,7 +53,7 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
             swipeRefreshLayout.isRefreshing = state.isLoading
 
             ivPlaceHolderDefault.isVisible = state.communities.isNullOrEmpty()
-            mAdapter.setList(state.communities)
+            mAdapter.submitList(state.communities)
 
             showAlgorithm(state)
         }
