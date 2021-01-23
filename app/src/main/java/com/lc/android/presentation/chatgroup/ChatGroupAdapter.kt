@@ -3,6 +3,8 @@ package com.lc.android.presentation.chatgroup
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lc.android.R
 import com.lc.server.models.model.ChatGroup
@@ -10,9 +12,21 @@ import kotlinx.android.synthetic.main.item_chat_group.view.*
 
 class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHolder>() {
 
-    private val list by lazy { mutableListOf<ChatGroup>() }
+    private val list: MutableList<ChatGroup>
+        get() = asyncListDiffer.currentList
     private var listener: ((Int?, MutableList<ChatGroup>) -> Unit)? = null
     private var moreListener: ((ChatGroup?) -> Unit)? = null
+
+    private val asyncListDiffer =
+        AsyncListDiffer(this, object : DiffUtil.ItemCallback<ChatGroup>() {
+            override fun areItemsTheSame(oldItem: ChatGroup, newItem: ChatGroup): Boolean {
+                return oldItem.chatGroupId == newItem.chatGroupId
+            }
+
+            override fun areContentsTheSame(oldItem: ChatGroup, newItem: ChatGroup): Boolean {
+                return oldItem == newItem
+            }
+        })
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatGroupViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -21,24 +35,22 @@ class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHold
     }
 
     override fun onBindViewHolder(holder: ChatGroupViewHolder, position: Int) {
-        holder.itemView.tvChatGroupName.text = list[position].groupName
+        holder.itemView.apply {
+            tvChatGroupName.text = list[position].groupName
 
-        holder.itemView.setOnClickListener {
-            listener?.invoke(list[position].chatGroupId, list)
-        }
+            setOnClickListener {
+                listener?.invoke(list[position].chatGroupId, list)
+            }
 
-        holder.itemView.ibMore.setOnClickListener {
-            moreListener?.invoke(list[position])
+            ibMore.setOnClickListener {
+                moreListener?.invoke(list[position])
+            }
         }
     }
 
     override fun getItemCount(): Int = list.size
 
-    fun setList(list: List<ChatGroup>) {
-        this.list.clear()
-        this.list.addAll(list)
-        notifyDataSetChanged()
-    }
+    fun submitList(list: List<ChatGroup>) = asyncListDiffer.submitList(list)
 
     fun setListener(listener: ((Int?, MutableList<ChatGroup>) -> Unit)?) {
         this.listener = listener

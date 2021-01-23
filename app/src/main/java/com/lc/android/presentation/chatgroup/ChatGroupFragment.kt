@@ -49,7 +49,7 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
             fab.isClickable = state.isClickable
 
             ivPlaceHolderDefault.isVisible = state.chatGroups.isNullOrEmpty()
-            mAdapter.setList(state.chatGroups)
+            mAdapter.submitList(state.chatGroups)
         }
 
         viewModel.chatGroupEvent.observe { response ->
