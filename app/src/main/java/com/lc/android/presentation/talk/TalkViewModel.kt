@@ -7,7 +7,6 @@ import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.library.data.db.entities.ChatListEntity
 import com.lc.library.data.db.entities.TalkEntity
 import com.lc.library.data.repository.Resource
-import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.presentation.usecase.*
 import com.lc.server.models.model.UserInfoLocale
 import com.lc.server.models.request.ResendMessageRequest
@@ -20,7 +19,8 @@ class TalkViewModel(
     private val readMessagesUseCase: ReadMessagesUseCase,
     private val saveChatListUseCase: SaveChatListUseCase,
     private val resendMessageUseCase: ResendMessageUseCase,
-    private val repository: LanguageCenterRepository,
+    private val talkWebSocketsUseCase: TalkWebSocketsUseCase,
+    private val fetchTalkUnreceivedUseCase: FetchTalkUnreceivedUseCase,
 ) : BaseViewModel<TalkViewState>(TalkViewState()) {
 
     private val _clearTextEvent = MutableLiveData<Unit>()
@@ -53,7 +53,8 @@ class TalkViewModel(
                 is Resource.Error -> setError(resource.throwable)
                 null -> {
                     setError(Throwable("Web sockets is null"))
-                    reIncomingWebSockets()
+                    callFetchTalkUnreceived()
+                    incomingSendMessageSocket()
                 }
             }
         }
@@ -113,16 +114,25 @@ class TalkViewModel(
                 is Resource.Error -> setError(resource.throwable)
                 null -> {
                     setError(Throwable("Web sockets is null"))
-                    reIncomingWebSockets()
+                    callFetchTalkUnreceived()
+                    incomingSendMessageSocket()
                 }
             }
         }
     }
 
-    private fun reIncomingWebSockets() {
+    fun incomingSendMessageSocket() {
         launch {
-            repository.incomingSendMessageSocket()
-            reIncomingWebSockets()
+            talkWebSocketsUseCase()
+            incomingSendMessageSocket()
+        }
+    }
+
+    fun callFetchTalkUnreceived() {
+        launch {
+            when (val resource = fetchTalkUnreceivedUseCase()) {
+                is Resource.Error -> setError(resource.throwable)
+            }
         }
     }
 

@@ -34,6 +34,8 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         super.onStart()
 
         viewModel.callReadMessages(args.userInfo.userId)
+        viewModel.incomingSendMessageSocket()
+        viewModel.callFetchTalkUnreceived()
     }
 
     private fun initialView() {
