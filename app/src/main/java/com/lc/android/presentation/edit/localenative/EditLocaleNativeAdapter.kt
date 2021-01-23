@@ -28,35 +28,37 @@ class EditLocaleNativeAdapter :
     override fun onBindViewHolder(holder: EditLocaleNativeViewHolder, position: Int) {
         val (locale, level, isChecked) = list[position]
 
-        holder.itemView.tvLocale.text = locale?.toUpperCase(Locale.getDefault())
-        holder.itemView.tvLevel.text = "$level%"
-        holder.itemView.checkBox.isChecked = isChecked
-        holder.itemView.seekBar.progress = level
-        holder.itemView.seekBar.isVisible = isChecked
-        when (locale?.toLowerCase(Locale.getDefault())) {
-            "th" -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_thailand)
-            "en" -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_united_kingdom)
-            else -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_world)
+        holder.itemView.apply {
+            tvLocale.text = locale?.toUpperCase(Locale.getDefault())
+            tvLevel.text = "$level%"
+            checkBox.isChecked = isChecked
+            seekBar.progress = level
+            seekBar.isVisible = isChecked
+            when (locale?.toLowerCase(Locale.getDefault())) {
+                "th" -> ivLocale.setImageResource(R.drawable.ic_thailand)
+                "en" -> ivLocale.setImageResource(R.drawable.ic_united_kingdom)
+                else -> ivLocale.setImageResource(R.drawable.ic_world)
+            }
+
+            checkBox.setOnCheckedChangeListener { _, b ->
+                list[position] = list[position].copy(isChecked = b)
+                seekBar.isVisible = b
+            }
+
+            seekBar.setOnSeekBarChangeListener(object :
+                SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, b: Boolean) {
+                    list[position] = list[position].copy(level = progress)
+                    tvLevel.text = "$progress%"
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                }
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                }
+            })
         }
-
-        holder.itemView.checkBox.setOnCheckedChangeListener { _, b ->
-            list[holder.adapterPosition] = list[holder.adapterPosition].copy(isChecked = b)
-            holder.itemView.seekBar.isVisible = b
-        }
-
-        holder.itemView.seekBar.setOnSeekBarChangeListener(object :
-            SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, b: Boolean) {
-                list[holder.adapterPosition] = list[holder.adapterPosition].copy(level = progress)
-                holder.itemView.tvLevel.text = "$progress%"
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
-        })
     }
 
     override fun getItemCount(): Int = list.size
