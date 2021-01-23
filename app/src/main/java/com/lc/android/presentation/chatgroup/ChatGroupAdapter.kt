@@ -36,14 +36,16 @@ class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHold
 
     override fun onBindViewHolder(holder: ChatGroupViewHolder, position: Int) {
         holder.itemView.apply {
-            tvChatGroupName.text = list[position].groupName
+            val item = list[position]
+
+            tvChatGroupName.text = item.groupName
 
             setOnClickListener {
-                listener?.invoke(list[position].chatGroupId, list)
+                listener?.invoke(item.chatGroupId, list)
             }
 
             ibMore.setOnClickListener {
-                moreListener?.invoke(list[position])
+                moreListener?.invoke(item)
             }
         }
     }

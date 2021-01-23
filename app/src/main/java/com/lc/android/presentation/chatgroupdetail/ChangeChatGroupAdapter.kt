@@ -36,10 +36,12 @@ class ChangeChatGroupAdapter :
 
     override fun onBindViewHolder(holder: ChangeChatGroupViewHolder, position: Int) {
         holder.itemView.apply {
-            tvChatGroup.text = list[position].groupName
+            val item = list[position]
+
+            tvChatGroup.text = item.groupName
 
             tvChatGroup.setOnClickListener {
-                listener?.invoke(list[position])
+                listener?.invoke(item)
             }
         }
     }
