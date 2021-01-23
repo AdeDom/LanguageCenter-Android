@@ -51,7 +51,7 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
             fab.isClickable = state.isClickable
 
             ivPlaceHolderDefault.isVisible = state.chatGroupDetails.isNullOrEmpty()
-            mAdapter.setList(state.chatGroupDetails)
+            mAdapter.submitList(state.chatGroupDetails)
         }
 
         viewModel.chatGroupDetailEvent.observe { response ->
