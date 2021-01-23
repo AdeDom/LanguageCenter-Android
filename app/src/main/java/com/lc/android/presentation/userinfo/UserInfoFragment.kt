@@ -67,8 +67,8 @@ class UserInfoFragment : BaseFragment(R.layout.fragment_user_info) {
         tvAge.text = getString(R.string.str_age, age)
         tvAboutMe.text = getString(R.string.str_about_me, aboutMe)
         ivPicture.load(picture)
-        mLocalNativeAdapter.setList(localNatives)
-        mLocalLearningAdapter.setList(localLearnings)
+        mLocalNativeAdapter.submitList(localNatives)
+        mLocalLearningAdapter.submitList(localLearnings)
     }
 
     private fun observeViewModel() {
