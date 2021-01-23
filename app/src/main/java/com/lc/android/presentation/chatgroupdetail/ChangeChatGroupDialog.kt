@@ -28,7 +28,7 @@ class ChangeChatGroupDialog : BaseBottomSheetDialog(R.layout.dialog_change_chat_
             adapter = mAdapter
         }
 
-        mAdapter.setList(args.otherChatGroups.toList())
+        mAdapter.submitList(args.otherChatGroups.toList())
 
         mAdapter.setListener {
             findNavController().popBackStack()
