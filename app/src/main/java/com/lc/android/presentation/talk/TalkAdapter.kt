@@ -18,6 +18,8 @@ class TalkAdapter(
     private val picture: String?
 ) : RecyclerView.Adapter<TalkAdapter.TalkViewHolder>() {
 
+    private var resendMessageListener: ((TalkEntity) -> Unit)? = null
+
     private val asyncListDiffer =
         AsyncListDiffer(this, object : DiffUtil.ItemCallback<TalkEntity>() {
             override fun areItemsTheSame(oldItem: TalkEntity, newItem: TalkEntity): Boolean {
@@ -68,6 +70,13 @@ class TalkAdapter(
             // is send message
             ivSendMessageCompleted.isVisible = talkEntity.isSendMessage
             animationSendMessage.isVisible = !talkEntity.isSendMessage
+
+            // event
+            if (!talkEntity.isSendMessage) {
+                tvMessage.setOnClickListener {
+                    resendMessageListener?.invoke(talkEntity)
+                }
+            }
         }
     }
 
@@ -79,6 +88,10 @@ class TalkAdapter(
     }
 
     fun submitList(list: List<TalkEntity>) = asyncListDiffer.submitList(list)
+
+    fun setResendMessageListener(resendMessageListener: (TalkEntity) -> Unit) {
+        this.resendMessageListener = resendMessageListener
+    }
 
     inner class TalkViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvMessage: TextView = itemView.findViewById(R.id.tvMessage)

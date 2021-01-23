@@ -2,6 +2,7 @@ package com.lc.library.domain.repository
 
 import com.lc.library.data.db.entities.ChatListEntity
 import com.lc.library.data.db.entities.FriendInfoEntity
+import com.lc.library.data.model.ResendMessageRequest
 import com.lc.library.data.repository.Resource
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
@@ -27,6 +28,8 @@ interface LanguageCenterRepository {
     suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse>
 
     suspend fun callReadMessages(readUserId: String?): Resource<BaseResponse>
+
+    suspend fun callResendMessage(resendMessageRequest: ResendMessageRequest): Resource<BaseResponse>
 
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse>
 

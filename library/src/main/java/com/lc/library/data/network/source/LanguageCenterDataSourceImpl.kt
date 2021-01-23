@@ -3,6 +3,7 @@ package com.lc.library.data.network.source
 import androidx.lifecycle.LiveData
 import com.lc.library.data.db.AppDatabase
 import com.lc.library.data.db.entities.*
+import com.lc.library.data.model.ResendMessageRequest
 import com.lc.server.models.model.TalkSendMessageWebSocket
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
@@ -182,6 +183,10 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun callReceiveMessage(talkId: String?): BaseResponse {
         return provider.getLanguageCenterDataSource().callReceiveMessage(talkId)
+    }
+
+    override suspend fun callResendMessage(resendMessageRequest: ResendMessageRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource().callResendMessage(resendMessageRequest)
     }
 
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse {

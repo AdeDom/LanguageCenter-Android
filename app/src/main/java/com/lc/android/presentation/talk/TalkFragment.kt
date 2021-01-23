@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +27,7 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         initialView()
         observeViewModel()
         viewEvent()
+        resultListener()
     }
 
     override fun onStart() {
@@ -83,12 +85,26 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
 
         ivPicture.setOnClickListener { navToUserInfo() }
         tvName.setOnClickListener { navToUserInfo() }
+
+        mAdapter.setResendMessageListener {
+            viewModel.setStateResendMessageTalkEntity(it)
+            findNavController().navigate(R.id.action_talkFragment_to_talkMoreDialog)
+        }
     }
 
     private fun navToUserInfo() {
         val navDirections = TalkFragmentDirections
             .actionTalkFragmentToUserInfoFragment(null, true, args.userInfo)
         findNavController().navigate(navDirections)
+    }
+
+    private fun resultListener() {
+        setFragmentResultListener(TalkMoreDialog.TALK_MORE) { _, bundle ->
+            val talkMoreKey = bundle.getString(TalkMoreDialog.TALK_MORE_KEY)
+            when (talkMoreKey) {
+                TalkMoreDialog.RESEND_MESSAGE -> viewModel.callResendMessage()
+            }
+        }
     }
 
 }

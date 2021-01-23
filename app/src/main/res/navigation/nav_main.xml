@@ -239,6 +239,14 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_talkFragment_to_talkMoreDialog"
+            app:destination="@id/talkMoreDialog" />
     </fragment>
+    <dialog
+        android:id="@+id/talkMoreDialog"
+        android:name="com.lc.android.presentation.talk.TalkMoreDialog"
+        android:label="TalkMoreDialog"
+        tools:layout="@layout/dialog_talk_more" />
 
 </navigation>

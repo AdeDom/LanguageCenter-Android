@@ -1,5 +1,6 @@
 package com.lc.library.data.network.api
 
+import com.lc.library.data.model.ResendMessageRequest
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
 import retrofit2.http.*
@@ -44,6 +45,9 @@ interface LanguageCenterApi {
 
     @PATCH("api/chats/receive-message/{talkId}")
     suspend fun callReceiveMessage(@Path("talkId") talkId: String?): BaseResponse
+
+    @POST("api/chats/resend-message")
+    suspend fun callResendMessage(@Body resendMessageRequest: ResendMessageRequest): BaseResponse
 
     @POST("api/chat-group/add-chat-group")
     suspend fun callAddChatGroup(@Body addChatGroupRequest: AddChatGroupRequest): BaseResponse
