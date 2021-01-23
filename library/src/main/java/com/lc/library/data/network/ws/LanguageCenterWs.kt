@@ -24,7 +24,6 @@ class LanguageCenterWs(
 
     suspend fun incomingSendMessageSocket(listener: suspend (TalkSendMessageWebSocket) -> Unit) {
         client.wss(
-            method = HttpMethod.Get,
             host = "languagecenter.herokuapp.com",
             port = DEFAULT_PORT,
             path = "/ws/chats/send-message",
@@ -50,9 +49,9 @@ class LanguageCenterWs(
         }
     }
 
-    suspend fun outgoingSendMessageSocket(talkSendMessageWebSocket: TalkSendMessageWebSocket) {
+    suspend fun outgoingSendMessageSocket(talkSendMessageWebSocket: TalkSendMessageWebSocket): Unit? {
         val toJson = Gson().toJson(talkSendMessageWebSocket)
-        sendMessageSocket?.outgoing?.send(Frame.Text(toJson))
+        return sendMessageSocket?.outgoing?.send(Frame.Text(toJson))
     }
 
 }

@@ -25,11 +25,11 @@ interface LanguageCenterRepository {
 
     suspend fun callAddAlgorithm(addAlgorithmRequest: AddAlgorithmRequest): Resource<BaseResponse>
 
-    suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse>
+    suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse>?
 
     suspend fun callReadMessages(readUserId: String?): Resource<BaseResponse>
 
-    suspend fun callResendMessage(resendMessageRequest: ResendMessageRequest): Resource<BaseResponse>
+    suspend fun callResendMessage(resendMessageRequest: ResendMessageRequest): Resource<BaseResponse>?
 
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse>
 

@@ -9,7 +9,7 @@ import com.lc.server.models.response.BaseResponse
 class ResendMessageUseCaseImpl(
     private val repository: LanguageCenterRepository,
 ) : ResendMessageUseCase {
-    override suspend fun invoke(resendMessageRequest: ResendMessageRequest): Resource<BaseResponse> {
+    override suspend fun invoke(resendMessageRequest: ResendMessageRequest): Resource<BaseResponse>? {
         return repository.callResendMessage(resendMessageRequest)
     }
 }

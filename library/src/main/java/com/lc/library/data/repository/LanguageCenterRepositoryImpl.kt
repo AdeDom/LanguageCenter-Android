@@ -160,7 +160,7 @@ class LanguageCenterRepositoryImpl(
         return safeApiCall { dataSource.callAddAlgorithm(addAlgorithmRequest) }
     }
 
-    override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse> {
+    override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse>? {
         val talkId = LanguageCenterUtils.getRandomUUID()
         val fromUserId = dataSource.getDbUserInfo()?.userId
         val dateTimeLong = LanguageCenterUtils.getCurrentTimeMillis()
@@ -189,7 +189,7 @@ class LanguageCenterRepositoryImpl(
                     sendMessageRequest.toUserId,
                     sendMessageRequest.messages,
                     resource.data.dateTimeLong
-                )
+                ) ?: return null
             }
         }
 
@@ -200,13 +200,19 @@ class LanguageCenterRepositoryImpl(
         return safeApiCall { dataSource.callReadMessages(readUserId) }
     }
 
-    override suspend fun callResendMessage(resendMessageRequest: ResendMessageRequest): Resource<BaseResponse> {
+    override suspend fun callResendMessage(resendMessageRequest: ResendMessageRequest): Resource<BaseResponse>? {
         val resource = safeApiCall { dataSource.callResendMessage(resendMessageRequest) }
 
         if (resource is Resource.Success) {
             if (resource.data.success) {
                 val (talkId, fromUserId, toUserId, messages, dateTimeLong) = resendMessageRequest
-                webSocketsSendMessage(talkId, fromUserId, toUserId, messages, dateTimeLong)
+                webSocketsSendMessage(
+                    talkId,
+                    fromUserId,
+                    toUserId,
+                    messages,
+                    dateTimeLong
+                ) ?: return null
             }
         }
 
@@ -219,7 +225,20 @@ class LanguageCenterRepositoryImpl(
         toUserId: String?,
         messages: String?,
         dateTimeLong: Long?,
-    ) {
+    ): Unit? {
+        // call web socket
+        val talkSendMessageWebSocket = TalkSendMessageWebSocket(
+            talkId = talkId.orEmpty(),
+            fromUserId = fromUserId.orEmpty(),
+            toUserId = toUserId.orEmpty(),
+            messages = messages.orEmpty(),
+            dateTimeLong = dateTimeLong ?: 0,
+        )
+        repeat(3) {
+            dataSource.outgoingSendMessageSocket(talkSendMessageWebSocket) ?: return null
+            delay(500)
+        }
+
         // update send message
         dataSource.updateTalkSendMessage(
             talkId = talkId.orEmpty(),
@@ -230,25 +249,12 @@ class LanguageCenterRepositoryImpl(
         )
 
         // update chat list
-        dataSource.updateChatListNewMessage(
+        return dataSource.updateChatListNewMessage(
             userId = toUserId.orEmpty(),
             messages = messages.orEmpty(),
             dateTimeString = LanguageCenterUtils.getDateTimeFormat(dateTimeLong ?: 0),
             dateTimeLong = dateTimeLong ?: 0,
         )
-
-        // call web socket
-        val talkSendMessageWebSocket = TalkSendMessageWebSocket(
-            talkId = talkId.orEmpty(),
-            fromUserId = fromUserId.orEmpty(),
-            toUserId = toUserId.orEmpty(),
-            messages = messages.orEmpty(),
-            dateTimeLong = dateTimeLong ?: 0,
-        )
-        repeat(3) {
-            dataSource.outgoingSendMessageSocket(talkSendMessageWebSocket)
-            delay(500)
-        }
     }
 
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse> {

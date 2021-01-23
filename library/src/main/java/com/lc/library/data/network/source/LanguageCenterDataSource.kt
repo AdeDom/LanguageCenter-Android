@@ -120,6 +120,6 @@ interface LanguageCenterDataSource {
 
     suspend fun incomingSendMessageSocket(listener: suspend (TalkSendMessageWebSocket) -> Unit)
 
-    suspend fun outgoingSendMessageSocket(talkSendMessageWebSocket: TalkSendMessageWebSocket)
+    suspend fun outgoingSendMessageSocket(talkSendMessageWebSocket: TalkSendMessageWebSocket): Unit?
 
 }

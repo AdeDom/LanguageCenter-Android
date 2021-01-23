@@ -8,6 +8,7 @@ import com.lc.library.data.db.entities.ChatListEntity
 import com.lc.library.data.db.entities.TalkEntity
 import com.lc.library.data.model.ResendMessageRequest
 import com.lc.library.data.repository.Resource
+import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.presentation.usecase.*
 import com.lc.server.models.model.UserInfoLocale
 import com.lc.server.models.request.SendMessageRequest
@@ -19,6 +20,7 @@ class TalkViewModel(
     private val readMessagesUseCase: ReadMessagesUseCase,
     private val saveChatListUseCase: SaveChatListUseCase,
     private val resendMessageUseCase: ResendMessageUseCase,
+    private val repository: LanguageCenterRepository,
 ) : BaseViewModel<TalkViewState>(TalkViewState()) {
 
     private val _clearTextEvent = MutableLiveData<Unit>()
@@ -49,6 +51,10 @@ class TalkViewModel(
             )
             when (val resource = sendMessageUseCase(request)) {
                 is Resource.Error -> setError(resource.throwable)
+                null -> {
+                    setError(Throwable("Web sockets is null"))
+                    reIncomingWebSockets()
+                }
             }
         }
     }
@@ -105,7 +111,18 @@ class TalkViewModel(
             )
             when (val resource = resendMessageUseCase(request)) {
                 is Resource.Error -> setError(resource.throwable)
+                null -> {
+                    setError(Throwable("Web sockets is null"))
+                    reIncomingWebSockets()
+                }
             }
+        }
+    }
+
+    private fun reIncomingWebSockets() {
+        launch {
+            repository.incomingSendMessageSocket()
+            reIncomingWebSockets()
         }
     }
 

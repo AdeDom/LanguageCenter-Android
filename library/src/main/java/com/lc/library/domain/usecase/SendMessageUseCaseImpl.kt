@@ -9,7 +9,7 @@ import com.lc.server.models.response.SendMessageResponse
 class SendMessageUseCaseImpl(
     private val repository: LanguageCenterRepository,
 ) : SendMessageUseCase {
-    override suspend fun invoke(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse> {
+    override suspend fun invoke(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse>? {
         return repository.callSendMessage(sendMessageRequest)
     }
 }

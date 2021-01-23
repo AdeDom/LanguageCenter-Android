@@ -231,7 +231,7 @@ class LanguageCenterDataSourceImpl(
         return provider.getWebSocketDataSource().incomingSendMessageSocket(listener)
     }
 
-    override suspend fun outgoingSendMessageSocket(talkSendMessageWebSocket: TalkSendMessageWebSocket) {
+    override suspend fun outgoingSendMessageSocket(talkSendMessageWebSocket: TalkSendMessageWebSocket): Unit? {
         return provider.getWebSocketDataSource().outgoingSendMessageSocket(talkSendMessageWebSocket)
     }
 
