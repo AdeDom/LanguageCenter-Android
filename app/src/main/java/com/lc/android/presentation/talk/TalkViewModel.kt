@@ -19,9 +19,12 @@ class TalkViewModel(
     private val readMessagesUseCase: ReadMessagesUseCase,
     private val saveChatListUseCase: SaveChatListUseCase,
     private val resendMessageUseCase: ResendMessageUseCase,
-    private val talkWebSocketsUseCase: TalkWebSocketsUseCase,
     private val fetchTalkUnreceivedUseCase: FetchTalkUnreceivedUseCase,
 ) : BaseViewModel<TalkViewState>(TalkViewState()) {
+
+    private val _talkWebSockets = MutableLiveData<Unit>().apply { value = Unit }
+    val talkWebSockets: LiveData<Unit>
+        get() = _talkWebSockets
 
     private val _clearTextEvent = MutableLiveData<Unit>()
     val clearTextEvent: LiveData<Unit>
@@ -53,8 +56,8 @@ class TalkViewModel(
                 is Resource.Error -> setError(resource.throwable)
                 null -> {
                     setError(Throwable("Web sockets is null"))
+                    _talkWebSockets.value = Unit
                     callFetchTalkUnreceived()
-                    incomingSendMessageSocket()
                 }
             }
         }
@@ -114,17 +117,10 @@ class TalkViewModel(
                 is Resource.Error -> setError(resource.throwable)
                 null -> {
                     setError(Throwable("Web sockets is null"))
+                    _talkWebSockets.value = Unit
                     callFetchTalkUnreceived()
-                    incomingSendMessageSocket()
                 }
             }
-        }
-    }
-
-    fun incomingSendMessageSocket() {
-        launch {
-            talkWebSocketsUseCase()
-            incomingSendMessageSocket()
         }
     }
 

@@ -22,6 +22,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         initialView()
+        observeViewModel()
     }
 
     private fun initialView() {
@@ -75,6 +76,12 @@ class MainActivity : BaseActivity() {
 
         viewModel.incomingSendMessageSocket()
         viewModel.callFetchTalkUnreceived()
+    }
+
+    private fun observeViewModel() {
+        viewModel.talkWebSockets.observe {
+            viewModel.incomingSendMessageSocket()
+        }
     }
 
 }

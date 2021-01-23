@@ -10,14 +10,19 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
+import com.lc.android.presentation.main.MainViewModel
 import com.lc.android.util.hideSoftKeyboard
 import com.lc.android.util.loadCircle
+import io.ktor.util.*
 import kotlinx.android.synthetic.main.fragment_talk.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@KtorExperimentalAPI
 class TalkFragment : BaseFragment(R.layout.fragment_talk) {
 
     private val viewModel by viewModel<TalkViewModel>()
+    private val sharedViewModel by sharedViewModel<MainViewModel>()
     private val args by navArgs<TalkFragmentArgs>()
     private val mAdapter by lazy { TalkAdapter(args.userInfo.picture) }
 
@@ -34,7 +39,6 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         super.onStart()
 
         viewModel.callReadMessages(args.userInfo.userId)
-        viewModel.incomingSendMessageSocket()
         viewModel.callFetchTalkUnreceived()
     }
 
@@ -74,6 +78,10 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
                     recyclerView.smoothScrollToPosition(talkEntity.lastIndex)
                 }
             })
+
+        viewModel.talkWebSockets.observe {
+            sharedViewModel.talkWebSockets()
+        }
 
         viewModel.error.observeError()
     }

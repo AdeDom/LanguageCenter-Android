@@ -1,6 +1,7 @@
 package com.lc.android.presentation.main
 
 import com.lc.android.base.BaseViewModel
+import com.lc.android.util.SingleLiveEvent
 import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.usecase.FetchTalkUnreceivedUseCase
 import com.lc.library.presentation.usecase.TalkWebSocketsUseCase
@@ -14,6 +15,8 @@ class MainViewModel(
     private val talkWebSocketsUseCase: TalkWebSocketsUseCase,
     private val fetchTalkUnreceivedUseCase: FetchTalkUnreceivedUseCase,
 ) : BaseViewModel<MainViewState>(MainViewState) {
+
+    val talkWebSockets = SingleLiveEvent<Unit>()
 
     fun setSelectPage(selectPage: String) {
         configPref.selectPage = selectPage
@@ -35,5 +38,7 @@ class MainViewModel(
             }
         }
     }
+
+    fun talkWebSockets() = talkWebSockets.call()
 
 }
