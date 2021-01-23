@@ -74,6 +74,7 @@ class MainActivity : BaseActivity() {
         super.onStart()
 
         viewModel.incomingSendMessageSocket()
+        viewModel.callFetchTalkUnreceived()
     }
 
 }

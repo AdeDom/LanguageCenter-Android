@@ -1,7 +1,6 @@
 package com.lc.library.data.repository
 
 import com.lc.library.data.db.entities.*
-import com.lc.library.data.model.ResendMessageRequest
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.PreferenceAuth
@@ -255,6 +254,32 @@ class LanguageCenterRepositoryImpl(
             dateTimeString = LanguageCenterUtils.getDateTimeFormat(dateTimeLong ?: 0),
             dateTimeLong = dateTimeLong ?: 0,
         )
+    }
+
+    override suspend fun callFetchTalkUnreceived(): Resource<FetchTalkUnreceivedResponse> {
+        val resource = safeApiCall { dataSource.callFetchTalkUnreceived() }
+
+        if (resource is Resource.Success) {
+            if (resource.data.success) {
+                resource.data.talks.forEach { talk ->
+                    val entity = TalkEntity(
+                        talkId = talk.talkId,
+                        fromUserId = talk.fromUserId,
+                        toUserId = talk.toUserId,
+                        messages = talk.messages,
+                        dateString = LanguageCenterUtils.getDateFormat(talk.dateTime),
+                        timeString = LanguageCenterUtils.getTimeFormat(talk.dateTime),
+                        dateTimeLong = talk.dateTime,
+                        isRead = talk.isRead,
+                        isSendMessage = talk.isSendMessage,
+                        isSendType = false,
+                    )
+                    dataSource.saveTalk(entity)
+                }
+            }
+        }
+
+        return resource
     }
 
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse> {

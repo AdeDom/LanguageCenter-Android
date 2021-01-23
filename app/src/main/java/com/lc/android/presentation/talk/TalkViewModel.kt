@@ -6,11 +6,11 @@ import com.lc.android.base.BaseViewModel
 import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.library.data.db.entities.ChatListEntity
 import com.lc.library.data.db.entities.TalkEntity
-import com.lc.library.data.model.ResendMessageRequest
 import com.lc.library.data.repository.Resource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.presentation.usecase.*
 import com.lc.server.models.model.UserInfoLocale
+import com.lc.server.models.request.ResendMessageRequest
 import com.lc.server.models.request.SendMessageRequest
 import kotlinx.coroutines.launch
 
