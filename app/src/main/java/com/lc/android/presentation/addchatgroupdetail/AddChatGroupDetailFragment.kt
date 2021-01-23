@@ -57,7 +57,7 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
             if (list.isNullOrEmpty()) return@observe
 
             ivPlaceHolderDefault.visibility = View.GONE
-            mAdapter.setList(list)
+            mAdapter.submitList(list)
         })
 
         viewModel.error.observeError()
