@@ -3,6 +3,8 @@ package com.lc.android.presentation.profile
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lc.android.R
 import com.lc.server.models.model.UserInfoLocale
@@ -11,7 +13,25 @@ import java.util.*
 
 class ProfileLocaleAdapter : RecyclerView.Adapter<ProfileLocaleAdapter.ProfileLocaleViewHolder>() {
 
-    private val list by lazy { mutableListOf<UserInfoLocale>() }
+    private val list: MutableList<UserInfoLocale>
+        get() = asyncListDiffer.currentList
+
+    private val asyncListDiffer =
+        AsyncListDiffer(this, object : DiffUtil.ItemCallback<UserInfoLocale>() {
+            override fun areItemsTheSame(
+                oldItem: UserInfoLocale,
+                newItem: UserInfoLocale
+            ): Boolean {
+                return oldItem.locale == newItem.locale
+            }
+
+            override fun areContentsTheSame(
+                oldItem: UserInfoLocale,
+                newItem: UserInfoLocale
+            ): Boolean {
+                return oldItem == newItem
+            }
+        })
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileLocaleViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -20,22 +40,22 @@ class ProfileLocaleAdapter : RecyclerView.Adapter<ProfileLocaleAdapter.ProfileLo
     }
 
     override fun onBindViewHolder(holder: ProfileLocaleViewHolder, position: Int) {
-        holder.itemView.tvLocale.text = list[position].locale?.toUpperCase(Locale.getDefault())
-        holder.itemView.tvLevel.text = list[position].level.toString()
-        when (list[position].locale?.toLowerCase(Locale.getDefault())) {
-            "th" -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_thailand)
-            "en" -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_united_kingdom)
-            else -> holder.itemView.ivLocale.setImageResource(R.drawable.ic_world)
+        val item = list[position]
+
+        holder.itemView.apply {
+            tvLocale.text = item.locale?.toUpperCase(Locale.getDefault())
+            tvLevel.text = item.level.toString()
+            when (item.locale?.toLowerCase(Locale.getDefault())) {
+                "th" -> ivLocale.setImageResource(R.drawable.ic_thailand)
+                "en" -> ivLocale.setImageResource(R.drawable.ic_united_kingdom)
+                else -> ivLocale.setImageResource(R.drawable.ic_world)
+            }
         }
     }
 
     override fun getItemCount(): Int = list.size
 
-    fun setList(list: List<UserInfoLocale>) {
-        this.list.clear()
-        this.list.addAll(list)
-        notifyDataSetChanged()
-    }
+    fun submitList(list: List<UserInfoLocale>) = asyncListDiffer.submitList(list)
 
     class ProfileLocaleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

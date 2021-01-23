@@ -81,8 +81,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             aboutMe?.let { tvAboutMe.text = getString(R.string.str_about_me, aboutMe) }
             ivPicture.loadCircle(picture)
 
-            mLocalNativeAdapter.setList(localNatives)
-            mLocalLearningAdapter.setList(localLearnings)
+            mLocalNativeAdapter.submitList(localNatives)
+            mLocalLearningAdapter.submitList(localLearnings)
         })
 
         viewModel.error.observeError()
