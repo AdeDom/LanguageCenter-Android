@@ -262,6 +262,7 @@ class LanguageCenterRepositoryImpl(
         if (resource is Resource.Success) {
             if (resource.data.success) {
                 resource.data.talks.forEach { talk ->
+                    // save talk
                     val entity = TalkEntity(
                         talkId = talk.talkId,
                         fromUserId = talk.fromUserId,
@@ -275,6 +276,14 @@ class LanguageCenterRepositoryImpl(
                         isSendType = false,
                     )
                     dataSource.saveTalk(entity)
+
+                    // save chat list
+                    saveChatListDatabase(
+                        fromUserId = talk.fromUserId,
+                        toUserId = talk.toUserId,
+                        messages = talk.messages,
+                        dateTimeLong = talk.dateTime,
+                    )
                 }
             }
         }
@@ -372,7 +381,12 @@ class LanguageCenterRepositoryImpl(
             if (count == 0) {
                 sendMessageCompleted(it)
                 callReceiveMessage(it)
-                saveChatListDatabase(it)
+                saveChatListDatabase(
+                    fromUserId = it.fromUserId,
+                    toUserId = it.toUserId,
+                    messages = it.messages,
+                    dateTimeLong = it.dateTimeLong,
+                )
             }
         }
     }
@@ -397,12 +411,17 @@ class LanguageCenterRepositoryImpl(
         dataSource.callReceiveMessage(socket.talkId)
     }
 
-    private suspend fun saveChatListDatabase(socket: TalkSendMessageWebSocket) {
+    private suspend fun saveChatListDatabase(
+        fromUserId: String,
+        toUserId: String,
+        messages: String,
+        dateTimeLong: Long,
+    ) {
         val getDbUserInfoUserId = dataSource.getDbUserInfo()?.userId
 
         val listUserId = mutableListOf<String>()
-        listUserId.add(socket.fromUserId)
-        listUserId.add(socket.toUserId)
+        listUserId.add(fromUserId)
+        listUserId.add(toUserId)
         val userId = listUserId.singleOrNull { it != getDbUserInfoUserId }
 
         val count = dataSource.getDbChatListCountByUserId(userId)
@@ -427,9 +446,9 @@ class LanguageCenterRepositoryImpl(
                         aboutMe = userInfo?.aboutMe,
                         localNatives = userInfo?.localNatives ?: emptyList(),
                         localLearnings = userInfo?.localLearnings ?: emptyList(),
-                        messages = socket.messages,
-                        dateTimeString = LanguageCenterUtils.getDateTimeFormat(socket.dateTimeLong),
-                        dateTimeLong = socket.dateTimeLong,
+                        messages = messages,
+                        dateTimeString = LanguageCenterUtils.getDateTimeFormat(dateTimeLong),
+                        dateTimeLong = dateTimeLong,
                     )
                     dataSource.saveChatListEntity(entity)
                 }
@@ -437,9 +456,9 @@ class LanguageCenterRepositoryImpl(
         } else {
             dataSource.updateChatListNewMessage(
                 userId = userId.orEmpty(),
-                messages = socket.messages,
-                dateTimeString = LanguageCenterUtils.getDateTimeFormat(socket.dateTimeLong),
-                dateTimeLong = socket.dateTimeLong,
+                messages = messages,
+                dateTimeString = LanguageCenterUtils.getDateTimeFormat(dateTimeLong),
+                dateTimeLong = dateTimeLong,
             )
         }
     }
