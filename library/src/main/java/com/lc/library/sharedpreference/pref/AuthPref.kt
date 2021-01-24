@@ -1,6 +1,6 @@
 package com.lc.library.sharedpreference.pref
 
-interface PreferenceAuth {
+interface AuthPref {
     var accessToken: String
     var refreshToken: String
 }

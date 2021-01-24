@@ -4,14 +4,14 @@ import com.lc.android.base.BaseViewModel
 import com.lc.android.util.SingleLiveEvent
 import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.usecase.FetchTalkUnreceivedUseCase
+import com.lc.library.presentation.usecase.FilePrefUseCase
 import com.lc.library.presentation.usecase.TalkWebSocketsUseCase
-import com.lc.library.sharedpreference.pref.ConfigPref
 import io.ktor.util.*
 import kotlinx.coroutines.launch
 
 @KtorExperimentalAPI
 class MainViewModel(
-    private val configPref: ConfigPref,
+    private val filePrefUseCase: FilePrefUseCase,
     private val talkWebSocketsUseCase: TalkWebSocketsUseCase,
     private val fetchTalkUnreceivedUseCase: FetchTalkUnreceivedUseCase,
 ) : BaseViewModel<MainViewState>(MainViewState) {
@@ -19,10 +19,10 @@ class MainViewModel(
     val talkWebSockets = SingleLiveEvent<Unit>()
 
     fun setSelectPage(selectPage: String) {
-        configPref.selectPage = selectPage
+        filePrefUseCase.setSelectPage(selectPage)
     }
 
-    fun getSelectPage() = configPref.selectPage
+    fun getSelectPage() = filePrefUseCase.getSelectPage()
 
     fun incomingSendMessageSocket() {
         launch {

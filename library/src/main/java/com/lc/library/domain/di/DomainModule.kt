@@ -31,6 +31,7 @@ private val domainModule = module {
     single<ResendMessageUseCase> { ResendMessageUseCaseImpl(get()) }
     single<FetchTalkUnreceivedUseCase> { FetchTalkUnreceivedUseCaseImpl(get()) }
     single<TalkWebSocketsUseCase> { TalkWebSocketsUseCaseImpl(get()) }
+    single<FilePrefUseCase> { FilePrefUseCaseImpl(get(), get()) }
 
 }
 

@@ -1,17 +1,17 @@
 package com.lc.android.presentation.guide.nativelanguage
 
 import com.lc.android.base.BaseViewModel
-import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.presentation.model.UserInfoLocaleItem
+import com.lc.library.presentation.usecase.GetUserInfoUseCase
 import kotlinx.coroutines.launch
 
 class GuideNativeLanguageViewModel(
-    private val dataSource: LanguageCenterDataSource,
+    private val useCase: GetUserInfoUseCase,
 ) : BaseViewModel<GuideNativeLanguageViewState>(GuideNativeLanguageViewState()) {
 
     fun getSettingLocaleNatives() {
         launch {
-            val localNatives = dataSource.getDbUserInfo()?.localNatives
+            val localNatives = useCase.getDbUserInfo()?.localNatives
             val isCheckedTh = localNatives?.any { it.locale == "th" } ?: false
             val isCheckedEn = localNatives?.any { it.locale == "en" } ?: false
 

@@ -3,10 +3,10 @@ package com.lc.android.presentation.edit.localenative
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lc.android.base.BaseViewModel
-import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.model.UserInfoLocaleItem
 import com.lc.library.presentation.usecase.EditUserInfoUseCase
+import com.lc.library.presentation.usecase.GetUserInfoUseCase
 import com.lc.server.models.model.UserInfoLocale
 import com.lc.server.models.request.EditLocaleRequest
 import com.lc.server.models.response.BaseResponse
@@ -14,8 +14,8 @@ import com.lc.server.util.LanguageCenterConstant
 import kotlinx.coroutines.launch
 
 class EditLocaleNativeViewModel(
-    private val useCase: EditUserInfoUseCase,
-    private val dataSource: LanguageCenterDataSource,
+    private val editUserInfoUseCase: EditUserInfoUseCase,
+    private val getUserInfoUseCase: GetUserInfoUseCase,
 ) : BaseViewModel<EditLocaleNativeViewState>(EditLocaleNativeViewState()) {
 
     private val _editLocaleNativeEvent = MutableLiveData<BaseResponse>()
@@ -24,7 +24,7 @@ class EditLocaleNativeViewModel(
 
     fun getLocaleNatives() {
         launch {
-            val localNatives = dataSource.getDbUserInfo()?.localNatives
+            val localNatives = getUserInfoUseCase.getDbUserInfo()?.localNatives
             val isCheckedTh = localNatives?.any { it.locale == "th" } ?: false
             val isCheckedEn = localNatives?.any { it.locale == "en" } ?: false
 
@@ -54,7 +54,7 @@ class EditLocaleNativeViewModel(
                         )
                     }
             )
-            when (val resource = useCase.callEditLocale(request)) {
+            when (val resource = editUserInfoUseCase.callEditLocale(request)) {
                 is Resource.Success -> _editLocaleNativeEvent.value = resource.data
                 is Resource.Error -> setError(resource.throwable)
             }

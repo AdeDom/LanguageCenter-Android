@@ -3,10 +3,10 @@ package com.lc.android.presentation.edit.localelearning
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lc.android.base.BaseViewModel
-import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.model.UserInfoLocaleItem
 import com.lc.library.presentation.usecase.EditUserInfoUseCase
+import com.lc.library.presentation.usecase.GetUserInfoUseCase
 import com.lc.server.models.model.UserInfoLocale
 import com.lc.server.models.request.EditLocaleRequest
 import com.lc.server.models.response.BaseResponse
@@ -14,9 +14,9 @@ import com.lc.server.util.LanguageCenterConstant
 import kotlinx.coroutines.launch
 
 class EditLocaleLearningViewModel(
-    private val useCase: EditUserInfoUseCase,
-    private val dataSource: LanguageCenterDataSource,
-) : BaseViewModel<EditLocaleLearningViewState>(EditLocaleLearningViewState()){
+    private val editUserInfoUseCase: EditUserInfoUseCase,
+    private val getUserInfoUseCase: GetUserInfoUseCase,
+) : BaseViewModel<EditLocaleLearningViewState>(EditLocaleLearningViewState()) {
 
     private val _editLocaleLearningEvent = MutableLiveData<BaseResponse>()
     val editLocaleLearningEvent: LiveData<BaseResponse>
@@ -24,7 +24,7 @@ class EditLocaleLearningViewModel(
 
     fun getLocaleLearnings() {
         launch {
-            val localLearnings = dataSource.getDbUserInfo()?.localLearnings
+            val localLearnings = getUserInfoUseCase.getDbUserInfo()?.localLearnings
             val isCheckedTh = localLearnings?.any { it.locale == "th" } ?: false
             val isCheckedEn = localLearnings?.any { it.locale == "en" } ?: false
 
@@ -54,7 +54,7 @@ class EditLocaleLearningViewModel(
                         )
                     }
             )
-            when (val resource = useCase.callEditLocale(request)) {
+            when (val resource = editUserInfoUseCase.callEditLocale(request)) {
                 is Resource.Success -> _editLocaleLearningEvent.value = resource.data
                 is Resource.Error -> setError(resource.throwable)
             }

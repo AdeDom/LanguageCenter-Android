@@ -4,7 +4,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.lc.library.BuildConfig
 import com.lc.library.data.network.api.LanguageCenterApi
 import com.lc.library.data.network.ws.LanguageCenterWs
-import com.lc.library.sharedpreference.pref.PreferenceAuth
+import com.lc.library.sharedpreference.pref.AuthPref
 import com.lc.server.models.request.RefreshTokenRequest
 import io.ktor.util.*
 import kotlinx.coroutines.runBlocking
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
 
 @KtorExperimentalAPI
 class DataSourceProvider(
-    private val pref: PreferenceAuth,
+    private val pref: AuthPref,
     private val webSocket: LanguageCenterWs,
 ) {
 

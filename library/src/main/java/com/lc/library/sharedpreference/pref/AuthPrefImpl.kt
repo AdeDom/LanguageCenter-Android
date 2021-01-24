@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 
-class PreferenceAuthImpl(context: Context) : PreferenceAuth {
+class AuthPrefImpl(context: Context) : AuthPref {
 
     private val sharedPreference: SharedPreferences =
         context.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)

@@ -1,14 +1,14 @@
 package com.lc.android.presentation.splashscreen
 
 import com.lc.android.base.BaseViewModel
-import com.lc.library.sharedpreference.pref.PreferenceAuth
+import com.lc.library.presentation.usecase.FilePrefUseCase
 
 class SplashScreenViewModel(
-    private val pref: PreferenceAuth,
+    private val pref: FilePrefUseCase,
 ) : BaseViewModel<SplashScreenViewState>(SplashScreenViewState) {
 
     fun isValidateSignIn(): Boolean {
-        return pref.accessToken.isNotBlank()
+        return pref.getAccessToken().isNotBlank()
     }
 
 }

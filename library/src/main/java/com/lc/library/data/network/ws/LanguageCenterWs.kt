@@ -1,7 +1,7 @@
 package com.lc.library.data.network.ws
 
 import com.google.gson.Gson
-import com.lc.library.sharedpreference.pref.PreferenceAuth
+import com.lc.library.sharedpreference.pref.AuthPref
 import com.lc.server.models.model.TalkSendMessageWebSocket
 import com.lc.server.util.LanguageCenterConstant
 import io.ktor.client.*
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 @KtorExperimentalAPI
 class LanguageCenterWs(
     private val client: HttpClient,
-    private val pref: PreferenceAuth,
+    private val pref: AuthPref,
 ) {
 
     private var sendMessageSocket: WebSocketSession? = null

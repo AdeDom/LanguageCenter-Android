@@ -3,7 +3,7 @@ package com.lc.library.data.repository
 import com.lc.library.data.db.entities.*
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
-import com.lc.library.sharedpreference.pref.PreferenceAuth
+import com.lc.library.sharedpreference.pref.AuthPref
 import com.lc.library.util.LanguageCenterUtils
 import com.lc.server.models.model.AddChatGroupDetail
 import com.lc.server.models.model.TalkSendMessageWebSocket
@@ -16,7 +16,7 @@ import retrofit2.HttpException
 
 class LanguageCenterRepositoryImpl(
     private val dataSource: LanguageCenterDataSource,
-    private val pref: PreferenceAuth,
+    private val pref: AuthPref,
 ) : LanguageCenterRepository {
 
     private suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T): Resource<T> =
