@@ -62,7 +62,7 @@ interface LanguageCenterDataSource {
 
     suspend fun getDbChatListBySearch(search: String?): List<ChatListEntity>?
 
-    suspend fun getDbChatListCountByUserId(userId: String?): Int
+    suspend fun getDbChatListCountByUserId(userId: String): Int
 
     suspend fun updateChatListNewMessage(
         userId: String,
@@ -100,6 +100,8 @@ interface LanguageCenterDataSource {
     suspend fun callResendMessage(resendMessageRequest: ResendMessageRequest): BaseResponse
 
     suspend fun callFetchTalkUnreceived(): FetchTalkUnreceivedResponse
+
+    suspend fun callUpdateReceiveMessages(updateReceiveMessageRequest: UpdateReceiveMessageRequest): BaseResponse
 
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse
 

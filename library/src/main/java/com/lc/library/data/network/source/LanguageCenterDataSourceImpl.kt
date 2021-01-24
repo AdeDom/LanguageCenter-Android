@@ -117,7 +117,7 @@ class LanguageCenterDataSourceImpl(
         return db.getChatListDao().getDbChatListBySearch(search)
     }
 
-    override suspend fun getDbChatListCountByUserId(userId: String?): Int {
+    override suspend fun getDbChatListCountByUserId(userId: String): Int {
         return db.getChatListDao().getDbChatListCountByUserId(userId)
     }
 
@@ -190,6 +190,11 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun callFetchTalkUnreceived(): FetchTalkUnreceivedResponse {
         return provider.getLanguageCenterDataSource().callFetchTalkUnreceived()
+    }
+
+    override suspend fun callUpdateReceiveMessages(updateReceiveMessageRequest: UpdateReceiveMessageRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource()
+            .callUpdateReceiveMessages(updateReceiveMessageRequest)
     }
 
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse {

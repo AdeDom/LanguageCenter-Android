@@ -51,6 +51,9 @@ interface LanguageCenterApi {
     @GET("api/chats/fetch-talk-unreceived")
     suspend fun callFetchTalkUnreceived(): FetchTalkUnreceivedResponse
 
+    @PUT("/api/chats/update-receive-messages")
+    suspend fun callUpdateReceiveMessages(@Body updateReceiveMessageRequest: UpdateReceiveMessageRequest): BaseResponse
+
     @POST("api/chat-group/add-chat-group")
     suspend fun callAddChatGroup(@Body addChatGroupRequest: AddChatGroupRequest): BaseResponse
 

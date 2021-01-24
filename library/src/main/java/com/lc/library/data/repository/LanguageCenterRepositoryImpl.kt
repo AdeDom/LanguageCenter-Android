@@ -285,6 +285,13 @@ class LanguageCenterRepositoryImpl(
                         dateTimeLong = talk.dateTime,
                     )
                 }
+
+                // call api put talk is receive message
+                if (resource.data.talks.isNotEmpty()) {
+                    val talkIdList = resource.data.talks.map { it.talkId }
+                    val request = UpdateReceiveMessageRequest(talkIdList)
+                    safeApiCall { dataSource.callUpdateReceiveMessages(request) }
+                }
             }
         }
 
@@ -408,7 +415,7 @@ class LanguageCenterRepositoryImpl(
     }
 
     private suspend fun callReceiveMessage(socket: TalkSendMessageWebSocket) {
-        dataSource.callReceiveMessage(socket.talkId)
+        safeApiCall { dataSource.callReceiveMessage(socket.talkId) }
     }
 
     private suspend fun saveChatListDatabase(
@@ -424,8 +431,8 @@ class LanguageCenterRepositoryImpl(
         listUserId.add(toUserId)
         val userId = listUserId.singleOrNull { it != getDbUserInfoUserId }
 
-        val count = dataSource.getDbChatListCountByUserId(userId)
-        if (count == 0) {
+        val count = userId?.let { dataSource.getDbChatListCountByUserId(it) }
+        if (count != null && count == 0) {
             val resource = safeApiCall { dataSource.callChatListUserInfo(userId) }
 
             if (resource is Resource.Success) {
@@ -453,7 +460,7 @@ class LanguageCenterRepositoryImpl(
                     dataSource.saveChatListEntity(entity)
                 }
             }
-        } else {
+        } else if (count != null && count > 0) {
             dataSource.updateChatListNewMessage(
                 userId = userId.orEmpty(),
                 messages = messages,

@@ -23,7 +23,7 @@ interface ChatListDao {
     suspend fun getDbChatListBySearch(search: String?): List<ChatListEntity>?
 
     @Query("SELECT COUNT(*) FROM chat_list WHERE user_id = :userId")
-    suspend fun getDbChatListCountByUserId(userId: String?): Int
+    suspend fun getDbChatListCountByUserId(userId: String): Int
 
     @Query("UPDATE chat_list SET messages = :messages, date_time_string = :dateTimeString, date_time_long = :dateTimeLong WHERE user_id = :userId")
     suspend fun updateChatListNewMessage(
