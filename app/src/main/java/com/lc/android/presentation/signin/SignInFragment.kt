@@ -52,6 +52,13 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
     private fun viewEvent() {
         signInButton.setOnClickListener {
+            signOut()
+        }
+    }
+
+    private fun signOut() {
+        mGoogleSignInClient.signOut().addOnCompleteListener(requireActivity()) {
+            viewModel.signOut()
             signIn()
         }
     }

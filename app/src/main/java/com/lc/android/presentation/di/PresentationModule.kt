@@ -30,7 +30,7 @@ import org.koin.dsl.module
 private val presentationModule = module {
 
     viewModel { SplashScreenViewModel(get()) }
-    viewModel { SignInViewModel(get()) }
+    viewModel { SignInViewModel(get(), get()) }
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { GuideGenderViewModel(get()) }
     viewModel { GuideBirthDateViewModel(get(), get()) }
