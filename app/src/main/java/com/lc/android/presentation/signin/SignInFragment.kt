@@ -80,6 +80,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             } catch (e: ApiException) {
                 when (e.statusCode) {
                     7 -> requireView().snackbar(getString(R.string.error_message_sign_in_network))
+                    10 -> requireView().snackbar(getString(R.string.error_message_sign_in_developer))
                 }
             }
         }
