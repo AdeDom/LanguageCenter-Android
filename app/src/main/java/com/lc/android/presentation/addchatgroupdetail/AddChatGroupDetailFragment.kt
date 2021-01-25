@@ -43,6 +43,10 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
     }
 
     private fun observeViewModel() {
+        viewModel.attachFirstTime.observe {
+            viewModel.getDbAddChatGroupDetailBySearch()
+        }
+        
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
 
