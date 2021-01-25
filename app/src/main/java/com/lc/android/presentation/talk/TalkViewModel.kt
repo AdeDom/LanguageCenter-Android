@@ -72,9 +72,11 @@ class TalkViewModel(
     }
 
     fun saveChatList(userInfo: UserInfoParcelable) {
+        if (userInfo.userId.isNullOrBlank()) return
+
         launch {
             val entity = ChatListEntity(
-                userId = userInfo.userId.orEmpty(),
+                userId = userInfo.userId,
                 email = userInfo.email,
                 givenName = userInfo.givenName,
                 familyName = userInfo.familyName,

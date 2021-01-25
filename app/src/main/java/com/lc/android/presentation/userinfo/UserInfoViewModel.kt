@@ -42,11 +42,13 @@ class UserInfoViewModel(
     }
 
     fun callAddChatGroupNew(chatGroupId: Int?, friendInfo: UserInfoParcelable) {
+        if (friendInfo.userId.isNullOrBlank()) return
+
         launch {
             setState { copy(isLoading = true, isClickable = false) }
 
             val entity = FriendInfoEntity(
-                userId = friendInfo.userId.orEmpty(),
+                userId = friendInfo.userId,
                 email = friendInfo.email,
                 givenName = friendInfo.givenName,
                 familyName = friendInfo.familyName,
