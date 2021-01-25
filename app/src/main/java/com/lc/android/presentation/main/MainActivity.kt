@@ -43,12 +43,12 @@ class MainActivity : BaseActivity() {
                 R.id.chatGroupFragment -> showBottomNav(ConfigPref.SELECT_PAGE_CHAT_GROUP)
                 R.id.vocabularyFragment -> showBottomNav(ConfigPref.SELECT_PAGE_VOCABULARY)
                 R.id.profileFragment -> showBottomNav(ConfigPref.SELECT_PAGE_PROFILE)
-                R.id.userInfoFragment -> hideBottomNav()
-                R.id.talkFragment -> hideBottomNav()
-                R.id.chatGroupDetailFragment -> hideBottomNav()
-                R.id.editProfileFragment -> hideBottomNav()
-                R.id.editLocaleNativeFragment -> hideBottomNav()
-                R.id.editLocaleLearningFragment -> hideBottomNav()
+                R.id.userInfoFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_USER_INFO)
+                R.id.talkFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_TALK)
+                R.id.chatGroupDetailFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_CHAT_GROUP_DETAIL)
+                R.id.editProfileFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_EDIT_PROFILE)
+                R.id.editLocaleNativeFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_EDIT_LOCALE_NATIVE)
+                R.id.editLocaleLearningFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_EDIT_LOCALE_LEARNING)
             }
         }
     }
@@ -67,7 +67,8 @@ class MainActivity : BaseActivity() {
         bottomNavigationView.visibility = View.VISIBLE
     }
 
-    private fun hideBottomNav() {
+    private fun hideBottomNav(selectPage: String) {
+        viewModel.setSelectPage(selectPage)
         bottomNavigationView.visibility = View.GONE
     }
 

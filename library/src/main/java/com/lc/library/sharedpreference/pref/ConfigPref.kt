@@ -12,6 +12,12 @@ interface ConfigPref {
         const val SELECT_PAGE_CHAT_GROUP = "chat_group"
         const val SELECT_PAGE_VOCABULARY = "vocabulary"
         const val SELECT_PAGE_PROFILE = "profile"
+        const val SELECT_PAGE_USER_INFO = "user_info"
+        const val SELECT_PAGE_TALK = "talk"
+        const val SELECT_PAGE_CHAT_GROUP_DETAIL = "chat_group_detail"
+        const val SELECT_PAGE_EDIT_PROFILE = "edit_profile"
+        const val SELECT_PAGE_EDIT_LOCALE_NATIVE = "edit_locale_native"
+        const val SELECT_PAGE_EDIT_LOCALE_LEARNING = "edit_locale_learning"
     }
 
 }
