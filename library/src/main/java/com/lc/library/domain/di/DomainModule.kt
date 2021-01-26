@@ -28,7 +28,7 @@ private val domainModule = module {
     single<GetChatListUseCase> { GetChatListUseCaseImpl(get()) }
     single<ReadMessagesUseCase> { ReadMessagesUseCaseImpl(get()) }
     single<SaveChatListUseCase> { SaveChatListUseCaseImpl(get()) }
-    single<ResendMessageUseCase> { ResendMessageUseCaseImpl(get()) }
+    single<ResendMessageUseCase> { ResendMessageUseCaseImpl(get(), get()) }
     single<FetchTalkUnreceivedUseCase> { FetchTalkUnreceivedUseCaseImpl(get()) }
     single<TalkWebSocketsUseCase> { TalkWebSocketsUseCaseImpl(get()) }
     single<FilePrefUseCase> { FilePrefUseCaseImpl(get(), get()) }

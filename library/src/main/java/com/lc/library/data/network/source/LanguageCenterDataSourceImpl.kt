@@ -78,6 +78,10 @@ class LanguageCenterDataSourceImpl(
         return db.getTalkDao().saveTalk(talkEntity)
     }
 
+    override suspend fun getDbTalkByTalkId(talkId: String): TalkEntity? {
+        return db.getTalkDao().getDbTalkByTalkId(talkId)
+    }
+
     override fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>> {
         return db.getTalkDao().getDbTalkByOtherUserIdLiveData(otherUserId)
     }

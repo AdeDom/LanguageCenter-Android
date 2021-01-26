@@ -160,11 +160,10 @@ class LanguageCenterRepositoryImpl(
     }
 
     override suspend fun callSendMessage(sendMessageRequest: SendMessageRequest): Resource<SendMessageResponse>? {
-        val talkId = LanguageCenterUtils.getRandomUUID()
         val fromUserId = dataSource.getDbUserInfo()?.userId
         val dateTimeLong = LanguageCenterUtils.getCurrentTimeMillis()
         val entity = TalkEntity(
-            talkId = talkId,
+            talkId = sendMessageRequest.talkId.orEmpty(),
             fromUserId = fromUserId.orEmpty(),
             toUserId = sendMessageRequest.toUserId.orEmpty(),
             messages = sendMessageRequest.messages.orEmpty(),
@@ -177,13 +176,13 @@ class LanguageCenterRepositoryImpl(
         )
         dataSource.saveTalk(entity)
 
-        val request = sendMessageRequest.copy(talkId = talkId)
+        val request = sendMessageRequest.copy(talkId = sendMessageRequest.talkId)
         val resource = safeApiCall { dataSource.callSendMessage(request) }
 
         if (resource is Resource.Success) {
             if (resource.data.success) {
                 webSocketsSendMessage(
-                    talkId,
+                    sendMessageRequest.talkId,
                     fromUserId,
                     sendMessageRequest.toUserId,
                     sendMessageRequest.messages,
@@ -225,6 +224,23 @@ class LanguageCenterRepositoryImpl(
         messages: String?,
         dateTimeLong: Long?,
     ): Unit? {
+        // update send message
+        dataSource.updateTalkSendMessage(
+            talkId = talkId.orEmpty(),
+            dateString = LanguageCenterUtils.getDateFormat(dateTimeLong ?: 0),
+            timeString = LanguageCenterUtils.getTimeFormat(dateTimeLong ?: 0),
+            dateTimeLong = dateTimeLong ?: 0,
+            isSendMessage = true,
+        )
+
+        // update chat list
+        dataSource.updateChatListNewMessage(
+            userId = toUserId.orEmpty(),
+            messages = messages.orEmpty(),
+            dateTimeString = LanguageCenterUtils.getDateTimeFormat(dateTimeLong ?: 0),
+            dateTimeLong = dateTimeLong ?: 0,
+        )
+
         // call web socket
         val talkSendMessageWebSocket = TalkSendMessageWebSocket(
             talkId = talkId.orEmpty(),
@@ -238,22 +254,7 @@ class LanguageCenterRepositoryImpl(
             delay(500)
         }
 
-        // update send message
-        dataSource.updateTalkSendMessage(
-            talkId = talkId.orEmpty(),
-            dateString = LanguageCenterUtils.getDateFormat(dateTimeLong ?: 0),
-            timeString = LanguageCenterUtils.getTimeFormat(dateTimeLong ?: 0),
-            dateTimeLong = dateTimeLong ?: 0,
-            isSendMessage = true,
-        )
-
-        // update chat list
-        return dataSource.updateChatListNewMessage(
-            userId = toUserId.orEmpty(),
-            messages = messages.orEmpty(),
-            dateTimeString = LanguageCenterUtils.getDateTimeFormat(dateTimeLong ?: 0),
-            dateTimeLong = dateTimeLong ?: 0,
-        )
+        return Unit
     }
 
     override suspend fun callFetchTalkUnreceived(): Resource<FetchTalkUnreceivedResponse> {

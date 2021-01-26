@@ -40,6 +40,8 @@ interface LanguageCenterDataSource {
 
     suspend fun saveTalk(talkEntity: TalkEntity)
 
+    suspend fun getDbTalkByTalkId(talkId: String): TalkEntity?
+
     fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>>
 
     suspend fun getDbCountTalkByTalkId(talkId: String): Int

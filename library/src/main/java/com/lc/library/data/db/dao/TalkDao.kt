@@ -13,6 +13,9 @@ interface TalkDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveTalk(talkEntity: TalkEntity)
 
+    @Query("SELECT * FROM talk WHERE talk_id = :talkId")
+    suspend fun getDbTalkByTalkId(talkId: String): TalkEntity?
+
     @Query("SELECT * FROM talk WHERE from_user_id = :otherUserId OR to_user_id = :otherUserId ORDER BY date_time_long ASC")
     fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>>
 

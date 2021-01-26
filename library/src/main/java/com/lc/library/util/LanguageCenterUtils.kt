@@ -9,10 +9,6 @@ object LanguageCenterUtils {
         return System.currentTimeMillis()
     }
 
-    fun getRandomUUID(): String {
-        return UUID.randomUUID().toString().replace("-", "")
-    }
-
     fun getDateFormat(dateTime: Long): String {
         val dateSdf = SimpleDateFormat("E, MMM d", Locale.getDefault())
         return dateSdf.format(dateTime)

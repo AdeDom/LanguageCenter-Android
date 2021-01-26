@@ -11,6 +11,7 @@ import com.lc.library.presentation.usecase.*
 import com.lc.server.models.model.UserInfoLocale
 import com.lc.server.models.request.ResendMessageRequest
 import com.lc.server.models.request.SendMessageRequest
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class TalkViewModel(
@@ -47,16 +48,16 @@ class TalkViewModel(
             val message = state.value?.messages
             _clearTextEvent.value = Unit
 
+            val talkId = sendMessageUseCase.getTalkId()
+
             val request = SendMessageRequest(
+                talkId = talkId,
                 messages = message,
                 toUserId = toUserId,
             )
             when (val resource = sendMessageUseCase(request)) {
                 is Resource.Error -> setError(resource.throwable)
-                null -> {
-                    setError(Throwable("Web sockets is null"))
-                    _talkWebSockets.value = Unit
-                }
+                null -> handleCallWebSocketsIsNull(talkId)
             }
         }
     }
@@ -104,23 +105,38 @@ class TalkViewModel(
     }
 
     fun callResendMessage() {
+        val entity = state.value?.resendMessageTalkEntity
+        if (entity?.talkId == null) return
+
         launch {
-            val entity = state.value?.resendMessageTalkEntity
             val request = ResendMessageRequest(
-                talkId = entity?.talkId,
-                fromUserId = entity?.fromUserId,
-                toUserId = entity?.toUserId,
-                messages = entity?.messages,
-                dateTimeLong = entity?.dateTimeLong,
+                talkId = entity.talkId,
+                fromUserId = entity.fromUserId,
+                toUserId = entity.toUserId,
+                messages = entity.messages,
+                dateTimeLong = entity.dateTimeLong,
             )
             when (val resource = resendMessageUseCase(request)) {
                 is Resource.Error -> setError(resource.throwable)
-                null -> {
-                    setError(Throwable("Web sockets is null"))
-                    _talkWebSockets.value = Unit
-                }
+                null -> handleCallWebSocketsIsNull(entity.talkId)
             }
         }
+    }
+
+    private suspend fun handleCallWebSocketsIsNull(talkId: String) {
+        _talkWebSockets.value = Unit
+
+        delay(1_000)
+
+        val talkEntity = resendMessageUseCase.getDbTalkByTalkId(talkId) ?: return
+        val request = ResendMessageRequest(
+            talkId = talkEntity.talkId,
+            fromUserId = talkEntity.fromUserId,
+            toUserId = talkEntity.toUserId,
+            messages = talkEntity.messages,
+            dateTimeLong = talkEntity.dateTimeLong,
+        )
+        resendMessageUseCase(request)
     }
 
 }
