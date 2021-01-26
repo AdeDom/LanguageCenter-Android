@@ -7,6 +7,7 @@ import com.lc.library.presentation.usecase.FetchTalkUnreceivedUseCase
 import com.lc.library.presentation.usecase.FilePrefUseCase
 import com.lc.library.presentation.usecase.TalkWebSocketsUseCase
 import io.ktor.util.*
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 @KtorExperimentalAPI
@@ -15,6 +16,8 @@ class MainViewModel(
     private val talkWebSocketsUseCase: TalkWebSocketsUseCase,
     private val fetchTalkUnreceivedUseCase: FetchTalkUnreceivedUseCase,
 ) : BaseViewModel<MainViewState>(MainViewState) {
+
+    private var incomingJob: Job = Job()
 
     val talkWebSockets = SingleLiveEvent<Unit>()
 
@@ -25,7 +28,8 @@ class MainViewModel(
     fun getSelectPage() = filePrefUseCase.getSelectPage()
 
     fun incomingSendMessageSocket() {
-        launch {
+        incomingJob.cancel()
+        incomingJob = launch {
             talkWebSocketsUseCase()
             incomingSendMessageSocket()
         }
@@ -40,5 +44,10 @@ class MainViewModel(
     }
 
     fun talkWebSockets() = talkWebSockets.call()
+
+    override fun onCleared() {
+        incomingJob.cancel()
+        super.onCleared()
+    }
 
 }

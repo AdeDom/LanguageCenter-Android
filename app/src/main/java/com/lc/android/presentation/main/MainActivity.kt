@@ -82,6 +82,7 @@ class MainActivity : BaseActivity() {
     private fun observeViewModel() {
         viewModel.talkWebSockets.observe {
             viewModel.incomingSendMessageSocket()
+            viewModel.callFetchTalkUnreceived()
         }
     }
 
