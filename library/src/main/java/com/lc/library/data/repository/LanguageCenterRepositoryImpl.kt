@@ -386,8 +386,15 @@ class LanguageCenterRepositoryImpl(
         dataSource.incomingSendMessageSocket {
             val count = dataSource.getDbCountTalkByTalkId(it.talkId)
             if (count == 0) {
-                sendMessageCompleted(it)
-                callReceiveMessage(it)
+                // talk chat message
+                val receiveMessage = safeApiCall { dataSource.callReceiveMessage(it.talkId) }
+                if (receiveMessage is Resource.Success) {
+                    if (receiveMessage.data.success) {
+                        sendMessageCompleted(it)
+                    }
+                }
+
+                // chat list
                 saveChatListDatabase(
                     fromUserId = it.fromUserId,
                     toUserId = it.toUserId,
@@ -412,10 +419,6 @@ class LanguageCenterRepositoryImpl(
             isSendType = false,
         )
         dataSource.saveTalk(entity)
-    }
-
-    private suspend fun callReceiveMessage(socket: TalkSendMessageWebSocket) {
-        safeApiCall { dataSource.callReceiveMessage(socket.talkId) }
     }
 
     private suspend fun saveChatListDatabase(
