@@ -53,6 +53,8 @@ interface LanguageCenterRepository {
         friendInfoEntity: FriendInfoEntity,
     ): Resource<BaseResponse>
 
+    suspend fun callFetchVocabularyTranslation(): Resource<FetchVocabularyTranslationResponse>
+
     suspend fun incomingSendMessageSocket()
 
 }

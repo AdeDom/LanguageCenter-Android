@@ -123,6 +123,8 @@ interface LanguageCenterDataSource {
 
     suspend fun callAddChatGroupFriend(addChatGroupFriendRequest: AddChatGroupFriendRequest): BaseResponse
 
+    suspend fun callFetchVocabularyTranslation(): FetchVocabularyTranslationResponse
+
     suspend fun incomingSendMessageSocket(listener: suspend (TalkSendMessageWebSocket) -> Unit)
 
     suspend fun outgoingSendMessageSocket(talkSendMessageWebSocket: TalkSendMessageWebSocket): Unit?

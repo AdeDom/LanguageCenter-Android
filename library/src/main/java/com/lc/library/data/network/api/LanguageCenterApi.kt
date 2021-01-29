@@ -51,7 +51,7 @@ interface LanguageCenterApi {
     @GET("api/chats/fetch-talk-unreceived")
     suspend fun callFetchTalkUnreceived(): FetchTalkUnreceivedResponse
 
-    @PUT("/api/chats/update-receive-messages")
+    @PUT("api/chats/update-receive-messages")
     suspend fun callUpdateReceiveMessages(@Body updateReceiveMessageRequest: UpdateReceiveMessageRequest): BaseResponse
 
     @POST("api/chat-group/add-chat-group")
@@ -78,7 +78,10 @@ interface LanguageCenterApi {
     @HTTP(method = "DELETE", path = "api/chat-group/remove-chat-group-detail", hasBody = true)
     suspend fun callRemoveChatGroupDetail(@Body removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): BaseResponse
 
-    @POST("/api/chat-group/add-chat-group-friend")
+    @POST("api/chat-group/add-chat-group-friend")
     suspend fun callAddChatGroupFriend(@Body addChatGroupFriendRequest: AddChatGroupFriendRequest): BaseResponse
+
+    @GET("api/vocabulary/fetch-vocabulary-translate")
+    suspend fun callFetchVocabularyTranslation(): FetchVocabularyTranslationResponse
 
 }

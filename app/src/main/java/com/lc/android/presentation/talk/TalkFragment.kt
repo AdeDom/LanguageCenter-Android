@@ -86,6 +86,10 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
     }
 
     private fun viewEvent() {
+        ibTranslate.setOnClickListener {
+            findNavController().navigate(R.id.action_talkFragment_to_vocabularyTranslationFragment)
+        }
+
         etMessage.addTextChangedListener { viewModel.setStateMessages(it.toString()) }
 
         ibSendMessage.setOnClickListener { viewModel.callSendMessage(args.userInfo.userId) }

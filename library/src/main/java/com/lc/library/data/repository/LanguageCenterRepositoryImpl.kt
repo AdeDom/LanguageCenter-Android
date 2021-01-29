@@ -383,6 +383,10 @@ class LanguageCenterRepositoryImpl(
         return resource
     }
 
+    override suspend fun callFetchVocabularyTranslation(): Resource<FetchVocabularyTranslationResponse> {
+        return safeApiCall { dataSource.callFetchVocabularyTranslation() }
+    }
+
     override suspend fun incomingSendMessageSocket() {
         dataSource.incomingSendMessageSocket {
             val count = dataSource.getDbCountTalkByTalkId(it.talkId)

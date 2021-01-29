@@ -239,6 +239,10 @@ class LanguageCenterDataSourceImpl(
             .callAddChatGroupFriend(addChatGroupFriendRequest)
     }
 
+    override suspend fun callFetchVocabularyTranslation(): FetchVocabularyTranslationResponse {
+        return provider.getLanguageCenterDataSource().callFetchVocabularyTranslation()
+    }
+
     override suspend fun incomingSendMessageSocket(listener: suspend (TalkSendMessageWebSocket) -> Unit) {
         return provider.getWebSocketDataSource().incomingSendMessageSocket(listener)
     }
