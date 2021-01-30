@@ -33,6 +33,7 @@ private val domainModule = module {
     single<TalkWebSocketsUseCase> { TalkWebSocketsUseCaseImpl(get()) }
     single<FilePrefUseCase> { FilePrefUseCaseImpl(get(), get()) }
     single<FetchVocabularyTranslationUseCase> { FetchVocabularyTranslationUseCaseImpl(get()) }
+    single<LanguageCenterTranslateUseCase> { LanguageCenterTranslateUseCaseImpl(get()) }
 
 }
 

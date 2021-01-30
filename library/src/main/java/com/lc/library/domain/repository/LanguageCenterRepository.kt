@@ -32,6 +32,8 @@ interface LanguageCenterRepository {
 
     suspend fun callFetchTalkUnreceived(): Resource<FetchTalkUnreceivedResponse>
 
+    suspend fun callLanguageCenterTranslate(vocabulary: String?): Resource<LanguageCenterTranslateResponse>
+
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse>
 
     suspend fun callFetchChatGroup(): Resource<FetchChatGroupResponse>

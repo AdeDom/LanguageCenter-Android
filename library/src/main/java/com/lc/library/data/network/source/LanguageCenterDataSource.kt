@@ -105,6 +105,8 @@ interface LanguageCenterDataSource {
 
     suspend fun callUpdateReceiveMessages(updateReceiveMessageRequest: UpdateReceiveMessageRequest): BaseResponse
 
+    suspend fun callLanguageCenterTranslate(vocabulary: String?): LanguageCenterTranslateResponse
+
     suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse
 
     suspend fun callFetchChatGroup(): FetchChatGroupResponse

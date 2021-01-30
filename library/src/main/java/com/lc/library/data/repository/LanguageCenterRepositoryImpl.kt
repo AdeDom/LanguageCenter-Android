@@ -299,6 +299,10 @@ class LanguageCenterRepositoryImpl(
         return resource
     }
 
+    override suspend fun callLanguageCenterTranslate(vocabulary: String?): Resource<LanguageCenterTranslateResponse> {
+        return safeApiCall { dataSource.callLanguageCenterTranslate(vocabulary) }
+    }
+
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callAddChatGroup(addChatGroupRequest) }
     }

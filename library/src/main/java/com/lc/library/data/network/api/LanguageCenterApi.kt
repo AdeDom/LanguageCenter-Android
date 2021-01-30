@@ -54,6 +54,9 @@ interface LanguageCenterApi {
     @PUT("api/chats/update-receive-messages")
     suspend fun callUpdateReceiveMessages(@Body updateReceiveMessageRequest: UpdateReceiveMessageRequest): BaseResponse
 
+    @GET("api/chats/languageCenter/translate")
+    suspend fun callLanguageCenterTranslate(@Query("vocabulary") vocabulary: String?): LanguageCenterTranslateResponse
+
     @POST("api/chat-group/add-chat-group")
     suspend fun callAddChatGroup(@Body addChatGroupRequest: AddChatGroupRequest): BaseResponse
 

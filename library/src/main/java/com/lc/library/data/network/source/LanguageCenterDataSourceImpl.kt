@@ -201,6 +201,10 @@ class LanguageCenterDataSourceImpl(
             .callUpdateReceiveMessages(updateReceiveMessageRequest)
     }
 
+    override suspend fun callLanguageCenterTranslate(vocabulary: String?): LanguageCenterTranslateResponse {
+        return provider.getLanguageCenterDataSource().callLanguageCenterTranslate(vocabulary)
+    }
+
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): BaseResponse {
         return provider.getLanguageCenterDataSource().callAddChatGroup(addChatGroupRequest)
     }

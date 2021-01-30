@@ -64,10 +64,10 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
             ibSendMessage.isClickable = state.isSendMessage
 
             layoutTranslate.isVisible = state.isResultTranslate
-            tvVocabularyText.text = state.resultTranslate?.first
+            tvVocabularyText.text = state.resultTranslate?.vocabulary
             tvTranslationText.text = ""
-            state.resultTranslate?.second?.forEach { translation ->
-                tvTranslationText.append("$translation\n")
+            state.resultTranslate?.translations?.forEach { translation ->
+                tvTranslationText.append("${translation.translation}\n")
             }
         }
 
@@ -140,7 +140,7 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         setFragmentResultListener(GoogleTranslateDialog.TRANSLATE_TEXT_KEY) { _, bundle ->
             val translateText = bundle.getString(GoogleTranslateDialog.TRANSLATE_TEXT)
             if (!translateText.isNullOrBlank()) {
-                viewModel.callGoogleTranslate(translateText)
+                viewModel.callLanguageCenterTranslate(translateText)
             }
         }
     }
