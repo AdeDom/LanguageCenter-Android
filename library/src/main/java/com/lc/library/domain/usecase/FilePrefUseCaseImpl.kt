@@ -25,4 +25,12 @@ class FilePrefUseCaseImpl(
         configPref.selectPage = selectPage
     }
 
+    override fun getIsTranslateThToEn(): Boolean {
+        return configPref.isTranslateThToEn
+    }
+
+    override fun setIsTranslateThToEn(isTranslateThToEn: Boolean) {
+        configPref.isTranslateThToEn = isTranslateThToEn
+    }
+
 }

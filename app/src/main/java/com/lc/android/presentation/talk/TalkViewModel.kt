@@ -20,6 +20,7 @@ class TalkViewModel(
     private val readMessagesUseCase: ReadMessagesUseCase,
     private val saveChatListUseCase: SaveChatListUseCase,
     private val resendMessageUseCase: ResendMessageUseCase,
+    private val filePrefUseCase: FilePrefUseCase,
 ) : BaseViewModel<TalkViewState>(TalkViewState()) {
 
     private val _talkWebSockets = MutableLiveData<Unit>().apply { value = Unit }
@@ -137,6 +138,41 @@ class TalkViewModel(
             dateTimeLong = talkEntity.dateTimeLong,
         )
         resendMessageUseCase(request)
+    }
+
+    fun callGoogleTranslate(translateText: String) {
+        launch {
+            setState { copy(isLoading = true) }
+
+            delay(3_000)
+            setState {
+                copy(
+                    isResultTranslate = true,
+                    resultTranslate = Pair(
+                        first = translateText,
+                        second = listOf(
+                            "aaa",
+                            "bbb",
+                            "ccc",
+                        )
+                    )
+                )
+            }
+
+            setState { copy(isLoading = false) }
+        }
+    }
+
+    fun setStateIsResultTranslateHide() {
+        setState { copy(isResultTranslate = false) }
+    }
+
+    fun getIsTranslateThToEn(): Boolean {
+        return filePrefUseCase.getIsTranslateThToEn()
+    }
+
+    fun setIsTranslateThToEn(isTranslateThToEn: Boolean) {
+        filePrefUseCase.setIsTranslateThToEn(isTranslateThToEn)
     }
 
 }

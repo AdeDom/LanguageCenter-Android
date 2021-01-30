@@ -65,4 +65,7 @@
     <string name="add_chat_group_detail">Add chat group detail</string>
     <string name="user_info">User info</string>
     <string name="resend_message">Resend message</string>
+    <string name="translate">Translate</string>
+    <string name="th">TH</string>
+    <string name="en">EN</string>
 </resources>

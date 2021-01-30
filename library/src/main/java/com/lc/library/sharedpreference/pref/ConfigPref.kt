@@ -4,6 +4,8 @@ interface ConfigPref {
 
     var selectPage: String
 
+    var isTranslateThToEn: Boolean
+
     companion object {
         const val CONFIG_PREF = "config_pref"
         const val SELECT_PAGE_KEY = "select_page_key"
@@ -18,6 +20,7 @@ interface ConfigPref {
         const val SELECT_PAGE_EDIT_PROFILE = "edit_profile"
         const val SELECT_PAGE_EDIT_LOCALE_NATIVE = "edit_locale_native"
         const val SELECT_PAGE_EDIT_LOCALE_LEARNING = "edit_locale_learning"
+        const val TRANSLATE_KEY = "translate_key"
     }
 
 }

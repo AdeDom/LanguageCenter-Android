@@ -62,6 +62,13 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
             ibSendMessage.isClickable = state.isSendMessage
+
+            layoutTranslate.isVisible = state.isResultTranslate
+            tvVocabularyText.text = state.resultTranslate?.first
+            tvTranslationText.text = ""
+            state.resultTranslate?.second?.forEach { translation ->
+                tvTranslationText.append("$translation\n")
+            }
         }
 
         viewModel.clearTextEvent.observe {
@@ -87,7 +94,13 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
 
     private fun viewEvent() {
         ibTranslate.setOnClickListener {
-            findNavController().navigate(R.id.action_talkFragment_to_vocabularyTranslationFragment)
+            val navDirections = TalkFragmentDirections
+                .actionTalkFragmentToGoogleTranslateDialog(viewModel.getIsTranslateThToEn())
+            findNavController().navigate(navDirections)
+        }
+
+        ibClose.setOnClickListener {
+            viewModel.setStateIsResultTranslateHide()
         }
 
         etMessage.addTextChangedListener { viewModel.setStateMessages(it.toString()) }
@@ -116,6 +129,18 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
             val talkMoreKey = bundle.getString(TalkMoreDialog.TALK_MORE_KEY)
             when (talkMoreKey) {
                 TalkMoreDialog.RESEND_MESSAGE -> viewModel.callResendMessage()
+            }
+        }
+
+        setFragmentResultListener(GoogleTranslateDialog.IS_TRANSLATE_TH_TO_EN_KEY) { _, bundle ->
+            val isTranslateThToEn = bundle.getBoolean(GoogleTranslateDialog.IS_TRANSLATE_TH_TO_EN)
+            viewModel.setIsTranslateThToEn(isTranslateThToEn)
+        }
+
+        setFragmentResultListener(GoogleTranslateDialog.TRANSLATE_TEXT_KEY) { _, bundle ->
+            val translateText = bundle.getString(GoogleTranslateDialog.TRANSLATE_TEXT)
+            if (!translateText.isNullOrBlank()) {
+                viewModel.callGoogleTranslate(translateText)
             }
         }
     }

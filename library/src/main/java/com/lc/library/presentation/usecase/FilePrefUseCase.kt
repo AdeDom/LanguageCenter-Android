@@ -10,4 +10,8 @@ interface FilePrefUseCase {
 
     fun setSelectPage(selectPage: String)
 
+    fun getIsTranslateThToEn(): Boolean
+
+    fun setIsTranslateThToEn(isTranslateThToEn: Boolean)
+
 }

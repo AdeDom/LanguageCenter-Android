@@ -19,4 +19,12 @@ class ConfigPrefImpl(context: Context) : ConfigPref {
             }
         }
 
+    override var isTranslateThToEn: Boolean
+        get() = sharedPreference.getBoolean(ConfigPref.TRANSLATE_KEY, true)
+        set(value) {
+            sharedPreference.edit {
+                putBoolean(ConfigPref.TRANSLATE_KEY, value)
+            }
+        }
+
 }

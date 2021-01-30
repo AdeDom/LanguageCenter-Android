@@ -243,22 +243,22 @@
             android:id="@+id/action_talkFragment_to_talkMoreDialog"
             app:destination="@id/talkMoreDialog" />
         <action
-            android:id="@+id/action_talkFragment_to_vocabularyTranslationFragment"
-            app:destination="@id/vocabularyTranslationFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_talkFragment_to_googleTranslateDialog"
+            app:destination="@id/googleTranslateDialog" />
     </fragment>
     <dialog
         android:id="@+id/talkMoreDialog"
         android:name="com.lc.android.presentation.talk.TalkMoreDialog"
         android:label="TalkMoreDialog"
         tools:layout="@layout/dialog_talk_more" />
-    <fragment
-        android:id="@+id/vocabularyTranslationFragment"
-        android:name="com.lc.android.presentation.vocabularytranslation.VocabularyTranslationFragment"
-        android:label="VocabularyTranslationFragment"
-        tools:layout="@layout/fragment_vocabulary_translation" />
+    <dialog
+        android:id="@+id/googleTranslateDialog"
+        android:name="com.lc.android.presentation.talk.GoogleTranslateDialog"
+        android:label="GoogleTranslateDialog"
+        tools:layout="@layout/dialog_google_translate">
+        <argument
+            android:name="isTranslateThToEn"
+            app:argType="boolean" />
+    </dialog>
 
 </navigation>
