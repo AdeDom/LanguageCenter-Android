@@ -3,6 +3,7 @@ package com.lc.library.data.network.source
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.lc.library.BuildConfig
 import com.lc.library.data.network.api.LanguageCenterApi
+import com.lc.library.data.network.api.LanguageTranslateApi
 import com.lc.library.data.network.ws.LanguageCenterWs
 import com.lc.library.sharedpreference.pref.AuthPref
 import com.lc.server.models.request.RefreshTokenRequest
@@ -78,6 +79,42 @@ class DataSourceProvider(
             client(okHttpClient)
             addConverterFactory(GsonConverterFactory.create())
             baseUrl("https://languagecenter.herokuapp.com/")
+        }.build()
+
+        return retrofit.create()
+    }
+
+    fun getRapidApi(): LanguageTranslateApi {
+        val okHttpClient = OkHttpClient.Builder().apply {
+            if (BuildConfig.DEBUG) {
+                addInterceptor(HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                })
+            }
+
+            connectTimeout(60, TimeUnit.SECONDS)
+            writeTimeout(60, TimeUnit.SECONDS)
+            readTimeout(60, TimeUnit.SECONDS)
+
+            addInterceptor {
+                val request = it.request()
+                    .newBuilder()
+                    .addHeader(
+                        "x-rapidapi-key",
+                        "48c2171a80mshd6eb0e26bdfe6b1p19a080jsn5552fdf81b8d"
+                    )
+                    .build()
+
+                it.proceed(request)
+            }
+
+            addNetworkInterceptor(StethoInterceptor())
+        }.build()
+
+        val retrofit = Retrofit.Builder().apply {
+            client(okHttpClient)
+            addConverterFactory(GsonConverterFactory.create())
+            baseUrl("https://google-translate1.p.rapidapi.com/")
         }.build()
 
         return retrofit.create()

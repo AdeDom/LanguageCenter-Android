@@ -2,6 +2,7 @@ package com.lc.library.data.network.source
 
 import androidx.lifecycle.LiveData
 import com.lc.library.data.db.entities.*
+import com.lc.library.data.model.GoogleTranslateResponse
 import com.lc.server.models.model.TalkSendMessageWebSocket
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
@@ -126,6 +127,14 @@ interface LanguageCenterDataSource {
     suspend fun callAddChatGroupFriend(addChatGroupFriendRequest: AddChatGroupFriendRequest): BaseResponse
 
     suspend fun callFetchVocabularyTranslation(): FetchVocabularyTranslationResponse
+
+    suspend fun callAddVocabularyTranslation(addVocabularyTranslation: AddVocabularyTranslation): BaseResponse
+
+    suspend fun callGoogleTranslate(
+        vocabulary: String,
+        source: String,
+        target: String,
+    ): GoogleTranslateResponse
 
     suspend fun incomingSendMessageSocket(listener: suspend (TalkSendMessageWebSocket) -> Unit)
 

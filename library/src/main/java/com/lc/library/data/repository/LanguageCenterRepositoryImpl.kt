@@ -4,9 +4,13 @@ import com.lc.library.data.db.entities.*
 import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.AuthPref
+import com.lc.library.sharedpreference.pref.ConfigPref
+import com.lc.library.util.LanguageCenterConstant
 import com.lc.library.util.LanguageCenterUtils
 import com.lc.server.models.model.AddChatGroupDetail
 import com.lc.server.models.model.TalkSendMessageWebSocket
+import com.lc.server.models.model.Translation
+import com.lc.server.models.model.Vocabulary
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +20,8 @@ import retrofit2.HttpException
 
 class LanguageCenterRepositoryImpl(
     private val dataSource: LanguageCenterDataSource,
-    private val pref: AuthPref,
+    private val authPref: AuthPref,
+    private val configPref: ConfigPref,
 ) : LanguageCenterRepository {
 
     private suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T): Resource<T> =
@@ -46,8 +51,8 @@ class LanguageCenterRepositoryImpl(
 
     private fun saveTokenAuth(response: SignInResponse) {
         if (response.success) {
-            pref.accessToken = response.token?.accessToken.orEmpty()
-            pref.refreshToken = response.token?.refreshToken.orEmpty()
+            authPref.accessToken = response.token?.accessToken.orEmpty()
+            authPref.refreshToken = response.token?.refreshToken.orEmpty()
         }
     }
 
@@ -83,8 +88,8 @@ class LanguageCenterRepositoryImpl(
     }
 
     override suspend fun signOut() {
-        pref.accessToken = ""
-        pref.refreshToken = ""
+        authPref.accessToken = ""
+        authPref.refreshToken = ""
         dataSource.deleteUserInfo()
         dataSource.deleteFriendInfo()
         dataSource.deleteAllAddChatGroupDetail()
@@ -300,7 +305,73 @@ class LanguageCenterRepositoryImpl(
     }
 
     override suspend fun callLanguageCenterTranslate(vocabulary: String?): Resource<LanguageCenterTranslateResponse> {
-        return safeApiCall { dataSource.callLanguageCenterTranslate(vocabulary) }
+        var resource = safeApiCall { dataSource.callLanguageCenterTranslate(vocabulary) }
+
+        if (resource is Resource.Success && resource.data.vocabulary == null && vocabulary != null) {
+            // get source & target
+            var source = ""
+            var target = ""
+            when (configPref.isTranslateThToEn) {
+                true -> {
+                    source = LanguageCenterConstant.THAI
+                    target = LanguageCenterConstant.ENGLISH
+                }
+                false -> {
+                    source = LanguageCenterConstant.ENGLISH
+                    target = LanguageCenterConstant.THAI
+                }
+            }
+
+            // call api google translate
+            val googleTranslate = safeApiCall {
+                dataSource.callGoogleTranslate(
+                    vocabulary = vocabulary,
+                    source = source,
+                    target = target,
+                )
+            }
+
+            if (googleTranslate is Resource.Success) {
+                googleTranslate.data
+                    .data
+                    ?.translations
+                    ?.map { it.translatedText.orEmpty() }
+                    ?.filter { it.isNotBlank() }
+                    ?.let { translations ->
+                        // save translation to server
+                        val request = AddVocabularyTranslation(
+                            vocabulary = vocabulary,
+                            source = source,
+                            target = target,
+                            translations = translations,
+                        )
+                        safeApiCall { dataSource.callAddVocabularyTranslation(request) }
+
+                        // response resource to view UI
+                        val languageCenterTranslateResponse = LanguageCenterTranslateResponse(
+                            success = true,
+                            message = "",
+                            vocabulary = Vocabulary(
+                                vocabularyId = "",
+                                vocabulary = vocabulary,
+                                sourceLanguage = source,
+                                created = 0,
+                                vocabularyGroupName = "",
+                                translations = translations.map {
+                                    Translation(
+                                        translationId = 0,
+                                        translation = it,
+                                        targetLanguage = target,
+                                    )
+                                },
+                            ),
+                        )
+                        resource = Resource.Success(languageCenterTranslateResponse)
+                    }
+            }
+        }
+
+        return resource
     }
 
     override suspend fun callAddChatGroup(addChatGroupRequest: AddChatGroupRequest): Resource<BaseResponse> {

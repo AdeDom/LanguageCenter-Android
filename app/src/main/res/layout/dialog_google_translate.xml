@@ -23,19 +23,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ibSwitch"
         app:layout_constraintEnd_toStartOf="@+id/ibSwitch"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ibSwitch"
         tools:text="@string/th" />
 
     <ImageButton
         android:id="@+id/ibSwitch"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_margin="8dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="4dp"
         android:background="@drawable/ic_switch"
         android:rotation="90"
-        app:layout_constraintEnd_toStartOf="@+id/tvTranslationText"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/layoutTextInputLayout"
+        app:layout_constraintEnd_toStartOf="@+id/tvTranslationText" />
 
     <TextView
         android:id="@+id/tvTranslationText"
@@ -43,8 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/layoutTextInputLayout"
+        app:layout_constraintEnd_toEndOf="@+id/layoutTextInputLayout"
         tools:text="@string/en" />
 
     <com.google.android.material.textfield.TextInputLayout

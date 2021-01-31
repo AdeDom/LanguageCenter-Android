@@ -3,6 +3,7 @@ package com.lc.library.data.network.source
 import androidx.lifecycle.LiveData
 import com.lc.library.data.db.AppDatabase
 import com.lc.library.data.db.entities.*
+import com.lc.library.data.model.GoogleTranslateResponse
 import com.lc.server.models.model.TalkSendMessageWebSocket
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
@@ -245,6 +246,19 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun callFetchVocabularyTranslation(): FetchVocabularyTranslationResponse {
         return provider.getLanguageCenterDataSource().callFetchVocabularyTranslation()
+    }
+
+    override suspend fun callAddVocabularyTranslation(addVocabularyTranslation: AddVocabularyTranslation): BaseResponse {
+        return provider.getLanguageCenterDataSource()
+            .callAddVocabularyTranslation(addVocabularyTranslation)
+    }
+
+    override suspend fun callGoogleTranslate(
+        vocabulary: String,
+        source: String,
+        target: String
+    ): GoogleTranslateResponse {
+        return provider.getRapidApi().callGoogleTranslate(vocabulary, source, target)
     }
 
     override suspend fun incomingSendMessageSocket(listener: suspend (TalkSendMessageWebSocket) -> Unit) {

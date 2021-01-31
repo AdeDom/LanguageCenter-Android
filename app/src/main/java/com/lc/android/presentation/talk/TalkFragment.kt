@@ -127,6 +127,12 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
             viewModel.setStateResendMessageTalkEntity(it)
             findNavController().navigate(R.id.action_talkFragment_to_talkMoreDialog)
         }
+
+        layoutTranslate.setOnTouchListener { _, motionEvent ->
+            layoutTranslate.x = motionEvent.rawX
+            layoutTranslate.y = motionEvent.rawY
+            true
+        }
     }
 
     private fun navToUserInfo() {
