@@ -62,13 +62,7 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
             ibSendMessage.isClickable = state.isSendMessage
-
             layoutTranslate.isVisible = state.isResultTranslate
-            tvVocabularyText.text = state.resultTranslate?.vocabulary
-            tvTranslationText.text = ""
-            state.resultTranslate?.translations?.forEach { translation ->
-                tvTranslationText.append("${translation.translation}\n")
-            }
         }
 
         viewModel.clearTextEvent.observe {
@@ -84,6 +78,21 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
                     recyclerView.smoothScrollToPosition(talkEntity.lastIndex)
                 }
             })
+
+        viewModel.translateResultsEvent.observe {
+            ibSendMessageTranslate.isVisible = it.translations.size == 1
+            tvVocabularyText.text = it?.vocabulary
+
+            if (it.translations.size == 1) {
+                tvTranslationText.text = it.translations.singleOrNull()?.translation
+            } else {
+                var translateText = ""
+                it?.translations?.forEachIndexed { index, translation ->
+                    translateText += "[${index.plus(1)}] ${translation.translation}${if (index == it.translations.size - 1) "" else "\n"}"
+                }
+                tvTranslationText.text = translateText
+            }
+        }
 
         viewModel.talkWebSockets.observe {
             sharedViewModel.talkWebSockets()
@@ -106,6 +115,8 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         etMessage.addTextChangedListener { viewModel.setStateMessages(it.toString()) }
 
         ibSendMessage.setOnClickListener { viewModel.callSendMessage(args.userInfo.userId) }
+
+        ibSendMessageTranslate.setOnClickListener { viewModel.callSendMessageTranslate(args.userInfo.userId) }
 
         requireView().setOnClickListener { activity?.hideSoftKeyboard() }
 

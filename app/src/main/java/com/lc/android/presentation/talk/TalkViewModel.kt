@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lc.android.base.BaseViewModel
 import com.lc.android.presentation.model.UserInfoParcelable
+import com.lc.android.util.SingleLiveEvent
 import com.lc.library.data.db.entities.ChatListEntity
 import com.lc.library.data.db.entities.TalkEntity
 import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.usecase.*
 import com.lc.server.models.model.UserInfoLocale
+import com.lc.server.models.model.Vocabulary
 import com.lc.server.models.request.ResendMessageRequest
 import com.lc.server.models.request.SendMessageRequest
 import kotlinx.coroutines.delay
@@ -31,6 +33,8 @@ class TalkViewModel(
     private val _clearTextEvent = MutableLiveData<Unit>()
     val clearTextEvent: LiveData<Unit>
         get() = _clearTextEvent
+
+    val translateResultsEvent = SingleLiveEvent<Vocabulary>()
 
     fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>> {
         return getTalkUseCase.getDbTalkByOtherUserIdLiveData(otherUserId)
@@ -146,11 +150,14 @@ class TalkViewModel(
             setState { copy(isLoading = true) }
 
             when (val resource = languageCenterTranslateUseCase(translateText)) {
-                is Resource.Success -> setState {
-                    copy(
-                        isResultTranslate = resource.data.vocabulary != null,
-                        resultTranslate = resource.data.vocabulary
-                    )
+                is Resource.Success -> {
+                    setState {
+                        copy(
+                            isResultTranslate = resource.data.vocabulary != null,
+                            resultTranslate = resource.data.vocabulary
+                        )
+                    }
+                    translateResultsEvent.value = resource.data.vocabulary
                 }
                 is Resource.Error -> setError(resource.throwable)
             }
@@ -169,6 +176,24 @@ class TalkViewModel(
 
     fun setIsTranslateThToEn(isTranslateThToEn: Boolean) {
         filePrefUseCase.setIsTranslateThToEn(isTranslateThToEn)
+    }
+
+    fun callSendMessageTranslate(toUserId: String?) {
+        launch {
+            setState { copy(isResultTranslate = false) }
+
+            val talkId = sendMessageUseCase.getTalkId()
+
+            val request = SendMessageRequest(
+                talkId = talkId,
+                messages = state.value?.resultTranslate?.translations?.singleOrNull()?.translation,
+                toUserId = toUserId,
+            )
+            when (val resource = sendMessageUseCase(request)) {
+                is Resource.Error -> setError(resource.throwable)
+                null -> handleCallWebSocketsIsNull(talkId)
+            }
+        }
     }
 
 }

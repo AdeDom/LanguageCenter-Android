@@ -40,12 +40,11 @@
         app:layout_constraintTop_toBottomOf="@+id/ivPicture"
         tools:listitem="@layout/item_chat_right" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutTranslate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:orientation="vertical"
         android:padding="4dp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,24 +55,47 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="end"
-            android:background="@drawable/ic_close_black" />
+            android:background="@drawable/ic_close_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvVocabularyText"
-            style="@style/Text.Body"
-            android:layout_width="wrap_content"
+            style="@style/Text.Title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ibClose"
             tools:text="สวัสดี" />
 
         <TextView
             android:id="@+id/tvTranslationText"
             style="@style/Text.Body"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#4284f5"
+            android:padding="4dp"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvVocabularyText"
             tools:text="็Hello" />
 
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/ibSendMessageTranslate"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/ic_send_gray"
+            android:rotation="315"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTranslationText"
+            app:layout_constraintEnd_toEndOf="@+id/tvTranslationText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
         android:id="@+id/ibTranslate"
