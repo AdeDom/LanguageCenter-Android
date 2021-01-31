@@ -128,7 +128,7 @@ interface LanguageCenterDataSource {
 
     suspend fun callFetchVocabularyTranslation(): FetchVocabularyTranslationResponse
 
-    suspend fun callAddVocabularyTranslation(addVocabularyTranslation: AddVocabularyTranslation): BaseResponse
+    suspend fun callAddVocabularyTranslation(addVocabularyTranslationRequest: AddVocabularyTranslationRequest): BaseResponse
 
     suspend fun callGoogleTranslate(
         vocabulary: String,

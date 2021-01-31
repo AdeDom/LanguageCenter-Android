@@ -248,9 +248,9 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callFetchVocabularyTranslation()
     }
 
-    override suspend fun callAddVocabularyTranslation(addVocabularyTranslation: AddVocabularyTranslation): BaseResponse {
+    override suspend fun callAddVocabularyTranslation(addVocabularyTranslationRequest: AddVocabularyTranslationRequest): BaseResponse {
         return provider.getLanguageCenterDataSource()
-            .callAddVocabularyTranslation(addVocabularyTranslation)
+            .callAddVocabularyTranslation(addVocabularyTranslationRequest)
     }
 
     override suspend fun callGoogleTranslate(

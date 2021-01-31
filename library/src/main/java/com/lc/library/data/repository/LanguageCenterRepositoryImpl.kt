@@ -339,7 +339,7 @@ class LanguageCenterRepositoryImpl(
                     ?.filter { it.isNotBlank() }
                     ?.let { translations ->
                         // save translation to server
-                        val request = AddVocabularyTranslation(
+                        val request = AddVocabularyTranslationRequest(
                             vocabulary = vocabulary,
                             source = source,
                             target = target,

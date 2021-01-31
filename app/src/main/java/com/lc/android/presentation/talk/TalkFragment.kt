@@ -1,6 +1,7 @@
 package com.lc.android.presentation.talk
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -129,8 +130,15 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         }
 
         layoutTranslate.setOnTouchListener { _, motionEvent ->
-            layoutTranslate.x = motionEvent.rawX
-            layoutTranslate.y = motionEvent.rawY
+            when (motionEvent.action) {
+                MotionEvent.ACTION_MOVE -> {
+                    val layoutTranslateX = layoutTranslate.width / 2
+                    val layoutTranslateY = layoutTranslate.height / 2
+
+                    layoutTranslate.x = motionEvent.rawX - layoutTranslateX
+                    layoutTranslate.y = motionEvent.rawY - layoutTranslateY
+                }
+            }
             true
         }
     }
@@ -160,6 +168,10 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
                 viewModel.callLanguageCenterTranslate(translateText)
             }
         }
+    }
+
+    companion object {
+        private const val TAG = "TalkFragment"
     }
 
 }
