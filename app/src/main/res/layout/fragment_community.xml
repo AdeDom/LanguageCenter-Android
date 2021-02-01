@@ -66,6 +66,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:overScrollMode="never"
                 tools:listitem="@layout/item_user_info" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
