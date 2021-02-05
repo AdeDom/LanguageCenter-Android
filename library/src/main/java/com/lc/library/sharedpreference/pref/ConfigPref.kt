@@ -13,6 +13,8 @@ interface ConfigPref {
         const val SELECT_PAGE_CHATS = "chats"
         const val SELECT_PAGE_CHAT_GROUP = "chat_group"
         const val SELECT_PAGE_VOCABULARY = "vocabulary"
+        const val SELECT_PAGE_ADD_VOCABULARY = "addVocabulary"
+        const val SELECT_PAGE_VOCABULARY_DETAIL = "vocabularyDetail"
         const val SELECT_PAGE_PROFILE = "profile"
         const val SELECT_PAGE_USER_INFO = "user_info"
         const val SELECT_PAGE_TALK = "talk"

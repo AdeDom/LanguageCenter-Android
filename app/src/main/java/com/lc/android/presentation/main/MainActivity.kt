@@ -46,6 +46,8 @@ class MainActivity : BaseActivity() {
                 R.id.userInfoFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_USER_INFO)
                 R.id.talkFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_TALK)
                 R.id.chatGroupDetailFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_CHAT_GROUP_DETAIL)
+                R.id.addVocabularyFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_ADD_VOCABULARY)
+                R.id.vocabularyDetailFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_VOCABULARY_DETAIL)
                 R.id.editProfileFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_EDIT_PROFILE)
                 R.id.editLocaleNativeFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_EDIT_LOCALE_NATIVE)
                 R.id.editLocaleLearningFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_EDIT_LOCALE_LEARNING)

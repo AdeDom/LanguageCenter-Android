@@ -64,8 +64,19 @@
         android:label="VocabularyFragment"
         tools:layout="@layout/fragment_vocabulary">
         <action
-            android:id="@+id/action_vocabularyFragment_to_vocabularyActivity"
-            app:destination="@id/vocabularyActivity" />
+            android:id="@+id/action_vocabularyFragment_to_vocabularyDetailFragment"
+            app:destination="@id/vocabularyDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_vocabularyFragment_to_addVocabularyFragment"
+            app:destination="@id/addVocabularyFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -102,11 +113,6 @@
         android:name="com.lc.android.presentation.edit.profile.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
-    <activity
-        android:id="@+id/vocabularyActivity"
-        android:name="com.lc.android.presentation.VocabularyActivity"
-        android:label="activity_vocabulary"
-        tools:layout="@layout/activity_vocabulary" />
     <fragment
         android:id="@+id/chatGroupDetailFragment"
         android:name="com.lc.android.presentation.chatgroupdetail.ChatGroupDetailFragment"
@@ -260,5 +266,15 @@
             android:name="isTranslateThToEn"
             app:argType="boolean" />
     </dialog>
+    <fragment
+        android:id="@+id/addVocabularyFragment"
+        android:name="com.lc.android.presentation.addvocabulary.AddVocabularyFragment"
+        android:label="AddVocabularyFragment"
+        tools:layout="@layout/fragment_add_vocabulary" />
+    <fragment
+        android:id="@+id/vocabularyDetailFragment"
+        android:name="com.lc.android.presentation.vocabularydetail.VocabularyDetailFragment"
+        android:label="VocabularyDetailFragment"
+        tools:layout="@layout/fragment_vocabulary_detail" />
 
 </navigation>

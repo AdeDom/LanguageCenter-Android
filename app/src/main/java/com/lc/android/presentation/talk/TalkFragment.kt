@@ -170,8 +170,4 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
         }
     }
 
-    companion object {
-        private const val TAG = "TalkFragment"
-    }
-
 }
