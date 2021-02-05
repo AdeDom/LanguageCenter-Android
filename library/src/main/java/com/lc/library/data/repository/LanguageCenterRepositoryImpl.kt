@@ -459,10 +459,6 @@ class LanguageCenterRepositoryImpl(
         return resource
     }
 
-    override suspend fun callFetchVocabularyTranslation(): Resource<FetchVocabularyTranslationResponse> {
-        return safeApiCall { dataSource.callFetchVocabularyTranslation() }
-    }
-
     override suspend fun callAddVocabularyTranslation(addVocabularyTranslationRequest: AddVocabularyTranslationRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callAddVocabularyTranslation(addVocabularyTranslationRequest) }
     }

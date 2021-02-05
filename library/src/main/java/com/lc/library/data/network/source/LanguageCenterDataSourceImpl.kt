@@ -244,10 +244,6 @@ class LanguageCenterDataSourceImpl(
             .callAddChatGroupFriend(addChatGroupFriendRequest)
     }
 
-    override suspend fun callFetchVocabularyTranslation(): FetchVocabularyTranslationResponse {
-        return provider.getLanguageCenterDataSource().callFetchVocabularyTranslation()
-    }
-
     override suspend fun callAddVocabularyTranslation(addVocabularyTranslationRequest: AddVocabularyTranslationRequest): BaseResponse {
         return provider.getLanguageCenterDataSource()
             .callAddVocabularyTranslation(addVocabularyTranslationRequest)

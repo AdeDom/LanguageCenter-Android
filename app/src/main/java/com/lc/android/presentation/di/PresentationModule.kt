@@ -19,7 +19,6 @@ import com.lc.android.presentation.signin.SignInViewModel
 import com.lc.android.presentation.splashscreen.SplashScreenViewModel
 import com.lc.android.presentation.talk.TalkViewModel
 import com.lc.android.presentation.userinfo.UserInfoViewModel
-import com.lc.android.presentation.vocabularytranslation.VocabularyTranslationViewModel
 import io.ktor.util.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -49,7 +48,6 @@ private val presentationModule = module {
     viewModel { MainViewModel(get(), get(), get()) }
     viewModel { TalkViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { ChatsViewModel(get()) }
-    viewModel { VocabularyTranslationViewModel(get()) }
     viewModel { AddVocabularyViewModel(get()) }
 
 }

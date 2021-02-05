@@ -84,9 +84,6 @@ interface LanguageCenterApi {
     @POST("api/chat-group/add-chat-group-friend")
     suspend fun callAddChatGroupFriend(@Body addChatGroupFriendRequest: AddChatGroupFriendRequest): BaseResponse
 
-    @GET("api/vocabulary/fetch-vocabulary-translate")
-    suspend fun callFetchVocabularyTranslation(): FetchVocabularyTranslationResponse
-
     @POST("api/vocabulary/add-vocabulary-translation")
     suspend fun callAddVocabularyTranslation(@Body addVocabularyTranslationRequest: AddVocabularyTranslationRequest): BaseResponse
 

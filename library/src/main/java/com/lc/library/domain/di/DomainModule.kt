@@ -32,7 +32,6 @@ private val domainModule = module {
     single<FetchTalkUnreceivedUseCase> { FetchTalkUnreceivedUseCaseImpl(get()) }
     single<TalkWebSocketsUseCase> { TalkWebSocketsUseCaseImpl(get()) }
     single<FilePrefUseCase> { FilePrefUseCaseImpl(get(), get()) }
-    single<FetchVocabularyTranslationUseCase> { FetchVocabularyTranslationUseCaseImpl(get()) }
     single<LanguageCenterTranslateUseCase> { LanguageCenterTranslateUseCaseImpl(get()) }
     single<AddVocabularyTranslationUseCase> { AddVocabularyTranslationUseCaseImpl(get()) }
 
