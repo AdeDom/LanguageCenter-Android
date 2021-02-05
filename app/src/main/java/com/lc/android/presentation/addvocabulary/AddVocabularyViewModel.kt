@@ -4,6 +4,7 @@ import com.lc.android.base.BaseViewModel
 import com.lc.android.util.SingleLiveEvent
 import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.usecase.AddVocabularyTranslationUseCase
+import com.lc.library.util.LanguageCenterConstant
 import com.lc.server.models.request.AddVocabularyTranslationRequest
 import com.lc.server.models.response.BaseResponse
 import kotlinx.coroutines.launch
@@ -14,15 +15,15 @@ class AddVocabularyViewModel(
 
     val addVocabularyTranslationEvent = SingleLiveEvent<BaseResponse>()
 
-    fun callAddVocabularyTranslation(source: String, target: String) {
+    fun callAddVocabularyTranslation() {
         launch {
             setState { copy(isLoading = true, isClickable = false) }
 
             if (state.value?.isValidateVocabulary == true && state.value?.isValidateTranslation == true) {
                 val request = AddVocabularyTranslationRequest(
                     vocabulary = state.value?.vocabulary,
-                    source = source,
-                    target = target,
+                    source = state.value?.source,
+                    target = state.value?.target,
                     translations = listOf(state.value?.translation.orEmpty()),
                 )
                 when (val resource = addVocabularyTranslationUseCase(request)) {
@@ -51,6 +52,26 @@ class AddVocabularyViewModel(
                 isValidateTranslation = translation.isNotEmpty(),
             )
         }
+    }
+
+    fun setStateSourceAndTarget(source: String, target: String) {
+        setState { copy(source = source, target = target) }
+    }
+
+    fun onSwitchTranslate() {
+        val source = when (state.value?.source) {
+            LanguageCenterConstant.THAI -> LanguageCenterConstant.ENGLISH
+            LanguageCenterConstant.ENGLISH -> LanguageCenterConstant.THAI
+            else -> null
+        }
+
+        val target = when (state.value?.target) {
+            LanguageCenterConstant.THAI -> LanguageCenterConstant.ENGLISH
+            LanguageCenterConstant.ENGLISH -> LanguageCenterConstant.THAI
+            else -> null
+        }
+
+        setState { copy(source = source, target = target) }
     }
 
 }

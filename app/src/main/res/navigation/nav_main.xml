@@ -77,6 +77,9 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_vocabularyFragment_to_addTranslateDialog"
+            app:destination="@id/addTranslateDialog" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -270,11 +273,23 @@
         android:id="@+id/addVocabularyFragment"
         android:name="com.lc.android.presentation.addvocabulary.AddVocabularyFragment"
         android:label="AddVocabularyFragment"
-        tools:layout="@layout/fragment_add_vocabulary" />
+        tools:layout="@layout/fragment_add_vocabulary">
+        <argument
+            android:name="source"
+            app:argType="string" />
+        <argument
+            android:name="target"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/vocabularyDetailFragment"
         android:name="com.lc.android.presentation.vocabularydetail.VocabularyDetailFragment"
         android:label="VocabularyDetailFragment"
         tools:layout="@layout/fragment_vocabulary_detail" />
+    <dialog
+        android:id="@+id/addTranslateDialog"
+        android:name="com.lc.android.presentation.vocapbulary.AddTranslateDialog"
+        android:label="AddTranslateDialog"
+        tools:layout="@layout/dialog_add_translate" />
 
 </navigation>

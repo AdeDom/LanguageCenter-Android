@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/img_background_app">
@@ -14,6 +15,37 @@
         android:text="@string/vocabulary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvVocabularyText"
+        style="@style/Text.Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ibSwitch"
+        app:layout_constraintEnd_toStartOf="@+id/ibSwitch"
+        app:layout_constraintTop_toTopOf="@+id/ibSwitch"
+        tools:text="@string/th" />
+
+    <ImageButton
+        android:id="@+id/ibSwitch"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/ic_switch"
+        android:rotation="90"
+        app:layout_constraintBottom_toTopOf="@+id/etVocabulary"
+        app:layout_constraintEnd_toStartOf="@+id/tvTranslationText" />
+
+    <TextView
+        android:id="@+id/tvTranslationText"
+        style="@style/Text.Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/etVocabulary"
+        app:layout_constraintEnd_toEndOf="@+id/etVocabulary"
+        tools:text="@string/en" />
 
     <TextView
         android:id="@+id/tvEnglish"
