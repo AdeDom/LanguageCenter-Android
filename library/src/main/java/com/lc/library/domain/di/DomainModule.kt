@@ -34,6 +34,7 @@ private val domainModule = module {
     single<FilePrefUseCase> { FilePrefUseCaseImpl(get(), get()) }
     single<FetchVocabularyTranslationUseCase> { FetchVocabularyTranslationUseCaseImpl(get()) }
     single<LanguageCenterTranslateUseCase> { LanguageCenterTranslateUseCaseImpl(get()) }
+    single<AddVocabularyTranslationUseCase> { AddVocabularyTranslationUseCaseImpl(get()) }
 
 }
 

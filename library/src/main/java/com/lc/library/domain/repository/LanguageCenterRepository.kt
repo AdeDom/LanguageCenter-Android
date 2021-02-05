@@ -57,6 +57,8 @@ interface LanguageCenterRepository {
 
     suspend fun callFetchVocabularyTranslation(): Resource<FetchVocabularyTranslationResponse>
 
+    suspend fun callAddVocabularyTranslation(addVocabularyTranslationRequest: AddVocabularyTranslationRequest): Resource<BaseResponse>
+
     suspend fun incomingSendMessageSocket()
 
 }

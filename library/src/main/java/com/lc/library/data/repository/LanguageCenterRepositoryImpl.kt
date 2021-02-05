@@ -345,7 +345,7 @@ class LanguageCenterRepositoryImpl(
                             target = target,
                             translations = translations,
                         )
-                        safeApiCall { dataSource.callAddVocabularyTranslation(request) }
+                        callAddVocabularyTranslation(request)
 
                         // response resource to view UI
                         val languageCenterTranslateResponse = LanguageCenterTranslateResponse(
@@ -460,6 +460,10 @@ class LanguageCenterRepositoryImpl(
 
     override suspend fun callFetchVocabularyTranslation(): Resource<FetchVocabularyTranslationResponse> {
         return safeApiCall { dataSource.callFetchVocabularyTranslation() }
+    }
+
+    override suspend fun callAddVocabularyTranslation(addVocabularyTranslationRequest: AddVocabularyTranslationRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callAddVocabularyTranslation(addVocabularyTranslationRequest) }
     }
 
     override suspend fun incomingSendMessageSocket() {
