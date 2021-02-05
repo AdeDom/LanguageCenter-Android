@@ -10,7 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.util.snackbar
-import com.lc.library.util.LanguageCenterConstant
+import com.lc.server.util.LanguageCenterConstant
 import kotlinx.android.synthetic.main.fragment_add_vocabulary.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

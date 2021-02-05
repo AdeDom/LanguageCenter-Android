@@ -6,7 +6,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.library.util.LanguageCenterConstant
+import com.lc.server.util.LanguageCenterConstant
 import kotlinx.android.synthetic.main.fragment_vocabulary.*
 
 class VocabularyFragment : BaseFragment(R.layout.fragment_vocabulary) {

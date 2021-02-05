@@ -4,9 +4,9 @@ import com.lc.android.base.BaseViewModel
 import com.lc.android.util.SingleLiveEvent
 import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.usecase.AddVocabularyTranslationUseCase
-import com.lc.library.util.LanguageCenterConstant
 import com.lc.server.models.request.AddVocabularyTranslationRequest
 import com.lc.server.models.response.BaseResponse
+import com.lc.server.util.LanguageCenterConstant
 import kotlinx.coroutines.launch
 
 class AddVocabularyViewModel(
@@ -25,6 +25,7 @@ class AddVocabularyViewModel(
                     source = state.value?.source,
                     target = state.value?.target,
                     translations = listOf(state.value?.translation.orEmpty()),
+                    reference = LanguageCenterConstant.ADD_VOCABULARY,
                 )
                 when (val resource = addVocabularyTranslationUseCase(request)) {
                     is Resource.Success -> addVocabularyTranslationEvent.value = resource.data

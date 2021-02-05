@@ -5,7 +5,6 @@ import com.lc.library.data.network.source.LanguageCenterDataSource
 import com.lc.library.domain.repository.LanguageCenterRepository
 import com.lc.library.sharedpreference.pref.AuthPref
 import com.lc.library.sharedpreference.pref.ConfigPref
-import com.lc.library.util.LanguageCenterConstant
 import com.lc.library.util.LanguageCenterUtils
 import com.lc.server.models.model.AddChatGroupDetail
 import com.lc.server.models.model.TalkSendMessageWebSocket
@@ -13,6 +12,7 @@ import com.lc.server.models.model.Translation
 import com.lc.server.models.model.Vocabulary
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
+import com.lc.server.util.LanguageCenterConstant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -344,6 +344,7 @@ class LanguageCenterRepositoryImpl(
                             source = source,
                             target = target,
                             translations = translations,
+                            reference = LanguageCenterConstant.GOOGLE_TRANSLATE,
                         )
                         callAddVocabularyTranslation(request)
 
