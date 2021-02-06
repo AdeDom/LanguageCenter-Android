@@ -253,6 +253,10 @@ class LanguageCenterDataSourceImpl(
         return provider.getLanguageCenterDataSource().callFetchVocabularyGroup()
     }
 
+    override suspend fun callFetchVocabularyDetail(vocabularyGroupId: Int): FetchVocabularyDetailResponse {
+        return provider.getLanguageCenterDataSource().callFetchVocabularyDetail(vocabularyGroupId)
+    }
+
     override suspend fun callGoogleTranslate(
         vocabulary: String,
         source: String,

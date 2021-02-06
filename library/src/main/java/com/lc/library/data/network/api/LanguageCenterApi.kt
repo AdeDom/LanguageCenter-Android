@@ -90,4 +90,7 @@ interface LanguageCenterApi {
     @GET("api/vocabulary/fetch-vocabulary-group")
     suspend fun callFetchVocabularyGroup(): FetchVocabularyGroupResponse
 
+    @GET("api/vocabulary/fetch-vocabulary-detail/vocabularyGroup")
+    suspend fun callFetchVocabularyDetail(@Query("vocabularyGroupId") vocabularyGroupId: Int): FetchVocabularyDetailResponse
+
 }

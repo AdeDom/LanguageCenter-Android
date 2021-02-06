@@ -467,6 +467,10 @@ class LanguageCenterRepositoryImpl(
         return safeApiCall { dataSource.callFetchVocabularyGroup() }
     }
 
+    override suspend fun callFetchVocabularyDetail(vocabularyGroupId: Int): Resource<FetchVocabularyDetailResponse> {
+        return safeApiCall { dataSource.callFetchVocabularyDetail(vocabularyGroupId) }
+    }
+
     override suspend fun incomingSendMessageSocket() {
         dataSource.incomingSendMessageSocket {
             val count = dataSource.getDbCountTalkByTalkId(it.talkId)

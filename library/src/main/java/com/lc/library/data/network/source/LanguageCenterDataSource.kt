@@ -130,6 +130,8 @@ interface LanguageCenterDataSource {
 
     suspend fun callFetchVocabularyGroup(): FetchVocabularyGroupResponse
 
+    suspend fun callFetchVocabularyDetail(vocabularyGroupId: Int): FetchVocabularyDetailResponse
+
     suspend fun callGoogleTranslate(
         vocabulary: String,
         source: String,
