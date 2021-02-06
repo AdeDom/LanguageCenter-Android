@@ -87,4 +87,7 @@ interface LanguageCenterApi {
     @POST("api/vocabulary/add-vocabulary-translation")
     suspend fun callAddVocabularyTranslation(@Body addVocabularyTranslationRequest: AddVocabularyTranslationRequest): BaseResponse
 
+    @GET("api/vocabulary/fetch-vocabulary-group")
+    suspend fun callFetchVocabularyGroup(): FetchVocabularyGroupResponse
+
 }

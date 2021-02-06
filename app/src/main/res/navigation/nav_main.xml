@@ -285,7 +285,11 @@
         android:id="@+id/vocabularyDetailFragment"
         android:name="com.lc.android.presentation.vocabularydetail.VocabularyDetailFragment"
         android:label="VocabularyDetailFragment"
-        tools:layout="@layout/fragment_vocabulary_detail" />
+        tools:layout="@layout/fragment_vocabulary_detail">
+        <argument
+            android:name="vocabularyGroupId"
+            app:argType="integer" />
+    </fragment>
     <dialog
         android:id="@+id/addTranslateDialog"
         android:name="com.lc.android.presentation.vocapbulary.AddTranslateDialog"
