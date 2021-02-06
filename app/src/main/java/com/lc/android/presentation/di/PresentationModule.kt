@@ -52,7 +52,7 @@ private val presentationModule = module {
     viewModel { ChatsViewModel(get()) }
     viewModel { AddVocabularyViewModel(get()) }
     viewModel { VocabularyViewModel(get()) }
-    viewModel { VocabularyDetailViewModel(get()) }
+    viewModel { VocabularyDetailViewModel(get(), get()) }
 
 }
 

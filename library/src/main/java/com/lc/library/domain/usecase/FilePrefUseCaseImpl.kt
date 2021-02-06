@@ -33,4 +33,12 @@ class FilePrefUseCaseImpl(
         configPref.isTranslateThToEn = isTranslateThToEn
     }
 
+    override fun getCopyTextMessage(): String? {
+        return configPref.copyTextMessage
+    }
+
+    override fun setCopyTextMessage(copyTextMessage: String?) {
+        configPref.copyTextMessage = copyTextMessage
+    }
+
 }

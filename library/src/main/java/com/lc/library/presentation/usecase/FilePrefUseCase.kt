@@ -14,4 +14,8 @@ interface FilePrefUseCase {
 
     fun setIsTranslateThToEn(isTranslateThToEn: Boolean)
 
+    fun getCopyTextMessage(): String?
+
+    fun setCopyTextMessage(copyTextMessage: String?)
+
 }

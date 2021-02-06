@@ -196,4 +196,8 @@ class TalkViewModel(
         }
     }
 
+    fun getCopyTextMessage(): String? {
+        return filePrefUseCase.getCopyTextMessage()
+    }
+
 }

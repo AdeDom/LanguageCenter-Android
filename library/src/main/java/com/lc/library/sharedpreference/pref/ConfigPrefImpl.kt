@@ -27,4 +27,12 @@ class ConfigPrefImpl(context: Context) : ConfigPref {
             }
         }
 
+    override var copyTextMessage: String?
+        get() = sharedPreference.getString(ConfigPref.COPY_TEXT_MESSAGE_KEY, "")
+        set(value) {
+            sharedPreference.edit {
+                putString(ConfigPref.COPY_TEXT_MESSAGE_KEY, value)
+            }
+        }
+
 }

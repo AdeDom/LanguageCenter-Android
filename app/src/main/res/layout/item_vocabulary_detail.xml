@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
@@ -13,79 +14,59 @@
         android:background="@drawable/shape_cardview_background"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tvName"
-            style="@style/Text.Body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AdeDom"
+        <ImageView
+            android:id="@+id/ivReference"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_translate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvVocabularyEnglish"
-            style="@style/Text.Body"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvVocabularyText"
+            style="@style/Text.Title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/hello_english"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvVocabularyThai"
+            android:id="@+id/tvTranslationText"
             style="@style/Text.Body"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#4284f5"
+            android:padding="4dp"
             android:text="@string/hello_thai"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvVocabularyEnglish" />
+            app:layout_constraintTop_toBottomOf="@+id/tvVocabularyText" />
 
-        <ImageView
-            android:id="@+id/ivLike"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_like"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvVocabularyThai" />
-
-        <TextView
-            android:id="@+id/tvLike"
-            style="@style/Text.Body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="10"
-            app:layout_constraintBottom_toBottomOf="@+id/ivLike"
-            app:layout_constraintStart_toEndOf="@+id/ivLike"
-            app:layout_constraintTop_toTopOf="@+id/ivLike" />
-
-        <ImageView
-            android:id="@+id/ivDislike"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_dislike"
-            app:layout_constraintBottom_toBottomOf="@+id/tvLike"
-            app:layout_constraintStart_toEndOf="@+id/tvLike"
-            app:layout_constraintTop_toTopOf="@+id/tvLike" />
-
-        <TextView
-            android:id="@+id/tvDislike"
-            style="@style/Text.Body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="9"
-            app:layout_constraintBottom_toBottomOf="@+id/ivDislike"
-            app:layout_constraintStart_toEndOf="@+id/ivDislike"
-            app:layout_constraintTop_toTopOf="@+id/ivDislike" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_copy"
+        <ImageButton
+            android:id="@+id/ibPicture"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_profile"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTranslationText" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/Text.Body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ibPicture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ibPicture"
+            app:layout_constraintTop_toTopOf="@+id/ibPicture"
+            tools:text="AdeDom" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

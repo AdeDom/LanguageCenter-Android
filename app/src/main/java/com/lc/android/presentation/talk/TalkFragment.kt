@@ -14,6 +14,7 @@ import com.lc.android.base.BaseFragment
 import com.lc.android.presentation.main.MainViewModel
 import com.lc.android.util.hideSoftKeyboard
 import com.lc.android.util.loadCircle
+import com.lc.android.util.toast
 import io.ktor.util.*
 import kotlinx.android.synthetic.main.fragment_talk.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -139,6 +140,14 @@ class TalkFragment : BaseFragment(R.layout.fragment_talk) {
                     layoutTranslate.y = motionEvent.rawY - layoutTranslateY
                 }
             }
+            true
+        }
+
+        etMessage.setOnLongClickListener {
+            val text = etMessage.text.toString() + viewModel.getCopyTextMessage()
+            etMessage.setText(text)
+            etMessage.setSelection(text.length)
+            context.toast("Paste")
             true
         }
     }
