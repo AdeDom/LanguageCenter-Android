@@ -12,7 +12,7 @@ import io.ktor.http.cio.websocket.*
 import io.ktor.util.*
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.consumeAsFlow
 
 @KtorExperimentalAPI
 class LanguageCenterWs(
@@ -24,6 +24,7 @@ class LanguageCenterWs(
 
     suspend fun incomingSendMessageSocket(listener: suspend (TalkSendMessageWebSocket) -> Unit) {
         client.wss(
+            method = HttpMethod.Get,
             host = "languagecenter.herokuapp.com",
             port = DEFAULT_PORT,
             path = "/ws/chats/send-message",
@@ -34,7 +35,7 @@ class LanguageCenterWs(
             sendMessageSocket = this
             try {
                 incoming
-                    .receiveAsFlow()
+                    .consumeAsFlow()
                     .catch {
                     }
                     .collect { frame ->
