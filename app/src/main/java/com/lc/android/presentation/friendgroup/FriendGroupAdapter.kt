@@ -1,4 +1,4 @@
-package com.lc.android.presentation.chatgroup
+package com.lc.android.presentation.friendgroup
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lc.android.R
 import com.lc.server.models.model.ChatGroup
-import kotlinx.android.synthetic.main.item_chat_group.view.*
+import kotlinx.android.synthetic.main.item_friend_group.view.*
 
-class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHolder>() {
+class FriendGroupAdapter : RecyclerView.Adapter<FriendGroupAdapter.FriendGroupViewHolder>() {
 
     private val list: MutableList<ChatGroup>
         get() = asyncListDiffer.currentList
@@ -28,13 +28,13 @@ class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHold
             }
         })
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatGroupViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendGroupViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_chat_group, parent, false)
-        return ChatGroupViewHolder(view)
+            .inflate(R.layout.item_friend_group, parent, false)
+        return FriendGroupViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ChatGroupViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FriendGroupViewHolder, position: Int) {
         holder.itemView.apply {
             val item = list[position]
 
@@ -62,6 +62,6 @@ class ChatGroupAdapter : RecyclerView.Adapter<ChatGroupAdapter.ChatGroupViewHold
         this.moreListener = moreListener
     }
 
-    class ChatGroupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class FriendGroupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 }

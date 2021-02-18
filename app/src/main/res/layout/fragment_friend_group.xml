@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/chat_group"
+        android:text="@string/friend_group"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvChatGroup"
-        tools:listitem="@layout/item_chat_group" />
+        tools:listitem="@layout/item_friend_group" />
 
     <ImageView
         android:id="@+id/ivPlaceHolderDefault"

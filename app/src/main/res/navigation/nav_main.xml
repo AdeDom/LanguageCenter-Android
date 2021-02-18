@@ -37,28 +37,6 @@
             app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/chatGroupFragment"
-        android:name="com.lc.android.presentation.chatgroup.ChatGroupFragment"
-        android:label="ChatGroupFragment"
-        tools:layout="@layout/fragment_chat_group">
-        <action
-            android:id="@+id/action_chatGroupFragment_to_chatGroupDetailFragment"
-            app:destination="@id/chatGroupDetailFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/action_chatGroupFragment_to_addChatGroupDialog"
-            app:destination="@id/addChatGroupDialog" />
-        <action
-            android:id="@+id/action_chatGroupFragment_to_moreChatGroupDialog"
-            app:destination="@id/moreChatGroupDialog" />
-        <action
-            android:id="@+id/action_chatGroupFragment_to_renameChatGroupDialog"
-            app:destination="@id/renameChatGroupDialog" />
-    </fragment>
-    <fragment
         android:id="@+id/vocabularyFragment"
         android:name="com.lc.android.presentation.vocapbulary.VocabularyFragment"
         android:label="VocabularyFragment"
@@ -200,26 +178,6 @@
         android:label="EditLocaleLearningFragment"
         tools:layout="@layout/fragment_edit_locale_learning" />
     <dialog
-        android:id="@+id/addChatGroupDialog"
-        android:name="com.lc.android.presentation.chatgroup.AddChatGroupDialog"
-        android:label="AddChatGroupDialog"
-        tools:layout="@layout/dialog_add_chat_group" />
-    <dialog
-        android:id="@+id/moreChatGroupDialog"
-        android:name="com.lc.android.presentation.chatgroup.MoreChatGroupDialog"
-        android:label="MoreChatGroupDialog"
-        tools:layout="@layout/dialog_more_chat_group" />
-    <dialog
-        android:id="@+id/renameChatGroupDialog"
-        android:name="com.lc.android.presentation.chatgroup.RenameChatGroupDialog"
-        android:label="RenameChatGroupDialog"
-        tools:layout="@layout/dialog_rename_chat_group">
-        <argument
-            android:name="groupName"
-            app:argType="string"
-            app:nullable="true" />
-    </dialog>
-    <dialog
         android:id="@+id/changeChatGroupDialog"
         android:name="com.lc.android.presentation.chatgroupdetail.ChangeChatGroupDialog"
         android:label="ChangeChatGroupDialog"
@@ -302,5 +260,40 @@
         android:name="com.lc.android.presentation.vocapbulary.AddTranslateDialog"
         android:label="AddTranslateDialog"
         tools:layout="@layout/dialog_add_translate" />
+    <fragment
+        android:id="@+id/friendGroupFragment"
+        android:name="com.lc.android.presentation.friendgroup.FriendGroupFragment"
+        android:label="FriendGroupFragment"
+        tools:layout="@layout/fragment_friend_group">
+        <action
+            android:id="@+id/action_friendGroupFragment_to_moreFriendGroupDialog"
+            app:destination="@id/moreFriendGroupDialog" />
+        <action
+            android:id="@+id/action_friendGroupFragment_to_addFriendGroupDialog"
+            app:destination="@id/addFriendGroupDialog" />
+        <action
+            android:id="@+id/action_friendGroupFragment_to_renameFriendGroupDialog"
+            app:destination="@id/renameFriendGroupDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/moreFriendGroupDialog"
+        android:name="com.lc.android.presentation.friendgroup.MoreFriendGroupDialog"
+        android:label="MoreFriendGroupDialog"
+        tools:layout="@layout/dialog_more_friend_group" />
+    <dialog
+        android:id="@+id/addFriendGroupDialog"
+        android:name="com.lc.android.presentation.friendgroup.AddFriendGroupDialog"
+        android:label="AddFriendGroupDialog"
+        tools:layout="@layout/dialog_add_friend_group" />
+    <dialog
+        android:id="@+id/renameFriendGroupDialog"
+        android:name="com.lc.android.presentation.friendgroup.RenameFriendGroupDialog"
+        android:label="RenameFriendGroupDialog"
+        tools:layout="@layout/dialog_rename_friend_group">
+        <argument
+            android:name="groupName"
+            app:argType="string"
+            app:nullable="true" />
+    </dialog>
 
 </navigation>

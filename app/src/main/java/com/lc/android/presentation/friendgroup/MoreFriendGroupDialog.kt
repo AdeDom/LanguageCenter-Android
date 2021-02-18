@@ -1,4 +1,4 @@
-package com.lc.android.presentation.chatgroup
+package com.lc.android.presentation.friendgroup
 
 import android.os.Bundle
 import android.view.View
@@ -7,9 +7,9 @@ import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.lc.android.R
 import com.lc.android.base.BaseBottomSheetDialog
-import kotlinx.android.synthetic.main.dialog_more_chat_group.*
+import kotlinx.android.synthetic.main.dialog_more_friend_group.*
 
-class MoreChatGroupDialog : BaseBottomSheetDialog(R.layout.dialog_more_chat_group) {
+class MoreFriendGroupDialog : BaseBottomSheetDialog(R.layout.dialog_more_friend_group) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -12,9 +12,9 @@
         android:title="@string/chats" />
 
     <item
-        android:id="@+id/chatGroupFragment"
-        android:icon="@drawable/ic_chat_group"
-        android:title="@string/chat_group" />
+        android:id="@+id/friendGroupFragment"
+        android:icon="@drawable/ic_friend_group"
+        android:title="@string/friend_group" />
 
     <item
         android:id="@+id/vocabularyFragment"

@@ -1,4 +1,4 @@
-package com.lc.android.presentation.chatgroup
+package com.lc.android.presentation.friendgroup
 
 import android.os.Bundle
 import android.view.View
@@ -6,24 +6,16 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.lc.android.R
 import com.lc.android.base.BaseBottomSheetDialog
-import kotlinx.android.synthetic.main.dialog_add_chat_group.*
+import kotlinx.android.synthetic.main.dialog_add_friend_group.*
 
-class RenameChatGroupDialog : BaseBottomSheetDialog(R.layout.dialog_rename_chat_group) {
-
-    private val args by navArgs<RenameChatGroupDialogArgs>()
+class AddFriendGroupDialog : BaseBottomSheetDialog(R.layout.dialog_add_friend_group) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initialView()
         viewEvent()
-    }
-
-    private fun initialView() {
-        etChatGroup.setText(args.groupName)
     }
 
     private fun viewEvent() {
@@ -40,13 +32,13 @@ class RenameChatGroupDialog : BaseBottomSheetDialog(R.layout.dialog_rename_chat_
     private fun onClickConfirm() {
         findNavController().popBackStack()
         setFragmentResult(
-            RENAME_CHAT_GROUP,
+            ADD_CHAT_GROUP,
             bundleOf(GROUP_NAME to etChatGroup.text.toString().trim())
         )
     }
 
     companion object {
-        const val RENAME_CHAT_GROUP = "RenameChatGroup"
+        const val ADD_CHAT_GROUP = "AddChatGroup"
         const val GROUP_NAME = "groupName"
     }
 

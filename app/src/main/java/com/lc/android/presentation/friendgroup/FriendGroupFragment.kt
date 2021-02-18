@@ -1,4 +1,4 @@
-package com.lc.android.presentation.chatgroup
+package com.lc.android.presentation.friendgroup
 
 import android.os.Bundle
 import android.view.View
@@ -10,15 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.android.presentation.model.ChatGroup
 import com.lc.android.util.snackbar
-import kotlinx.android.synthetic.main.fragment_chat_group.*
+import kotlinx.android.synthetic.main.fragment_friend_group.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
+class FriendGroupFragment : BaseFragment(R.layout.fragment_friend_group) {
 
-    private val viewModel by viewModel<ChatGroupViewModel>()
-    private val mAdapter by lazy { ChatGroupAdapter() }
+    private val viewModel by viewModel<FriendGroupViewModel>()
+    private val mAdapter by lazy { FriendGroupAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,55 +65,55 @@ class ChatGroupFragment : BaseFragment(R.layout.fragment_chat_group) {
 
     private fun viewEvent() {
         mAdapter.setListener { chatGroupId, chatGroups ->
-            chatGroupId?.let {
-                val navDirections = ChatGroupFragmentDirections
-                    .actionChatGroupFragmentToChatGroupDetailFragment(
-                        chatGroupId = chatGroupId,
-                        chatGroups = chatGroups.map {
-                            ChatGroup(
-                                chatGroupId = it.chatGroupId,
-                                groupName = it.groupName,
-                                userId = it.userId,
-                            )
-                        }.toTypedArray(),
-                    )
-                findNavController().navigate(navDirections)
-            }
+//            chatGroupId?.let {
+//                val navDirections = FriendGroupFragmentDirections
+//                    .actionChatGroupFragmentToChatGroupDetailFragment(
+//                        chatGroupId = chatGroupId,
+//                        chatGroups = chatGroups.map {
+//                            ChatGroup(
+//                                chatGroupId = it.chatGroupId,
+//                                groupName = it.groupName,
+//                                userId = it.userId,
+//                            )
+//                        }.toTypedArray(),
+//                    )
+//                findNavController().navigate(navDirections)
+//            }
         }
 
         mAdapter.setMoreListener { chatGroup ->
             viewModel.setStateChatGroup(chatGroup)
-            findNavController().navigate(R.id.action_chatGroupFragment_to_moreChatGroupDialog)
+            findNavController().navigate(R.id.action_friendGroupFragment_to_moreFriendGroupDialog)
         }
 
         fab.setOnClickListener {
-            findNavController().navigate(R.id.action_chatGroupFragment_to_addChatGroupDialog)
+            findNavController().navigate(R.id.action_friendGroupFragment_to_addFriendGroupDialog)
         }
     }
 
     private fun resultListener() {
-        setFragmentResultListener(AddChatGroupDialog.ADD_CHAT_GROUP) { _, bundle ->
-            val groupName = bundle.getString(AddChatGroupDialog.GROUP_NAME)
+        setFragmentResultListener(AddFriendGroupDialog.ADD_CHAT_GROUP) { _, bundle ->
+            val groupName = bundle.getString(AddFriendGroupDialog.GROUP_NAME)
             viewModel.callAddChatGroup(groupName)
         }
 
-        setFragmentResultListener(RenameChatGroupDialog.RENAME_CHAT_GROUP) { _, bundle ->
-            val groupName = bundle.getString(RenameChatGroupDialog.GROUP_NAME)
+        setFragmentResultListener(RenameFriendGroupDialog.RENAME_CHAT_GROUP) { _, bundle ->
+            val groupName = bundle.getString(RenameFriendGroupDialog.GROUP_NAME)
             viewModel.callRenameChatGroup(groupName)
         }
 
-        setFragmentResultListener(MoreChatGroupDialog.MORE_CHAT_GROUP) { _, bundle ->
-            when (bundle.getString(MoreChatGroupDialog.MORE_KEY, "")) {
-                MoreChatGroupDialog.RENAME -> dialogRenameChatGroup()
-                MoreChatGroupDialog.REMOVE -> dialogRemoveChatGroup()
+        setFragmentResultListener(MoreFriendGroupDialog.MORE_CHAT_GROUP) { _, bundle ->
+            when (bundle.getString(MoreFriendGroupDialog.MORE_KEY, "")) {
+                MoreFriendGroupDialog.RENAME -> dialogRenameChatGroup()
+                MoreFriendGroupDialog.REMOVE -> dialogRemoveChatGroup()
             }
         }
     }
 
     private fun dialogRenameChatGroup() {
         val groupName = viewModel.state.value?.chatGroup?.groupName
-        val navDirections = ChatGroupFragmentDirections
-            .actionChatGroupFragmentToRenameChatGroupDialog(groupName)
+        val navDirections = FriendGroupFragmentDirections
+            .actionFriendGroupFragmentToRenameFriendGroupDialog(groupName)
         findNavController().navigate(navDirections)
     }
 

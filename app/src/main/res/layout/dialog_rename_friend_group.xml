@@ -31,7 +31,7 @@
             android:layout_margin="16dp"
             android:background="@drawable/shape_cardview_background"
             android:gravity="start"
-            android:hint="@string/chat_group"
+            android:hint="@string/friend_group"
             android:imeOptions="actionDone"
             android:singleLine="true" />
 

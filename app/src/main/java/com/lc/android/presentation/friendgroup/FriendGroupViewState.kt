@@ -1,8 +1,8 @@
-package com.lc.android.presentation.chatgroup
+package com.lc.android.presentation.friendgroup
 
 import com.lc.server.models.model.ChatGroup
 
-data class ChatGroupViewState(
+data class FriendGroupViewState(
     val chatGroups: List<ChatGroup> = emptyList(),
     val chatGroup: ChatGroup? = null,
     val isLoading: Boolean = false,

@@ -31,7 +31,7 @@ class MainActivity : BaseActivity() {
         when (viewModel.getSelectPage()) {
             ConfigPref.SELECT_PAGE_COMMUNITY -> navGraphStartDestination(R.id.communityFragment)
             ConfigPref.SELECT_PAGE_CHATS -> navGraphStartDestination(R.id.chatsFragment)
-            ConfigPref.SELECT_PAGE_CHAT_GROUP -> navGraphStartDestination(R.id.chatGroupFragment)
+            ConfigPref.SELECT_PAGE_FRIEND_GROUP -> navGraphStartDestination(R.id.friendGroupFragment)
             ConfigPref.SELECT_PAGE_VOCABULARY -> navGraphStartDestination(R.id.vocabularyFragment)
             ConfigPref.SELECT_PAGE_PROFILE -> navGraphStartDestination(R.id.profileFragment)
         }
@@ -40,7 +40,7 @@ class MainActivity : BaseActivity() {
             when (destination.id) {
                 R.id.communityFragment -> showBottomNav(ConfigPref.SELECT_PAGE_COMMUNITY)
                 R.id.chatsFragment -> showBottomNav(ConfigPref.SELECT_PAGE_CHATS)
-                R.id.chatGroupFragment -> showBottomNav(ConfigPref.SELECT_PAGE_CHAT_GROUP)
+                R.id.friendGroupFragment -> showBottomNav(ConfigPref.SELECT_PAGE_FRIEND_GROUP)
                 R.id.vocabularyFragment -> showBottomNav(ConfigPref.SELECT_PAGE_VOCABULARY)
                 R.id.profileFragment -> showBottomNav(ConfigPref.SELECT_PAGE_PROFILE)
                 R.id.userInfoFragment -> hideBottomNav(ConfigPref.SELECT_PAGE_USER_INFO)
