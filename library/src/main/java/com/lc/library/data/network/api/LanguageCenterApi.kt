@@ -57,31 +57,31 @@ interface LanguageCenterApi {
     @GET("api/chats/languageCenter/translate")
     suspend fun callLanguageCenterTranslate(@Query("vocabulary") vocabulary: String?): LanguageCenterTranslateResponse
 
-    @POST("api/chat-group/add-chat-group")
+    @POST("api/friend-group/add-chat-group")
     suspend fun callAddChatGroup(@Body addChatGroupRequest: AddChatGroupRequest): BaseResponse
 
-    @GET("api/chat-group/fetch-chat-group")
+    @GET("api/friend-group/fetch-chat-group")
     suspend fun callFetchChatGroup(): FetchChatGroupResponse
 
-    @GET("api/chat-group/fetchChatGroupDetail")
+    @GET("api/friend-group/fetchChatGroupDetail")
     suspend fun callFetchChatGroupDetail(@Query("chatGroupId") chatGroupId: Int?): FetchChatGroupDetailResponse
 
-    @PUT("api/chat-group/rename-chat-group")
+    @PUT("api/friend-group/rename-chat-group")
     suspend fun callRenameChatGroup(@Body renameChatGroupRequest: RenameChatGroupRequest): BaseResponse
 
-    @DELETE("api/chat-group/remove-chat-group/{chatGroupId}")
+    @DELETE("api/friend-group/remove-chat-group/{chatGroupId}")
     suspend fun callRemoveChatGroup(@Path("chatGroupId") chatGroupId: Int?): BaseResponse
 
-    @GET("api/chat-group/fetch-add-chat-group-detail")
+    @GET("api/friend-group/fetch-add-chat-group-detail")
     suspend fun callFetchAddChatGroupDetail(): FetchAddChatGroupDetailResponse
 
-    @PUT("api/chat-group/change-chat-group")
+    @PUT("api/friend-group/change-chat-group")
     suspend fun callChangeChatGroup(@Body changeChatGroupRequest: ChangeChatGroupRequest): BaseResponse
 
-    @HTTP(method = "DELETE", path = "api/chat-group/remove-chat-group-detail", hasBody = true)
+    @HTTP(method = "DELETE", path = "api/friend-group/remove-chat-group-detail", hasBody = true)
     suspend fun callRemoveChatGroupDetail(@Body removeChatGroupDetailRequest: RemoveChatGroupDetailRequest): BaseResponse
 
-    @POST("api/chat-group/add-chat-group-friend")
+    @POST("api/friend-group/add-chat-group-friend")
     suspend fun callAddChatGroupFriend(@Body addChatGroupFriendRequest: AddChatGroupFriendRequest): BaseResponse
 
     @POST("api/vocabulary/add-vocabulary-translation")
