@@ -68,9 +68,9 @@ class FriendGroupDetailFragment : BaseFragment(R.layout.fragment_friend_group_de
 
     private fun viewEvent() {
         fab.setOnClickListener {
-//            val navDirections = FriendGroupDetailFragmentDirections
-//                .actionFriendGroupDetailFragmentToAddFriendGroupDetailFragment(args.chatGroupId)
-//            findNavController().navigate(navDirections)
+            val navDirections = FriendGroupDetailFragmentDirections
+                .actionFriendGroupDetailFragmentToAddFriendGroupDetailFragment(args.chatGroupId)
+            findNavController().navigate(navDirections)
         }
 
         mAdapter.setListener { chatGroupDetail ->
@@ -134,8 +134,8 @@ class FriendGroupDetailFragment : BaseFragment(R.layout.fragment_friend_group_de
 
     private fun dialogRemoveChatGroupDetail() {
         AlertDialog.Builder(requireActivity()).apply {
-            setTitle(R.string.dialog_remove_chat_group_detail_title)
-            setMessage(R.string.dialog_remove_chat_group_detail_message)
+            setTitle(R.string.dialog_remove_friend_group_detail_title)
+            setMessage(R.string.dialog_remove_friend_group_detail_message)
             setPositiveButton(android.R.string.cancel) { dialog, _ ->
                 dialog.dismiss()
             }

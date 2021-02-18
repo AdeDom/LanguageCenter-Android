@@ -1,4 +1,4 @@
-package com.lc.android.presentation.addchatgroupdetail
+package com.lc.android.presentation.addfriendgroupdetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,9 +8,9 @@ import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.usecase.GetAddChatGroupDetailUseCase
 import kotlinx.coroutines.launch
 
-class AddChatGroupDetailViewModel(
+class AddFriendGroupDetailViewModel(
     private val getAddChatGroupDetailUseCase: GetAddChatGroupDetailUseCase,
-) : BaseViewModel<AddChatGroupDetailViewState>(AddChatGroupDetailViewState()) {
+) : BaseViewModel<AddFriendGroupDetailViewState>(AddFriendGroupDetailViewState()) {
 
     private val _getDbAddChatGroupDetail = MutableLiveData<List<AddChatGroupDetailEntity>>()
     val getDbAddChatGroupDetail: LiveData<List<AddChatGroupDetailEntity>>

@@ -1,6 +1,6 @@
 package com.lc.android.presentation.di
 
-import com.lc.android.presentation.addchatgroupdetail.AddChatGroupDetailViewModel
+import com.lc.android.presentation.addfriendgroupdetail.AddFriendGroupDetailViewModel
 import com.lc.android.presentation.addvocabulary.AddVocabularyViewModel
 import com.lc.android.presentation.chats.ChatsViewModel
 import com.lc.android.presentation.community.CommunityViewModel
@@ -44,7 +44,6 @@ private val presentationModule = module {
     viewModel { EditLocaleLearningViewModel(get(), get()) }
     viewModel { CommunityViewModel(get()) }
     viewModel { UserInfoViewModel(get(), get(), get()) }
-    viewModel { AddChatGroupDetailViewModel(get()) }
     viewModel { MainViewModel(get(), get(), get()) }
     viewModel { TalkViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { ChatsViewModel(get()) }
@@ -53,6 +52,7 @@ private val presentationModule = module {
     viewModel { VocabularyDetailViewModel(get(), get()) }
     viewModel { FriendGroupViewModel(get(), get(), get(), get()) }
     viewModel { FriendGroupDetailViewModel(get(), get(), get()) }
+    viewModel { AddFriendGroupDetailViewModel(get()) }
 
 }
 

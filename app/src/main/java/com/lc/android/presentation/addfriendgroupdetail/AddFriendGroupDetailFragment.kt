@@ -1,4 +1,4 @@
-package com.lc.android.presentation.addchatgroupdetail
+package com.lc.android.presentation.addfriendgroupdetail
 
 import android.os.Bundle
 import android.view.View
@@ -12,14 +12,14 @@ import com.lc.android.base.BaseFragment
 import com.lc.android.presentation.model.UserInfoLocaleParcelable
 import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.library.data.db.entities.AddChatGroupDetailEntity
-import kotlinx.android.synthetic.main.fragment_add_chat_group_detail.*
+import kotlinx.android.synthetic.main.fragment_add_friend_group_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group_detail) {
+class AddFriendGroupDetailFragment : BaseFragment(R.layout.fragment_add_friend_group_detail) {
 
-    private val viewModel by viewModel<AddChatGroupDetailViewModel>()
-    private val args by navArgs<AddChatGroupDetailFragmentArgs>()
-    private val mAdapter by lazy { AddChatGroupDetailAdapter() }
+    private val viewModel by viewModel<AddFriendGroupDetailViewModel>()
+    private val args by navArgs<AddFriendGroupDetailFragmentArgs>()
+    private val mAdapter by lazy { AddFriendGroupDetailAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
         viewModel.attachFirstTime.observe {
             viewModel.getDbAddChatGroupDetailBySearch()
         }
-        
+
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
 
@@ -94,8 +94,8 @@ class AddChatGroupDetailFragment : BaseFragment(R.layout.fragment_add_chat_group
                 UserInfoLocaleParcelable(locale = it.locale, level = it.level)
             },
         )
-        val navDirections = AddChatGroupDetailFragmentDirections
-            .actionAddChatGroupDetailFragmentToUserInfoFragment(
+        val navDirections = AddFriendGroupDetailFragmentDirections
+            .actionAddFriendGroupDetailFragmentToUserInfoFragment(
                 args.chatGroupId.toString(),
                 false,
                 userInfo,

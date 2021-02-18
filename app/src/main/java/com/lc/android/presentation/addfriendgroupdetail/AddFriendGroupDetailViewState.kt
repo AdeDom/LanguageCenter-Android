@@ -1,6 +1,6 @@
-package com.lc.android.presentation.addchatgroupdetail
+package com.lc.android.presentation.addfriendgroupdetail
 
-data class AddChatGroupDetailViewState(
+data class AddFriendGroupDetailViewState(
     val search: String = "",
     val isLoading: Boolean = false,
     val isClickable: Boolean = true,

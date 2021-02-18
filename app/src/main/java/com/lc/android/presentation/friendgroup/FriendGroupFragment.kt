@@ -120,8 +120,8 @@ class FriendGroupFragment : BaseFragment(R.layout.fragment_friend_group) {
 
     private fun dialogRemoveChatGroup() {
         AlertDialog.Builder(requireActivity()).apply {
-            setTitle(R.string.dialog_remove_chat_group_title)
-            setMessage(R.string.dialog_remove_chat_group_message)
+            setTitle(R.string.dialog_remove_friend_group_title)
+            setMessage(R.string.dialog_remove_friend_group_message)
             setPositiveButton(android.R.string.cancel) { dialog, _ ->
                 dialog.dismiss()
             }

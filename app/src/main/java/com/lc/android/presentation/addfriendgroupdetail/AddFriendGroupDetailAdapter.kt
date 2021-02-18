@@ -1,4 +1,4 @@
-package com.lc.android.presentation.addchatgroupdetail
+package com.lc.android.presentation.addfriendgroupdetail
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +12,8 @@ import com.lc.library.data.db.entities.AddChatGroupDetailEntity
 import com.lc.server.util.LanguageCenterConstant
 import kotlinx.android.synthetic.main.item_user_info.view.*
 
-class AddChatGroupDetailAdapter :
-    RecyclerView.Adapter<AddChatGroupDetailAdapter.AddChatGroupDetailViewHolder>() {
+class AddFriendGroupDetailAdapter :
+    RecyclerView.Adapter<AddFriendGroupDetailAdapter.AddFriendGroupDetailViewHolder>() {
 
     private val list: List<AddChatGroupDetailEntity>
         get() = asyncListDiffer.currentList
@@ -39,13 +39,13 @@ class AddChatGroupDetailAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): AddChatGroupDetailViewHolder {
+    ): AddFriendGroupDetailViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_user_info, parent, false)
-        return AddChatGroupDetailViewHolder(view)
+        return AddFriendGroupDetailViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: AddChatGroupDetailViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AddFriendGroupDetailViewHolder, position: Int) {
         val item = list[position]
 
         holder.itemView.apply {
@@ -101,6 +101,6 @@ class AddChatGroupDetailAdapter :
         this.listener = listener
     }
 
-    class AddChatGroupDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class AddFriendGroupDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 }
