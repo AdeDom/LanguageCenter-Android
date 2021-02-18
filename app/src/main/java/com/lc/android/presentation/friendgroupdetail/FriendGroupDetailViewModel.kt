@@ -1,4 +1,4 @@
-package com.lc.android.presentation.chatgroupdetail
+package com.lc.android.presentation.friendgroupdetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,11 +13,11 @@ import com.lc.server.models.request.RemoveChatGroupDetailRequest
 import com.lc.server.models.response.BaseResponse
 import kotlinx.coroutines.launch
 
-class ChatGroupDetailViewModel(
+class FriendGroupDetailViewModel(
     private val fetchChatGroupDetailUseCase: FetchChatGroupDetailUseCase,
     private val changeChatGroupUseCase: ChangeChatGroupUseCase,
     private val removeChatGroupDetailUseCase: RemoveChatGroupDetailUseCase,
-) : BaseViewModel<ChatGroupDetailViewState>(ChatGroupDetailViewState()) {
+) : BaseViewModel<FriendGroupDetailViewState>(FriendGroupDetailViewState()) {
 
     private val _chatGroupDetailEvent = MutableLiveData<BaseResponse>()
     val chatGroupDetailEvent: LiveData<BaseResponse>

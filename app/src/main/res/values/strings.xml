@@ -61,7 +61,7 @@
     <string name="change_chat_group">Change chat group</string>
     <string name="dialog_remove_chat_group_detail_title">Remove chat group detail</string>
     <string name="dialog_remove_chat_group_detail_message">Do you really want to delete?</string>
-    <string name="chat_group_detail">Chat group detail</string>
+    <string name="friend_group_detail">Friend group detail</string>
     <string name="add_chat_group_detail">Add chat group detail</string>
     <string name="user_info">User info</string>
     <string name="resend_message">Resend message</string>

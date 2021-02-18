@@ -1,4 +1,4 @@
-package com.lc.android.presentation.chatgroupdetail
+package com.lc.android.presentation.friendgroupdetail
 
 import android.os.Bundle
 import android.view.View
@@ -15,14 +15,14 @@ import com.lc.android.presentation.model.ChatGroup
 import com.lc.android.presentation.model.UserInfoLocaleParcelable
 import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.android.util.snackbar
-import kotlinx.android.synthetic.main.fragment_chat_group_detail.*
+import kotlinx.android.synthetic.main.fragment_friend_group_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail) {
+class FriendGroupDetailFragment : BaseFragment(R.layout.fragment_friend_group_detail) {
 
-    private val viewModel by viewModel<ChatGroupDetailViewModel>()
-    private val args by navArgs<ChatGroupDetailFragmentArgs>()
-    private val mAdapter by lazy { ChatGroupDetailAdapter() }
+    private val viewModel by viewModel<FriendGroupDetailViewModel>()
+    private val args by navArgs<FriendGroupDetailFragmentArgs>()
+    private val mAdapter by lazy { FriendGroupDetailAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,9 +68,9 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
 
     private fun viewEvent() {
         fab.setOnClickListener {
-            val navDirections = ChatGroupDetailFragmentDirections
-                .actionChatGroupDetailFragmentToAddChatGroupDetailFragment(args.chatGroupId)
-            findNavController().navigate(navDirections)
+//            val navDirections = FriendGroupDetailFragmentDirections
+//                .actionFriendGroupDetailFragmentToAddFriendGroupDetailFragment(args.chatGroupId)
+//            findNavController().navigate(navDirections)
         }
 
         mAdapter.setListener { chatGroupDetail ->
@@ -93,8 +93,8 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
                     UserInfoLocaleParcelable(locale = it.locale, level = it.level)
                 },
             )
-            val navDirections = ChatGroupDetailFragmentDirections
-                .actionChatGroupDetailFragmentToUserInfoFragment(
+            val navDirections = FriendGroupDetailFragmentDirections
+                .actionFriendGroupDetailFragmentToUserInfoFragment(
                     args.chatGroupId.toString(),
                     false,
                     userInfo,
@@ -104,20 +104,21 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
 
         mAdapter.setMoreListener {
             viewModel.setStateFriendUserId(it.userId)
-            findNavController().navigate(R.id.action_chatGroupDetailFragment_to_moreChatGroupDetailDialog)
+            findNavController().navigate(R.id.action_friendGroupDetailFragment_to_moreFriendGroupDetailDialog)
         }
     }
 
     private fun resultListener() {
-        setFragmentResultListener(MoreChatGroupDetailDialog.MORE_CHAT_GROUP_DETAIL) { _, bundle ->
-            when (bundle.getString(MoreChatGroupDetailDialog.MORE_KEY, "")) {
-                MoreChatGroupDetailDialog.CHANGE_CHAT_GROUP -> dialogChangeChatGroup()
-                MoreChatGroupDetailDialog.REMOVE -> dialogRemoveChatGroupDetail()
+        setFragmentResultListener(MoreFriendGroupDetailDialog.MORE_CHAT_GROUP_DETAIL) { _, bundle ->
+            when (bundle.getString(MoreFriendGroupDetailDialog.MORE_KEY, "")) {
+                MoreFriendGroupDetailDialog.CHANGE_CHAT_GROUP -> dialogChangeChatGroup()
+                MoreFriendGroupDetailDialog.REMOVE -> dialogRemoveChatGroupDetail()
             }
         }
 
-        setFragmentResultListener(ChangeChatGroupDialog.CHANGE_CHAT_GROUP) { _, bundle ->
-            val chatGroup = bundle.getParcelable<ChatGroup>(ChangeChatGroupDialog.CHANGE_KEY)
+        setFragmentResultListener(ChangeFriendGroupDetailDialog.CHANGE_CHAT_GROUP) { _, bundle ->
+            val chatGroup =
+                bundle.getParcelable<ChatGroup>(ChangeFriendGroupDetailDialog.CHANGE_KEY)
             viewModel.callChangeChatGroup(chatGroup?.chatGroupId)
         }
     }
@@ -125,8 +126,8 @@ class ChatGroupDetailFragment : BaseFragment(R.layout.fragment_chat_group_detail
     private fun dialogChangeChatGroup() {
         val otherChatGroups = viewModel.state.value?.otherChatGroups?.toTypedArray()
         otherChatGroups?.let {
-            val navDirections = ChatGroupDetailFragmentDirections
-                .actionChatGroupDetailFragmentToChangeChatGroupDialog(it)
+            val navDirections = FriendGroupDetailFragmentDirections
+                .actionFriendGroupDetailFragmentToChangeFriendGroupDetailDialog(it)
             findNavController().navigate(navDirections)
         }
     }

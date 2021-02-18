@@ -1,9 +1,9 @@
-package com.lc.android.presentation.chatgroupdetail
+package com.lc.android.presentation.friendgroupdetail
 
 import com.lc.android.presentation.model.ChatGroup
 import com.lc.server.models.model.ChatGroupDetail
 
-data class ChatGroupDetailViewState(
+data class FriendGroupDetailViewState(
     val chatGroupId: Int = 0,
     val otherChatGroups: List<ChatGroup> = emptyList(),
     val friendUserId: String? = "",

@@ -95,38 +95,6 @@
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
     <fragment
-        android:id="@+id/chatGroupDetailFragment"
-        android:name="com.lc.android.presentation.chatgroupdetail.ChatGroupDetailFragment"
-        android:label="ChatGroupDetailFragment"
-        tools:layout="@layout/fragment_chat_group_detail">
-        <action
-            android:id="@+id/action_chatGroupDetailFragment_to_addChatGroupDetailFragment"
-            app:destination="@id/addChatGroupDetailFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
-        <argument
-            android:name="chatGroupId"
-            app:argType="integer" />
-        <argument
-            android:name="chatGroups"
-            app:argType="com.lc.android.presentation.model.ChatGroup[]" />
-        <action
-            android:id="@+id/action_chatGroupDetailFragment_to_changeChatGroupDialog"
-            app:destination="@id/changeChatGroupDialog" />
-        <action
-            android:id="@+id/action_chatGroupDetailFragment_to_moreChatGroupDetailDialog"
-            app:destination="@id/moreChatGroupDetailDialog" />
-        <action
-            android:id="@+id/action_chatGroupDetailFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
-    </fragment>
-    <fragment
         android:id="@+id/addChatGroupDetailFragment"
         android:name="com.lc.android.presentation.addchatgroupdetail.AddChatGroupDetailFragment"
         android:label="AddChatGroupDetailFragment"
@@ -177,20 +145,6 @@
         android:name="com.lc.android.presentation.edit.localelearning.EditLocaleLearningFragment"
         android:label="EditLocaleLearningFragment"
         tools:layout="@layout/fragment_edit_locale_learning" />
-    <dialog
-        android:id="@+id/changeChatGroupDialog"
-        android:name="com.lc.android.presentation.chatgroupdetail.ChangeChatGroupDialog"
-        android:label="ChangeChatGroupDialog"
-        tools:layout="@layout/dialog_change_chat_group">
-        <argument
-            android:name="otherChatGroups"
-            app:argType="com.lc.android.presentation.model.ChatGroup[]" />
-    </dialog>
-    <dialog
-        android:id="@+id/moreChatGroupDetailDialog"
-        android:name="com.lc.android.presentation.chatgroupdetail.MoreChatGroupDetailDialog"
-        android:label="MoreChatGroupDetailDialog"
-        tools:layout="@layout/dialog_more_chat_group_detail" />
     <fragment
         android:id="@+id/talkFragment"
         android:name="com.lc.android.presentation.talk.TalkFragment"
@@ -274,6 +228,13 @@
         <action
             android:id="@+id/action_friendGroupFragment_to_renameFriendGroupDialog"
             app:destination="@id/renameFriendGroupDialog" />
+        <action
+            android:id="@+id/action_friendGroupFragment_to_friendGroupDetailFragment"
+            app:destination="@id/friendGroupDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <dialog
         android:id="@+id/moreFriendGroupDialog"
@@ -294,6 +255,45 @@
             android:name="groupName"
             app:argType="string"
             app:nullable="true" />
+    </dialog>
+    <fragment
+        android:id="@+id/friendGroupDetailFragment"
+        android:name="com.lc.android.presentation.friendgroupdetail.FriendGroupDetailFragment"
+        android:label="FriendGroupDetailFragment"
+        tools:layout="@layout/fragment_friend_group_detail">
+        <argument
+            android:name="chatGroupId"
+            app:argType="integer" />
+        <argument
+            android:name="chatGroups"
+            app:argType="com.lc.android.presentation.model.ChatGroup[]" />
+        <action
+            android:id="@+id/action_friendGroupDetailFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_friendGroupDetailFragment_to_moreFriendGroupDetailDialog"
+            app:destination="@id/moreFriendGroupDetailDialog" />
+        <action
+            android:id="@+id/action_friendGroupDetailFragment_to_changeFriendGroupDetailDialog"
+            app:destination="@id/changeFriendGroupDetailDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/moreFriendGroupDetailDialog"
+        android:name="com.lc.android.presentation.friendgroupdetail.MoreFriendGroupDetailDialog"
+        android:label="MoreFriendGroupDetailDialog"
+        tools:layout="@layout/dialog_more_friend_group_detail" />
+    <dialog
+        android:id="@+id/changeFriendGroupDetailDialog"
+        android:name="com.lc.android.presentation.friendgroupdetail.ChangeFriendGroupDetailDialog"
+        android:label="ChangeFriendGroupDetailDialog"
+        tools:layout="@layout/dialog_change_friend_group_detail">
+        <argument
+            android:name="otherChatGroups"
+            app:argType="com.lc.android.presentation.model.ChatGroup[]" />
     </dialog>
 
 </navigation>

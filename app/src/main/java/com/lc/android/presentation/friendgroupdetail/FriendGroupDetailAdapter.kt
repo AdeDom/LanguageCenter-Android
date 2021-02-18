@@ -1,4 +1,4 @@
-package com.lc.android.presentation.chatgroupdetail
+package com.lc.android.presentation.friendgroupdetail
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +10,10 @@ import com.lc.android.R
 import com.lc.android.util.loadCircle
 import com.lc.server.models.model.ChatGroupDetail
 import com.lc.server.util.LanguageCenterConstant
-import kotlinx.android.synthetic.main.item_chat_group_detail.view.*
+import kotlinx.android.synthetic.main.item_friend_group_detail.view.*
 
-class ChatGroupDetailAdapter :
-    RecyclerView.Adapter<ChatGroupDetailAdapter.ChatGroupDetailViewHolder>() {
+class FriendGroupDetailAdapter :
+    RecyclerView.Adapter<FriendGroupDetailAdapter.FriendGroupDetailViewHolder>() {
 
     private val list: MutableList<ChatGroupDetail>
         get() = asyncListDiffer.currentList
@@ -37,13 +37,13 @@ class ChatGroupDetailAdapter :
             }
         })
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatGroupDetailViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendGroupDetailViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_chat_group_detail, parent, false)
-        return ChatGroupDetailViewHolder(view)
+            .inflate(R.layout.item_friend_group_detail, parent, false)
+        return FriendGroupDetailViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ChatGroupDetailViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FriendGroupDetailViewHolder, position: Int) {
         val item = list[position]
 
         holder.itemView.apply {
@@ -107,6 +107,6 @@ class ChatGroupDetailAdapter :
         this.moreListener = moreListener
     }
 
-    class ChatGroupDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class FriendGroupDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 }
