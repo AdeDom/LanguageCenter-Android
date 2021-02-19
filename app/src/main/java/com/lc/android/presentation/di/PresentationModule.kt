@@ -32,7 +32,7 @@ import org.koin.dsl.module
 @ExperimentalCoroutinesApi
 private val presentationModule = module {
 
-    viewModel { SplashScreenViewModel(get()) }
+    viewModel { SplashScreenViewModel(get(), get()) }
     viewModel { SignInViewModel(get(), get()) }
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { GuideGenderViewModel(get()) }

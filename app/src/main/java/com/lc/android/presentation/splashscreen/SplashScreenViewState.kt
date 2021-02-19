@@ -1,3 +1,5 @@
 package com.lc.android.presentation.splashscreen
 
-object SplashScreenViewState
+data class SplashScreenViewState(
+    val isLoading: Boolean = false,
+)

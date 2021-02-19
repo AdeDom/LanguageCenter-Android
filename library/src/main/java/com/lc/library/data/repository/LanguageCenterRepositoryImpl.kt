@@ -49,6 +49,16 @@ class LanguageCenterRepositoryImpl(
         return response
     }
 
+    override suspend fun callValidateToken(): Resource<BaseResponse> {
+        val resource = safeApiCall { dataSource.callValidateToken(authPref.refreshToken) }
+
+        if (resource is Resource.Success && !resource.data.success) {
+            signOut()
+        }
+
+        return resource
+    }
+
     private fun saveTokenAuth(response: SignInResponse) {
         if (response.success) {
             authPref.accessToken = response.token?.accessToken.orEmpty()

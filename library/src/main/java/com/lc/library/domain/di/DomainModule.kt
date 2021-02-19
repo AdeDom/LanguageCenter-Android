@@ -36,6 +36,7 @@ private val domainModule = module {
     single<AddVocabularyTranslationUseCase> { AddVocabularyTranslationUseCaseImpl(get()) }
     single<FetchVocabularyGroupUseCase> { FetchVocabularyGroupUseCaseImpl(get()) }
     single<FetchVocabularyDetailUseCase> { FetchVocabularyDetailUseCaseImpl(get()) }
+    single<ValidateTokenUseCase> { ValidateTokenUseCaseImpl(get()) }
 
 }
 

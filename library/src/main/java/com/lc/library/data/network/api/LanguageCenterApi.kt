@@ -12,6 +12,9 @@ interface LanguageCenterApi {
     @POST("api/auth/refresh-token")
     suspend fun callRefreshToken(@Body refreshToken: RefreshTokenRequest): SignInResponse
 
+    @GET("api/auth/validate-token/token")
+    suspend fun callValidateToken(@Query("refreshToken") refreshToken: String?): BaseResponse
+
     @GET("api/account/user-info")
     suspend fun callFetchUserInfo(): UserInfoResponse
 

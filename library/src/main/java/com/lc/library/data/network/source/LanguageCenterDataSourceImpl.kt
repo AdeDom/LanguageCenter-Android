@@ -144,6 +144,10 @@ class LanguageCenterDataSourceImpl(
         return provider.getDataSource().callSignIn(request)
     }
 
+    override suspend fun callValidateToken(refreshToken: String?): BaseResponse {
+        return provider.getDataSource().callValidateToken(refreshToken)
+    }
+
     override suspend fun callFetchUserInfo(): UserInfoResponse {
         return provider.getLanguageCenterDataSource().callFetchUserInfo()
     }

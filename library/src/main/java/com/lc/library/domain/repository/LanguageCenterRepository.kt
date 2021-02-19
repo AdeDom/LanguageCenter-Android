@@ -10,6 +10,8 @@ interface LanguageCenterRepository {
 
     suspend fun callSignIn(request: SignInRequest): Resource<SignInResponse>
 
+    suspend fun callValidateToken(): Resource<BaseResponse>
+
     suspend fun signOut()
 
     suspend fun saveChatListEntity(chatListEntity: ChatListEntity)

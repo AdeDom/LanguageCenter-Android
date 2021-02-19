@@ -78,6 +78,8 @@ interface LanguageCenterDataSource {
 
     suspend fun callSignIn(request: SignInRequest): SignInResponse
 
+    suspend fun callValidateToken(refreshToken: String?): BaseResponse
+
     suspend fun callFetchUserInfo(): UserInfoResponse
 
     suspend fun callGuideUpdateProfile(guideUpdateProfileRequest: GuideUpdateProfileRequest): BaseResponse
