@@ -63,6 +63,8 @@ interface LanguageCenterRepository {
 
     suspend fun callFetchVocabularyDetail(vocabularyGroupId: Int): Resource<FetchVocabularyDetailResponse>
 
+    suspend fun callVocabularyTranslationFeedback(vocabularyTranslationFeedbackRequest: VocabularyTranslationFeedbackRequest): Resource<BaseResponse>
+
     suspend fun incomingSendMessageSocket()
 
 }

@@ -152,6 +152,10 @@ class LanguageCenterDataSourceImpl(
         return db.getVocabularyFeedbackDao().getDbVocabularyFeedback()
     }
 
+    override suspend fun updateVocabularyFeedbackIsEvaluation(vocabularyId: String) {
+        return db.getVocabularyFeedbackDao().updateVocabularyFeedbackIsEvaluation(vocabularyId)
+    }
+
     override suspend fun callSignIn(request: SignInRequest): SignInResponse {
         return provider.getDataSource().callSignIn(request)
     }
@@ -271,6 +275,11 @@ class LanguageCenterDataSourceImpl(
 
     override suspend fun callFetchVocabularyDetail(vocabularyGroupId: Int): FetchVocabularyDetailResponse {
         return provider.getLanguageCenterDataSource().callFetchVocabularyDetail(vocabularyGroupId)
+    }
+
+    override suspend fun callVocabularyTranslationFeedback(vocabularyTranslationFeedbackRequest: VocabularyTranslationFeedbackRequest): BaseResponse {
+        return provider.getLanguageCenterDataSource()
+            .callVocabularyTranslationFeedback(vocabularyTranslationFeedbackRequest)
     }
 
     override suspend fun callGoogleTranslate(

@@ -82,6 +82,8 @@ interface LanguageCenterDataSource {
 
     suspend fun getDbVocabularyFeedback(): VocabularyFeedbackEntity?
 
+    suspend fun updateVocabularyFeedbackIsEvaluation(vocabularyId: String)
+
     suspend fun callSignIn(request: SignInRequest): SignInResponse
 
     suspend fun callValidateToken(refreshToken: String?): BaseResponse
@@ -139,6 +141,8 @@ interface LanguageCenterDataSource {
     suspend fun callFetchVocabularyGroup(): FetchVocabularyGroupResponse
 
     suspend fun callFetchVocabularyDetail(vocabularyGroupId: Int): FetchVocabularyDetailResponse
+
+    suspend fun callVocabularyTranslationFeedback(vocabularyTranslationFeedbackRequest: VocabularyTranslationFeedbackRequest): BaseResponse
 
     suspend fun callGoogleTranslate(
         vocabulary: String,

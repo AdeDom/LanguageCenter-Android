@@ -96,4 +96,7 @@ interface LanguageCenterApi {
     @GET("api/vocabulary/fetch-vocabulary-detail/vocabularyGroup")
     suspend fun callFetchVocabularyDetail(@Query("vocabularyGroupId") vocabularyGroupId: Int): FetchVocabularyDetailResponse
 
+    @POST("api/vocabulary/vocabulary-translation-feedback")
+    suspend fun callVocabularyTranslationFeedback(@Body vocabularyTranslationFeedbackRequest: VocabularyTranslationFeedbackRequest): BaseResponse
+
 }

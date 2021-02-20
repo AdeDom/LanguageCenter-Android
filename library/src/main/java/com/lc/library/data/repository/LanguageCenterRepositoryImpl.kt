@@ -505,6 +505,20 @@ class LanguageCenterRepositoryImpl(
         return safeApiCall { dataSource.callFetchVocabularyDetail(vocabularyGroupId) }
     }
 
+    override suspend fun callVocabularyTranslationFeedback(vocabularyTranslationFeedbackRequest: VocabularyTranslationFeedbackRequest): Resource<BaseResponse> {
+        val resource = safeApiCall {
+            dataSource.callVocabularyTranslationFeedback(vocabularyTranslationFeedbackRequest)
+        }
+
+        if (resource is Resource.Success) {
+            vocabularyTranslationFeedbackRequest.vocabularyId?.let {
+                dataSource.updateVocabularyFeedbackIsEvaluation(it)
+            }
+        }
+
+        return resource
+    }
+
     override suspend fun incomingSendMessageSocket() {
         dataSource.incomingSendMessageSocket {
             val count = dataSource.getDbCountTalkByTalkId(it.talkId)

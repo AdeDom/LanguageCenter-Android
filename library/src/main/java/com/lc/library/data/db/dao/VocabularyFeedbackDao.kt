@@ -18,4 +18,7 @@ interface VocabularyFeedbackDao {
     @Query("SELECT * FROM vocabulary_feedback WHERE is_evaluation = 0 ORDER BY created DESC LIMIT 1")
     suspend fun getDbVocabularyFeedback(): VocabularyFeedbackEntity?
 
+    @Query("UPDATE vocabulary_feedback SET is_evaluation = 1 WHERE vocabulary_id = :vocabularyId")
+    suspend fun updateVocabularyFeedbackIsEvaluation(vocabularyId: String)
+
 }

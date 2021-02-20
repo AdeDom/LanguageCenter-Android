@@ -6,10 +6,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.presentation.model.TranslationParcelable
 import com.lc.android.presentation.model.VocabularyFeedbackParcelable
+import com.lc.android.util.snackbar
 import com.lc.server.util.LanguageCenterConstant
 import kotlinx.android.synthetic.main.fragment_vocabulary.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -67,6 +69,14 @@ class VocabularyFragment : BaseFragment(R.layout.fragment_vocabulary) {
             findNavController().navigate(navDirections)
         }
 
+        viewModel.vocabularyTranslationFeedbackEvent.observe { response ->
+            if (response.success) {
+                requireView().snackbar(response.message, Snackbar.LENGTH_SHORT)
+            } else {
+                requireView().snackbar(response.message)
+            }
+        }
+
         viewModel.error.observeError()
     }
 
@@ -104,6 +114,7 @@ class VocabularyFragment : BaseFragment(R.layout.fragment_vocabulary) {
             val vocabularyFeedback = bundle.getParcelable<VocabularyFeedbackParcelable>(
                 VocabularyFeedbackDialog.VOCABULARY_FEEDBACK_KEY
             )
+            viewModel.callVocabularyTranslationFeedback(vocabularyFeedback)
         }
     }
 
