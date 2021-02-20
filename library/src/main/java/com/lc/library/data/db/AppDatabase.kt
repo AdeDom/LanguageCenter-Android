@@ -5,16 +5,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.lc.library.data.db.converter.TranslationConverter
 import com.lc.library.data.db.converter.UserInfoLocaleConverters
 import com.lc.library.data.db.dao.*
 import com.lc.library.data.db.entities.*
 
 @Database(
     entities = [UserInfoEntity::class, FriendInfoEntity::class, AddChatGroupDetailEntity::class,
-        TalkEntity::class, ChatListEntity::class],
-    version = 14
+        TalkEntity::class, ChatListEntity::class, VocabularyFeedbackEntity::class],
+    version = 15
 )
-@TypeConverters(UserInfoLocaleConverters::class)
+@TypeConverters(UserInfoLocaleConverters::class, TranslationConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getUserInfoDao(): UserInfoDao
@@ -26,6 +27,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getTalkDao(): TalkDao
 
     abstract fun getChatListDao(): ChatListDao
+
+    abstract fun getVocabularyFeedbackDao(): VocabularyFeedbackDao
 
     companion object {
         @Volatile

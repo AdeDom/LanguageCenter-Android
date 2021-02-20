@@ -70,4 +70,5 @@
     <string name="add_translate">Add translate</string>
     <string name="thai_to_english">Thai to English</string>
     <string name="english_to_thai">English to Thai</string>
+    <string name="questionnaire">Questionnaire</string>
 </resources>

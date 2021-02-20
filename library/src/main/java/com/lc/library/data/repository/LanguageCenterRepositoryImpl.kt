@@ -382,6 +382,30 @@ class LanguageCenterRepositoryImpl(
             }
         }
 
+        // save vocabulary feedback
+        if (resource is Resource.Success) {
+            val success = (resource as Resource.Success<LanguageCenterTranslateResponse>)
+            val vocabularyId = success.data.vocabulary?.vocabularyId
+
+            val countVocabulary = vocabularyId?.let { dataSource.getDbVocabularyIsEvaluation(it) }
+            if (countVocabulary == 0) {
+                success.data.vocabulary?.let {
+                    val entity = VocabularyFeedbackEntity(
+                        vocabularyId = it.vocabularyId,
+                        userId = it.userInfo?.userId,
+                        vocabulary = it.vocabulary,
+                        sourceLanguage = it.sourceLanguage,
+                        reference = it.reference,
+                        vocabularyGroupName = it.vocabularyGroupName,
+                        translations = it.translations,
+                        isEvaluation = false,
+                        created = System.currentTimeMillis(),
+                    )
+                    dataSource.saveVocabularyFeedback(entity)
+                }
+            }
+        }
+
         return resource
     }
 

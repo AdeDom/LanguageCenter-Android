@@ -48,7 +48,7 @@ private val presentationModule = module {
     viewModel { TalkViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { ChatsViewModel(get()) }
     viewModel { AddVocabularyViewModel(get()) }
-    viewModel { VocabularyViewModel(get()) }
+    viewModel { VocabularyViewModel(get(), get()) }
     viewModel { VocabularyDetailViewModel(get(), get()) }
     viewModel { FriendGroupViewModel(get(), get(), get(), get()) }
     viewModel { FriendGroupDetailViewModel(get(), get(), get()) }

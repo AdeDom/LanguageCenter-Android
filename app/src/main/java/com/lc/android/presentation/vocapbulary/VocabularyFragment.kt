@@ -8,6 +8,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
+import com.lc.android.presentation.model.TranslationParcelable
+import com.lc.android.presentation.model.VocabularyFeedbackParcelable
 import com.lc.server.util.LanguageCenterConstant
 import kotlinx.android.synthetic.main.fragment_vocabulary.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,9 +42,29 @@ class VocabularyFragment : BaseFragment(R.layout.fragment_vocabulary) {
     }
 
     private fun observeViewModel() {
+        viewModel.attachFirstTime.observe {
+            viewModel.randomVocabularyFeedback()
+        }
+
         viewModel.state.observe { state ->
             animationLoading.isVisible = state.isLoading
             mAdapter.submitList(state.vocabularyGroups)
+        }
+
+        viewModel.getVocabularyFeedback.observe { entity ->
+            val vocabularyFeedback = VocabularyFeedbackParcelable(
+                vocabularyId = entity.vocabularyId,
+                vocabulary = entity.vocabulary,
+                translations = entity.translations.map {
+                    TranslationParcelable(
+                        translationId = it.translationId,
+                        translation = it.translation,
+                    )
+                },
+            )
+            val navDirections = VocabularyFragmentDirections
+                .actionVocabularyFragmentToVocabularyFeedbackDialog(vocabularyFeedback)
+            findNavController().navigate(navDirections)
         }
 
         viewModel.error.observeError()
@@ -76,6 +98,12 @@ class VocabularyFragment : BaseFragment(R.layout.fragment_vocabulary) {
                 )
             }
             findNavController().navigate(navDirections)
+        }
+
+        setFragmentResultListener(VocabularyFeedbackDialog.VOCABULARY_FEEDBACK) { _, bundle ->
+            val vocabularyFeedback = bundle.getParcelable<VocabularyFeedbackParcelable>(
+                VocabularyFeedbackDialog.VOCABULARY_FEEDBACK_KEY
+            )
         }
     }
 

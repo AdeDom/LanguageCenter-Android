@@ -140,6 +140,18 @@ class LanguageCenterDataSourceImpl(
         return db.getChatListDao().deleteChatList()
     }
 
+    override suspend fun saveVocabularyFeedback(entity: VocabularyFeedbackEntity) {
+        return db.getVocabularyFeedbackDao().saveVocabularyFeedback(entity)
+    }
+
+    override suspend fun getDbVocabularyIsEvaluation(vocabularyId: String): Int {
+        return db.getVocabularyFeedbackDao().getDbVocabularyIsEvaluation(vocabularyId)
+    }
+
+    override suspend fun getDbVocabularyFeedback(): VocabularyFeedbackEntity? {
+        return db.getVocabularyFeedbackDao().getDbVocabularyFeedback()
+    }
+
     override suspend fun callSignIn(request: SignInRequest): SignInResponse {
         return provider.getDataSource().callSignIn(request)
     }

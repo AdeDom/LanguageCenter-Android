@@ -58,6 +58,9 @@
         <action
             android:id="@+id/action_vocabularyFragment_to_addTranslateDialog"
             app:destination="@id/addTranslateDialog" />
+        <action
+            android:id="@+id/action_vocabularyFragment_to_vocabularyFeedbackDialog"
+            app:destination="@id/vocabularyFeedbackDialog" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -302,5 +305,14 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
     </fragment>
+    <dialog
+        android:id="@+id/vocabularyFeedbackDialog"
+        android:name="com.lc.android.presentation.vocapbulary.VocabularyFeedbackDialog"
+        android:label="VocabularyFeedbackDialog"
+        tools:layout="@layout/dialog_vocabulary_feedback" >
+        <argument
+            android:name="vocabularyFeedback"
+            app:argType="com.lc.android.presentation.model.VocabularyFeedbackParcelable" />
+    </dialog>
 
 </navigation>

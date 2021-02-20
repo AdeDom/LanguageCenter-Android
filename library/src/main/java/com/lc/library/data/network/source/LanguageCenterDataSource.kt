@@ -76,6 +76,12 @@ interface LanguageCenterDataSource {
 
     suspend fun deleteChatList()
 
+    suspend fun saveVocabularyFeedback(entity: VocabularyFeedbackEntity)
+
+    suspend fun getDbVocabularyIsEvaluation(vocabularyId: String): Int
+
+    suspend fun getDbVocabularyFeedback(): VocabularyFeedbackEntity?
+
     suspend fun callSignIn(request: SignInRequest): SignInResponse
 
     suspend fun callValidateToken(refreshToken: String?): BaseResponse
