@@ -2,6 +2,7 @@ package com.lc.android.presentation.signin
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -29,8 +30,18 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
         mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
+        initialView()
         observeViewModel()
         viewEvent()
+    }
+
+    private fun initialView() {
+        val topAnim = AnimationUtils.loadAnimation(context, R.anim.top_animation)
+        val bottomAnim = AnimationUtils.loadAnimation(context, R.anim.bottom_animation)
+
+        ivLogo.startAnimation(topAnim)
+        tvLanguageCenter.startAnimation(topAnim)
+        signInButton.startAnimation(bottomAnim)
     }
 
     private fun observeViewModel() {
