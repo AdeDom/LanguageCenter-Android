@@ -14,7 +14,7 @@ class CommunityViewModel(
             setState { copy(isLoading = true) }
 
             when (val resource = useCase()) {
-                is Resource.Success -> setState { copy(communities = resource.data.communities) }
+                is Resource.Success -> setState { copy(communities = communities + resource.data.communities) }
                 is Resource.Error -> setError(resource.throwable)
             }
 

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
 import com.lc.android.presentation.model.UserInfoLocaleParcelable
@@ -35,7 +36,20 @@ class CommunityFragment : BaseFragment(R.layout.fragment_community) {
 
     private fun initialView() {
         recyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
+            val llm = LinearLayoutManager(context)
+            layoutManager = llm
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    val communitiesSize = viewModel.state.value?.communities?.size?.minus(1) ?: 0
+                    val visibleItemPosition = llm.findLastCompletelyVisibleItemPosition()
+
+                    if (visibleItemPosition == communitiesSize) {
+                        viewModel.callFetchCommunity()
+                    }
+                }
+            })
             adapter = mAdapter
         }
 
