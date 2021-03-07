@@ -22,4 +22,16 @@ class CommunityViewModel(
         }
     }
 
+    fun searchCommunity(search: String) {
+        setState {
+            copy(
+                communities = if (search.isEmpty()) {
+                    communities
+                } else {
+                    useCase.searchCommunity(communities, search)
+                },
+            )
+        }
+    }
+
 }
