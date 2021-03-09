@@ -1,5 +1,7 @@
 package com.lc.android.presentation.profile
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -103,6 +105,13 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         ibEditLocaleLearning.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_editLocaleLearningFragment)
+        }
+
+        ibAboutMe.setOnClickListener {
+            Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("https://github.com/adedom")
+                startActivity(this)
+            }
         }
     }
 

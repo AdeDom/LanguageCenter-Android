@@ -1,6 +1,7 @@
 package com.lc.android.presentation.signin
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
@@ -64,6 +65,13 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     private fun viewEvent() {
         signInButton.setOnClickListener {
             signOut()
+        }
+
+        tvDevBy.setOnClickListener {
+            Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("https://github.com/adedom")
+                startActivity(this)
+            }
         }
     }
 

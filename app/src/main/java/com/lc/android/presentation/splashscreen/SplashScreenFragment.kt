@@ -1,5 +1,7 @@
 package com.lc.android.presentation.splashscreen
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -19,6 +21,7 @@ class SplashScreenFragment : BaseFragment(R.layout.fragment_splash_screen) {
 
         initialView()
         viewModelObserve()
+        viewEvent()
     }
 
     private fun initialView() {
@@ -50,6 +53,15 @@ class SplashScreenFragment : BaseFragment(R.layout.fragment_splash_screen) {
         }
 
         viewModel.error.observeError()
+    }
+
+    private fun viewEvent() {
+        tvDevBy.setOnClickListener {
+            Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("https://github.com/adedom")
+                startActivity(this)
+            }
+        }
     }
 
 }
