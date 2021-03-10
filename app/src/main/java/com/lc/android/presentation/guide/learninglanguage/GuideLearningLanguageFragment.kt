@@ -1,6 +1,7 @@
 package com.lc.android.presentation.guide.learninglanguage
 
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,8 +17,8 @@ class GuideLearningLanguageFragment : BaseFragment(R.layout.fragment_guide_learn
     private val viewModel by viewModel<GuideLearningLanguageViewModel>()
     private val mAdapter by lazy { GuideLearningLanguageAdapter() }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initialView()
         observeViewModel()

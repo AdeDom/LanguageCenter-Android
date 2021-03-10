@@ -3,6 +3,7 @@ package com.lc.android.presentation.signin
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -21,8 +22,8 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     private val viewModel by viewModel<SignInViewModel>()
     private lateinit var mGoogleSignInClient: GoogleSignInClient
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestServerAuthCode(getString(R.string.server_client_id))

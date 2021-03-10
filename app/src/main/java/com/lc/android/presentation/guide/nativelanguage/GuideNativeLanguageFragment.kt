@@ -1,12 +1,13 @@
 package com.lc.android.presentation.guide.nativelanguage
 
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lc.android.R
 import com.lc.android.base.BaseFragment
-import com.lc.android.presentation.model.UserInfoLocaleParcelable
 import com.lc.android.presentation.model.GuideUpdateProfileParcelable
+import com.lc.android.presentation.model.UserInfoLocaleParcelable
 import kotlinx.android.synthetic.main.fragment_guide_native_language.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -15,8 +16,8 @@ class GuideNativeLanguageFragment : BaseFragment(R.layout.fragment_guide_native_
     private val viewModel by viewModel<GuideNativeLanguageViewModel>()
     private val mAdapter by lazy { GuideNativeLanguageAdapter() }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initialView()
         observeViewModel()

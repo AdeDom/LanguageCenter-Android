@@ -2,6 +2,7 @@ package com.lc.android.presentation.edit.profile
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
@@ -25,8 +26,8 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
 
     private val viewModel by viewModel<EditProfileViewModel>()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         observeViewModel()
         viewEvent()

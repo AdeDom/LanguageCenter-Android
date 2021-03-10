@@ -1,6 +1,7 @@
 package com.lc.android.presentation.guide.gender
 
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lc.android.R
@@ -20,8 +21,8 @@ class GuideGenderFragment : BaseFragment(R.layout.fragment_guide_gender) {
     private val args by navArgs<GuideGenderFragmentArgs>()
     private val viewModel by viewModel<GuideGenderViewModel>()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         observeViewModel()
         viewEvent()

@@ -24,8 +24,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private val mLocalNativeAdapter by lazy { ProfileLocaleAdapter() }
     private val mLocalLearningAdapter by lazy { ProfileLocaleAdapter() }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestServerAuthCode(getString(R.string.server_client_id))

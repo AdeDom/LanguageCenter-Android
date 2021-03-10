@@ -2,6 +2,7 @@ package com.lc.android.presentation.guide.birthdate
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -18,8 +19,8 @@ class GuideBirthDateFragment : BaseFragment(R.layout.fragment_guide_birth_date) 
     private val args by navArgs<GuideBirthDateFragmentArgs>()
     private val viewModel by viewModel<GuideBirthDateViewModel>()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         observeViewModel()
         viewEvent()
