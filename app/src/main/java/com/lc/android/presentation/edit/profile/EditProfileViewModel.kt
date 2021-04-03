@@ -2,6 +2,7 @@ package com.lc.android.presentation.edit.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.lc.android.base.BaseViewModel
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.library.data.repository.Resource
@@ -33,7 +34,7 @@ class EditProfileViewModel(
         get() = _editProfileEvent
 
     val getDbUserInfoLiveData: LiveData<UserInfoEntity>
-        get() = getUserInfoUseCase.getDbUserInfoLiveData()
+        get() = getUserInfoUseCase.getDbUserInfoFlow().asLiveData()
 
     fun process(action: EditProfileGenderEvent) {
         launch {

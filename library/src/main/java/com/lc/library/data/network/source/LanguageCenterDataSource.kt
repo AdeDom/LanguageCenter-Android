@@ -1,11 +1,11 @@
 package com.lc.library.data.network.source
 
-import androidx.lifecycle.LiveData
 import com.lc.library.data.db.entities.*
 import com.lc.library.data.model.GoogleTranslateResponse
 import com.lc.server.models.model.TalkSendMessageWebSocket
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
+import kotlinx.coroutines.flow.Flow
 
 interface LanguageCenterDataSource {
 
@@ -13,7 +13,7 @@ interface LanguageCenterDataSource {
 
     suspend fun getDbUserInfo(): UserInfoEntity?
 
-    fun getDbUserInfoLiveData(): LiveData<UserInfoEntity>
+    fun getDbUserInfoFlow(): Flow<UserInfoEntity>
 
     suspend fun deleteUserInfo()
 
@@ -21,7 +21,7 @@ interface LanguageCenterDataSource {
 
     suspend fun getDbFriendInfoList(): List<FriendInfoEntity>?
 
-    fun getDbFriendInfoLiveData(): LiveData<List<FriendInfoEntity>>
+    fun getDbFriendInfoFlow(): Flow<List<FriendInfoEntity>>
 
     suspend fun deleteFriendInfo()
 
@@ -33,7 +33,7 @@ interface LanguageCenterDataSource {
 
     suspend fun getDbAddChatGroupDetailList(): List<AddChatGroupDetailEntity>?
 
-    fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>>
+    fun getDbAddChatGroupDetailFlow(): Flow<List<AddChatGroupDetailEntity>>
 
     suspend fun deleteAddChatGroupDetail(userId: String?)
 
@@ -43,7 +43,7 @@ interface LanguageCenterDataSource {
 
     suspend fun getDbTalkByTalkId(talkId: String): TalkEntity?
 
-    fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>>
+    fun getDbTalkByOtherUserIdFlow(otherUserId: String?): Flow<List<TalkEntity>>
 
     suspend fun getDbCountTalkByTalkId(talkId: String): Int
 
@@ -61,7 +61,7 @@ interface LanguageCenterDataSource {
 
     suspend fun getDbChatListAll(): List<ChatListEntity>
 
-    fun getDbChatListLiveData(): LiveData<List<ChatListEntity>>
+    fun getDbChatListFlow(): Flow<List<ChatListEntity>>
 
     suspend fun getDbChatListBySearch(search: String?): List<ChatListEntity>?
 

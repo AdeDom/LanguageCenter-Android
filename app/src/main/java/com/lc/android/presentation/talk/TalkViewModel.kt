@@ -2,6 +2,7 @@ package com.lc.android.presentation.talk
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.lc.android.base.BaseViewModel
 import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.android.util.SingleLiveEvent
@@ -37,7 +38,7 @@ class TalkViewModel(
     val translateResultsEvent = SingleLiveEvent<Vocabulary>()
 
     fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>> {
-        return getTalkUseCase.getDbTalkByOtherUserIdLiveData(otherUserId)
+        return getTalkUseCase.getDbTalkByOtherUserIdFlow(otherUserId).asLiveData()
     }
 
     fun setStateMessages(messages: String) {

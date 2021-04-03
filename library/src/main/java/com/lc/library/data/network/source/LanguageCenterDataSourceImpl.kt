@@ -1,12 +1,12 @@
 package com.lc.library.data.network.source
 
-import androidx.lifecycle.LiveData
 import com.lc.library.data.db.AppDatabase
 import com.lc.library.data.db.entities.*
 import com.lc.library.data.model.GoogleTranslateResponse
 import com.lc.server.models.model.TalkSendMessageWebSocket
 import com.lc.server.models.request.*
 import com.lc.server.models.response.*
+import kotlinx.coroutines.flow.Flow
 
 class LanguageCenterDataSourceImpl(
     private val db: AppDatabase,
@@ -21,8 +21,8 @@ class LanguageCenterDataSourceImpl(
         return db.getUserInfoDao().getDbUserInfo()
     }
 
-    override fun getDbUserInfoLiveData(): LiveData<UserInfoEntity> {
-        return db.getUserInfoDao().getDbUserInfoLiveData()
+    override fun getDbUserInfoFlow(): Flow<UserInfoEntity> {
+        return db.getUserInfoDao().getDbUserInfoFlow()
     }
 
     override suspend fun deleteUserInfo() {
@@ -37,8 +37,8 @@ class LanguageCenterDataSourceImpl(
         return db.getFriendInfoDao().getDbFriendInfoList()
     }
 
-    override fun getDbFriendInfoLiveData(): LiveData<List<FriendInfoEntity>> {
-        return db.getFriendInfoDao().getDbFriendInfoLiveData()
+    override fun getDbFriendInfoFlow(): Flow<List<FriendInfoEntity>> {
+        return db.getFriendInfoDao().getDbFriendInfoFlow()
     }
 
     override suspend fun deleteFriendInfo() {
@@ -61,8 +61,8 @@ class LanguageCenterDataSourceImpl(
         return db.getAddChatGroupDetailDao().getDbAddChatGroupDetailList()
     }
 
-    override fun getDbAddChatGroupDetailLiveData(): LiveData<List<AddChatGroupDetailEntity>> {
-        return db.getAddChatGroupDetailDao().getDbAddChatGroupDetailLiveData()
+    override fun getDbAddChatGroupDetailFlow(): Flow<List<AddChatGroupDetailEntity>> {
+        return db.getAddChatGroupDetailDao().getDbAddChatGroupDetailFlow()
     }
 
     override suspend fun deleteAddChatGroupDetail(userId: String?) {
@@ -81,8 +81,8 @@ class LanguageCenterDataSourceImpl(
         return db.getTalkDao().getDbTalkByTalkId(talkId)
     }
 
-    override fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>> {
-        return db.getTalkDao().getDbTalkByOtherUserIdLiveData(otherUserId)
+    override fun getDbTalkByOtherUserIdFlow(otherUserId: String?): Flow<List<TalkEntity>> {
+        return db.getTalkDao().getDbTalkByOtherUserIdFlow(otherUserId)
     }
 
     override suspend fun getDbCountTalkByTalkId(talkId: String): Int {
@@ -112,8 +112,8 @@ class LanguageCenterDataSourceImpl(
         return db.getChatListDao().getDbChatListAll()
     }
 
-    override fun getDbChatListLiveData(): LiveData<List<ChatListEntity>> {
-        return db.getChatListDao().getDbChatListLiveData()
+    override fun getDbChatListFlow(): Flow<List<ChatListEntity>> {
+        return db.getChatListDao().getDbChatListFlow()
     }
 
     override suspend fun getDbChatListBySearch(search: String?): List<ChatListEntity>? {

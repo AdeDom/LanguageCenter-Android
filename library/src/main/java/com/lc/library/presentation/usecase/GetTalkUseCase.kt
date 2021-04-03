@@ -1,10 +1,10 @@
 package com.lc.library.presentation.usecase
 
-import androidx.lifecycle.LiveData
 import com.lc.library.data.db.entities.TalkEntity
+import kotlinx.coroutines.flow.Flow
 
 interface GetTalkUseCase {
 
-    fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>>
+    fun getDbTalkByOtherUserIdFlow(otherUserId: String?): Flow<List<TalkEntity>>
 
 }

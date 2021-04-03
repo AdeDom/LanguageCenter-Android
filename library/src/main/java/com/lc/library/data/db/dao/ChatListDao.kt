@@ -1,11 +1,11 @@
 package com.lc.library.data.db.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.lc.library.data.db.entities.ChatListEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ChatListDao {
@@ -17,7 +17,7 @@ interface ChatListDao {
     suspend fun getDbChatListAll(): List<ChatListEntity>
 
     @Query("SELECT * FROM chat_list ORDER BY date_time_long DESC")
-    fun getDbChatListLiveData(): LiveData<List<ChatListEntity>>
+    fun getDbChatListFlow(): Flow<List<ChatListEntity>>
 
     @Query("SELECT * FROM chat_list WHERE given_name LIKE '%' || :search || '%'  OR family_name LIKE '%' || :search || '%' ")
     suspend fun getDbChatListBySearch(search: String?): List<ChatListEntity>?

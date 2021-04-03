@@ -1,10 +1,10 @@
 package com.lc.library.presentation.usecase
 
-import androidx.lifecycle.LiveData
 import com.lc.library.data.db.entities.FriendInfoEntity
+import kotlinx.coroutines.flow.Flow
 
 interface FetchFriendInfoUseCase {
 
-    fun getDbFriendInfoLiveData(): LiveData<List<FriendInfoEntity>>
+    fun getDbFriendInfoFlow(): Flow<List<FriendInfoEntity>>
 
 }

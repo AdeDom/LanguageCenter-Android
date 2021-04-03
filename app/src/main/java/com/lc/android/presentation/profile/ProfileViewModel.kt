@@ -1,6 +1,7 @@
 package com.lc.android.presentation.profile
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.lc.android.base.BaseViewModel
 import com.lc.library.data.db.entities.UserInfoEntity
 import com.lc.library.presentation.usecase.GetUserInfoUseCase
@@ -13,7 +14,7 @@ class ProfileViewModel(
 ) : BaseViewModel<ProfileViewState>(ProfileViewState()) {
 
     val getDbUserInfoLiveData: LiveData<UserInfoEntity>
-        get() = getUserInfoUseCase.getDbUserInfoLiveData()
+        get() = getUserInfoUseCase.getDbUserInfoFlow().asLiveData()
 
     fun signOut() {
         launch {

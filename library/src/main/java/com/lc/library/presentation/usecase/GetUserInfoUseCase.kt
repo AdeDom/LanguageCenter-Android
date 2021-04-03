@@ -1,11 +1,11 @@
 package com.lc.library.presentation.usecase
 
-import androidx.lifecycle.LiveData
 import com.lc.library.data.db.entities.UserInfoEntity
+import kotlinx.coroutines.flow.Flow
 
 interface GetUserInfoUseCase {
 
-    fun getDbUserInfoLiveData(): LiveData<UserInfoEntity>
+    fun getDbUserInfoFlow(): Flow<UserInfoEntity>
 
     suspend fun getDbUserInfo(): UserInfoEntity?
 

@@ -1,11 +1,11 @@
 package com.lc.library.data.db.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.lc.library.data.db.entities.TalkEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TalkDao {
@@ -17,7 +17,7 @@ interface TalkDao {
     suspend fun getDbTalkByTalkId(talkId: String): TalkEntity?
 
     @Query("SELECT * FROM talk WHERE from_user_id = :otherUserId OR to_user_id = :otherUserId ORDER BY date_time_long ASC")
-    fun getDbTalkByOtherUserIdLiveData(otherUserId: String?): LiveData<List<TalkEntity>>
+    fun getDbTalkByOtherUserIdFlow(otherUserId: String?): Flow<List<TalkEntity>>
 
     @Query("SELECT COUNT(*) FROM talk WHERE talk_id = :talkId")
     suspend fun getDbCountTalkByTalkId(talkId: String): Int

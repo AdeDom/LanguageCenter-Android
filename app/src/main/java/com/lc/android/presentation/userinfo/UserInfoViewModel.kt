@@ -2,6 +2,7 @@ package com.lc.android.presentation.userinfo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.lc.android.base.BaseViewModel
 import com.lc.android.presentation.model.UserInfoParcelable
 import com.lc.library.data.db.entities.FriendInfoEntity
@@ -26,7 +27,7 @@ class UserInfoViewModel(
         get() = _addChatGroupNewEvent
 
     val getDbFriendInfoLiveData: LiveData<List<FriendInfoEntity>>
-        get() = fetchFriendInfoUseCase.getDbFriendInfoLiveData()
+        get() = fetchFriendInfoUseCase.getDbFriendInfoFlow().asLiveData()
 
     fun callAddAlgorithm(algorithm: String?) {
         launch {

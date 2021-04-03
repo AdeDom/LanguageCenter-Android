@@ -1,11 +1,11 @@
 package com.lc.library.presentation.usecase
 
-import androidx.lifecycle.LiveData
 import com.lc.library.data.db.entities.ChatListEntity
+import kotlinx.coroutines.flow.Flow
 
 interface GetChatListUseCase {
 
-    fun getDbChatListLiveData(): LiveData<List<ChatListEntity>>
+    fun getDbChatListFlow(): Flow<List<ChatListEntity>>
 
     suspend fun getDbChatListBySearch(search: String?): List<ChatListEntity>?
 
