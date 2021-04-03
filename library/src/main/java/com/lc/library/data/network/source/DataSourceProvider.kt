@@ -7,7 +7,6 @@ import com.lc.library.data.network.api.LanguageTranslateApi
 import com.lc.library.data.network.ws.LanguageCenterWs
 import com.lc.library.sharedpreference.pref.AuthPref
 import com.lc.server.models.request.RefreshTokenRequest
-import io.ktor.util.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -19,7 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import java.util.concurrent.TimeUnit
 
-@KtorExperimentalAPI
 class DataSourceProvider(
     private val pref: AuthPref,
     private val webSocket: LanguageCenterWs,

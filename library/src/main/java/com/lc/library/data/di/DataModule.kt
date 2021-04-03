@@ -12,10 +12,8 @@ import io.ktor.client.engine.okhttp.*
 import io.ktor.client.features.*
 import io.ktor.client.features.logging.*
 import io.ktor.client.features.websocket.*
-import io.ktor.util.*
 import org.koin.dsl.module
 
-@KtorExperimentalAPI
 private val dataModule = module {
 
     single {
@@ -44,5 +42,4 @@ private val dataModule = module {
 
 }
 
-@KtorExperimentalAPI
 val getDataAndroidModule = dataModule

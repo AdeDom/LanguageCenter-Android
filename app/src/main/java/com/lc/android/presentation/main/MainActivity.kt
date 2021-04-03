@@ -8,11 +8,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.lc.android.R
 import com.lc.android.base.BaseActivity
 import com.lc.library.sharedpreference.pref.ConfigPref
-import io.ktor.util.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@KtorExperimentalAPI
 class MainActivity : BaseActivity() {
 
     private val viewModel by viewModel<MainViewModel>()

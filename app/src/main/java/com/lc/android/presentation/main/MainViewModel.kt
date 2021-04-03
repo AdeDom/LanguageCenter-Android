@@ -6,11 +6,9 @@ import com.lc.library.data.repository.Resource
 import com.lc.library.presentation.usecase.FetchTalkUnreceivedUseCase
 import com.lc.library.presentation.usecase.FilePrefUseCase
 import com.lc.library.presentation.usecase.TalkWebSocketsUseCase
-import io.ktor.util.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-@KtorExperimentalAPI
 class MainViewModel(
     private val filePrefUseCase: FilePrefUseCase,
     private val talkWebSocketsUseCase: TalkWebSocketsUseCase,

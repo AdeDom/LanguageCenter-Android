@@ -21,14 +21,12 @@ import com.lc.android.presentation.talk.TalkViewModel
 import com.lc.android.presentation.userinfo.UserInfoViewModel
 import com.lc.android.presentation.vocabularydetail.VocabularyDetailViewModel
 import com.lc.android.presentation.vocapbulary.VocabularyViewModel
-import io.ktor.util.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 @FlowPreview
-@KtorExperimentalAPI
 @ExperimentalCoroutinesApi
 private val presentationModule = module {
 
@@ -57,6 +55,5 @@ private val presentationModule = module {
 }
 
 @FlowPreview
-@KtorExperimentalAPI
 @ExperimentalCoroutinesApi
 val getPresentationModule = presentationModule

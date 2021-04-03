@@ -15,12 +15,10 @@ import com.lc.android.presentation.main.MainViewModel
 import com.lc.android.util.hideSoftKeyboard
 import com.lc.android.util.loadCircle
 import com.lc.android.util.toast
-import io.ktor.util.*
 import kotlinx.android.synthetic.main.fragment_talk.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@KtorExperimentalAPI
 class TalkFragment : BaseFragment(R.layout.fragment_talk) {
 
     private val viewModel by viewModel<TalkViewModel>()

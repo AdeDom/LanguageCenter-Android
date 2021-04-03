@@ -9,12 +9,10 @@ import io.ktor.client.features.websocket.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.http.cio.websocket.*
-import io.ktor.util.*
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 
-@KtorExperimentalAPI
 class LanguageCenterWs(
     private val client: HttpClient,
     private val pref: AuthPref,
