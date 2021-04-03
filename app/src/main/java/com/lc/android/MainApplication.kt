@@ -2,10 +2,10 @@ package com.lc.android
 
 import android.app.Application
 import com.facebook.stetho.Stetho
-import com.lc.android.presentation.di.getPresentationModule
-import com.lc.library.data.di.getDataAndroidModule
-import com.lc.library.domain.di.getDomainModule
-import com.lc.library.sharedpreference.di.getSharedPreferenceModule
+import com.lc.android.presentation.di.presentationModule
+import com.lc.library.data.di.dataModule
+import com.lc.library.domain.di.domainModule
+import com.lc.library.sharedpreference.di.sharedPreferenceModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.koin.androidContext
@@ -26,10 +26,10 @@ class MainApplication : Application() {
             androidContext(this@MainApplication)
             koin.loadModules(
                 listOf(
-                    getPresentationModule,
-                    getDomainModule,
-                    getDataAndroidModule,
-                    getSharedPreferenceModule
+                    presentationModule,
+                    domainModule,
+                    dataModule,
+                    sharedPreferenceModule
                 )
             )
             koin.createRootScope()

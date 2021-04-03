@@ -28,7 +28,7 @@ import org.koin.dsl.module
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-private val presentationModule = module {
+val presentationModule = module {
 
     viewModel { SplashScreenViewModel(get(), get()) }
     viewModel { SignInViewModel(get(), get()) }
@@ -53,7 +53,3 @@ private val presentationModule = module {
     viewModel { AddFriendGroupDetailViewModel(get()) }
 
 }
-
-@FlowPreview
-@ExperimentalCoroutinesApi
-val getPresentationModule = presentationModule

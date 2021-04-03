@@ -4,7 +4,7 @@ import com.lc.library.domain.usecase.*
 import com.lc.library.presentation.usecase.*
 import org.koin.dsl.module
 
-private val domainModule = module {
+val domainModule = module {
 
     single<SignInUseCase> { SignInUseCaseImpl(get()) }
     single<SignOutUseCase> { SignOutUseCaseImpl(get()) }
@@ -41,5 +41,3 @@ private val domainModule = module {
     single<VocabularyTranslationFeedbackUseCase> { VocabularyTranslationFeedbackUseCaseImpl(get()) }
 
 }
-
-val getDomainModule = domainModule

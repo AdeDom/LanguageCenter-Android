@@ -14,7 +14,7 @@ import io.ktor.client.features.logging.*
 import io.ktor.client.features.websocket.*
 import org.koin.dsl.module
 
-private val dataModule = module {
+val dataModule = module {
 
     single {
         HttpClient(OkHttp) {
@@ -41,5 +41,3 @@ private val dataModule = module {
     single<LanguageCenterRepository> { LanguageCenterRepositoryImpl(get(), get(), get()) }
 
 }
-
-val getDataAndroidModule = dataModule
