@@ -49,20 +49,12 @@ class LanguageCenterDataSourceImpl(
         return db.getAddChatGroupDetailDao().saveAddChatGroupDetail(addChatGroupDetailEntity)
     }
 
-    override suspend fun getDbFetchLastUserId(): String? {
-        return db.getAddChatGroupDetailDao().getDbFetchLastUserId()
-    }
-
     override suspend fun getDbAddChatGroupDetailBySearch(search: String?): List<AddChatGroupDetailEntity>? {
         return db.getAddChatGroupDetailDao().getDbAddChatGroupDetailBySearch(search)
     }
 
     override suspend fun getDbAddChatGroupDetailList(): List<AddChatGroupDetailEntity>? {
         return db.getAddChatGroupDetailDao().getDbAddChatGroupDetailList()
-    }
-
-    override fun getDbAddChatGroupDetailFlow(): Flow<List<AddChatGroupDetailEntity>> {
-        return db.getAddChatGroupDetailDao().getDbAddChatGroupDetailFlow()
     }
 
     override suspend fun deleteAddChatGroupDetail(userId: String?) {
