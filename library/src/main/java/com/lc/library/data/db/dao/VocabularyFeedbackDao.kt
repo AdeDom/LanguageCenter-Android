@@ -12,6 +12,9 @@ interface VocabularyFeedbackDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveVocabularyFeedback(entity: VocabularyFeedbackEntity)
 
+    @Query("SELECT * FROM vocabulary_feedback")
+    suspend fun getDbVocabularyFeedbackList(): List<VocabularyFeedbackEntity>
+
     @Query("SELECT COUNT(*) FROM vocabulary_feedback WHERE vocabulary_id = :vocabularyId")
     suspend fun getDbVocabularyIsEvaluation(vocabularyId: String): Int
 
